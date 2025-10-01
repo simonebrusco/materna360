@@ -11,6 +11,8 @@ export default function HomePage() {
         <Greeting />
         <div className="h-4" />
         <MessageOfTheDay />
+        <div className="h-4" />
+        <ActivityOfTheDay />
       </main>
     </>
   );
