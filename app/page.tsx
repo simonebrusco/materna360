@@ -6,9 +6,7 @@ export default function HomePage() {
       <h1 className="text-3xl font-semibold">Olá, este é um teste do Materna360 🚀</h1>
       <p className="mt-3 text-gray-600">Next.js App Router + Tailwind CSS initialized successfully.</p>
       <div className="mt-6 flex justify-center">
-        {/* centered alert button section */}
-        {/* using a client component for onClick without converting this page to client */}
-        {/**/}
+        <AlertButton label="Mostrar Alerta" />
       </div>
       <div className="mt-6 flex justify-center">
         <a
