@@ -1,4 +1,4 @@
-export default function ActivityOfDay(): JSX.Element {
+export default function ActivityOfDay() {
   return (
     <section className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="rounded-2xl bg-white shadow-sm ring-1 ring-black/5 p-5 sm:p-6">
