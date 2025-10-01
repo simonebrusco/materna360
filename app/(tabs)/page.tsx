@@ -1,6 +1,6 @@
 import Greeting from '../../components/Greeting';
 import MessageOfTheDay from '../../components/MessageOfTheDay';
-import ActivityOfTheDay from '../../components/ActivityOfTheDay';
+import ActivityOfDay from '../../components/ActivityOfDay';
 import { getRandomMessage } from '../../data/messages';
 
 export default function Page() {
@@ -11,7 +11,7 @@ export default function Page() {
       <div className="h-4" />
       <MessageOfTheDay initial={initialMessage} />
       <div className="h-4" />
-      <ActivityOfTheDay />
+      <ActivityOfDay />
     </>
   );
 }
