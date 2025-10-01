@@ -1,4 +1,3 @@
-import '../globals.css';
 import Header from '../../components/Header';
 import BottomTab from '../../components/BottomTab';
 
