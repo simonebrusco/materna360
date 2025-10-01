@@ -1,4 +1,6 @@
 import Header from "../components/Header";
+import Greeting from "../components/Greeting";
+import MessageOfTheDay from "../components/MessageOfTheDay";
 
 export default function HomePage() {
   return (
