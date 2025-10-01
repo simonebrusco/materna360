@@ -13,6 +13,15 @@ export default function HomePage() {
           Saiba Mais
         </a>
       </div>
+      <div className="mt-4 flex justify-center">
+        <a
+          href="/sobre"
+          aria-label="Ir para a página Sobre"
+          className="inline-flex w-full sm:w-auto items-center justify-center rounded-xl border border-[#359b9d] px-6 py-3 text-[#359b9d] text-base font-medium shadow-sm hover:bg-[#359b9d]/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#359b9d]/40"
+        >
+          Sobre
+        </a>
+      </div>
     </main>
   );
 }
