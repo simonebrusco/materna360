@@ -1,13 +1,15 @@
 import Greeting from '../../components/Greeting';
 import MessageOfTheDay from '../../components/MessageOfTheDay';
 import ActivityOfTheDay from '../../components/ActivityOfTheDay';
+import { getRandomMessage } from '../../data/messages';
 
 export default function Page() {
+  const initialMessage: string = getRandomMessage();
   return (
     <>
       <Greeting />
       <div className="h-4" />
-      <MessageOfTheDay />
+      <MessageOfTheDay initial={initialMessage} />
       <div className="h-4" />
       <ActivityOfTheDay />
     </>
