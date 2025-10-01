@@ -6,12 +6,10 @@ import { getRandomMessage } from '../../data/messages';
 export default function Page() {
   const initialMessage: string = getRandomMessage();
   return (
-    <>
+    <div className="space-y-8 sm:space-y-10">
       <Greeting />
-      <div className="h-4" />
       <MessageOfTheDay initial={initialMessage} />
-      <div className="h-4" />
       <ActivityOfDay />
-    </>
+    </div>
   );
 }
