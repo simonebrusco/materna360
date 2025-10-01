@@ -18,6 +18,9 @@
   },
   "devDependencies": {
     "typescript": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "@types/node": "*",
     "tailwindcss": "*",
     "postcss": "*",
     "autoprefixer": "*"
