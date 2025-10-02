@@ -3,7 +3,7 @@ import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { usePlanner } from "./usePlanner";
 import PlannerSheet from "./PlannerSheet";
 import PlannerList from "./PlannerList";
-import { onPlannerAdd } from "./plannerBus";
+import { onPlannerAdd, onPlannerPropose } from "./plannerBus";
 import Button from "../ui/Button";
 
 function uid() {
@@ -13,6 +13,7 @@ function uid() {
 export default function PlannerSection() {
   const { items, addItem, toggleDone, loading } = usePlanner();
   const [open, setOpen] = useState(false);
+  const [initial, setInitial] = useState<{title:string; category:any; durationMin:number; notes?:string} | null>(null);
   const sectionRef = useRef<HTMLElement|null>(null);
 
   const onAddClick = useCallback(() => setOpen(true), []);
@@ -32,10 +33,26 @@ export default function PlannerSection() {
   const empty = !items || items.length === 0;
   const top3 = useMemo(() => (items || []).slice(0,3), [items]);
 
-  useEffect(() => onPlannerAdd(() => {
-    sectionRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setOpen(true);
-  }), []);
+  useEffect(() => {
+    const offAdd = onPlannerAdd(() => {
+      sectionRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setOpen(true);
+    });
+    const offPropose = onPlannerPropose((draft) => {
+      sectionRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setInitial({
+        title: draft.title || "",
+        category: draft.category || "brincadeira",
+        durationMin: typeof draft.durationMin === "number" ? draft.durationMin : 10,
+        notes: draft.notes || "",
+      });
+      setOpen(true);
+    });
+    return () => {
+      offAdd();
+      offPropose();
+    };
+  }, []);
 
   return (
     <section ref={sectionRef} className="bg-white rounded-2xl shadow-sm ring-1 ring-gray-200 p-6">
@@ -58,7 +75,7 @@ export default function PlannerSection() {
         </div>
       )}
 
-      <PlannerSheet open={open} onOpenChange={setOpen} onSubmit={onSubmit} />
+      <PlannerSheet open={open} onOpenChange={setOpen} onSubmit={onSubmit} initial={initial ?? undefined} />
     </section>
   );
 }
