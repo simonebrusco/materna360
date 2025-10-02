@@ -1,70 +1,37 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
 import Card from "../ui/Card";
 import SectionTitle from "../ui/SectionTitle";
+import { useMemo } from "react";
+import { useCheckins } from "../../hooks/useCheckins";
 
-type Checkin = { mood: number; date: string };
-
-const STORAGE_KEY = "materna360:checkins";
+const moods = [
+  { value: 1, emoji: "😢", label: "muito triste" },
+  { value: 2, emoji: "😐", label: "neutro" },
+  { value: 3, emoji: "🙂", label: "bem" },
+  { value: 4, emoji: "😀", label: "feliz" },
+  { value: 5, emoji: "🤩", label: "muito feliz" },
+] as const;
 
 function getToday(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
-function readCheckins(): Checkin[] {
-  if (typeof window === "undefined") return [];
-  const raw = window.localStorage.getItem(STORAGE_KEY);
-  if (!raw) return [];
-  try {
-    const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed)) {
-      return parsed.filter((x) => typeof x?.mood === "number" && typeof x?.date === "string");
-    }
-    if (parsed && typeof parsed === "object" && typeof (parsed as any).mood === "number" && typeof (parsed as any).date === "string") {
-      return [parsed as Checkin];
-    }
-  } catch {
-    return [];
-  }
-  return [];
-}
-
-function writeCheckins(list: Checkin[]): void {
-  if (typeof window === "undefined") return;
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+function formatDDMM(dateISO: string): string {
+  const [y, m, d] = dateISO.split("-");
+  return `${d}/${m}`;
 }
 
 export default function CheckinCard() {
-  const [selected, setSelected] = useState<number | null>(null);
+  const { checkins, addCheckin } = useCheckins();
   const today = useMemo(() => getToday(), []);
 
-  useEffect(() => {
-    const list = readCheckins();
-    const existing = list.find((c) => c.date === today);
-    if (existing) setSelected(existing.mood);
-  }, [today]);
+  const selected = useMemo(() => checkins.find((c) => c.date === today)?.mood ?? null, [checkins, today]);
 
-  const moods = [
-    { value: 1, emoji: "😢", label: "muito triste" },
-    { value: 2, emoji: "😐", label: "neutro" },
-    { value: 3, emoji: "🙂", label: "bem" },
-    { value: 4, emoji: "😀", label: "feliz" },
-    { value: 5, emoji: "🤩", label: "muito feliz" },
-  ] as const;
-
-  const handleSelect = (value: number) => {
-    setSelected(value);
-    const list = readCheckins();
-    const idx = list.findIndex((c) => c.date === today);
-    const entry: Checkin = { mood: value, date: today };
-    if (idx >= 0) {
-      list[idx] = entry;
-    } else {
-      list.push(entry);
-    }
-    writeCheckins(list);
-  };
+  const recent = useMemo(() => {
+    const sorted = [...checkins].sort((a, b) => b.date.localeCompare(a.date));
+    return sorted.slice(0, 5);
+  }, [checkins]);
 
   return (
     <Card>
@@ -77,16 +44,33 @@ export default function CheckinCard() {
               key={m.value}
               type="button"
               aria-label={m.label}
-              onClick={() => handleSelect(m.value)}
+              onClick={() => addCheckin(m.value)}
               className={[
                 "text-3xl p-2 rounded-full hover:bg-gray-100 focus:ring-2 focus:ring-indigo-300",
-                isSelected ? "bg-[#FF6F61] text-white" : "text-gray-800"
+                isSelected ? "bg-[#FF6F61] text-white" : "text-gray-800",
               ].join(" ")}
             >
               <span aria-hidden>{m.emoji}</span>
             </button>
           );
         })}
+      </div>
+
+      <p className="mt-3 text-sm text-gray-600">Registrar seu humor ajuda você a perceber seus avanços.</p>
+
+      <div className="text-sm text-gray-600 flex space-x-2 mt-4">
+        {recent.length > 0 ? (
+          recent.map((c, idx) => {
+            const mood = moods.find((m) => m.value === c.mood)?.emoji ?? "";
+            return (
+              <span key={c.date + idx} className="inline-flex items-center">
+                {formatDDMM(c.date)} {mood}
+              </span>
+            );
+          })
+        ) : (
+          <span>Ainda não registrou nada. Que tal começar agora?</span>
+        )}
       </div>
     </Card>
   );
