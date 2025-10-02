@@ -5,7 +5,7 @@ import ActivityOfDay from '../../components/ActivityOfDay';
 import Card from '../../components/ui/Card';
 import SectionTitle from '../../components/ui/SectionTitle';
 import WeeklyProgress from '../../components/today/WeeklyProgress';
-import WeeklyGoals from '../../components/today/WeeklyGoals';
+import WeeklyGoals from '../../components/goals/WeeklyGoals';
 const Planner = dynamic(() => import('@/components/Planner'), { ssr: false });
 
 export default function Page() {
@@ -18,6 +18,8 @@ export default function Page() {
         <MessageOfTheDay initial={"Pequenos momentos se transformam em grandes lembranças."} />
       </Card>
 
+      <WeeklyGoals />
+
       <Card>
         <SectionTitle>🧩 Atividade do dia</SectionTitle>
         <ActivityOfDay />
@@ -29,8 +31,6 @@ export default function Page() {
       </Card>
 
       <WeeklyProgress />
-
-      <WeeklyGoals />
 
       <Planner items={[]} />
     </div>
