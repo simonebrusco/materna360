@@ -21,9 +21,8 @@
     "@types/react": "*",
     "@types/react-dom": "*",
     "@types/node": "*",
-    "tailwindcss": "*",
-    "@tailwindcss/postcss": "*",
-    "postcss": "*",
-    "autoprefixer": "*"
+    "tailwindcss": "3.4.14",
+    "postcss": "8.4.47",
+    "autoprefixer": "10.4.20"
   }
 }
