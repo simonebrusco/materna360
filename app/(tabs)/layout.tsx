@@ -7,7 +7,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
     <div className="min-h-dvh flex flex-col">
       <Header />
       <main className="flex-1 pt-14 pb-20">
-        <Container>
+        <Container {...({ 'data-ui-flag': 'v1' } as any)}>
           <div className="space-y-6 sm:space-y-8">
             {children}
           </div>
