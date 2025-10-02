@@ -6,6 +6,7 @@ import Card from '../../components/ui/Card';
 import SectionTitle from '../../components/ui/SectionTitle';
 import WeeklyProgress from '../../components/today/WeeklyProgress';
 import WeeklyGoals from '../../components/today/WeeklyGoals';
+const PlannerPreview = dynamic(() => import('../../components/Planner/PlannerPreview'), { ssr: false });
 
 export default function Page() {
   return (
