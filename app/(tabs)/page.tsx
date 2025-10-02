@@ -22,7 +22,7 @@ export default function Page() {
 
       <Card>
         <SectionTitle>💡 Dica de hoje</SectionTitle>
-        <p className="text-sm sm:text-base text-gray-600 leading-relaxed">Reserve alguns minutos para respirar fundo e apreciar um pequeno momento do dia.</p>
+        <p className="text-sm sm:text-base text-gray-700 leading-relaxed">Reserve alguns minutos para respirar fundo e apreciar um pequeno momento do dia.</p>
       </Card>
     </div>
   );
