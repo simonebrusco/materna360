@@ -29,6 +29,7 @@ export default function WeeklyGoals() {
   }, [goals]);
 
   const allDone = goals.every(g => g.done);
+  const noneDone = goals.every(g => !g.done);
   const toggle = (id: number) => setGoals(gs => gs.map(g => g.id === id ? { ...g, done: !g.done } : g));
 
   return (
@@ -56,8 +57,12 @@ export default function WeeklyGoals() {
       </div>
 
       <p className="text-sm text-gray-600">
-        Toque nos corações para marcar suas metas desta semana. {allDone && (
-          <span className="ml-1 font-medium text-coral">Parabéns! Você está cultivando uma rotina mais leve 💛</span>
+        {noneDone ? (
+          <>Define your weekly goals 💛</>
+        ) : (
+          <>Toque nos corações para marcar suas metas desta semana. {allDone && (
+            <span className="ml-1 font-medium text-coral">Parabéns! Você está cultivando uma rotina mais leve 💛</span>
+          )}</>
         )}
       </p>
     </section>

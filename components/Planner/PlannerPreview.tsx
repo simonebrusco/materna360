@@ -21,7 +21,12 @@ export default function PlannerPreview() {
 
   if (isEmpty) {
     return (
-      <div className="text-sm text-gray-600">Nenhuma atividade salva ainda. Use “Salvar no Planner” para adicionar.</div>
+      <div className="bg-offwhite text-gray-600 rounded-xl shadow-sm ring-1 ring-gray-200 p-4 sm:p-5">
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-sm">✨ No activities yet. Add one to your week!</p>
+          <button type="button" className="inline-flex items-center justify-center rounded-lg bg-coral px-3 py-1.5 text-sm font-medium text-white hover:bg-coral-hover">Add Activity</button>
+        </div>
+      </div>
     );
   }
 
