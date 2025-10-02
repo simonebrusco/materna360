@@ -1,12 +1,11 @@
+import dynamic from 'next/dynamic';
 import Greeting from '../../components/Greeting';
-import MessageOfTheDay from '../../components/MessageOfTheDay';
+const MessageOfTheDay = dynamic(() => import('../../components/MessageOfTheDay'), { ssr: false });
 import ActivityOfDay from '../../components/ActivityOfDay';
 import Card from '../../components/ui/Card';
 import SectionTitle from '../../components/ui/SectionTitle';
-import { getRandomMessage } from '../../data/messages';
 
 export default function Page() {
-  const initialMessage: string = getRandomMessage();
   return (
     <div className="space-y-6 sm:space-y-8">
       <Greeting />
@@ -14,7 +13,7 @@ export default function Page() {
       <Card>
         <SectionTitle>🌟 Mensagem do dia</SectionTitle>
         <div className="mt-3">
-          <MessageOfTheDay initial={initialMessage} />
+          <MessageOfTheDay initial={"Pequenos momentos se transformam em grandes lembranças."} />
         </div>
       </Card>
 
