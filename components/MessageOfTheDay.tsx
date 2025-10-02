@@ -22,7 +22,7 @@ export default function MessageOfTheDay({ initial }: MessageOfTheDayProps) {
           ❝
         </div>
         <div className="flex-1">
-          <p className="mt-0.5 text-lg sm:text-xl text-gray-700 leading-relaxed">{message}</p>
+          <p className="mt-0.5 text-lg sm:text-xl text-gray-600 leading-relaxed">{message}</p>
         </div>
       </div>
 
@@ -31,7 +31,7 @@ export default function MessageOfTheDay({ initial }: MessageOfTheDayProps) {
           type="button"
           aria-label="Nova mensagem"
           onClick={handleNew}
-          className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 transition"
+          className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 transition"
         >
           Nova mensagem
         </button>
