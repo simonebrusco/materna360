@@ -1,5 +1,5 @@
 import Header from '@/components/Header';
-import BottomNav from '../../components/BottomNav';
+import BottomNav from "@/components/shell/BottomNav";
 import Container from '../../components/Container';
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
