@@ -1,7 +1,6 @@
 'use client';
 
 import { PlannerItem, PlannerCategory } from './usePlanner';
-import Button from '@/components/ui/Button';
 
 function categoryEmoji(cat: PlannerCategory): string {
   switch (cat) {
