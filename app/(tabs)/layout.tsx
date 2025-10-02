@@ -8,7 +8,9 @@ export default async function Layout({ children }: { children: React.ReactNode }
       <Header />
       <main className="flex-1 pt-14 pb-20">
         <Container>
-          {children}
+          <div className="space-y-6 sm:space-y-8">
+            {children}
+          </div>
         </Container>
       </main>
       <BottomTab />
