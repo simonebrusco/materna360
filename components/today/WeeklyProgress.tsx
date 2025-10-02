@@ -1,6 +1,8 @@
 "use client";
 import { useMemo } from "react";
 import { usePlanner } from "@/components/planner/usePlanner";
+import Button from "../ui/Button";
+import { openPlannerAdd } from "../planner/plannerBus";
 
 export default function WeeklyProgress() {
   const { items } = usePlanner();
@@ -18,7 +20,7 @@ export default function WeeklyProgress() {
 
       <div className="h-3 w-full rounded-full bg-gray-100 ring-1 ring-gray-200/70 overflow-hidden">
         <div
-          className="h-full bg-coral transition-all"
+          className="h-full bg-coral motion-safe:transition-[width] motion-safe:duration-300 motion-safe:ease-out"
           style={{ width: `${pct}%` }}
           aria-valuenow={pct}
           aria-valuemin={0}
@@ -28,7 +30,10 @@ export default function WeeklyProgress() {
       </div>
 
       {totalCount === 0 ? (
-        <p className="text-sm text-gray-600">Adicione atividades ao Planner para acompanhar seu progresso.</p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <p className="text-sm text-gray-600">Adicione atividades ao Planner para acompanhar seu progresso.</p>
+          <Button variant="secondary" size="sm" onClick={openPlannerAdd}>Adicionar atividade</Button>
+        </div>
       ) : (
         <p className="text-sm text-gray-600">Você concluiu <span className="font-semibold text-charcoal">{doneCount}</span> de <span className="font-semibold text-charcoal">{totalCount}</span> atividade(s).</p>
       )}

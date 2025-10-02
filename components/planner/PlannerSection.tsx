@@ -4,6 +4,7 @@ import { usePlanner } from "./usePlanner";
 import PlannerSheet from "./PlannerSheet";
 import PlannerList from "./PlannerList";
 import { onPlannerAdd } from "./plannerBus";
+import Button from "../ui/Button";
 
 function uid() {
   return "id-" + Math.random().toString(36).slice(2,10) + "-" + Date.now().toString(36);
@@ -40,15 +41,13 @@ export default function PlannerSection() {
     <section ref={sectionRef} className="bg-white rounded-2xl shadow-sm ring-1 ring-gray-200 p-6">
       <div className="flex items-start justify-between gap-4">
         <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Planner</h2>
-        <button onClick={onAddClick} className="rounded-lg bg-white ring-1 ring-gray-300 px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50">Adicionar</button>
+        <Button variant="secondary" size="sm" onClick={onAddClick}>Adicionar</Button>
       </div>
 
       {empty ? (
         <div className="mt-3 rounded-xl bg-[#FAFAF8] p-4 text-sm text-gray-600 ring-1 ring-gray-200">
           <p className="mb-3">Organize atividades para hoje. Você pode começar com algo simples, como 10 minutos de brincadeira 💛</p>
-          <button onClick={onAddClick} className="rounded-lg bg-[#FF6F61] hover:bg-[#FF786B] active:bg-[#E85D51] px-4 py-2 text-sm text-white">
-            Adicionar atividade
-          </button>
+          <Button onClick={onAddClick} variant="primary" size="md">Adicionar atividade</Button>
         </div>
       ) : (
         <div className="mt-4">

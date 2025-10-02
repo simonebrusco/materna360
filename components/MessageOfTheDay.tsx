@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { getRandomMessage } from "../data/messages";
+import Button from "./ui/Button";
 
 type MessageOfTheDayProps = {
   initial: string;
@@ -27,14 +28,16 @@ export default function MessageOfTheDay({ initial }: MessageOfTheDayProps) {
       </div>
 
       <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
-        <button
+        <Button
           type="button"
           aria-label="Nova mensagem"
           onClick={handleNew}
-          className="inline-flex items-center justify-center rounded-lg bg-coral px-4 py-2 text-sm font-medium text-white hover:bg-coral-hover active:bg-coral-active shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 transition w-full sm:w-auto min-h-[44px]"
+          variant="primary"
+          size="md"
+          className="w-full sm:w-auto"
         >
           Nova mensagem
-        </button>
+        </Button>
       </div>
     </div>
   );
