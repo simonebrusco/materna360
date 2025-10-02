@@ -16,14 +16,13 @@ export default function MessageOfTheDay({ initial }: MessageOfTheDayProps) {
   };
 
   return (
-    <section className="max-w-2xl mx-auto bg-white rounded-2xl shadow-sm ring-1 ring-black/5 p-5 sm:p-6">
+    <div>
       <div className="flex items-start gap-3">
         <div className="text-gray-300 text-3xl leading-none select-none" aria-hidden>
           ❝
         </div>
         <div className="flex-1">
-          <p className="text-xs font-medium uppercase tracking-wide text-gray-500">Mensagem do dia</p>
-          <p className="mt-2 text-lg leading-relaxed text-gray-900 sm:text-xl">{message}</p>
+          <p className="mt-0.5 text-lg leading-relaxed text-gray-900 sm:text-xl">{message}</p>
         </div>
       </div>
 
@@ -37,6 +36,6 @@ export default function MessageOfTheDay({ initial }: MessageOfTheDayProps) {
           Nova mensagem
         </button>
       </div>
-    </section>
+    </div>
   );
 }
