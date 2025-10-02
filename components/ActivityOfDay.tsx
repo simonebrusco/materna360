@@ -5,8 +5,8 @@ export default function ActivityOfDay() {
         <span className="inline-flex rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700 ml-auto">10 min</span>
       </div>
 
-      <h3 className="mt-2 text-lg font-medium text-gray-900 sm:text-xl">Brincadeira de blocos criativos</h3>
-      <p className="mt-1.5 text-sm sm:text-base text-gray-700 leading-relaxed">Separe alguns blocos de montar e convide seu filho para criar juntos uma torre, um animal ou o que a imaginação mandar.</p>
+      <h3 className="mt-2 text-lg font-medium text-charcoal sm:text-xl">Brincadeira de blocos criativos</h3>
+      <p className="mt-1.5 text-sm sm:text-base text-grayMid leading-relaxed">Separe alguns blocos de montar e convide seu filho para criar juntos uma torre, um animal ou o que a imaginação mandar.</p>
 
       <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
         <button
