@@ -6,7 +6,7 @@ import Card from '../../components/ui/Card';
 import SectionTitle from '../../components/ui/SectionTitle';
 import WeeklyProgress from '../../components/today/WeeklyProgress';
 import WeeklyGoals from '../../components/today/WeeklyGoals';
-const Planner = dynamic(() => import('@/components/Planner'), { ssr: false });
+const PlannerSection = dynamic(() => import('../../components/planner/PlannerSection'), { ssr: false });
 
 export default function Page() {
   return (
@@ -32,7 +32,7 @@ export default function Page() {
 
       <WeeklyGoals />
 
-      <Planner items={[]} />
+      <PlannerSection />
     </div>
   );
 }
