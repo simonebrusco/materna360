@@ -13,7 +13,7 @@ const items = [
 export default function BottomNav() {
   const pathname = usePathname() || "/";
   return (
-    <nav className="sticky bottom-0 z-20 border-t border-gray-200 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 [padding-bottom:env(safe-area-inset-bottom)]">
+    <nav className="sticky bottom-0 z-20 border-t border-gray-200 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 [padding-bottom:calc(1.5rem+env(safe-area-inset-bottom))]">
       <div className="mx-auto max-w-3xl px-2 sm:px-4">
         <ul className="grid grid-cols-4 gap-1 py-2">
           {items.map((it) => {
