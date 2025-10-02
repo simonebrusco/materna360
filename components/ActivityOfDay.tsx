@@ -1,12 +1,8 @@
 export default function ActivityOfDay() {
   return (
-    <section className="max-w-2xl mx-auto bg-white rounded-2xl shadow-sm ring-1 ring-black/5 p-5 sm:p-6">
+    <div>
       <div className="flex items-start justify-between">
-        <div className="flex items-center gap-2">
-          <div className="text-2xl select-none" aria-hidden>🧩</div>
-          <p className="text-base/6 font-semibold text-gray-900">Atividade do dia</p>
-        </div>
-        <span className="inline-flex rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700">10 min</span>
+        <span className="inline-flex rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700 ml-auto">10 min</span>
       </div>
 
       <h3 className="mt-2 text-lg font-medium text-gray-900 sm:text-xl">Brincadeira de blocos criativos</h3>
@@ -26,6 +22,6 @@ export default function ActivityOfDay() {
           Salvar no Planner
         </button>
       </div>
-    </section>
+    </div>
   );
 }
