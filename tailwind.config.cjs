@@ -47,6 +47,7 @@ module.exports = {
           active: "#E85D51",
           light: "#FF8C7F",
         },
+        neutral: "#AD8567",
         lavender: "#7A6FF0",
         charcoal: "#4B4B4B",
         grayMid: "#6B6B6B",
