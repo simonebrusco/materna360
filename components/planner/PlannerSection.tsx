@@ -1,8 +1,9 @@
 "use client";
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { usePlanner } from "./usePlanner";
 import PlannerSheet from "./PlannerSheet";
 import PlannerList from "./PlannerList";
+import { onPlannerAdd } from "./plannerBus";
 
 function uid() {
   return "id-" + Math.random().toString(36).slice(2,10) + "-" + Date.now().toString(36);
@@ -11,6 +12,7 @@ function uid() {
 export default function PlannerSection() {
   const { items, addItem, toggleDone, loading } = usePlanner();
   const [open, setOpen] = useState(false);
+  const sectionRef = useRef<HTMLElement|null>(null);
 
   const onAddClick = useCallback(() => setOpen(true), []);
   const onSubmit = useCallback((input: {title:string; category:any; durationMin:number; notes?:string}) => {
@@ -29,8 +31,13 @@ export default function PlannerSection() {
   const empty = !items || items.length === 0;
   const top3 = useMemo(() => (items || []).slice(0,3), [items]);
 
+  useEffect(() => onPlannerAdd(() => {
+    sectionRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setOpen(true);
+  }), []);
+
   return (
-    <section className="bg-white rounded-2xl shadow-sm ring-1 ring-gray-200 p-6">
+    <section ref={sectionRef} className="bg-white rounded-2xl shadow-sm ring-1 ring-gray-200 p-6">
       <div className="flex items-start justify-between gap-4">
         <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Planner</h2>
         <button onClick={onAddClick} className="rounded-lg bg-white ring-1 ring-gray-300 px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50">Adicionar</button>
