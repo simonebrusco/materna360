@@ -25,8 +25,8 @@ export default function BottomNav() {
                   className={[
                     "flex flex-col items-center justify-center rounded-xl px-3 py-2 text-xs sm:text-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2",
                     active
-                      ? "bg-coral text-white"
-                      : "text-grayMid hover:bg-gray-100",
+                      ? "text-coral ring-1 ring-coral/30"
+                      : "text-neutral hover:bg-coral-light/20",
                   ].join(" ")}
                 >
                   <span aria-hidden className="text-base sm:text-lg leading-none">{it.icon}</span>
