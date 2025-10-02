@@ -8,6 +8,9 @@ import SectionTitle from '@/components/ui/SectionTitle';
 export default function Page() {
   return (
     <div className="space-y-6 sm:space-y-8">
+      <div data-ui-flag="diagnostic-v1" className="mb-4 rounded-lg border border-red-500 bg-red-50 px-4 py-3 text-sm font-medium text-red-800">
+        UI DIAGNOSTIC: This is Today page. Tailwind classes should render colored background/border/text. If this looks plain, Tailwind is not applying.
+      </div>
       <Greeting />
 
       <Card>
