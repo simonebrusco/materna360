@@ -7,26 +7,26 @@ import SectionTitle from '../../components/ui/SectionTitle';
 
 export default function Page() {
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8 space-y-6">
       <Greeting />
 
-      <Card>
-        <SectionTitle>🌟 Mensagem do dia</SectionTitle>
-        <div className="mt-3">
+      <Card className="ring-gray-200 p-6">
+        <div className="mb-2"><SectionTitle>🌟 Mensagem do dia</SectionTitle></div>
+        <div>
           <MessageOfTheDay initial={"Pequenos momentos se transformam em grandes lembranças."} />
         </div>
       </Card>
 
-      <Card>
-        <SectionTitle>🧩 Atividade do dia</SectionTitle>
-        <div className="mt-3">
+      <Card className="ring-gray-200 p-6">
+        <div className="mb-2"><SectionTitle>🧩 Atividade do dia</SectionTitle></div>
+        <div>
           <ActivityOfDay />
         </div>
       </Card>
 
-      <Card>
-        <SectionTitle>💡 Dica de hoje</SectionTitle>
-        <p className="mt-3 text-gray-700">Reserve alguns minutos para respirar fundo e apreciar um pequeno momento do dia.</p>
+      <Card className="ring-gray-200 p-6">
+        <div className="mb-2"><SectionTitle>💡 Dica de hoje</SectionTitle></div>
+        <p className="text-gray-600">Reserve alguns minutos para respirar fundo e apreciar um pequeno momento do dia.</p>
       </Card>
     </div>
   );
