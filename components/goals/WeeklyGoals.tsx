@@ -2,9 +2,6 @@
 
 import { useCallback } from "react";
 import { useWeeklyGoals } from "./useWeeklyGoals";
-import Card from "../ui/Card";
-import SectionTitle from "../ui/SectionTitle";
-import Button from "../ui/Button";
 
 const HEART_CORAL = "#FF6F61"; // accent for filled hearts
 const GRAY_300 = "#D1D5DB"; // Tailwind gray-300
@@ -21,16 +18,21 @@ export default function WeeklyGoals() {
   );
 
   return (
-    <Card className="p-6 ring-1 ring-gray-200 bg-white rounded-2xl shadow-sm">
+    <section className="bg-white rounded-2xl shadow-sm ring-1 ring-gray-200 p-6 space-y-3">
       <div className="flex items-start justify-between gap-4">
         <div className="space-y-1">
-          <SectionTitle>Defina suas metas da semana 💛</SectionTitle>
+          <h2 className="text-lg sm:text-xl font-semibold text-charcoal leading-7 sm:leading-8 mb-2 sm:mb-3">Defina suas metas da semana 💛</h2>
           <p className="text-sm text-gray-600">Toque nos corações para marcar suas metas desta semana.</p>
         </div>
 
-        <Button variant="ghost" onClick={reset} aria-label="Clear weekly goals">
+        <button
+          type="button"
+          onClick={reset}
+          aria-label="Clear weekly goals"
+          className="inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 text-gray-700 hover:bg-gray-100 focus-visible:outline-gray-300"
+        >
           Limpar metas
-        </Button>
+        </button>
       </div>
 
       <div className="mt-4 flex items-center gap-2">
@@ -69,6 +71,6 @@ export default function WeeklyGoals() {
       </div>
 
       {isLoading && <p className="mt-2 text-xs text-gray-400">Carregando metas…</p>}
-    </Card>
+    </section>
   );
 }
