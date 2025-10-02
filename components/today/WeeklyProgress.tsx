@@ -38,7 +38,11 @@ export default function WeeklyProgress() {
         />
       </div>
 
-      <p className="text-sm text-gray-600">Você já fez <span className="font-semibold text-charcoal">{count}</span> atividade(s) essa semana. Continue assim 👏</p>
+      {count === 0 ? (
+        <p className="text-sm text-gray-600">Let’s start! Your journey begins today 🚀</p>
+      ) : (
+        <p className="text-sm text-gray-600">Você já fez <span className="font-semibold text-charcoal">{count}</span> atividade(s) essa semana. Continue assim 👏</p>
+      )}
 
       {/* TEMP dev controls (keep minimal, we may hide later) */}
       <div className="flex gap-2 pt-2">
