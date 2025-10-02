@@ -17,7 +17,7 @@ export default function ActivityOfDay() {
         </button>
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-lg border border-coral text-coral px-4 py-2 text-sm font-medium hover:bg-coral-light hover:text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 w-full sm:w-auto min-h-[44px]"
+          className="inline-flex items-center justify-center rounded-lg bg-neutral px-4 py-2 text-white text-sm font-medium hover:brightness-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 transition w-full sm:w-auto min-h-[44px]"
         >
           Salvar no Planner
         </button>
