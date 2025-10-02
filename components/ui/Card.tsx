@@ -1,3 +1,3 @@
 export default function Card({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <section className={["rounded-2xl bg-white shadow-sm ring-1 ring-gray-200/60 p-4 sm:p-6", className].filter(Boolean).join(" ")}>{children}</section>;
+  return <section className={["bg-white rounded-2xl shadow-md ring-1 ring-gray-200 p-6 space-y-4", className].filter(Boolean).join(" ")}>{children}</section>;
 }
