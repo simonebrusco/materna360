@@ -18,11 +18,11 @@ export default function MessageOfTheDay({ initial }: MessageOfTheDayProps) {
   return (
     <div>
       <div className="flex items-start gap-3">
-        <div className="text-gray-300 text-3xl leading-none select-none" aria-hidden>
+        <div className="text-neutral text-3xl leading-none select-none" aria-hidden>
           ❝
         </div>
         <div className="flex-1">
-          <p className="mt-0.5 text-sm sm:text-base text-gray-700 leading-relaxed">{message}</p>
+          <p className="mt-0.5 text-sm sm:text-base text-grayMid leading-relaxed">{message}</p>
         </div>
       </div>
 
