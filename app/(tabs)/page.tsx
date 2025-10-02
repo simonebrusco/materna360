@@ -4,6 +4,8 @@ const MessageOfTheDay = dynamic(() => import('../../components/MessageOfTheDay')
 import ActivityOfDay from '../../components/ActivityOfDay';
 import Card from '../../components/ui/Card';
 import SectionTitle from '../../components/ui/SectionTitle';
+import WeeklyProgress from '../../components/today/WeeklyProgress';
+import WeeklyGoals from '../../components/today/WeeklyGoals';
 
 export default function Page() {
   return (
@@ -24,6 +26,10 @@ export default function Page() {
         <SectionTitle>💡 Dica de hoje</SectionTitle>
         <p className="text-sm sm:text-base text-gray-700 leading-relaxed">Reserve alguns minutos para respirar fundo e apreciar um pequeno momento do dia.</p>
       </Card>
+
+      <WeeklyProgress />
+
+      <WeeklyGoals />
     </div>
   );
 }
