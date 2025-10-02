@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { DayKey, saveActivity } from "./Planner/PlannerStorage";
 import { openPlannerAdd } from "./planner/plannerBus";
+import Button from "./ui/Button";
 
 const DAY_ORDER: DayKey[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const DAY_LABEL: Record<DayKey, string> = {
@@ -53,20 +54,24 @@ export default function ActivityOfDay() {
       <p className="mt-1.5 text-sm sm:text-base text-grayMid leading-relaxed">{activityDesc}</p>
 
       <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
-        <button
+        <Button
           type="button"
           onClick={openPlannerAdd}
-          className="inline-flex items-center justify-center rounded-lg bg-coral px-4 py-2 text-sm font-medium text-white hover:bg-coral-hover active:bg-coral-active shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 transition w-full sm:w-auto min-h-[44px]"
+          variant="primary"
+          size="md"
+          className="w-full sm:w-auto"
         >
           Iniciar
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
           onClick={onSaveClick}
-          className="inline-flex items-center justify-center rounded-lg bg-neutral px-4 py-2 text-white text-sm font-medium hover:brightness-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 transition w-full sm:w-auto min-h-[44px]"
+          variant="secondary"
+          size="md"
+          className="w-full sm:w-auto"
         >
           {saved ? "Salvo!" : "Salvar no Planner"}
-        </button>
+        </Button>
       </div>
 
       {open && (
