@@ -31,6 +31,11 @@ export default function Page() {
       <WeeklyProgress />
 
       <WeeklyGoals />
+
+      <Card>
+        <SectionTitle>🗓️ Planner</SectionTitle>
+        <PlannerPreview />
+      </Card>
     </div>
   );
 }
