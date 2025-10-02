@@ -10,21 +10,21 @@ export default function Page() {
     <div className="space-y-6 sm:space-y-8">
       <Greeting />
 
-      <Card>
+      <Card className="ring-gray-200 p-6 space-y-4">
         <SectionTitle>🌟 Mensagem do dia</SectionTitle>
         <div className="mt-3">
           <MessageOfTheDay initial={"Pequenos momentos se transformam em grandes lembranças."} />
         </div>
       </Card>
 
-      <Card>
+      <Card className="ring-gray-200 p-6 space-y-4">
         <SectionTitle>🧩 Atividade do dia</SectionTitle>
         <div className="mt-3">
           <ActivityOfDay />
         </div>
       </Card>
 
-      <Card>
+      <Card className="ring-gray-200 p-6 space-y-4">
         <SectionTitle>💡 Dica de hoje</SectionTitle>
         <p className="mt-3 text-gray-700">Reserve alguns minutos para respirar fundo e apreciar um pequeno momento do dia.</p>
       </Card>
