@@ -1,5 +1,5 @@
 import Header from '../../components/Header';
-import BottomTab from '../../components/BottomTab';
+import BottomNav from '../../components/BottomNav';
 import Container from '../../components/Container';
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
@@ -13,7 +13,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
           </div>
         </Container>
       </main>
-      <BottomTab />
+      <BottomNav />
     </div>
   );
 }
