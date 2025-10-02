@@ -2,6 +2,7 @@
 
 import { useCallback } from "react";
 import { useWeeklyGoals } from "./useWeeklyGoals";
+import Button from "../ui/Button";
 
 const HEART_CORAL = "#FF6F61"; // accent for filled hearts
 const GRAY_300 = "#D1D5DB"; // Tailwind gray-300
@@ -22,17 +23,20 @@ export default function WeeklyGoals() {
       <div className="flex items-start justify-between gap-4">
         <div className="space-y-1">
           <h2 className="text-lg sm:text-xl font-semibold text-charcoal leading-7 sm:leading-8 mb-2 sm:mb-3">Defina suas metas da semana 💛</h2>
-          <p className="text-sm text-gray-600">Toque nos corações para marcar suas metas desta semana.</p>
+          {goals.filled === 0 && (
+            <p className="text-sm text-gray-600">Toque nos corações para definir suas metas desta semana.</p>
+          )}
         </div>
 
-        <button
+        <Button
           type="button"
           onClick={reset}
           aria-label="Clear weekly goals"
-          className="inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 text-gray-700 hover:bg-gray-100 focus-visible:outline-gray-300"
+          variant="secondary"
+          size="sm"
         >
           Limpar metas
-        </button>
+        </Button>
       </div>
 
       <div className="mt-4 flex items-center gap-2">
@@ -61,7 +65,7 @@ export default function WeeklyGoals() {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                aria-hidden="true"
+                aria-hidden={true}
               >
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
