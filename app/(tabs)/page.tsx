@@ -10,7 +10,7 @@ import PlannerSection from '@/components/planner/PlannerSection';
 
 export default function Page() {
   return (
-    <div className="min-h-screen flex flex-col max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 space-y-6 sm:space-y-8 lg:space-y-10">
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8 space-y-6">
       <Greeting />
 
       <Card>
