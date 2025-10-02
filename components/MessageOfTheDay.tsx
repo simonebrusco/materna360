@@ -22,16 +22,16 @@ export default function MessageOfTheDay({ initial }: MessageOfTheDayProps) {
           ❝
         </div>
         <div className="flex-1">
-          <p className="mt-0.5 text-sm sm:text-base text-gray-600 leading-relaxed">{message}</p>
+          <p className="mt-0.5 text-sm sm:text-base text-gray-700 leading-relaxed">{message}</p>
         </div>
       </div>
 
-      <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-end sm:items-center">
+      <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
         <button
           type="button"
           aria-label="Nova mensagem"
           onClick={handleNew}
-          className="inline-flex items-center justify-center rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 transition w-full sm:w-auto h-11 sm:h-auto"
+          className="inline-flex items-center justify-center rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 transition w-full sm:w-auto min-h-[44px]"
         >
           Nova mensagem
         </button>
