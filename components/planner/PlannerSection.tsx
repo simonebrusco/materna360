@@ -3,7 +3,7 @@ import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { usePlanner } from "./usePlanner";
 import PlannerSheet from "./PlannerSheet";
 import PlannerList from "./PlannerList";
-import { onPlannerAdd } from "./plannerBus";
+import { onPlannerAdd, onPlannerPropose, PlannerProposedItem } from "./plannerBus";
 
 function uid() {
   return "id-" + Math.random().toString(36).slice(2,10) + "-" + Date.now().toString(36);
@@ -12,27 +12,42 @@ function uid() {
 export default function PlannerSection() {
   const { items, addItem, toggleDone, loading } = usePlanner();
   const [open, setOpen] = useState(false);
+  const [pending, setPending] = useState<PlannerProposedItem | null>(null);
   const sectionRef = useRef<HTMLElement|null>(null);
 
   const onAddClick = useCallback(() => setOpen(true), []);
   const onSubmit = useCallback((input: {title:string; category:any; durationMin:number; notes?:string}) => {
-    addItem({
-      id: uid(),
-      title: input.title,
-      category: input.category,
-      durationMin: input.durationMin,
-      notes: input.notes,
-      done: false,
-      createdAt: Date.now(),
-    });
+    const exists = (items || []).some(it =>
+      it.title.trim().toLowerCase() === input.title.trim().toLowerCase() &&
+      it.category === input.category &&
+      it.durationMin === input.durationMin
+    );
+    if (!exists) {
+      addItem({
+        id: uid(),
+        title: input.title,
+        category: input.category,
+        durationMin: input.durationMin,
+        notes: input.notes,
+        done: false,
+        createdAt: Date.now(),
+      });
+    }
+    setPending(null);
     setOpen(false);
-  }, [addItem]);
+  }, [addItem, items]);
 
   const empty = !items || items.length === 0;
   const top3 = useMemo(() => (items || []).slice(0,3), [items]);
 
   useEffect(() => onPlannerAdd(() => {
     sectionRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setOpen(true);
+  }), []);
+
+  useEffect(() => onPlannerPropose((p) => {
+    sectionRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setPending(p);
     setOpen(true);
   }), []);
 
@@ -59,7 +74,7 @@ export default function PlannerSection() {
         </div>
       )}
 
-      <PlannerSheet open={open} onOpenChange={setOpen} onSubmit={onSubmit} />
+      <PlannerSheet open={open} onOpenChange={setOpen} onSubmit={onSubmit} initial={pending ?? undefined} />
     </section>
   );
 }

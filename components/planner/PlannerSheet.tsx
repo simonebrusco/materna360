@@ -8,11 +8,12 @@ type Input = {
   notes?: string;
 };
 export default function PlannerSheet({
-  open, onOpenChange, onSubmit
+  open, onOpenChange, onSubmit, initial
 }:{
   open: boolean;
   onOpenChange: (b:boolean)=>void;
   onSubmit: (input: Input)=>void;
+  initial?: Partial<Input>;
 }) {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState<Input["category"]>("brincadeira");
@@ -23,6 +24,15 @@ export default function PlannerSheet({
   useEffect(() => {
     if (open) setTimeout(() => first.current?.focus(), 0);
   }, [open]);
+
+  useEffect(() => {
+    if (open && initial) {
+      if (initial.title) setTitle(initial.title);
+      if (initial.category) setCategory(initial.category as Input["category"]);
+      if (typeof initial.durationMin === 'number') setDuration(initial.durationMin);
+      if (initial.notes) setNotes(initial.notes);
+    }
+  }, [open, initial]);
 
   const close = () => onOpenChange(false);
   const handleSubmit = (e:React.FormEvent) => {
