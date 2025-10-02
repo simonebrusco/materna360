@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { DayKey, usePlannerStorage } from "./Planner/PlannerStorage";
+import { DayKey, usePlannerStorage } from "./PlannerStorage";
 
 const ORDER: DayKey[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const LABELS: Record<DayKey, string> = {
