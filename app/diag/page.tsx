@@ -1,6 +1,9 @@
 export default function Page() {
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+      <div style={{padding: '8px', background: '#eef2ff', borderRadius: 8, marginBottom: 12}}>
+        CSS DIAG: If body is light gray and this box is purple-ish, global CSS is loaded. Next, Tailwind styles should also appear.
+      </div>
       <div
         data-ui-flag="diag-route"
         className="mb-6 rounded-lg border border-red-500 bg-red-50 px-4 py-3 text-sm font-semibold text-red-800"
