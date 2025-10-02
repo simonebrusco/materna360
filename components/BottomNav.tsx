@@ -23,10 +23,10 @@ export default function BottomNav() {
                 <Link
                   href={it.href}
                   className={[
-                    "flex flex-col items-center justify-center rounded-xl px-3 py-2 text-xs sm:text-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2",
+                    "flex flex-col items-center justify-center rounded-xl px-3 py-2 text-xs sm:text-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2",
                     active
-                      ? "bg-brand-50 text-brand-700 ring-1 ring-brand-200"
-                      : "text-gray-600 hover:bg-gray-100",
+                      ? "bg-coral text-white"
+                      : "text-grayMid hover:bg-gray-100",
                   ].join(" ")}
                 >
                   <span aria-hidden className="text-base sm:text-lg leading-none">{it.icon}</span>

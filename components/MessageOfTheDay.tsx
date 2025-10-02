@@ -31,7 +31,7 @@ export default function MessageOfTheDay({ initial }: MessageOfTheDayProps) {
           type="button"
           aria-label="Nova mensagem"
           onClick={handleNew}
-          className="inline-flex items-center justify-center rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 transition w-full sm:w-auto min-h-[44px]"
+          className="inline-flex items-center justify-center rounded-lg bg-coral px-4 py-2 text-sm font-medium text-white hover:bg-coral-hover active:bg-coral-active shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 transition w-full sm:w-auto min-h-[44px]"
         >
           Nova mensagem
         </button>

@@ -11,6 +11,8 @@ module.exports = {
     // brand safelist
     "bg-brand-600","hover:bg-brand-500","text-brand-700","ring-brand-200",
     "bg-accent-50","text-accent-700",
+    // coral palette used in UI
+    "bg-coral","hover:bg-coral-hover","active:bg-coral-active","text-coral","border-coral","bg-coral-light","text-grayMid",
   ],
   theme: {
     extend: {
@@ -38,7 +40,18 @@ module.exports = {
           700: "#6D28D9",
           800: "#5B21B6",
           900: "#4C1D95"
-        }
+        },
+        coral: {
+          DEFAULT: "#FF6F61",
+          hover: "#FF786B",
+          active: "#E85D51",
+          light: "#FF8C7F",
+        },
+        lavender: "#7A6FF0",
+        charcoal: "#4B4B4B",
+        grayMid: "#6B6B6B",
+        offwhite: "#FAFAF8",
+        mint: "#6EC5A3",
       }
     },
   },
