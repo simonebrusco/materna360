@@ -93,6 +93,25 @@ export default async function Page() {
           />
         </Card>
 
+        <section className="animate-fadeUp" style={{ animationDelay: '120ms' }}>
+          <div className="mb-2 flex items-center gap-2">
+            <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)]"><Sparkles size={14} className="text-[color:var(--brand-navy)]/80" /></span>
+            <h2 className="font-display text-[18px] font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)]">Insights para você</h2>
+          </div>
+          <div className="flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {[
+              { id: 'i1', title: 'Brincadeira rápida', text: '5 min de blocos melhoram a coordenação.' },
+              { id: 'i2', title: 'Respire em 4-4-4', text: 'Uma pausa curta reduz o estresse.' },
+              { id: 'i3', title: 'Leitura juntos', text: 'Histórias diárias criam vínculo.' },
+            ].map((i) => (
+              <div key={i.id} className="shrink-0 w-[220px] rounded-2xl border border-[color:var(--neutral-100)] bg-[color:var(--brand-peach)]/35 shadow-elev-1 p-4 hover-lift animate-fadeUp">
+                <h3 className="font-display text-[16px] font-semibold text-[color:var(--brand-navy)] mb-1">{i.title}</h3>
+                <p className="text-sm text-[color:var(--ink)]/80">{i.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <Card className="ring-0 border border-[color:var(--brand-peach)]/50 bg-[color:var(--brand-peach)]/35 text-[color:var(--brand-navy)] shadow-elev-1 p-4 animate-fadeUp hover-lift" style={{ animationDelay: '140ms' }}>
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
