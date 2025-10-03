@@ -1,8 +1,6 @@
 import type React from 'react';
 
-const LOGO_URL =
-  "" ||
-  "/Materna1000_300.svg";
+const LOGO_URL = "/Materna1000_300.svg";
 
 function BrandLogo() {
   const onError = (e: React.SyntheticEvent<HTMLImageElement>) => {
