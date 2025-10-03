@@ -114,7 +114,8 @@ export default function HomePage() {
             {insights.map((i: Insight) => (
               <div
                 key={i.id}
-                className="shrink-0 w-[220px] rounded-2xl border border-[color:var(--neutral-100)] bg-[color:var(--brand-peach)]/35 shadow-elev-1 p-4 hover-lift animate-fadeUp"
+                className="shrink-0 w-[220px] rounded-2xl border border-[color:var(--neutral-100)] bg-white shadow-elev-1 p-4 hover-lift animate-fadeUp"
+                style={{ boxShadow: "0 6px 16px rgba(249,201,183,0.08), 0 2px 6px rgba(20,25,40,0.04)" }}
               >
                 <h3 className="font-display text-[16px] font-semibold text-[color:var(--brand-navy)] mb-1">{i.title}</h3>
                 <p className="text-sm text-[color:var(--ink)]/80">{i.text}</p>
