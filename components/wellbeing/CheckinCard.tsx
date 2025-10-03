@@ -46,7 +46,7 @@ export default function CheckinCard() {
               aria-label={m.label}
               onClick={() => addCheckin(m.value)}
               className={[
-                "text-3xl p-2 rounded-full hover:bg-gray-100 focus:ring-2 focus:ring-indigo-300",
+                "text-3xl p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2",
                 isSelected ? "bg-[#FF6F61] text-white" : "text-gray-800",
               ].join(" ")}
             >
