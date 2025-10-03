@@ -40,19 +40,23 @@ export default async function Page() {
         >
           <div className="flex items-start justify-between gap-4 flex-nowrap">
             <div className="min-w-0">
-              <div className="text-xs uppercase tracking-wide text-[color:var(--brand-navy)]/65 flex items-center gap-1">
-                <Sparkles size={14} /> Materna360
+              <div className="flex items-center gap-2">
+                <Image
+                  src="/Materna1000_300.svg"
+                  alt="Materna360"
+                  width={106} height={32} priority
+                  className="block h-6 md:h-8 w-auto opacity-95 object-contain"
+                  sizes="(min-width: 768px) 106px, 80px"
+                />
+                <HeartHandshake size={16} className="text-[color:var(--brand-navy)]/80" />
+                <span className="text-xs text-[color:var(--brand-navy)]/70">
+                  Um passo por dia — mais conexão e leveza na sua rotina.
+                </span>
               </div>
-              <h1 className="font-display text-[24px] leading-7 md:text-[26px] font-semibold mt-1 text-[color:var(--brand-navy)] tracking-[-0.012em]">
-                Olá, você!
+
+              <h1 className="font-display text-[24px] leading-7 md:text-[26px] font-semibold mt-2 text-[color:var(--brand-navy)] tracking-[-0.012em] truncate">
+                Olá, Simone!
               </h1>
-              <p className="mt-1 text-sm text-[color:var(--brand-navy)]/75">
-                Um passo por dia — mais conexão e leveza na sua rotina.
-              </p>
-              <div className="mt-3 flex items-center gap-2">
-                <ProgressRing value={62} />
-                <span className="inline-flex items-center rounded-full border border-[color:var(--neutral-100)] bg-white/80 px-2 py-0.5 text-[11px] font-medium text-[color:var(--brand-navy)]/80">Semana 3/8 • 62% concluído</span>
-              </div>
             </div>
             <div className="shrink-0 flex items-center">
               <Image
