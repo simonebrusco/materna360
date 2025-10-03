@@ -2,35 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Google fonts for Poppins (headings) and Inter (body) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap');
+
 :root{
-  --brand-navy:#2F3A56;
-  --brand-coral:#FF6F61;
-  --brand-peach:#F9C9B7;
-  --bg:#FFFFFF;
-  --neutral-50:#F7F7F8;   /* base for separators */
-  --neutral-100:#EFEFEF;  /* hairline borders */
-  --neutral-300:#DADADA;  /* visible borders */
-  --ink:#253047;          /* main text */
+  /* Color tokens */
+  --brand-navy: #2F3A56;
+  --brand-coral: #FF6F61;
+  --accent-peach: #F9C9B7;
+  --bg: #FFFFFF;
+  --bg-soft: #F7F7F8;
+  --text: #1E1E1E;
+  --text-muted: #5E6370;
+  --border: #E9E9ED;
+
+  /* Backward-compatible aliases used in codebase */
+  --neutral-50: var(--bg-soft);
+  --neutral-100: var(--border);
 }
 
-/* Premium shadows */
-.shadow-elev-1{
-  box-shadow: 0 1px 2px rgba(20,25,40,.06), 0 4px 10px rgba(20,25,40,.04);
+@layer base {
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .font-display { font-family: "Poppins", "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+
+  /* Typography scale */
+  h1, .typography-h1 { font-family: "Poppins", inherit; font-weight: 600; font-size: clamp(22px, 2.2vw, 28px); line-height: 1.3; letter-spacing: -0.01em; color: var(--brand-navy); }
+  h2, .typography-h2 { font-family: "Poppins", inherit; font-weight: 600; font-size: clamp(18px, 1.8vw, 22px); line-height: 1.4; letter-spacing: -0.01em; color: var(--brand-navy); }
+  .typography-body { font-size: 16px; line-height: 1.5; font-weight: 400; }
+  .typography-label { font-size: 12px; line-height: 1.4; font-weight: 500; }
+  @media (min-width: 600px) { .typography-label { font-size: 14px; } }
+
+  /* Focus visibles */
+  :focus-visible { outline: 2px solid var(--brand-coral); outline-offset: 2px; }
 }
-.shadow-elev-2{
-  box-shadow: 0 3px 6px rgba(20,25,40,.08), 0 10px 24px rgba(20,25,40,.06);
-}
+
+/* Shadows */
+.shadow-elev-1{ box-shadow: 0 1px 2px rgba(20,25,40,.06), 0 4px 10px rgba(20,25,40,.04); }
+.shadow-elev-2{ box-shadow: 0 3px 6px rgba(20,25,40,.08), 0 10px 24px rgba(20,25,40,.06); }
+.shadow-card{ box-shadow: 0 10px 24px rgba(47,58,86,0.06), 0 2px 6px rgba(249,201,183,0.18); }
+.shadow-cta-hover{ box-shadow: 0 8px 16px rgba(255,111,97,0.24); }
 
 /* Smooth fadeUp animation */
-@keyframes fadeUp {
-  from{opacity:0; transform: translateY(8px)}
-  to{opacity:1; transform:none}
-}
-.animate-fadeUp { animation: fadeUp .35s ease-out forwards; }
+@keyframes fadeUp { from{opacity:0; transform: translateY(8px)} to{opacity:1; transform:none} }
+.animate-fadeUp { animation: fadeUp .3s ease-out forwards; }
 
-/* Fonts */
-body { font-family: var(--font-sans), system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
-.font-display { font-family: var(--font-display), var(--font-sans), sans-serif; }
+/* Grid system utility */
+@layer utilities {
+  .app-grid { display: grid; grid-template-columns: repeat(1, minmax(0,1fr)); gap: 16px; }
+  @media (min-width: 600px) { .app-grid { grid-template-columns: repeat(6, minmax(0,1fr)); gap: 16px; } }
+  @media (min-width: 900px) { .app-grid { grid-template-columns: repeat(12, minmax(0,1fr)); gap: 20px; } }
+  .hit-target { min-width: 44px; min-height: 44px; }
+}
 
 /* Micro utilities */
 .hover-lift{ transition: transform .2s ease, box-shadow .2s ease }

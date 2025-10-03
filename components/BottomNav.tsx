@@ -23,15 +23,15 @@ export default function BottomNav() {
   };
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 border-t bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
-      <ul className="mx-auto flex max-w-2xl items-center justify-between px-6 py-3">
+    <nav className="fixed bottom-0 inset-x-0 border-t border-[color:var(--border)] bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+      <ul className="container flex items-center justify-between py-3">
         {items.map((it) => (
           <li key={it.key}>
             <Link
               href={it.href}
               className={cn(
                 "inline-flex flex-col items-center text-sm",
-                isActive(it.href) ? "text-[#AD8567] font-medium" : "text-gray-500 hover:text-gray-700"
+                isActive(it.href) ? "text-[color:var(--brand-navy)] font-medium" : "text-gray-500 hover:text-gray-700"
               )}
             >
               <span>{it.label}</span>

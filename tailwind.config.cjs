@@ -15,9 +15,38 @@ module.exports = {
     "bg-coral","hover:bg-coral-hover","active:bg-coral-active","text-coral","border-coral","bg-coral-light","text-grayMid",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "1rem",
+        sm: "1rem",
+        md: "1rem",
+        lg: "1.25rem",
+        xl: "1.5rem",
+      },
+      screens: {
+        sm: "100%",
+        md: "640px",
+        lg: "864px",
+        xl: "1120px",
+      },
+    },
+    screens: {
+      sm: "360px",
+      md: "600px",
+      lg: "900px",
+      xl: "1280px",
+    },
     extend: {
+      boxShadow: {
+        card: "0 10px 24px rgba(47,58,86,0.06), 0 2px 6px rgba(249,201,183,0.18)",
+        cta: "0 8px 16px rgba(255,111,97,0.24)",
+      },
       colors: {
+        // Design system tokens via CSS variables
         brand: {
+          navy: "var(--brand-navy)",
+          coral: "var(--brand-coral)",
           50:  "#FFF7ED",
           100: "#FFEDD5",
           200: "#FED7AA",
@@ -30,6 +59,7 @@ module.exports = {
           900: "#7C2D12"
         },
         accent: {
+          peach: "var(--accent-peach)",
           50:  "#F5F3FF",
           100: "#EDE9FE",
           200: "#DDD6FE",
@@ -41,6 +71,15 @@ module.exports = {
           800: "#5B21B6",
           900: "#4C1D95"
         },
+        surface: {
+          bg: "var(--bg)",
+          soft: "var(--bg-soft)",
+        },
+        ink: {
+          DEFAULT: "var(--text)",
+          muted: "var(--text-muted)",
+        },
+        border: "var(--border)",
         coral: {
           DEFAULT: "#FF6F61",
           hover: "#FF786B",
@@ -53,7 +92,19 @@ module.exports = {
         grayMid: "#6B6B6B",
         offwhite: "#FAFAF8",
         mint: "#6EC5A3",
-      }
+      },
+      borderRadius: {
+        xl: "12px",
+        "2xl": "16px",
+      },
+      transitionTimingFunction: {
+        "out-soft": "cubic-bezier(0.2, 0, 0, 1)",
+      },
+      transitionDuration: {
+        200: "200ms",
+        250: "250ms",
+        300: "300ms",
+      },
     },
   },
   plugins: [],
