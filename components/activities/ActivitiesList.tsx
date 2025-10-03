@@ -33,7 +33,7 @@ export default function ActivitiesList({ age, onChangeAge }: { age: string; onCh
             <Card key={act.id} className="p-5">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h3 className="text/base font-semibold text-gray-900">{act.title}</h3>
+                  <h3 className="text-base font-semibold text-gray-900">{act.title}</h3>
                   <div className="mt-1 text-sm text-gray-600">
                     {act.minutes ? <span className="mr-3">⏱ {act.minutes} min</span> : null}
                     {act.summary ? <span>{act.summary}</span> : null}
