@@ -20,9 +20,9 @@ export default function FixedHeader() {
             </h1>
           </div>
           <div className="shrink-0">
-            <Link href="#" aria-label="Notificações" className="p-2 rounded-lg text-[color:var(--brand-navy)]/80 hover:bg-gray-50 focus:outline-none focus-visible:outline-2 focus-visible:outline-[color:var(--brand-coral)] focus-visible:outline-offset-2">
-              <Bell size={20} />
-            </Link>
+            <button type="button" aria-label="Notificações" className="p-2 rounded-lg text-[color:var(--brand-navy)]/80 hover:bg-gray-50 focus:outline-none focus-visible:outline-2 focus-visible:outline-[color:var(--brand-coral)] focus-visible:outline-offset-2">
+              <Bell size={20} aria-hidden="true" />
+            </button>
           </div>
         </div>
       </div>
