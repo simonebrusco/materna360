@@ -2,7 +2,6 @@
 
 import Brand from "../Brand";
 import { Bell } from "lucide-react";
-import Link from "next/link";
 
 export default function FixedHeader() {
   return (
