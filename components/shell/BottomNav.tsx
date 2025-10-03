@@ -9,7 +9,7 @@ function cx(...args: Array<string | false | null | undefined>) {
 const tabs = [
   { href: "/", label: "Hoje", emoji: "🏠" },
   { href: "/atividades", label: "Atividades", emoji: "🎯" },
-  { href: "/wellbeing", label: "Bem-estar", emoji: "🌿" },
+  { href: "/bem-estar", label: "Bem-estar", emoji: "🌿" },
   { href: "/perfil", label: "Perfil", emoji: "👤" },
 ];
 
