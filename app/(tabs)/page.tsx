@@ -25,29 +25,24 @@ export default function HomePage() {
     <div className="mx-auto max-w-2xl px-4 pt-5 pb-[96px] space-y-6 text-[color:var(--ink)]">
       {/* If these sections/components already exist in this file, KEEP them in place. */}
 
-      {/* HERO */}
+      {/* Greeting Card */}
       <section
-        className="relative overflow-hidden rounded-2xl border border-[color:var(--neutral-100)] shadow-elev-2 p-5 animate-fadeUp hover-lift"
-        style={{ background: "linear-gradient(135deg, rgba(249,201,183,.35), #fff 40%, #fff 100%)" }}
-        aria-label="Hero"
+        className="relative overflow-hidden rounded-2xl border border-[color:var(--neutral-100)] bg-white shadow-elev-2 p-5 animate-fadeUp hover-lift"
+        aria-label="Greeting"
       >
-        <div className="flex items-start justify-between gap-4 flex-nowrap">
-          <div className="min-w-0">
-            <p className="mt-1 text-sm text-[color:var(--brand-navy)]/75">
-              Que bom ter você aqui, vamos juntos criar momentos especiais hoje.
-            </p>
+        <p className="text-sm sm:text-base text-[color:var(--brand-navy)]">
+          Que bom ter você aqui. Vamos criar momentos especiais hoje.
+        </p>
+        <div className="mt-4">
+          <div className="h-2 w-full rounded-full bg-[color:rgba(47,58,86,.12)] overflow-hidden">
+            <div className="h-full rounded-full bg-[color:var(--brand-coral)]" style={{ width: "62%" }} />
           </div>
-          <div className="shrink-0 flex items-center gap-2">
-            <ProgressRing value={62} />
-            <div className="text-xs text-[color:var(--brand-navy)]/70">
-              Semana 3/8 • <span className="font-medium text-[color:var(--brand-navy)]">62%</span>
-            </div>
-          </div>
+          <p className="mt-2 text-xs text-[color:var(--brand-navy)]/70">Você está indo muito bem — continue no seu ritmo.</p>
         </div>
         <div
           className="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full"
           style={{
-            background: "radial-gradient(closest-side, rgba(255,111,97,.18), transparent)",
+            background: "radial-gradient(closest-side, rgba(249,201,183,.18), transparent)",
             filter: "blur(6px)",
           }}
         />
