@@ -13,16 +13,18 @@ import { Sparkles, BookOpen, Wind, Smile, HeartHandshake, Lightbulb, PlusCircle,
 
 export const dynamic = 'force-static'
 
+type Insight = { id: string; title: string; text: string };
+
 export default async function Page() {
-  const demoInsights = [
+  const demoInsights: Insight[] = [
     { id: "i1", title: "Respiro de 2 minutos", text: "Uma pausa curta muda seu dia." },
     { id: "i2", title: "Água + alongar", text: "Levante e hidrate-se agora." },
     { id: "i3", title: "Gentileza consigo", text: "Tudo bem fazer menos hoje." },
   ];
-  const demoDays = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+  const demoDays: string[] = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
   const anyProps = {} as any;
-  const insights = Array.isArray(anyProps?.insights) && anyProps.insights.length ? anyProps.insights : demoInsights;
-  const days = Array.isArray(anyProps?.days) && anyProps.days.length ? anyProps.days : demoDays;
+  const insights: Insight[] = Array.isArray(anyProps?.insights) && anyProps.insights.length ? (anyProps.insights as Insight[]) : demoInsights;
+  const days: string[] = Array.isArray(anyProps?.days) && anyProps.days.length ? (anyProps.days as string[]) : demoDays;
   return (
     <Container className="min-h-screen bg-white pt-0 pb-0">
       <header className="sr-only">
@@ -107,7 +109,7 @@ export default async function Page() {
             <h2 className="font-display text-[18px] font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)]">Insights para você</h2>
           </div>
           <div className="flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {insights.map((i) => (
+            {insights.map((i: Insight) => (
               <div key={i.id} className="shrink-0 w-[220px] rounded-2xl border border-[color:var(--neutral-100)] bg-[color:var(--brand-peach)]/35 shadow-elev-1 p-4 hover-lift animate-fadeUp">
                 <h3 className="font-display text-[16px] font-semibold text-[color:var(--brand-navy)] mb-1">{i.title}</h3>
                 <p className="text-sm text-[color:var(--ink)]/80">{i.text}</p>
