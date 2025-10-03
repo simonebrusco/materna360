@@ -37,8 +37,8 @@ export default async function Page() {
           style={{ background: 'linear-gradient(135deg, rgba(249,201,183,.35), #fff 40%, #fff 100%)' }}
           aria-label="Hero"
         >
-          <div className="flex items-start justify-between gap-4">
-            <div>
+          <div className="flex items-start justify-between gap-4 flex-nowrap">
+            <div className="min-w-0">
               <div className="text-xs uppercase tracking-wide text-[color:var(--brand-navy)]/65 flex items-center gap-1">
                 <Sparkles size={14} /> Materna360
               </div>
@@ -53,8 +53,8 @@ export default async function Page() {
                 <span className="inline-flex items-center rounded-full border border-[color:var(--neutral-100)] bg-white/80 px-2 py-0.5 text-[11px] font-medium text-[color:var(--brand-navy)]/80">Semana 3/8 • 62% concluído</span>
               </div>
             </div>
-            <div className="shrink-0 opacity-95">
-              <img src="/Materna1000_300.svg" alt="Materna360" className="h-6 md:h-8 w-auto opacity-95" loading="eager" decoding="async" fetchPriority="high" />
+            <div className="shrink-0 flex items-center opacity-95">
+              <img src="/Materna1000_300.svg" alt="Materna360" className="block h-6 md:h-8 w-auto opacity-95 object-contain" loading="eager" decoding="async" fetchPriority="high" />
             </div>
           </div>
           <div className="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'radial-gradient(closest-side, rgba(255,111,97,.18), transparent)', filter: 'blur(6px)' }} />
@@ -135,7 +135,7 @@ export default async function Page() {
         </Card>
 
         <section className="animate-fadeUp" style={{ animationDelay: '160ms' }}>
-          <div className="mb-2 flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)]"><Calendar size={14} className="text-[color:var(--brand-navy)]/80" /></span>
             <h2 className="font-display text-[18px] leading-6 font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)] mt-0">Planner da Semana</h2>
           </div>
