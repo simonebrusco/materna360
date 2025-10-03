@@ -2,57 +2,20 @@
 import Card from "@/components/ui/Card";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Button from "@/components/ui/Button";
-import { useSearchParams, useRouter } from "next/navigation";
-import AgeFilter, { getDefaultAge } from "./AgeFilter";
 import { CATALOG } from "./catalog";
 import { openPlannerAdd, proposePlannerItem } from "@/components/planner/plannerBus";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 
-export default function ActivitiesList() {
-  const router = useRouter();
-  const params = useSearchParams();
-  const ageParam = params.get("age");
-  const age = ageParam ?? getDefaultAge();
-
-  useEffect(() => {
-    if (!ageParam) {
-      const q = new URLSearchParams(Array.from(params.entries()));
-      q.set("age", age);
-      router.replace(`?${q.toString()}`);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ageParam]);
-
+export default function ActivitiesList({ age }: { age: string }) {
   const list = useMemo(() => CATALOG[age] ?? [], [age]);
 
   return (
     <div className="space-y-4">
-      <div className="bg-white rounded-2xl ring-1 ring-gray-200 p-4">
-        <AgeFilter
-          value={age}
-          onChange={(v) => {
-            const q = new URLSearchParams(Array.from(params.entries()));
-            q.set("age", v);
-            router.replace(`?${q.toString()}`);
-          }}
-        />
-      </div>
-
       <SectionTitle>Brincadeiras para hoje</SectionTitle>
 
       {list.length === 0 ? (
         <Card>
           <p className="text-sm text-gray-600">Nenhuma atividade cadastrada para {age} ainda.</p>
-          <div className="mt-3">
-            <Button
-              variant="secondary"
-              size="sm"
-              type="button"
-              onClick={() => router.replace(`?age=${getDefaultAge()}`)}
-            >
-              Ver outra faixa
-            </Button>
-          </div>
         </Card>
       ) : (
         <div className="space-y-3">
