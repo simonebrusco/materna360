@@ -9,7 +9,7 @@ import Container from '@/components/Container'
 import SectionTitle from '@/components/ui/SectionTitle'
 import Card from '@/components/ui/Card'
 import ProgressRing from '@/components/ui/ProgressRing'
-import { Sparkles, BookOpen, Wind, Smile, HeartHandshake, Lightbulb, PlusCircle, Calendar } from 'lucide-react'
+import { Sparkles, BookOpen, Wind, Smile, Lightbulb, PlusCircle, Calendar } from 'lucide-react'
 import Image from 'next/image'
 
 export const dynamic = 'force-static'
@@ -48,15 +48,8 @@ export default async function Page() {
                   className="block h-6 md:h-8 w-auto opacity-95 object-contain"
                   sizes="(min-width: 768px) 106px, 80px"
                 />
-                <HeartHandshake size={16} className="text-[color:var(--brand-navy)]/80" />
-                <span className="text-xs text-[color:var(--brand-navy)]/70">
-                  Um passo por dia — mais conexão e leveza na sua rotina.
-                </span>
               </div>
-
-              <h1 className="font-display text-[24px] leading-7 md:text-[26px] font-semibold mt-2 text-[color:var(--brand-navy)] tracking-[-0.012em] truncate">
-                Olá, Simone!
-              </h1>
+              <p className="mt-1 text-sm text-[color:var(--brand-navy)]/75">Que bom ter você aqui, vamos juntos criar momentos especiais hoje.</p>
             </div>
             <div className="shrink-0 flex items-center gap-2">
               <ProgressRing value={62} />
