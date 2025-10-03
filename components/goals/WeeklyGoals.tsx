@@ -22,7 +22,7 @@ export default function WeeklyGoals() {
     <section className="bg-white rounded-2xl shadow-sm ring-1 ring-gray-200 p-6 space-y-3">
       <div className="flex items-start justify-between gap-4">
         <div className="space-y-1">
-          <h2 className="text-lg sm:text-xl font-semibold text-charcoal leading-7 sm:leading-8 mb-2 sm:mb-3">Defina suas metas da semana 💛</h2>
+          <h2 className="font-display text-[18px] leading-6 font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)] mb-2 sm:mb-3">Defina suas metas da semana 💛</h2>
           {goals.filled === 0 && (
             <p className="text-sm text-gray-600">Toque nos corações para definir suas metas desta semana.</p>
           )}
@@ -51,7 +51,7 @@ export default function WeeklyGoals() {
               aria-label={filled ? `Meta ${i + 1} selecionada` : `Selecionar meta ${i + 1}`}
               className={[
                 "inline-flex h-10 w-10 items-center justify-center rounded-full transition-transform",
-                "focus:outline-none focus:ring-2 focus:ring-indigo-300",
+                "focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2",
                 filled ? "bg-[#FF6F61]/10" : "bg-white",
                 "ring-1 ring-gray-300 hover:scale-105 active:scale-[0.98]",
               ].join(" ")}
