@@ -1,4 +1,4 @@
-import ActivitiesSkeleton from './skeleton';
+import ActivitiesSkeleton from '@/app/activities/skeleton';
 
 export default function Loading() {
   return <ActivitiesSkeleton />;
