@@ -32,7 +32,7 @@ export default async function Page() {
         <p className="text-sm text-[#2F3A56]">Que bom ter você aqui, vamos juntos criar momentos especiais hoje.</p>
       </header>
 
-      <div className="mx-auto max-w-2xl px-4 pt-5 pb-[96px] space-y-7 text-[color:var(--ink)]">
+      <div className="mx-auto max-w-2xl px-4 pt-5 pb-[96px] space-y-6 text-[color:var(--ink)]">
         <section className="relative overflow-hidden rounded-2xl border border-[color:var(--neutral-100)] shadow-elev-2 p-5 animate-fadeUp hover-lift"
           style={{ background: 'linear-gradient(135deg, rgba(249,201,183,.35), #fff 40%, #fff 100%)' }}
           aria-label="Hero"
@@ -118,13 +118,13 @@ export default async function Page() {
           </div>
         </section>
 
-        <Card className="ring-0 border border-[color:var(--brand-peach)]/50 bg-[color:var(--brand-peach)]/35 text-[color:var(--brand-navy)] shadow-elev-1 p-4 animate-fadeUp hover-lift" style={{ animationDelay: '140ms' }}>
+        <Card className="ring-0 border border-[color:var(--brand-peach)]/50 bg-[color:var(--brand-peach)]/35 text-[color:var(--brand-navy)] shadow-elev-1 p-4 animate-fadeUp hover-lift mb-0" style={{ animationDelay: '140ms' }}>
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[color:var(--neutral-100)] bg-white/70">
                 <Lightbulb size={14} className="text-[color:var(--brand-navy)]/80" />
               </span>
-              <h2 className="font-display text-[18px] leading-6 font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)]">Tip do dia</h2>
+              <h2 className="font-display text-[18px] leading-6 font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)]">Insight do dia</h2>
             </div>
             <span className="px-2 py-0.5 text-[11px] font-medium rounded-full bg-white/70 text-[color:var(--brand-navy)]/80 border border-[color:var(--neutral-100)]">Aconselhável</span>
           </div>
@@ -141,7 +141,7 @@ export default async function Page() {
       <section className="animate-fadeUp" style={{ animationDelay: '160ms' }}>
         <div className="mb-2 flex items-center gap-2">
           <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)]"><Calendar size={14} className="text-[color:var(--brand-navy)]/80" /></span>
-          <h2 className="font-display text-[18px] font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)]">Planner da Semana</h2>
+          <h2 className="font-display text-[18px] font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)] mt-0">Planner da Semana</h2>
         </div>
         <div className="grid grid-cols-2 gap-3">
           {days.map((d: string) => (
