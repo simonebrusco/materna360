@@ -131,9 +131,25 @@ export default async function Page() {
       </div>
 
       <div className="divider-hairline" />
-      <section className="animate-fadeUp active:scale-[0.995] transition-transform" style={{ animationDelay: '160ms' }}>
-        <SectionTitle className="text-[22px] leading-7 font-semibold text-[color:var(--brand-navy)] tracking-[-0.01em]">Planner</SectionTitle>
-        <PlannerSection />
+
+      <section className="animate-fadeUp" style={{ animationDelay: '160ms' }}>
+        <div className="mb-2 flex items-center gap-2">
+          <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)]"><Calendar size={14} className="text-[color:var(--brand-navy)]/80" /></span>
+          <h2 className="font-display text-[18px] font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)]">Planner da Semana</h2>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          {['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'].map((d) => (
+            <div key={d} className="rounded-xl border border-[color:var(--neutral-100)] bg-white shadow-elev-1 p-3 flex flex-col justify-between">
+              <span className="text-xs text-[color:var(--brand-navy)]/70 font-medium">{d}</span>
+              <span className="text-sm font-semibold text-[color:var(--brand-navy)]">2 tarefas</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="animate-fadeUp active:scale-[0.995] transition-transform" style={{ animationDelay: '200ms' }}>
+        <SectionTitle className="text-[22px] leading-7 font-semibold text-[color:var(--brand-navy)] tracking-[-0.01em]">Progresso da semana</SectionTitle>
+        <WeeklyProgress />
       </section>
 
       <section className="animate-fadeUp active:scale-[0.995] transition-transform" style={{ animationDelay: '200ms' }}>
