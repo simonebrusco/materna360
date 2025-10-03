@@ -1,38 +1,42 @@
-import dynamic from 'next/dynamic';
-const MessageOfTheDay = dynamic(() => import('../../components/MessageOfTheDay'), { ssr: false });
-import ActivityOfDay from '../../components/ActivityOfDay';
-import Card from '../../components/ui/Card';
-import SectionTitle from '../../components/ui/SectionTitle';
-import WeeklyProgress from '../../components/today/WeeklyProgress';
-import WeeklyGoals from '../../components/goals/WeeklyGoals';
-import PlannerSection from '@/components/planner/PlannerSection';
-import HeaderGreeting from '@/components/shell/HeaderGreeting';
+/** DO NOT re-export this file. Keep this as a direct server page (no client hooks). */
 
-export default function Page() {
+import React from 'react'
+import MessageOfTheDay from '@/components/MessageOfTheDay'
+import ActivityOfDay from '@/components/ActivityOfDay'
+import PlannerSection from '@/components/planner/PlannerSection'
+import WeeklyProgress from '@/components/today/WeeklyProgress'
+import Container from '@/components/Container'
+import SectionTitle from '@/components/ui/SectionTitle'
+
+export const dynamic = 'force-static'
+
+export default async function Page() {
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8 space-y-6">
-      <HeaderGreeting />
+    <Container className="min-h-screen bg-offwhite flex flex-col gap-6 pb-24">
+      <header className="pt-6">
+        <h1 className="text-2xl font-semibold text-gray-900">Olá, Simone <span aria-hidden>💛</span></h1>
+        <p className="text-sm text-gray-600">Que bom ter você aqui, vamos juntos criar momentos especiais hoje.</p>
+      </header>
 
-      <Card>
-        <SectionTitle>🌟 Mensagem do dia</SectionTitle>
+      <section>
+        <SectionTitle>Mensagem do dia</SectionTitle>
         <MessageOfTheDay initial={"Pequenos momentos se transformam em grandes lembranças."} />
-      </Card>
+      </section>
 
-      <PlannerSection />
-
-      <WeeklyGoals />
-
-      <Card>
-        <SectionTitle>🧩 Atividade do dia</SectionTitle>
+      <section>
+        <SectionTitle>Atividade do dia</SectionTitle>
         <ActivityOfDay />
-      </Card>
+      </section>
 
-      <Card>
-        <SectionTitle>💡 Dica de hoje</SectionTitle>
-        <p className="text-sm sm:text-base text-gray-700 leading-relaxed">Reserve alguns minutos para respirar fundo e apreciar um pequeno momento do dia.</p>
-      </Card>
+      <section>
+        <SectionTitle>Planner</SectionTitle>
+        <PlannerSection />
+      </section>
 
-      <WeeklyProgress />
-    </div>
-  );
+      <section>
+        <SectionTitle>Progresso da semana</SectionTitle>
+        <WeeklyProgress />
+      </section>
+    </Container>
+  )
 }
