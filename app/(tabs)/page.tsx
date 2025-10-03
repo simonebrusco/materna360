@@ -17,6 +17,12 @@ export default function HomePage() {
     { id: "i3", title: "Gentileza consigo", text: "Tudo bem fazer menos hoje." },
   ];
   const demoDays: string[] = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+  const todayIndex = (() => {
+    const d = new Date().getDay(); // 0=Sun..6=Sat
+    // Map to our array index (Seg..Dom)
+    // Seg(1)->0, Ter(2)->1, Qua(3)->2, Qui(4)->3, Sex(5)->4, Sáb(6)->5, Dom(0)->6
+    return d === 0 ? 6 : d - 1;
+  })();
   const anyProps = {} as any;
   const insights: Insight[] = Array.isArray(anyProps?.insights) && anyProps.insights.length ? (anyProps.insights as Insight[]) : demoInsights;
   const days: string[] = Array.isArray(anyProps?.days) && anyProps.days.length ? (anyProps.days as string[]) : demoDays;
