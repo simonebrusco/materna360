@@ -20,7 +20,7 @@ export default async function Page() {
       </header>
 
       <div className="space-y-4">
-        <Card className="p-4 bg-[#F9C9B7] text-[#2F3A56] ring-[#E5E5E5]">
+        <Card className="p-4 ring-[#E5E5E5]">
           <SectionTitle className="text-[#2F3A56]">Mensagem do dia</SectionTitle>
           <MessageOfTheDay
             initial={"Pequenos momentos se transformam em grandes lembranças."}
@@ -35,7 +35,8 @@ export default async function Page() {
             titleClassName="text-[#2F3A56]"
             bodyClassName="text-[#2F3A56]"
             primaryButtonClassName="font-bold uppercase rounded-md shadow-sm"
-            secondaryButtonClassName="font-bold uppercase rounded-md shadow-sm text-[#2F3A56] ring-[#E5E5E5] bg-transparent hover:bg-[#F5F5F5]"
+            secondaryButtonClassName="font-bold uppercase rounded-md shadow-sm"
+            secondaryButtonVariantOverride="primary"
           />
         </Card>
       </div>
