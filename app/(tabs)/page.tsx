@@ -103,7 +103,6 @@ export default function HomePage() {
             bodyClassName="text-[#333333]"
             primaryButtonClassName="bg-[color:var(--brand-coral)] text-white rounded-md px-3.5 py-2 font-semibold shadow-elev-1 hover:opacity-95 active:opacity-90 focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2"
             secondaryButtonClassName="ring-1 ring-[color:var(--brand-coral)] text-[color:var(--brand-navy)] rounded-md px-3.5 py-2 font-semibold hover:bg-white focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2"
-            secondaryButtonVariantOverride="ghost"
           />
         </Card>
 
