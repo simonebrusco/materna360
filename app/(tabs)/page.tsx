@@ -200,10 +200,13 @@ export default function HomePage() {
             </div>
           </div>
           <div className="hidden md:grid md:grid-cols-3 md:gap-3">
-            {days.map((d: string) => (
+            {days.map((d: string, idx: number) => (
               <div
                 key={d}
-                className="rounded-xl border border-[color:var(--neutral-100)] bg-white shadow-elev-1 p-3 flex flex-col justify-between hover-lift"
+                className={[
+                  "rounded-xl bg-white shadow-elev-1 p-3 flex flex-col justify-between hover-lift",
+                  idx === todayIndex ? "border-2 border-[color:var(--brand-coral)]" : "border border-[color:var(--neutral-100)]",
+                ].join(" ")}
               >
                 <span className="text-xs text-[color:var(--brand-navy)]/70 font-medium">{d}</span>
                 <span className="text-sm font-semibold text-[color:var(--brand-navy)]">2 tarefas</span>
