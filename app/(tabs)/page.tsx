@@ -62,7 +62,7 @@ export default function HomePage() {
           ].map(({ icon: Icon, label }, i) => (
             <button
               key={label}
-              className="shrink-0 rounded-xl border border-[color:var(--neutral-100)] bg-white px-3.5 py-2.5 text-sm shadow-elev-1 hover-lift active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2"
+              className="shrink-0 rounded-xl border border-[color:var(--neutral-100)] bg-transparent px-3.5 py-2.5 text-sm shadow-elev-1 hover-lift active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2 hover:border-[color:var(--brand-coral)]"
               style={{ animationDelay: `${80 + i * 20}ms` }}
             >
               <span className="flex items-center gap-2 text-[color:var(--brand-navy)]">
