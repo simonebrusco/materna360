@@ -53,8 +53,11 @@ export default async function Page() {
           />
         </Card>
 
-        <Card className="p-4 ring-[#E5E5E5]">
-          <SectionTitle className="text-[#2F3A56]">Atividade do dia</SectionTitle>
+        <Card className="ring-0 border border-[color:var(--neutral-100)] bg-white shadow-elev-2 p-4 animate-fadeUp active:scale-[0.995] transition-transform" style={{ animationDelay: '120ms' }}>
+          <div className="flex items-center justify-between mb-2">
+            <SectionTitle className="text-[22px] leading-7 font-semibold text-[color:var(--brand-navy)] tracking-[-0.01em]">Atividade do dia</SectionTitle>
+            <span className="ml-3 inline-flex items-center rounded-full border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)] px-2 py-0.5 text-[11px] font-medium text-[color:var(--brand-navy)]/70">Destaque</span>
+          </div>
           <ActivityOfDay
             titleClassName="text-[#2F3A56]"
             bodyClassName="text-[#2F3A56]"
