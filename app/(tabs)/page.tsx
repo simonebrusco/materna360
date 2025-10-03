@@ -5,7 +5,6 @@ import ActivityOfDay from "@/components/ActivityOfDay";
 import WeeklyProgress from "@/components/today/WeeklyProgress";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Card from "@/components/ui/Card";
-import ProgressRing from "@/components/ui/ProgressRing";
 import { Sparkles, BookOpen, Wind, Smile, Lightbulb, PlusCircle, Calendar } from "lucide-react";
 
 type Insight = { id: string; title: string; text: string };
