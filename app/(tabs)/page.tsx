@@ -59,10 +59,10 @@ export default async function Page() {
             <span className="ml-3 inline-flex items-center rounded-full border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)] px-2 py-0.5 text-[11px] font-medium text-[color:var(--brand-navy)]/70">Destaque</span>
           </div>
           <ActivityOfDay
-            titleClassName="text-[#2F3A56]"
-            bodyClassName="text-[#2F3A56]"
-            primaryButtonClassName="font-bold uppercase rounded-md shadow-sm"
-            secondaryButtonClassName="font-bold uppercase rounded-md shadow-sm"
+            titleClassName="text-[color:var(--brand-navy)]"
+            bodyClassName="text-[color:var(--ink)]"
+            primaryButtonClassName="bg-[color:var(--brand-coral)] text-white rounded-md px-3.5 py-2 font-semibold shadow-elev-1 hover:opacity-95 active:opacity-90 focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2"
+            secondaryButtonClassName="bg-[color:var(--brand-coral)] text-white rounded-md px-3.5 py-2 font-semibold shadow-elev-1 hover:opacity-95 active:opacity-90 focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2"
             secondaryButtonVariantOverride="primary"
           />
         </Card>
