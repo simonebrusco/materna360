@@ -2,40 +2,45 @@
 
 import * as React from "react";
 
-type ButtonVariants = "primary" | "secondary" | "ghost" | "outline";
-type ButtonSizes = "sm" | "md";
+type ButtonVariant = "primary" | "secondary";
+type ButtonSize = "sm" | "md";
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: ButtonVariants;
-  size?: ButtonSizes;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   className?: string;
 };
 
-const base =
-  "inline-flex items-center justify-center rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
+const base = [
+  "inline-flex items-center justify-center",
+  "rounded-xl md:rounded-2xl",
+  "transition-colors duration-200 ease-out-soft",
+  "focus:outline-none focus-visible:outline-2 focus-visible:outline-[color:var(--brand-coral)] focus-visible:outline-offset-2",
+  "disabled:opacity-50 disabled:pointer-events-none",
+  "min-h-11 min-w-11 select-none",
+].join(" ");
 
-const variantClasses: Record<ButtonVariants, string> = {
-  primary: "bg-[#FF6F61] text-white hover:bg-[#FF786B] active:bg-[#E85D51]",
-  secondary: "bg-white text-gray-700 ring-1 ring-gray-300 hover:bg-gray-50",
-  ghost: "bg-transparent text-gray-700 hover:bg-gray-50",
-  outline: "bg-transparent text-gray-800 ring-1 ring-gray-300 hover:bg-gray-50",
+const variantClasses: Record<ButtonVariant, string> = {
+  primary: [
+    "bg-[color:var(--brand-coral)] text-white",
+    "hover:opacity-95 active:opacity-90",
+    "shadow-sm hover:shadow-cta",
+  ].join(" "),
+  secondary: [
+    "bg-transparent",
+    "border border-[color:var(--brand-coral)]",
+    "text-[color:var(--brand-navy)]",
+    "hover:bg-[color:var(--brand-coral)]/5 active:bg-[color:var(--brand-coral)]/10",
+  ].join(" "),
 };
 
-const sizeClasses: Record<ButtonSizes, string> = {
-  sm: "text-sm px-3 py-1.5",
-  md: "text-sm sm:text-base px-4 py-2",
+const sizeClasses: Record<ButtonSize, string> = {
+  sm: "h-11 px-4 text-sm",
+  md: "h-11 md:h-12 px-5 text-sm md:text-base",
 };
 
-export default function Button({
-  variant = "primary",
-  size = "md",
-  className = "",
-  ...props
-}: Props) {
+export default function Button({ variant = "primary", size = "md", className = "", ...props }: Props) {
   return (
-    <button
-      className={[base, variantClasses[variant], sizeClasses[size], className].filter(Boolean).join(" ")}
-      {...props}
-    />
+    <button className={[base, variantClasses[variant], sizeClasses[size], className].filter(Boolean).join(" ")} {...props} />
   );
 }
