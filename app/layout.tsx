@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div data-build-stamp className="sr-only">BUILD: {new Date().toISOString()}</div>
         <header className="mx-auto max-w-2xl px-4 pt-4">
           <img
-            src="https://drive.google.com/uc?export=view&id=1SyBonmoaaMNBiOS-dnemuqt8_1R58HrFP"
+            src="https://drive.google.com/uc?export=view&id=1SyBonmoaMNBiOS-dnemuqt8_1R58HrFP"
             alt="Materna360"
             className="block h-7 md:h-8 w-auto object-contain opacity-95"
             loading="eager"
