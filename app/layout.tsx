@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Poppins } from 'next/font/google';
+import Header from '@/components/Header';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 const poppins = Poppins({ subsets: ['latin'], weight: ['400','600','700'], variable: '--font-display' });
@@ -15,7 +16,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-BR" className={`${inter.variable} ${poppins.variable} h-full bg-stone-50`}>
       <body className="text-gray-900 antialiased">
         <div data-build-stamp className="sr-only">BUILD: {new Date().toISOString()}</div>
-        {children}
+        <Header />
+        <main className="pb-20">{children}</main>
       </body>
     </html>
   );
