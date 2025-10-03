@@ -2,42 +2,15 @@
 import Card from "@/components/ui/Card";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Button from "@/components/ui/Button";
-import { useSearchParams, useRouter } from "next/navigation";
-import AgeFilter, { getDefaultAge } from "./AgeFilter";
 import { CATALOG } from "./catalog";
 import { openPlannerAdd, proposePlannerItem } from "@/components/planner/plannerBus";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 
-export default function ActivitiesList() {
-  const router = useRouter();
-  const params = useSearchParams();
-  const ageParam = params.get("age");
-  const age = ageParam ?? getDefaultAge();
-
-  useEffect(() => {
-    if (!ageParam) {
-      const q = new URLSearchParams(Array.from(params.entries()));
-      q.set("age", age);
-      router.replace(`?${q.toString()}`);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ageParam]);
-
+export default function ActivitiesList({ age, onChangeAge }: { age: string; onChangeAge?: (next: string) => void }) {
   const list = useMemo(() => CATALOG[age] ?? [], [age]);
 
   return (
     <div className="space-y-4">
-      <div className="bg-white rounded-2xl ring-1 ring-gray-200 p-4">
-        <AgeFilter
-          value={age}
-          onChange={(v) => {
-            const q = new URLSearchParams(Array.from(params.entries()));
-            q.set("age", v);
-            router.replace(`?${q.toString()}`);
-          }}
-        />
-      </div>
-
       <SectionTitle>Brincadeiras para hoje</SectionTitle>
 
       {list.length === 0 ? (
@@ -48,7 +21,7 @@ export default function ActivitiesList() {
               variant="secondary"
               size="sm"
               type="button"
-              onClick={() => router.replace(`?age=${getDefaultAge()}`)}
+              onClick={() => onChangeAge?.("2–3a")}
             >
               Ver outra faixa
             </Button>
@@ -60,7 +33,7 @@ export default function ActivitiesList() {
             <Card key={act.id} className="p-5">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-gray-900">{act.title}</h3>
+                  <h3 className="text/base font-semibold text-gray-900">{act.title}</h3>
                   <div className="mt-1 text-sm text-gray-600">
                     {act.minutes ? <span className="mr-3">⏱ {act.minutes} min</span> : null}
                     {act.summary ? <span>{act.summary}</span> : null}
