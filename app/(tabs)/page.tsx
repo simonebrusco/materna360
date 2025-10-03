@@ -16,7 +16,7 @@ export const dynamic = 'force-static'
 export default async function Page() {
   return (
     <Container className="min-h-screen bg-white pt-0 pb-0">
-      <header className="pt-6">
+      <header className="sr-only">
         <h1 className="text-2xl font-semibold text-[#2F3A56]">Olá, Simone <span aria-hidden>💛</span></h1>
         <p className="text-sm text-[#2F3A56]">Que bom ter você aqui, vamos juntos criar momentos especiais hoje.</p>
       </header>
