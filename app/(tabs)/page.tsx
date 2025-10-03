@@ -7,6 +7,7 @@ import PlannerSection from '@/components/planner/PlannerSection'
 import WeeklyProgress from '@/components/today/WeeklyProgress'
 import Container from '@/components/Container'
 import SectionTitle from '@/components/ui/SectionTitle'
+import Card from '@/components/ui/Card'
 
 export const dynamic = 'force-static'
 
@@ -18,15 +19,17 @@ export default async function Page() {
         <p className="text-sm text-gray-600">Que bom ter você aqui, vamos juntos criar momentos especiais hoje.</p>
       </header>
 
-      <section>
-        <SectionTitle>Mensagem do dia</SectionTitle>
-        <MessageOfTheDay initial={"Pequenos momentos se transformam em grandes lembranças."} />
-      </section>
+      <div className="space-y-4">
+        <Card className="p-4">
+          <SectionTitle>Mensagem do dia</SectionTitle>
+          <MessageOfTheDay initial={"Pequenos momentos se transformam em grandes lembranças."} />
+        </Card>
 
-      <section>
-        <SectionTitle>Atividade do dia</SectionTitle>
-        <ActivityOfDay />
-      </section>
+        <Card className="p-4">
+          <SectionTitle>Atividade do dia</SectionTitle>
+          <ActivityOfDay />
+        </Card>
+      </div>
 
       <section>
         <SectionTitle>Planner</SectionTitle>
