@@ -48,8 +48,8 @@ export default async function Page() {
           </div>
           <MessageOfTheDay
             initial={"Pequenos momentos se transformam em grandes lembranças."}
-            textClassName="text-[#2F3A56]"
-            buttonClassName="font-bold uppercase rounded-md shadow-sm"
+            textClassName="text-[color:var(--ink)]"
+            buttonClassName="bg-[color:var(--brand-coral)] text-white rounded-md px-3.5 py-2 font-semibold shadow-elev-1 hover:opacity-95 active:opacity-90 focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2"
           />
         </Card>
 
