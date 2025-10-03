@@ -1,7 +1,20 @@
-export default function Card({ className, children }: { className?: string; children: React.ReactNode }) {
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+export type CardProps = React.HTMLAttributes<HTMLDivElement>;
+
+export function Card({ className, children, ...props }: CardProps) {
   return (
-    <section className={["bg-white rounded-2xl shadow-sm ring-1 ring-gray-200 p-6", className].filter(Boolean).join(" ")}>
+    <div
+      {...props}
+      className={cn(
+        "rounded-2xl border border-stone-200 bg-white shadow-sm",
+        className
+      )}
+    >
       {children}
-    </section>
+    </div>
   );
 }
+
+export default Card;

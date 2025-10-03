@@ -17,7 +17,7 @@ export default function BottomNav() {
   const pathname = usePathname() || "/";
   return (
     <nav
-      className="sticky bottom-0 inset-x-0 z-40 border-t border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/70 pb-[env(safe-area-inset-bottom)]"
+      className="fixed bottom-0 inset-x-0 z-40 border-t border-[color:var(--neutral-100)] bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/70 pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_12px_rgba(20,25,40,.06)]"
       role="navigation"
       aria-label="Navegação inferior"
     >

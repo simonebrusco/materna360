@@ -6,9 +6,11 @@ import Button from "./ui/Button";
 
 type MessageOfTheDayProps = {
   initial: string;
+  textClassName?: string;
+  buttonClassName?: string;
 };
 
-export default function MessageOfTheDay({ initial }: MessageOfTheDayProps) {
+export default function MessageOfTheDay({ initial, textClassName = "", buttonClassName = "" }: MessageOfTheDayProps) {
   const [message, setMessage] = useState<string>(initial);
 
   const handleNew = (): void => {
@@ -23,7 +25,7 @@ export default function MessageOfTheDay({ initial }: MessageOfTheDayProps) {
           ❝
         </div>
         <div className="flex-1">
-          <p className="mt-0.5 text-sm sm:text-base text-grayMid leading-relaxed">{message}</p>
+          <p className={["mt-0.5 text-sm sm:text-base text-grayMid leading-relaxed", textClassName].filter(Boolean).join(" ")}>{message}</p>
         </div>
       </div>
 
@@ -34,7 +36,7 @@ export default function MessageOfTheDay({ initial }: MessageOfTheDayProps) {
           onClick={handleNew}
           variant="primary"
           size="md"
-          className="w-full sm:w-auto"
+          className={["w-full sm:w-auto", "font-bold uppercase rounded-md shadow-sm", buttonClassName].filter(Boolean).join(" ")}
         >
           Nova mensagem
         </Button>
