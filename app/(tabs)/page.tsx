@@ -58,16 +58,11 @@ export default async function Page() {
                 Olá, Simone!
               </h1>
             </div>
-            <div className="shrink-0 flex items-center">
-              <Image
-                src="/Materna1000_300.svg"
-                alt="Materna360"
-                width={106}
-                height={32}
-                priority
-                className="block h-6 md:h-8 w-auto opacity-95 object-contain"
-                sizes="(min-width: 768px) 106px, 80px"
-              />
+            <div className="shrink-0 flex items-center gap-2">
+              <ProgressRing value={62} />
+              <div className="text-xs text-[color:var(--brand-navy)]/70">
+                Semana 3/8 • <span className="font-medium text-[color:var(--brand-navy)]">62%</span>
+              </div>
             </div>
           </div>
           <div className="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'radial-gradient(closest-side, rgba(255,111,97,.18), transparent)', filter: 'blur(6px)' }} />
