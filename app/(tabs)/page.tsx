@@ -41,8 +41,11 @@ export default async function Page() {
       </section>
 
       <div className="space-y-6">
-        <Card className="p-4 ring-[#E5E5E5]">
-          <SectionTitle className="text-[#2F3A56]">Mensagem do dia</SectionTitle>
+        <Card className="ring-0 border border-[color:var(--neutral-100)] bg-white shadow-elev-1 p-4 animate-fadeUp active:scale-[0.995] transition-transform" style={{ animationDelay: '80ms' }}>
+          <div className="flex items-center justify-between mb-2">
+            <SectionTitle className="text-[22px] leading-7 font-semibold text-[color:var(--brand-navy)] tracking-[-0.01em]">Mensagem do dia</SectionTitle>
+            <span className="ml-3 inline-flex items-center rounded-full border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)] px-2 py-0.5 text-[11px] font-medium text-[color:var(--brand-navy)]/70">Hoje</span>
+          </div>
           <MessageOfTheDay
             initial={"Pequenos momentos se transformam em grandes lembranças."}
             textClassName="text-[#2F3A56]"
