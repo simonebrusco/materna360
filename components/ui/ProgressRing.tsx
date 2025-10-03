@@ -1,26 +1,19 @@
-import * as React from 'react';
+import * as React from "react";
 
-export function ProgressRing({ value = 0, size = 40, stroke = 6, className = '' }: { value?: number; size?: number; stroke?: number; className?: string }) {
-  const radius = (size - stroke) / 2;
-  const circumference = 2 * Math.PI * radius;
+export function ProgressRing({ size=28, stroke=3, value=62, track="rgba(47,58,86,.15)", bar="var(--brand-coral)"}:{
+  size?:number; stroke?:number; value?:number; track?:string; bar?:string;
+}){
+  const r = (size - stroke) / 2; const c = 2*Math.PI*r;
   const clamped = Math.max(0, Math.min(100, value));
-  const offset = circumference - (clamped / 100) * circumference;
+  const dash = (clamped/100) * c;
   return (
-    <svg width={size} height={size} className={className} viewBox={`0 0 ${size} ${size}`}>
-      <circle cx={size/2} cy={size/2} r={radius} fill="transparent" stroke="rgba(20,25,40,.08)" strokeWidth={stroke} />
-      <circle
-        cx={size/2}
-        cy={size/2}
-        r={radius}
-        fill="transparent"
-        stroke="currentColor"
-        strokeWidth={stroke}
-        strokeDasharray={`${circumference} ${circumference}`}
-        strokeDashoffset={offset}
-        strokeLinecap="round"
-        className="text-[color:var(--brand-coral)] transition-[stroke-dashoffset] duration-500 ease-out"
-      />
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} role="img" aria-label={`Progresso ${clamped}%`}>
+      <circle cx={size/2} cy={size/2} r={r} stroke={track} strokeWidth={stroke} fill="none"/>
+      <circle cx={size/2} cy={size/2} r={r} stroke={bar} strokeWidth={stroke} fill="none"
+        strokeDasharray={`${dash} ${c-dash}`} strokeLinecap="round"
+        transform={`rotate(-90 ${size/2} ${size/2})`} />
     </svg>
   );
 }
+
 export default ProgressRing;
