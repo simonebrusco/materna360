@@ -3,40 +3,42 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+function cn(...classes: Array<string | false | null | undefined>) {
+  return classes.filter(Boolean).join(" ");
+}
+
 const items = [
-  { href: "/", label: "Hoje", icon: "🏠" },
-  { href: "/atividades", label: "Atividades", icon: "🎯" },
-  { href: "/bem-estar", label: "Bem-estar", icon: "🌿" },
-  { href: "/perfil", label: "Perfil", icon: "👤" },
+  { href: "/", label: "Hoje", key: "home" },
+  { href: "/atividades", label: "Atividades", key: "atividades" },
+  { href: "/bem-estar", label: "Bem-estar", key: "bem-estar" },
+  { href: "/perfil", label: "Perfil", key: "perfil" },
 ];
 
 export default function BottomNav() {
   const pathname = usePathname() || "/";
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
+
   return (
-    <nav className="sticky bottom-0 z-20 border-t border-gray-200 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 [padding-bottom:calc(1.5rem+env(safe-area-inset-bottom))]">
-      <div className="mx-auto max-w-3xl px-2 sm:px-4">
-        <ul className="grid grid-cols-4 gap-1 py-2">
-          {items.map((it) => {
-            const active = pathname === it.href;
-            return (
-              <li key={it.href}>
-                <Link
-                  href={it.href}
-                  className={[
-                    "flex flex-col items-center justify-center rounded-xl px-3 py-2 text-xs sm:text-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2",
-                    active
-                      ? "text-coral underline decoration-coral/60 underline-offset-4"
-                      : "text-neutral hover:bg-gray-100",
-                  ].join(" ")}
-                >
-                  <span aria-hidden className="text-base sm:text-lg leading-none">{it.icon}</span>
-                  <span className="mt-1 leading-none">{it.label}</span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+    <nav className="fixed bottom-0 inset-x-0 border-t bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+      <ul className="mx-auto flex max-w-2xl items-center justify-between px-6 py-3">
+        {items.map((it) => (
+          <li key={it.key}>
+            <Link
+              href={it.href}
+              className={cn(
+                "inline-flex flex-col items-center text-sm",
+                isActive(it.href) ? "text-[#AD8567] font-medium" : "text-gray-500 hover:text-gray-700"
+              )}
+            >
+              <span>{it.label}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </nav>
   );
 }

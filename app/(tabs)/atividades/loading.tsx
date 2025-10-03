@@ -1,5 +1,3 @@
-import ActivitiesSkeleton from '@/app/activities/skeleton';
-
-export default function Loading() {
-  return <ActivitiesSkeleton />;
+export default function LoadingActivities() {
+  return <div className="p-4 text-gray-600">Carregando atividades…</div>;
 }
