@@ -66,6 +66,17 @@ export default async function Page() {
             secondaryButtonVariantOverride="primary"
           />
         </Card>
+
+        <Card className="ring-0 border border-[color:var(--brand-peach)]/50 bg-[color:var(--brand-peach)]/35 text-[color:var(--brand-navy)] shadow-elev-1 p-4 animate-fadeUp active:scale-[0.995] transition-transform" style={{ animationDelay: '140ms' }}>
+          <div className="flex items-center justify-between mb-2">
+            <SectionTitle className="text-[22px] leading-7 font-semibold text-[color:var(--brand-navy)] tracking-[-0.01em]">Tip do dia</SectionTitle>
+            <span className="ml-3 inline-flex items-center rounded-full border border-[color:var(--neutral-100)] bg-white/70 px-2 py-0.5 text-[11px] font-medium text-[color:var(--brand-navy)]/80">Aconselhável</span>
+          </div>
+          <p className="text-sm text-[color:var(--ink)]">Reserve 5 minutos para respirar profundamente hoje. Pequenas pausas restauram sua energia para estar presente com seu filho.</p>
+          <div className="mt-3 flex justify-end">
+            <a href="#" className="inline-flex items-center bg-[color:var(--brand-coral)] text-white rounded-md px-3.5 py-2 font-semibold shadow-elev-1 hover:opacity-95 active:opacity-90 focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2">Ver dica</a>
+          </div>
+        </Card>
       </div>
 
       <section>
