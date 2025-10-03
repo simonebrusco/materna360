@@ -5,7 +5,6 @@ import ActivityOfDay from "@/components/ActivityOfDay";
 import WeeklyProgress from "@/components/today/WeeklyProgress";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Card from "@/components/ui/Card";
-import ProgressRing from "@/components/ui/ProgressRing";
 import { Sparkles, BookOpen, Wind, Smile, Lightbulb, PlusCircle, Calendar } from "lucide-react";
 
 type Insight = { id: string; title: string; text: string };
@@ -17,6 +16,12 @@ export default function HomePage() {
     { id: "i3", title: "Gentileza consigo", text: "Tudo bem fazer menos hoje." },
   ];
   const demoDays: string[] = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+  const todayIndex = (() => {
+    const d = new Date().getDay(); // 0=Sun..6=Sat
+    // Map to our array index (Seg..Dom)
+    // Seg(1)->0, Ter(2)->1, Qua(3)->2, Qui(4)->3, Sex(5)->4, Sáb(6)->5, Dom(0)->6
+    return d === 0 ? 6 : d - 1;
+  })();
   const anyProps = {} as any;
   const insights: Insight[] = Array.isArray(anyProps?.insights) && anyProps.insights.length ? (anyProps.insights as Insight[]) : demoInsights;
   const days: string[] = Array.isArray(anyProps?.days) && anyProps.days.length ? (anyProps.days as string[]) : demoDays;
@@ -25,29 +30,24 @@ export default function HomePage() {
     <div className="mx-auto max-w-2xl px-4 pt-5 pb-[96px] space-y-6 text-[color:var(--ink)]">
       {/* If these sections/components already exist in this file, KEEP them in place. */}
 
-      {/* HERO */}
+      {/* Greeting Card */}
       <section
-        className="relative overflow-hidden rounded-2xl border border-[color:var(--neutral-100)] shadow-elev-2 p-5 animate-fadeUp hover-lift"
-        style={{ background: "linear-gradient(135deg, rgba(249,201,183,.35), #fff 40%, #fff 100%)" }}
-        aria-label="Hero"
+        className="relative overflow-hidden rounded-2xl border border-[color:var(--neutral-100)] bg-white shadow-elev-2 p-5 animate-fadeUp hover-lift"
+        aria-label="Greeting"
       >
-        <div className="flex items-start justify-between gap-4 flex-nowrap">
-          <div className="min-w-0">
-            <p className="mt-1 text-sm text-[color:var(--brand-navy)]/75">
-              Que bom ter você aqui, vamos juntos criar momentos especiais hoje.
-            </p>
+        <p className="text-sm sm:text-base text-[color:var(--brand-navy)]">
+          Que bom ter você aqui. Vamos criar momentos especiais hoje.
+        </p>
+        <div className="mt-4">
+          <div className="h-2 w-full rounded-full bg-[color:rgba(47,58,86,.12)] overflow-hidden">
+            <div className="h-full rounded-full bg-[color:var(--brand-coral)]" style={{ width: "62%" }} />
           </div>
-          <div className="shrink-0 flex items-center gap-2">
-            <ProgressRing value={62} />
-            <div className="text-xs text-[color:var(--brand-navy)]/70">
-              Semana 3/8 • <span className="font-medium text-[color:var(--brand-navy)]">62%</span>
-            </div>
-          </div>
+          <p className="mt-2 text-xs text-[color:var(--brand-navy)]/70">Você está indo muito bem — continue no seu ritmo.</p>
         </div>
         <div
           className="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full"
           style={{
-            background: "radial-gradient(closest-side, rgba(255,111,97,.18), transparent)",
+            background: "radial-gradient(closest-side, rgba(249,201,183,.18), transparent)",
             filter: "blur(6px)",
           }}
         />
@@ -67,7 +67,7 @@ export default function HomePage() {
           ].map(({ icon: Icon, label }, i) => (
             <button
               key={label}
-              className="shrink-0 rounded-xl border border-[color:var(--neutral-100)] bg-white px-3.5 py-2.5 text-sm shadow-elev-1 hover-lift active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2"
+              className="shrink-0 rounded-xl border border-[color:var(--neutral-100)] bg-transparent px-3.5 py-2.5 text-sm shadow-elev-1 hover-lift active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2 hover:border-[color:var(--brand-coral)]"
               style={{ animationDelay: `${80 + i * 20}ms` }}
             >
               <span className="flex items-center gap-2 text-[color:var(--brand-navy)]">
@@ -100,10 +100,10 @@ export default function HomePage() {
           </div>
           <ActivityOfDay
             titleClassName="text-[color:var(--brand-navy)]"
-            bodyClassName="text-[color:var(--ink)]"
+            bodyClassName="text-[#333333]"
             primaryButtonClassName="bg-[color:var(--brand-coral)] text-white rounded-md px-3.5 py-2 font-semibold shadow-elev-1 hover:opacity-95 active:opacity-90 focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2"
-            secondaryButtonClassName="bg-[color:var(--brand-coral)] text-white rounded-md px-3.5 py-2 font-semibold shadow-elev-1 hover:opacity-95 active:opacity-90 focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2"
-            secondaryButtonVariantOverride="primary"
+            secondaryButtonClassName="ring-1 ring-[color:var(--brand-coral)] text-[color:var(--brand-navy)] rounded-md px-3.5 py-2 font-semibold hover:bg-white focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2"
+            secondaryButtonVariantOverride="ghost"
           />
         </Card>
 
@@ -119,7 +119,8 @@ export default function HomePage() {
             {insights.map((i: Insight) => (
               <div
                 key={i.id}
-                className="shrink-0 w-[220px] rounded-2xl border border-[color:var(--neutral-100)] bg-[color:var(--brand-peach)]/35 shadow-elev-1 p-4 hover-lift animate-fadeUp"
+                className="shrink-0 w-[220px] rounded-2xl border border-[color:var(--neutral-100)] bg-white shadow-elev-1 p-4 hover-lift animate-fadeUp"
+                style={{ boxShadow: "0 6px 16px rgba(249,201,183,0.08), 0 2px 6px rgba(20,25,40,0.04)" }}
               >
                 <h3 className="font-display text-[16px] font-semibold text-[color:var(--brand-navy)] mb-1">{i.title}</h3>
                 <p className="text-sm text-[color:var(--ink)]/80">{i.text}</p>
@@ -171,10 +172,13 @@ export default function HomePage() {
           </div>
           <div className="md:hidden">
             <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scroll-px-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {days.map((d: string) => (
+              {days.map((d: string, idx: number) => (
                 <div
                   key={d}
-                  className="shrink-0 snap-start w-[140px] rounded-xl border border-[color:var(--neutral-100)] bg-white shadow-elev-1 p-3 flex flex-col justify-between hover-lift"
+                  className={[
+                    "shrink-0 snap-start w-[140px] rounded-xl bg-white shadow-elev-1 p-3 flex flex-col justify-between hover-lift",
+                    idx === todayIndex ? "border-2 border-[color:var(--brand-coral)]" : "border border-[color:var(--neutral-100)]",
+                  ].join(" ")}
                 >
                   <span className="text-xs text-[color:var(--brand-navy)]/70 font-medium">{d}</span>
                   <span className="text-sm font-semibold text-[color:var(--brand-navy)]">2 tarefas</span>
@@ -195,10 +199,13 @@ export default function HomePage() {
             </div>
           </div>
           <div className="hidden md:grid md:grid-cols-3 md:gap-3">
-            {days.map((d: string) => (
+            {days.map((d: string, idx: number) => (
               <div
                 key={d}
-                className="rounded-xl border border-[color:var(--neutral-100)] bg-white shadow-elev-1 p-3 flex flex-col justify-between hover-lift"
+                className={[
+                  "rounded-xl bg-white shadow-elev-1 p-3 flex flex-col justify-between hover-lift",
+                  idx === todayIndex ? "border-2 border-[color:var(--brand-coral)]" : "border border-[color:var(--neutral-100)]",
+                ].join(" ")}
               >
                 <span className="text-xs text-[color:var(--brand-navy)]/70 font-medium">{d}</span>
                 <span className="text-sm font-semibold text-[color:var(--brand-navy)]">2 tarefas</span>
