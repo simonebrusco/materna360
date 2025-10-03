@@ -79,8 +79,9 @@ export default async function Page() {
         </Card>
       </div>
 
-      <section>
-        <SectionTitle className="text-[#2F3A56]">Planner</SectionTitle>
+      <div className="h-px bg-[color:var(--neutral-100)]" />
+      <section className="animate-fadeUp active:scale-[0.995] transition-transform" style={{ animationDelay: '160ms' }}>
+        <SectionTitle className="text-[22px] leading-7 font-semibold text-[color:var(--brand-navy)] tracking-[-0.01em]">Planner</SectionTitle>
         <PlannerSection />
       </section>
 
