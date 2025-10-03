@@ -109,7 +109,7 @@ export default async function Page() {
           </div>
         </section>
 
-        <Card className="ring-0 border border-[color:var(--brand-peach)]/50 bg-[color:var(--brand-peach)]/35 text-[color:var(--brand-navy)] shadow-elev-1 p-4 animate-fadeUp hover-lift mb-0" style={{ animationDelay: '140ms' }}>
+        <Card className="ring-0 border border-[color:var(--brand-peach)]/50 bg-[color:var(--brand-peach)]/35 text-[color:var(--brand-navy)] shadow-elev-1 p-4 animate-fadeUp hover-lift mt-0 mb-0" style={{ animationDelay: '140ms' }}>
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[color:var(--neutral-100)] bg-white/70">
@@ -125,7 +125,7 @@ export default async function Page() {
           </div>
         </Card>
 
-        <section data-planner className="space-y-3 animate-fadeUp" style={{ animationDelay: '160ms' }}>
+        <section data-planner className="space-y-3 animate-fadeUp mt-0 mb-0" style={{ animationDelay: '160ms' }}>
           <h2 className="font-display text-[18px] leading-6 font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)]">Planner da Semana</h2>
           <div className="md:hidden">
             <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scroll-px-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
