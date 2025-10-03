@@ -54,7 +54,7 @@ export default async function Page() {
               </div>
             </div>
             <div className="shrink-0 opacity-95">
-              <img src="/Materna1000_300.svg" alt="Materna360" className="h-7 md:h-8 w-auto opacity-95" loading="eager" decoding="async" fetchPriority="high" />
+              <img src="/Materna1000_300.svg" alt="Materna360" className="h-6 md:h-8 w-auto opacity-95" loading="eager" decoding="async" fetchPriority="high" />
             </div>
           </div>
           <div className="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'radial-gradient(closest-side, rgba(255,111,97,.18), transparent)', filter: 'blur(6px)' }} />
@@ -133,25 +133,46 @@ export default async function Page() {
             <a href="#" className="inline-flex items-center bg-[color:var(--brand-coral)] text-white rounded-md px-3.5 py-2 font-semibold shadow-elev-1 hover:opacity-95 active:opacity-90 focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2">Ver dica</a>
           </div>
         </Card>
+
+        <section className="animate-fadeUp" style={{ animationDelay: '160ms' }}>
+          <div className="mb-2 flex items-center gap-2">
+            <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)]"><Calendar size={14} className="text-[color:var(--brand-navy)]/80" /></span>
+            <h2 className="font-display text-[18px] leading-6 font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)] mt-0">Planner da Semana</h2>
+          </div>
+          <div className="md:hidden">
+            <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scroll-px-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {days.map((d: string) => (
+                <div key={d} className="shrink-0 snap-start w-[140px] rounded-xl border border-[color:var(--neutral-100)] bg-white shadow-elev-1 p-3 flex flex-col justify-between hover-lift">
+                  <span className="text-xs text-[color:var(--brand-navy)]/70 font-medium">{d}</span>
+                  <span className="text-sm font-semibold text-[color:var(--brand-navy)]">2 tarefas</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="hidden md:grid md:grid-cols-3 md:gap-3">
+            {days.map((d: string) => (
+              <div key={d} className="rounded-xl border border-[color:var(--neutral-100)] bg-white shadow-elev-1 p-3 flex flex-col justify-between hover-lift">
+                <span className="text-xs text-[color:var(--brand-navy)]/70 font-medium">{d}</span>
+                <span className="text-sm font-semibold text-[color:var(--brand-navy)]">2 tarefas</span>
+              </div>
+            ))}
+            <div className="rounded-xl border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)] shadow-elev-1 p-3 flex flex-col justify-between">
+              <span className="text-xs text-[color:var(--brand-navy)]/70 font-medium">Resumo da semana</span>
+              <div className="mt-1 text-sm text-[color:var(--ink)]/80">
+                <div className="flex items-center gap-2">
+                  <span className="inline-block h-2 w-2 rounded-full bg-[color:var(--brand-coral)]"></span>
+                  62% concluído
+                </div>
+                <div className="mt-2 h-2 w-full rounded-full bg-[color:rgba(47,58,86,.12)]">
+                  <div className="h-2 rounded-full bg-[color:var(--brand-coral)]" style={{width:"62%"}} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         </div>
       </div>
 
-      <div className="divider-hairline" />
-
-      <section className="animate-fadeUp" style={{ animationDelay: '160ms' }}>
-        <div className="mb-2 flex items-center gap-2">
-          <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)]"><Calendar size={14} className="text-[color:var(--brand-navy)]/80" /></span>
-          <h2 className="font-display text-[18px] font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)] mt-0">Planner da Semana</h2>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          {days.map((d: string) => (
-            <div key={d} className="rounded-xl border border-[color:var(--neutral-100)] bg-white shadow-elev-1 p-3 flex flex-col justify-between">
-              <span className="text-xs text-[color:var(--brand-navy)]/70 font-medium">{d}</span>
-              <span className="text-sm font-semibold text-[color:var(--brand-navy)]">2 tarefas</span>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <section className="animate-fadeUp active:scale-[0.995] transition-transform" style={{ animationDelay: '200ms' }}>
         <SectionTitle className="text-[22px] leading-7 font-semibold text-[color:var(--brand-navy)] tracking-[-0.01em]">Progresso da semana</SectionTitle>
