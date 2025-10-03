@@ -9,7 +9,8 @@ import Container from '@/components/Container'
 import SectionTitle from '@/components/ui/SectionTitle'
 import Card from '@/components/ui/Card'
 import ProgressRing from '@/components/ui/ProgressRing'
-import { Sparkles, BookOpen, Wind, Smile, HeartHandshake, Lightbulb, PlusCircle } from 'lucide-react'
+import Image from 'next/image'
+import { Sparkles, BookOpen, Wind, Smile, HeartHandshake, Lightbulb, PlusCircle, Calendar } from 'lucide-react'
 
 export const dynamic = 'force-static'
 
@@ -37,17 +38,14 @@ export default async function Page() {
               <p className="mt-1 text-sm text-[color:var(--brand-navy)]/75">
                 Um passo por dia — mais conexão e leveza na sua rotina.
               </p>
-            </div>
-            <div className="shrink-0 flex items-center gap-2">
-              <ProgressRing value={62} />
-              <div className="text-xs text-[color:var(--brand-navy)]/70">
-                Semana 3/8 • <span className="font-medium text-[color:var(--brand-navy)]">62%</span>
+              <div className="mt-3 flex items-center gap-2">
+                <ProgressRing value={62} />
+                <span className="inline-flex items-center rounded-full border border-[color:var(--neutral-100)] bg-white/80 px-2 py-0.5 text-[11px] font-medium text-[color:var(--brand-navy)]/80">Semana 3/8 • 62% concluído</span>
               </div>
             </div>
-          </div>
-          <div className="mt-4 flex items-center gap-2 text-[11px] text-[color:var(--brand-navy)]/70">
-            <HeartHandshake size={14} />
-            <span>Conteúdos pensados para mães ocupadas</span>
+            <div className="shrink-0 opacity-95">
+              <Image src="https://cdn.builder.io/api/v1/image/assets%2Fd42dea593337474ca8fd8eae783a29cb%2Fe6ded411d52544cabd22046c45864e6d?format=webp&width=800" alt="Materna360" width={300} height={90} className="h-7 w-auto" />
+            </div>
           </div>
           <div className="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'radial-gradient(closest-side, rgba(255,111,97,.18), transparent)', filter: 'blur(6px)' }} />
         </section>
@@ -74,24 +72,9 @@ export default async function Page() {
         </section>
 
         <div className="space-y-6">
-        <Card className="ring-0 border border-[color:var(--neutral-100)] bg-white shadow-elev-1 p-4 animate-fadeUp active:scale-[0.995] transition-transform" style={{ animationDelay: '80ms' }}>
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)]">
-                <Sparkles size={14} className="text-[color:var(--brand-navy)]/80" />
-              </span>
-              <h2 className="font-display text-[18px] leading-6 font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)]">Mensagem do dia</h2>
-            </div>
-            <span className="px-2 py-0.5 text-[11px] font-medium rounded-full bg-[color:var(--neutral-50)] text-[color:var(--brand-navy)]/70 border border-[color:var(--neutral-100)]">Hoje</span>
-          </div>
-          <MessageOfTheDay
-            initial={"Pequenos momentos se transformam em grandes lembranças."}
-            textClassName="text-[color:var(--ink)]"
-            buttonClassName="bg-[color:var(--brand-coral)] text-white rounded-md px-3.5 py-2 font-semibold shadow-elev-1 hover:opacity-95 active:opacity-90 focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2"
-          />
-        </Card>
 
-        <Card className="ring-0 border border-[color:var(--neutral-100)] bg-white shadow-elev-2 p-4 animate-fadeUp active:scale-[0.995] transition-transform" style={{ animationDelay: '120ms' }}>
+
+        <Card className="ring-0 border border-[color:var(--neutral-100)] bg-white shadow-elev-2 p-5 animate-fadeUp hover-lift" style={{ animationDelay: '80ms', backgroundImage: 'linear-gradient(180deg, rgba(255,111,97,.06), #fff 24%)' }}>
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)]">
