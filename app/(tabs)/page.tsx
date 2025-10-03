@@ -40,15 +40,6 @@ export default async function Page() {
         >
           <div className="flex items-start justify-between gap-4 flex-nowrap">
             <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <Image
-                  src="/Materna1000_300.svg"
-                  alt="Materna360"
-                  width={106} height={32} priority
-                  className="block h-6 md:h-8 w-auto opacity-95 object-contain"
-                  sizes="(min-width: 768px) 106px, 80px"
-                />
-              </div>
               <p className="mt-1 text-sm text-[color:var(--brand-navy)]/75">Que bom ter você aqui, vamos juntos criar momentos especiais hoje.</p>
             </div>
             <div className="shrink-0 flex items-center gap-2">
