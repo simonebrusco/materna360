@@ -173,10 +173,13 @@ export default function HomePage() {
           </div>
           <div className="md:hidden">
             <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scroll-px-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {days.map((d: string) => (
+              {days.map((d: string, idx: number) => (
                 <div
                   key={d}
-                  className="shrink-0 snap-start w-[140px] rounded-xl border border-[color:var(--neutral-100)] bg-white shadow-elev-1 p-3 flex flex-col justify-between hover-lift"
+                  className={[
+                    "shrink-0 snap-start w-[140px] rounded-xl bg-white shadow-elev-1 p-3 flex flex-col justify-between hover-lift",
+                    idx === todayIndex ? "border-2 border-[color:var(--brand-coral)]" : "border border-[color:var(--neutral-100)]",
+                  ].join(" ")}
                 >
                   <span className="text-xs text-[color:var(--brand-navy)]/70 font-medium">{d}</span>
                   <span className="text-sm font-semibold text-[color:var(--brand-navy)]">2 tarefas</span>
