@@ -180,6 +180,18 @@ export default function HomePage() {
                   <span className="text-sm font-semibold text-[color:var(--brand-navy)]">2 tarefas</span>
                 </div>
               ))}
+              <div className="shrink-0 snap-start w-[180px] rounded-xl border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)] shadow-elev-1 p-3 flex flex-col justify-between">
+                <span className="text-xs text-[color:var(--brand-navy)]/70 font-medium">Resumo da semana</span>
+                <div className="mt-1 text-sm text-[color:var(--ink)]/80">
+                  <div className="flex items-center gap-2">
+                    <span className="inline-block h-2 w-2 rounded-full bg-[color:var(--brand-coral)]"></span>
+                    62% concluído
+                  </div>
+                  <div className="mt-2 h-2 w-full rounded-full bg-[color:rgba(47,58,86,.12)]">
+                    <div className="h-2 rounded-full bg-[color:var(--brand-coral)]" style={{ width: "62%" }} />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="hidden md:grid md:grid-cols-3 md:gap-3">
@@ -192,7 +204,7 @@ export default function HomePage() {
                 <span className="text-sm font-semibold text-[color:var(--brand-navy)]">2 tarefas</span>
               </div>
             ))}
-            <div className="rounded-xl border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)] shadow-elev-1 p-3 flex flex-col justify-between">
+            <div className="rounded-xl border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)] shadow-elev-1 p-3 flex flex-col justify-between md:col-span-3">
               <span className="text-xs text-[color:var(--brand-navy)]/70 font-medium">Resumo da semana</span>
               <div className="mt-1 text-sm text-[color:var(--ink)]/80">
                 <div className="flex items-center gap-2">
