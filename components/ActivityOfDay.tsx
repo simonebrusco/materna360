@@ -16,7 +16,19 @@ const DAY_LABEL: Record<DayKey, string> = {
   Sun: "Sun",
 };
 
-export default function ActivityOfDay() {
+type ActivityOfDayProps = {
+  titleClassName?: string;
+  bodyClassName?: string;
+  primaryButtonClassName?: string;
+  secondaryButtonClassName?: string;
+};
+
+export default function ActivityOfDay({
+  titleClassName = "",
+  bodyClassName = "",
+  primaryButtonClassName = "",
+  secondaryButtonClassName = "",
+}: ActivityOfDayProps) {
   const activityTitle = "Brincadeira de blocos criativos";
   const activityDesc =
     "Separe alguns blocos de montar e convide seu filho para criar juntos uma torre, um animal ou o que a imaginação mandar.";
@@ -50,8 +62,8 @@ export default function ActivityOfDay() {
         <span className="inline-flex rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700 ml-auto">10 min</span>
       </div>
 
-      <h3 className="mt-2 text-lg font-medium text-charcoal sm:text-xl">{activityTitle}</h3>
-      <p className="mt-1.5 text-sm sm:text-base text-grayMid leading-relaxed">{activityDesc}</p>
+      <h3 className={["mt-2 text-lg font-medium text-charcoal sm:text-xl", titleClassName].filter(Boolean).join(" ")}>{activityTitle}</h3>
+      <p className={["mt-1.5 text-sm sm:text-base text-grayMid leading-relaxed", bodyClassName].filter(Boolean).join(" ")}>{activityDesc}</p>
 
       <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
         <Button
@@ -59,7 +71,7 @@ export default function ActivityOfDay() {
           onClick={openPlannerAdd}
           variant="primary"
           size="md"
-          className="w-full sm:w-auto"
+          className={["w-full sm:w-auto", "font-bold uppercase rounded-md shadow-sm", primaryButtonClassName].filter(Boolean).join(" ")}
         >
           Iniciar
         </Button>
@@ -68,7 +80,12 @@ export default function ActivityOfDay() {
           onClick={onSaveClick}
           variant="secondary"
           size="md"
-          className="w-full sm:w-auto"
+          className={[
+            "w-full sm:w-auto",
+            "font-bold uppercase rounded-md shadow-sm",
+            "text-[#2F3A56] ring-[#E5E5E5] bg-transparent hover:bg-[#F5F5F5]",
+            secondaryButtonClassName,
+          ].filter(Boolean).join(" ")}
         >
           {saved ? "Salvo!" : "Salvar no Planner"}
         </Button>
