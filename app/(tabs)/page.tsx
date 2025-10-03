@@ -85,8 +85,8 @@ export default async function Page() {
         <PlannerSection />
       </section>
 
-      <section>
-        <SectionTitle className="text-[#2F3A56]">Progresso da semana</SectionTitle>
+      <section className="animate-fadeUp active:scale-[0.995] transition-transform" style={{ animationDelay: '200ms' }}>
+        <SectionTitle className="text-[22px] leading-7 font-semibold text-[color:var(--brand-navy)] tracking-[-0.01em]">Progresso da semana</SectionTitle>
         <WeeklyProgress />
       </section>
     </Container>
