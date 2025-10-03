@@ -52,7 +52,7 @@ export default async function Page() {
               </div>
             </div>
             <div className="shrink-0 opacity-95">
-              <img src="/Materna1000_300.svg" alt="Materna360" className="h-7 md:h-8 w-auto opacity-95" loading="eager" decoding="async" fetchpriority="high" />
+              <img src="/Materna1000_300.svg" alt="Materna360" className="h-7 md:h-8 w-auto opacity-95" loading="eager" decoding="async" fetchPriority="high" />
             </div>
           </div>
           <div className="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'radial-gradient(closest-side, rgba(255,111,97,.18), transparent)', filter: 'blur(6px)' }} />
