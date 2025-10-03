@@ -5,6 +5,7 @@ import PlannerSheet from "./PlannerSheet";
 import PlannerList from "./PlannerList";
 import { onPlannerAdd, onPlannerPropose } from "./plannerBus";
 import Button from "../ui/Button";
+import { Calendar } from "lucide-react";
 
 function uid() {
   return "id-" + Math.random().toString(36).slice(2,10) + "-" + Date.now().toString(36);
@@ -57,7 +58,10 @@ export default function PlannerSection() {
   return (
     <section ref={sectionRef} className="bg-white rounded-2xl shadow-sm ring-1 ring-gray-200 p-6">
       <div className="flex items-start justify-between gap-4">
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Planner</h2>
+        <div className="flex items-center gap-2">
+          <Calendar size={16} className="text-[color:var(--brand-navy)]/70" />
+          <h2 className="font-display text-[18px] leading-6 font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)]">Planner</h2>
+        </div>
         <Button variant="secondary" size="sm" onClick={onAddClick}>Adicionar</Button>
       </div>
 

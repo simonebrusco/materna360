@@ -26,7 +26,7 @@ export default function Planner({ items = [] }: { items?: Item[] }) {
 
       <div className="mt-4">
         <button
-          className="rounded-full border border-[rgba(255,111,97,0.3)] bg-white px-4 py-2 text-sm text-[#4B4B4B] hover:bg-[rgba(255,111,97,0.06)] focus:outline-none focus:ring-2 focus:ring-[rgba(255,111,97,0.25)]"
+          className="rounded-full border border-[color:var(--brand-coral)]/30 bg-white px-4 py-2 text-sm text-[#4B4B4B] hover:bg-[color:var(--brand-coral)]/10 focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2"
           onClick={() => console.log('Adicionar atividade')}
         >
           Adicionar atividade

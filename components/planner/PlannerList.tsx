@@ -24,7 +24,7 @@ export default function PlannerList({
               type="checkbox"
               checked={it.done}
               onChange={() => onToggleDone(it.id)}
-              className="h-5 w-5 rounded-md border border-gray-300 accent-[#FF6F61] focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-1"
+              className="h-5 w-5 rounded-md border border-gray-300 accent-[#FF6F61] focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-1"
               aria-label={it.done ? "Marcar como não concluída" : "Marcar como concluída"}
             />
             <span aria-hidden className="text-base">{emoji[it.category]}</span>

@@ -2,7 +2,7 @@ export default function SectionTitle({ children, className = "" }: { children: R
   return (
     <h2
       className={[
-        "text-lg sm:text-xl font-semibold text-charcoal leading-7 sm:leading-8 mb-2 sm:mb-3",
+        "font-display text-[18px] leading-6 font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)] mb-2 sm:mb-3",
         className,
       ]
         .filter(Boolean)

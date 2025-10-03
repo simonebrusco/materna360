@@ -12,7 +12,7 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const base =
-  "inline-flex items-center justify-center rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-300 disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-coral)]/40 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
 
 const variantClasses: Record<ButtonVariants, string> = {
   primary: "bg-[#FF6F61] text-white hover:bg-[#FF786B] active:bg-[#E85D51]",
