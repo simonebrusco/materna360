@@ -21,7 +21,6 @@ type ActivityOfDayProps = {
   bodyClassName?: string;
   primaryButtonClassName?: string;
   secondaryButtonClassName?: string;
-  secondaryButtonVariantOverride?: "primary" | "secondary";
 };
 
 export default function ActivityOfDay({
@@ -29,7 +28,6 @@ export default function ActivityOfDay({
   bodyClassName = "",
   primaryButtonClassName = "",
   secondaryButtonClassName = "",
-  secondaryButtonVariantOverride = "secondary",
 }: ActivityOfDayProps) {
   const activityTitle = "Brincadeira de blocos criativos";
   const activityDesc =
@@ -80,12 +78,12 @@ export default function ActivityOfDay({
         <Button
           type="button"
           onClick={onSaveClick}
-          variant={secondaryButtonVariantOverride}
+          variant="secondary"
           size="md"
           className={[
             "w-full sm:w-auto",
             "font-bold uppercase rounded-md shadow-sm",
-            secondaryButtonVariantOverride === "secondary" ? "text-[#2F3A56] ring-[#E5E5E5] bg-transparent hover:bg-[#F5F5F5]" : "",
+            "bg-transparent text-[color:var(--brand-navy)]",
             secondaryButtonClassName,
           ].filter(Boolean).join(" ")}
         >
