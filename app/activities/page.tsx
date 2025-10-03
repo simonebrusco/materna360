@@ -1,12 +1,19 @@
-"use client";
-import SectionTitle from "@/components/ui/SectionTitle";
-import ActivitiesList from "@/components/activities/ActivitiesList";
+export const dynamic = 'force-static';
+export const revalidate = 60;
 
-export default function ActivitiesPage() {
+import { Suspense } from 'react';
+import ActivitiesClient from './ActivitiesClient';
+import ActivitiesSkeleton from './skeleton';
+
+type PageProps = { searchParams?: { age?: string } };
+
+export default async function ActivitiesPage({ searchParams }: PageProps) {
+  const age = searchParams?.age ?? '2–3a';
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8 space-y-6">
-      <SectionTitle>Atividades</SectionTitle>
-      <ActivitiesList />
+      <Suspense fallback={<ActivitiesSkeleton />}> 
+        <ActivitiesClient initialAge={age} />
+      </Suspense>
     </div>
   );
 }
