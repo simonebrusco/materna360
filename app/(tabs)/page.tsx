@@ -9,12 +9,20 @@ import Container from '@/components/Container'
 import SectionTitle from '@/components/ui/SectionTitle'
 import Card from '@/components/ui/Card'
 import ProgressRing from '@/components/ui/ProgressRing'
-import Image from 'next/image'
 import { Sparkles, BookOpen, Wind, Smile, HeartHandshake, Lightbulb, PlusCircle, Calendar } from 'lucide-react'
 
 export const dynamic = 'force-static'
 
 export default async function Page() {
+  const demoInsights = [
+    { id: "i1", title: "Respiro de 2 minutos", text: "Uma pausa curta muda seu dia." },
+    { id: "i2", title: "Água + alongar", text: "Levante e hidrate-se agora." },
+    { id: "i3", title: "Gentileza consigo", text: "Tudo bem fazer menos hoje." },
+  ];
+  const demoDays = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+  const anyProps = {} as any;
+  const insights = Array.isArray(anyProps?.insights) && anyProps.insights.length ? anyProps.insights : demoInsights;
+  const days = Array.isArray(anyProps?.days) && anyProps.days.length ? anyProps.days : demoDays;
   return (
     <Container className="min-h-screen bg-white pt-0 pb-0">
       <header className="sr-only">
@@ -22,7 +30,7 @@ export default async function Page() {
         <p className="text-sm text-[#2F3A56]">Que bom ter você aqui, vamos juntos criar momentos especiais hoje.</p>
       </header>
 
-      <div className="mx-auto max-w-2xl px-4 pt-5 pb-[96px] space-y-8 text-[color:var(--ink)]">
+      <div className="mx-auto max-w-2xl px-4 pt-5 pb-[96px] space-y-7 text-[color:var(--ink)]">
         <section className="relative overflow-hidden rounded-2xl border border-[color:var(--neutral-100)] shadow-elev-2 p-5 animate-fadeUp hover-lift"
           style={{ background: 'linear-gradient(135deg, rgba(249,201,183,.35), #fff 40%, #fff 100%)' }}
           aria-label="Hero"
@@ -44,7 +52,7 @@ export default async function Page() {
               </div>
             </div>
             <div className="shrink-0 opacity-95">
-              <Image src="https://cdn.builder.io/api/v1/image/assets%2Fd42dea593337474ca8fd8eae783a29cb%2Fe6ded411d52544cabd22046c45864e6d?format=webp&width=800" alt="Materna360" width={300} height={90} className="h-7 w-auto" />
+              <img src="/Materna1000_300.svg" alt="Materna360" className="h-7 md:h-8 w-auto opacity-95" loading="eager" decoding="async" fetchpriority="high" />
             </div>
           </div>
           <div className="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'radial-gradient(closest-side, rgba(255,111,97,.18), transparent)', filter: 'blur(6px)' }} />
@@ -99,11 +107,7 @@ export default async function Page() {
             <h2 className="font-display text-[18px] font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)]">Insights para você</h2>
           </div>
           <div className="flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {[
-              { id: 'i1', title: 'Brincadeira rápida', text: '5 min de blocos melhoram a coordenação.' },
-              { id: 'i2', title: 'Respire em 4-4-4', text: 'Uma pausa curta reduz o estresse.' },
-              { id: 'i3', title: 'Leitura juntos', text: 'Histórias diárias criam vínculo.' },
-            ].map((i) => (
+            {insights.map((i) => (
               <div key={i.id} className="shrink-0 w-[220px] rounded-2xl border border-[color:var(--neutral-100)] bg-[color:var(--brand-peach)]/35 shadow-elev-1 p-4 hover-lift animate-fadeUp">
                 <h3 className="font-display text-[16px] font-semibold text-[color:var(--brand-navy)] mb-1">{i.title}</h3>
                 <p className="text-sm text-[color:var(--ink)]/80">{i.text}</p>
@@ -138,18 +142,13 @@ export default async function Page() {
           <h2 className="font-display text-[18px] font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)]">Planner da Semana</h2>
         </div>
         <div className="grid grid-cols-2 gap-3">
-          {['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'].map((d) => (
+          {days.map((d: string) => (
             <div key={d} className="rounded-xl border border-[color:var(--neutral-100)] bg-white shadow-elev-1 p-3 flex flex-col justify-between">
               <span className="text-xs text-[color:var(--brand-navy)]/70 font-medium">{d}</span>
               <span className="text-sm font-semibold text-[color:var(--brand-navy)]">2 tarefas</span>
             </div>
           ))}
         </div>
-      </section>
-
-      <section className="animate-fadeUp active:scale-[0.995] transition-transform" style={{ animationDelay: '200ms' }}>
-        <SectionTitle className="text-[22px] leading-7 font-semibold text-[color:var(--brand-navy)] tracking-[-0.01em]">Progresso da semana</SectionTitle>
-        <WeeklyProgress />
       </section>
 
       <section className="animate-fadeUp active:scale-[0.995] transition-transform" style={{ animationDelay: '200ms' }}>
