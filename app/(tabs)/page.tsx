@@ -142,7 +142,7 @@ export default async function Page() {
           </div>
         </Card>
 
-        <section className="space-y-3 animate-fadeUp" style={{ animationDelay: '160ms' }}>
+        <section data-planner className="space-y-3 animate-fadeUp" style={{ animationDelay: '160ms' }}>
           <div className="flex items-center gap-2">
             <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[color:var(--neutral-100)] bg-[color:var(--neutral-50)]"><Calendar size={14} className="text-[color:var(--brand-navy)]/80" /></span>
             <h2 className="font-display text-[18px] leading-6 font-semibold tracking-[-0.01em] text-[color:var(--brand-navy)] mt-0">Planner da Semana</h2>
