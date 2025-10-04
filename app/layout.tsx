@@ -1,3 +1,4 @@
+import React from "react";
 export const metadata = { title: "Materna360" };
 export default function RootLayout({children}:{children:React.ReactNode}){
   return (
