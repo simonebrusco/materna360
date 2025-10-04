@@ -1,6 +1,5 @@
 export const metadata = { title: "Materna360" };
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
       <head>
