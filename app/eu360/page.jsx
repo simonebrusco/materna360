@@ -2,9 +2,17 @@
 
 import Card from "../../components/ui/Card";
 import Btn from "../../components/ui/Btn";
+import { useEffect, useState } from "react";
+import GratitudeSheet from "../../components/gratitude/GratitudeSheet";
+import { getRecentGratitudes } from "../../lib/gratitude";
 
 
 export default function Eu360(){
+  const [open, setOpen] = useState(false);
+  const [recents, setRecents] = useState([]);
+  const refreshRecents = () => setRecents(getRecentGratitudes(3));
+  useEffect(() => { refreshRecents(); }, []);
+  const formatDate = (iso) => new Date(iso).toLocaleDateString("pt-BR", { day: "2-digit", month: "short" });
   return (
     <div className="container">
       <h1 className="h1">Eu360</h1>
@@ -41,8 +49,22 @@ export default function Eu360(){
       <Card>
         <strong>Gratidão</strong>
         <div className="space"></div>
-        <Btn>Registrar</Btn>
+        {recents.length ? (
+          <ul className="gratitude-list">
+            {recents.map((e) => (
+              <li key={e.id} className="gratitude-item">
+                <span className="gratitude-text">{e.text}</span>
+                <span className="gratitude-date">{formatDate(e.date)}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="small">Sem registros ainda.</div>
+        )}
+        <div className="space"></div>
+        <Btn onClick={() => setOpen(true)}>Registrar</Btn>
       </Card>
+      <GratitudeSheet open={open} onClose={() => setOpen(false)} onSaved={refreshRecents} />
     </div>
   );
 }
