@@ -10,6 +10,7 @@ const WellbeingBlock= dynamic(()=>import("../components/WellbeingBlock"),{ssr:fa
 const InsightsCard  = dynamic(()=>import("../components/InsightsCard"),{ssr:false});
 const TipCard       = dynamic(()=>import("../components/TipCard"),{ssr:false});
 const PremiumBanner = dynamic(()=>import("../components/PremiumBanner"),{ssr:false});
+const BottomTabBar = dynamic(()=>import("../components/BottomTabBar"),{ssr:false});
 
 export default function Page(){
   return (
@@ -33,6 +34,7 @@ export default function Page(){
         <TipCard />
         <PremiumBanner />
       </div>
+      <BottomTabBar />
     </main>
   );
 }
