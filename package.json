@@ -2,13 +2,14 @@
   "name": "materna360",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 0.0.0.0 -p 3000",
-    "build": "next build",
-    "start": "next start -H 0.0.0.0 -p 3000"
+    "dev": "cross-env NODE_ENV=development next dev -H 0.0.0.0 -p 3000",
+    "build": "cross-env NODE_ENV=production next build",
+    "start": "cross-env NODE_ENV=production next start -H 0.0.0.0 -p 3000"
   },
   "dependencies": {
     "next": "14.2.5",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "cross-env": "7.0.3"
   }
 }
