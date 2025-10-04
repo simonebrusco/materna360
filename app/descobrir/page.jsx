@@ -14,7 +14,7 @@ export default function Descobrir(){
           <div className="iconToken" style={{borderColor:"#fff"}}>🐻</div>
           <div>
             <div style={{fontWeight:800,marginBottom:6}}>Atividades para 3 a 4 anos</div>
-            <Btn variant="solid">Ver sugestões</Btn>
+            <Btn variant="primary">Ver sugestões</Btn>
           </div>
         </div>
       </Card>
