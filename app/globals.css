@@ -115,3 +115,17 @@ body {
 .tabbar-icon{ font-size: 18px; line-height: 1; }
 .tabbar-label{ font-size: 12px; }
 .tabbar-dot{ position: absolute; bottom: 6px; width: 6px; height: 6px; border-radius: 999px; background: var(--magenta); }
+
+/* ====== Mood Sheet ====== */
+.sheet-overlay{ position: fixed; inset: 0; background: rgba(13,27,42,0.4); display: grid; align-content: end; z-index: 60; }
+.sheet-panel{ background: var(--white); border-top-left-radius: var(--r-xl); border-top-right-radius: var(--r-xl); box-shadow: 0 -20px 40px rgba(13,27,42,0.12); padding: 16px; }
+.sheet-title{ font-weight: 800; margin-bottom: 10px; color: var(--navy); }
+.mood-grid{ display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.mood-option{ display: grid; place-items: center; padding: 12px 0; border: 1px solid rgba(13,27,42,0.12); border-radius: 12px; background: #fff; cursor: pointer; font-size: 22px; }
+.mood-option:active{ transform: scale(.98); }
+.sheet-close{ margin-top: 12px; width: 100%; }
+
+/* ====== Mood week ====== */
+.mood-week{ display: flex; align-items: center; gap: 8px; }
+.mood-day{ width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(13,27,42,0.12); }
+.mood-day.is-set{ border-color: var(--magenta); }
