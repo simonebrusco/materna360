@@ -16,7 +16,7 @@ export default function Cuidar(){
 
       <div className="space"></div>
 
-      <Card className="card-navy" style={{color:"#fff",background:"#0C1A2B"}}>
+      <Card className="card-navy">
         <div style={{fontWeight:800,marginBottom:6}}>Receita saudável</div>
         <div className="small" style={{opacity:.9}}>Omelete de espinafre</div>
       </Card>
