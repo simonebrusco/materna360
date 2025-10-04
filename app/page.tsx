@@ -16,7 +16,13 @@ export default function Page(){
     <main style={{
       padding:SPACING, fontFamily:FONT_STACK, background:COLORS.light, minHeight:"100vh"
     }}>
-      <div style={{maxWidth:720, margin:"0 auto", display:"grid", gap:SPACING}}>
+      <div style={{
+        maxWidth: 720,
+        margin: "0 auto",
+        display: "grid",
+        gap: `calc(${SPACING}px + 4px)`,
+        paddingBottom: 80,
+      }}>
         <GreetingLine name="Simone" />
         <MessageOfTheDay />
         <MoodCheck />
