@@ -15,7 +15,7 @@ const BottomTabBar = dynamic(()=>import("../components/BottomTabBar"),{ssr:false
 export default function Page(){
   return (
     <main style={{
-      padding:SPACING, fontFamily:FONT_STACK, background:COLORS.light, minHeight:"100vh"
+      padding:SPACING, fontFamily:FONT_STACK, background:COLORS.light, minHeight:"100vh", paddingBottom: "max(80px, env(safe-area-inset-bottom))"
     }}>
       <div style={{
         maxWidth: 720,
