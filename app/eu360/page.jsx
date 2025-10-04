@@ -21,6 +21,14 @@ export default function Eu360(){
       <div className="space"></div>
 
       <Card>
+        <strong>Converse com alguém da sua rede</strong>
+        <p className="small">Troque experiências, sem julgamentos.</p>
+        <Btn variant="solid">Iniciar conversa</Btn>
+      </Card>
+
+      <div className="space"></div>
+
+      <Card>
         <strong>Humor da semana</strong>
         <div style={{display:"flex",alignItems:"center",gap:10,marginTop:8}}>
           <div className="iconToken" style={{color:"#0C1A2B",borderColor:"#0C1A2B"}}>🙂</div>
