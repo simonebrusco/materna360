@@ -35,6 +35,8 @@ main{min-height:100vh;display:flex;justify-content:center}
 .btn-primary:hover{background:#E60056;box-shadow:
     0 12px 26px -10px rgba(255,0,94,.36),
     0 8px 18px -10px rgba(255,0,94,.24)}
+.btn-subtle{background:var(--rose-1);color:var(--magenta);border:1px solid var(--rose-2);box-shadow:none}
+.btn-subtle:hover{background:var(--rose-2)}
 
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .badge{display:inline-block;background:#FFE0EE;color:#B80045;border-radius:999px;padding:8px 12px;font-weight:700;font-size:12px}
