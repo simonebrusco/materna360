@@ -1,12 +1,11 @@
 export default function Btn({ children, variant = 'primary', className = '', ...rest }) {
-  const base = 'btn';
   const map = {
-    primary: 'btn-primary',
-    solid:   'btn-primary', // compat
-    ghost:   'btn-ghost',
-    subtle:  'btn-subtle',
+    primary: 'btn btn-primary',
+    solid: 'btn btn-primary',
+    ghost: 'btn btn-ghost',
+    subtle: 'btn btn-subtle',
   };
-  const cls = `${base} ${map[variant] ?? 'btn-primary'} ${className}`.trim();
+  const cls = `${map[variant] ?? map.primary} ${className}`.trim();
   return (
     <button className={cls} {...rest}>
       {children}
