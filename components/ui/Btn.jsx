@@ -1,16 +1,28 @@
-"use client";
-ai_main_76441ebb1c05
-export default function Btn({children,variant="solid",className="",...rest}){
-  const classes = `btn ${variant==="ghost" ? "btn-ghost" : "btn-primary"} ${className}`.trim();
+'use client';
+
+import React from 'react';
+
+const join = (...classes) => classes.filter(Boolean).join(' ');
+
+export default function Btn({
+  children,
+  variant = 'solid',
+  className = '',
+  style,
+  ...rest
+}) {
+  const variantClass =
+    variant === 'ghost' ? 'btn-ghost' :
+    variant === 'subtle' ? 'btn-subtle' :
+    'btn-primary';
+
   return (
-    <button {...rest} className={classes}>
+    <button
+      {...rest}
+      style={style}
+      className={join('btn', variantClass, className)}
+    >
       {children}
     </button>
   );
-
-export default function Btn({children,variant="solid",style,...rest}){
-  return <button {...rest} className={`btn ${variant==="ghost"?"btn-ghost":""}`} style={style}>
-    {children}
-  </button>;
-main
 }
