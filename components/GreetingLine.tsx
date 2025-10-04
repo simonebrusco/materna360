@@ -16,7 +16,7 @@ export default function GreetingLine({name}:Props){
   React.useEffect(()=>{ setGreeting(timeOfDay()); },[]);
   return (
     <div style={{display:"grid",gap:4,fontFamily:FONT_STACK}}>
-      <h2 style={{margin:0,color:COLORS.secondary,fontWeight:600}}>
+      <h2 style={{margin:0,color:COLORS.secondary,fontWeight:600,fontSize:"clamp(18px, 2.5vw, 22px)"}}>
         {greeting}{name?`, ${name}`:""} 💛
       </h2>
       <span style={{color:COLORS.accent,fontSize:14}}>
