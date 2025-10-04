@@ -25,13 +25,15 @@ function dailyMessage(d=new Date()){
   return MESSAGES[h % MESSAGES.length];
 }
 
+import { COLORS } from "../lib/ui/tokens";
+
 export default function GreetingLine({name}:Props){
   const [g,setG]=React.useState(""); const [m,setM]=React.useState("");
   React.useEffect(()=>{ setG(timeOfDay()); setM(dailyMessage()); },[]);
   return (
-    <div style={{display:"grid",gap:8}}>
-      <h1 style={{margin:0}}>{g}{name?`, ${name}`:""} 💛</h1>
-      <p style={{margin:0,opacity:0.9}}>{m}</p>
+    <div style={{display:"grid",gap:8,color:COLORS.secondary}}>
+      <h1 style={{margin:0,color:COLORS.secondary}}>{g}{name?`, ${name}`:""} 💛</h1>
+      <p style={{margin:0,opacity:0.9,color:COLORS.secondary}}>{m}</p>
     </div>
   );
 }
