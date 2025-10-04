@@ -17,7 +17,7 @@ export default function Home(){
 
         <Card>
           <div style={{display:"grid",gridTemplateColumns:"48px 1fr",gap:12,alignItems:"center"}}>
-            <div className="iconToken" style={{color:"#0C1A2B",borderColor:"#0C1A2B"}}>🙂</div>
+            <div className="iconToken">🙂</div>
             <div>
               <div style={{fontWeight:800}}>Como você se sente?</div>
               <div className="small" style={{opacity:.75}}>Toque para registrar</div>
@@ -30,14 +30,14 @@ export default function Home(){
 
       <div className="grid-2">
         <NavyCard><div className="iconToken">◐</div><div>Respirar</div></NavyCard>
-        <Card style={{minHeight:110,display:"grid",placeItems:"center"}}><div className="iconStack"><div className="iconToken" style={{color:"var(--navy)",borderColor:"var(--navy)"}}>♡</div><div>Refletir</div></div></Card>
+        <Card style={{minHeight:110,display:"grid",placeItems:"center"}}><div className="iconStack"><div className="iconToken">♡</div><div>Refletir</div></div></Card>
         <NavyCard><div className="iconToken">🔔</div><div>Inspirar</div></NavyCard>
-        <Card style={{minHeight:110,display:"grid",placeItems:"center"}}><div className="iconStack"><div className="iconToken" style={{color:"var(--navy)",borderColor:"var(--navy)"}}>Ⅱ</div><div>Pausar</div></div></Card>
+        <Card style={{minHeight:110,display:"grid",placeItems:"center"}}><div className="iconStack"><div className="iconToken">Ⅱ</div><div>Pausar</div></div></Card>
       </div>
 
       <div className="space"></div>
 
-      <Card className="card-navy" style={{color:"#fff",background:"#0C1A2B"}}>
+      <Card className="card-navy">
         <div style={{fontWeight:800,marginBottom:6}}>Seu bem-estar também é importante</div>
         <div className="small" style={{opacity:.9}}>Dicas simples para o seu dia.</div>
       </Card>

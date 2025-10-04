@@ -9,9 +9,9 @@ export default function Descobrir(){
     <div className="container">
       <h1 className="h1">Descobrir</h1>
 
-      <Card className="card-navy" style={{color:"#fff",background:"#0C1A2B"}}>
+      <Card className="card-navy">
         <div style={{display:"grid",gridTemplateColumns:"32px 1fr",gap:12,alignItems:"center"}}>
-          <div className="iconToken" style={{borderColor:"#fff"}}>🐻</div>
+          <div className="iconToken">🐻</div>
           <div>
             <div style={{fontWeight:800,marginBottom:6}}>Atividades para 3 a 4 anos</div>
             <Btn variant="solid">Ver sugestões</Btn>
