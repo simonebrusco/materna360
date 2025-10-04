@@ -13,7 +13,7 @@ export default function Btn({
 }) {
   const variantClass =
     variant === 'ghost' ? 'btn-ghost' :
-    variant === 'subtle' ? 'btn-subtle' :
+    variant === 'subtle' ? 'btn-ghost' :
     'btn-primary';
 
   return (
