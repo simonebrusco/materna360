@@ -11,7 +11,7 @@ export default function Cuidar(){
 
       <div className="grid-2">
         <NavyCard><div className="iconToken">🧘‍♀️</div><div>Meditar</div></NavyCard>
-        <NavyCard><div className="iconToken">💬</div><div>Mentoria</div></NavyCard>
+        <NavyCard><div className="iconToken">💬</div><div>Conversa</div></NavyCard>
       </div>
 
       <div className="space"></div>
