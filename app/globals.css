@@ -101,3 +101,14 @@ nav { background: var(--white); border-top: 1px solid rgba(255, 0, 94, 0.1); box
 /* Icon label inside navy cards */
 .iconStack { display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; text-align: center; }
 .iconToken { width: 28px; height: 28px; border-radius: 10px; border: 1.5px solid rgba(21,42,58,0.8); color: rgba(21,42,58,0.8); display: flex; align-items: center; justify-content: center; }
+
+/* Utilities for new home markup */
+.stack-xl { display: grid; gap: 24px; }
+.stack-xs { display: grid; gap: 8px; }
+.title-hero { font-family: Poppins, system-ui; font-weight: 600; font-size: 30px; letter-spacing: .2px; margin: 0; }
+.emoji { display: inline-block; }
+.muted { color: var(--muted); opacity: .9; }
+.row-start { display: grid; grid-template-columns: 48px 1fr; gap: 12px; align-items: center; }
+.badge-emoji { width: 28px; height: 28px; border-radius: 10px; border: 1.5px solid rgba(21,42,58,0.8); color: rgba(21,42,58,0.8); display: flex; align-items: center; justify-content: center; }
+.center { display: grid; place-items: center; min-height: 110px; text-align: center; }
+.mt-2 { margin-top: 8px; }
