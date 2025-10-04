@@ -1,25 +1,22 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter, Poppins } from 'next/font/google';
-import BrandLogo from '@/components/BrandLogo';
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
-const poppins = Poppins({ subsets: ['latin'], weight: ['400','600','700'], variable: '--font-display' });
-
-export const metadata: Metadata = {
-  title: 'Materna360',
-  description: 'Next.js + Tailwind starter',
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+import React from "react";
+export const metadata = { title: "Materna360" };
+export default function RootLayout({children}:{children:React.ReactNode}){
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${poppins.variable} h-full bg-stone-50`}>
-      <body className="text-gray-900 antialiased">
-        <header className="mx-auto max-w-2xl px-4 pt-4">
-          <BrandLogo />
-        </header>
-        <main className="pb-20">{children}</main>
-      </body>
+    <html lang="pt-BR">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {process.env.NODE_ENV === "production"
+          && process.env.NEXT_PUBLIC_FULLSTORY_ORG
+          && process.env.NEXT_PUBLIC_ENABLE_FS !== "false" ? (
+          <script
+            defer
+            src="https://edge.fullstory.com/s/fs.js"
+            data-org={process.env.NEXT_PUBLIC_FULLSTORY_ORG}
+            data-debug="false"
+          />
+        ) : null}
+      </head>
+      <body style={{margin:0}}>{children}</body>
     </html>
   );
 }
