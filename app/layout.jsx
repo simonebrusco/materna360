@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
       <body>
-        <main>
+        <main className="page">
           {children}
         </main>
         <TabBar />
