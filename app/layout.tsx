@@ -15,7 +15,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={`${inter.variable} ${poppins.variable} h-full bg-stone-50`}>
       <body className="text-gray-900 antialiased">
-        <div data-build-stamp className="sr-only">BUILD: {new Date().toISOString()}</div>
         <header className="mx-auto max-w-2xl px-4 pt-4">
           <BrandLogo />
           <p className="mt-1 text-[15px] text-[color:var(--brand-navy)]/80">
