@@ -114,3 +114,10 @@ nav { background: var(--white); border-top: 1px solid rgba(255, 0, 94, 0.1); box
 .gratitude-item { display: flex; justify-content: space-between; gap: 12px; }
 .gratitude-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 70%; }
 .gratitude-date { font-size: 12px; opacity: .7; }
+
+/* Weekly Planner */
+.week-tracker { display: grid; grid-template-columns: repeat(7, 36px); gap: 10px; align-items: center; }
+.week-day { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid rgba(13,27,42,.2); background: var(--white); color: var(--navy); font-weight: 700; }
+.week-day.is-current { border-color: var(--magenta); cursor: pointer; }
+.week-day.is-completed { background: var(--magenta); color: var(--white); border-color: var(--magenta); }
+.week-summary { margin-top: 10px; }
