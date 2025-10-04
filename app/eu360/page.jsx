@@ -1,7 +1,8 @@
+"use client";
+
 import Card from "../../components/ui/Card";
 import Btn from "../../components/ui/Btn";
 
-export const metadata={title:"Eu360 • Materna360"};
 
 export default function Eu360(){
   return (
