@@ -1,8 +1,22 @@
+"use client";
+import { COLORS, FONT_STACK, SPACING } from "../lib/ui/tokens";
+import GreetingLine from "../components/GreetingLine";
+import MessageOfTheDay from "../components/MessageOfTheDay";
+
 export default function Page() {
   return (
-    <main style={{ padding: 24, fontFamily: "system-ui, Poppins, Arial" }}>
-      <h1 style={{ margin: 0 }}>Materna360</h1>
-      <p style={{ marginTop: 8 }}>Dev server ok — homepage mínima (JSX).</p>
+    <main
+      style={{
+        padding: SPACING,
+        fontFamily: FONT_STACK,
+        background: COLORS.light,
+        minHeight: "100vh",
+      }}
+    >
+      <div style={{ maxWidth: 720, margin: "0 auto", display: "grid", gap: SPACING }}>
+        <GreetingLine name="Simone" />
+        <MessageOfTheDay />
+      </div>
     </main>
   );
 }
