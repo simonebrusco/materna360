@@ -1,9 +1,15 @@
+'use client';
+
+import { useEffect, useState } from "react";
 import Card from "../../components/ui/Card";
 import Btn from "../../components/ui/Btn";
+import { getLastNDays } from "../../lib/mood";
 
 export const metadata={title:"Eu360 • Materna360"};
 
 export default function Eu360(){
+  const [week, setWeek] = useState([]);
+  useEffect(() => { setWeek(getLastNDays(7)); }, []);
   return (
     <div className="container">
       <h1 className="h1">Eu360</h1>
@@ -22,9 +28,10 @@ export default function Eu360(){
 
       <Card>
         <strong>Humor da semana</strong>
-        <div style={{display:"flex",alignItems:"center",gap:10,marginTop:8}}>
-          <div className="iconToken">🙂</div>
-          <div className="small">Feliz</div>
+        <div className="mood-week" style={{marginTop:8}}>
+          {week.map((d, i) => (
+            <div key={i} className={`mood-day ${d.mood ? 'is-set' : ''}`}></div>
+          ))}
         </div>
       </Card>
 
