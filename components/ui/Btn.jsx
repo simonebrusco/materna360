@@ -1,14 +1,28 @@
-export default function Btn({ children, variant = 'primary', className = '', ...rest }) {
-  const base = 'btn';
-  const map = {
-    primary: 'btn-primary',
-    solid:   'btn-primary', // compat
-    ghost:   'btn-ghost',
-    subtle:  'btn-subtle',
-  };
-  const cls = `${base} ${map[variant] ?? 'btn-primary'} ${className}`.trim();
+"use client";
+import Link from "next/link";
+
+export default function Btn({
+  children,
+  variant = "solid",
+  href,
+  onClick,
+  style,
+  className = "",
+  ...rest
+}) {
+  const clsBase = `btn ${variant === "ghost" ? "btn-ghost" : variant === "subtle" ? "btn-subtle" : ""}`.trim();
+  const cls = `${clsBase} ${className}`.trim();
+
+  if (href) {
+    return (
+      <Link href={href} className={cls} style={style} {...rest}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <button className={cls} {...rest}>
+    <button onClick={onClick} className={cls} style={style} {...rest}>
       {children}
     </button>
   );
