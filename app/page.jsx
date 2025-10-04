@@ -1,6 +1,7 @@
 import Card from "../components/ui/Card";
 import NavyCard from "../components/ui/NavyCard";
 import Btn from "../components/ui/Btn";
+import WeeklyPlanner from "../components/planner/WeeklyPlanner";
 
 export default function Home(){
   return (
@@ -34,6 +35,14 @@ export default function Home(){
         <NavyCard><div className="iconToken">🔔</div><div>Inspirar</div></NavyCard>
         <Card style={{minHeight:110,display:"grid",placeItems:"center"}}><div className="iconStack"><div className="iconToken">Ⅱ</div><div>Pausar</div></div></Card>
       </div>
+
+      <div className="space"></div>
+
+      <Card>
+        <strong>Weekly Planner</strong>
+        <div className="space"></div>
+        <WeeklyPlanner />
+      </Card>
 
       <div className="space"></div>
 
