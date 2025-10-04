@@ -1,27 +1,14 @@
-'use client';
-
-import React from 'react';
-
-const join = (...classes) => classes.filter(Boolean).join(' ');
-
-export default function Btn({
-  children,
-  variant = 'solid',
-  className = '',
-  style,
-  ...rest
-}) {
-  const variantClass =
-    variant === 'ghost' ? 'btn-ghost' :
-    variant === 'subtle' ? 'btn-subtle' :
-    'btn-primary';
-
+export default function Btn({ children, variant = 'primary', className = '', ...rest }) {
+  const base = 'btn';
+  const map = {
+    primary: 'btn-primary',
+    solid:   'btn-primary', // compat
+    ghost:   'btn-ghost',
+    subtle:  'btn-subtle',
+  };
+  const cls = `${base} ${map[variant] ?? 'btn-primary'} ${className}`.trim();
   return (
-    <button
-      {...rest}
-      style={style}
-      className={join('btn', variantClass, className)}
-    >
+    <button className={cls} {...rest}>
       {children}
     </button>
   );
