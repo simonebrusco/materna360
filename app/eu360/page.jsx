@@ -50,6 +50,15 @@ export default function Eu360(){
         <div className="space"></div>
         <Btn>Registrar</Btn>
       </Card>
+      <div className="space"></div>
+      <Card>
+        <strong>Preciso de ajuda agora</strong>
+        <p className="small">Conte com apoio imediato. Você não está sozinha.</p>
+        <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+          <a className="btn" href="#" rel="noreferrer">Contatos de apoio</a>
+          <a className="btn btn-ghost" href="#" rel="noreferrer">Ver recursos</a>
+        </div>
+      </Card>
     </div>
   );
 }

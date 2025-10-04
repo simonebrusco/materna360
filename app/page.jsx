@@ -37,6 +37,26 @@ export default function Home(){
 
       <div className="space"></div>
 
+      <Card>
+        <strong>Planner da semana</strong>
+        <div style={{display:"flex",gap:12,marginTop:10}}>
+          {["S","T","Q","Q","S","S","D"].map((d,i)=>(
+            <div key={i} style={{width:28,height:28,borderRadius:14,display:"grid",placeItems:"center",background:i===0?"#FF005E":"#EAEFF6",color:i===0?"#fff":"#0C1A2B"}}>{d}</div>
+          ))}
+        </div>
+        <p className="small" style={{marginTop:8}}>0/7 concluídos 💖</p>
+      </Card>
+
+      <div className="space"></div>
+
+      <Card>
+        <strong>Afirmação de hoje</strong>
+        <p className="small" style={{marginTop:6}}>“Eu me acolho no meu ritmo.”</p>
+        <Btn variant="ghost">Ver outra</Btn>
+      </Card>
+
+      <div className="space"></div>
+
       <Card className="card-navy" style={{color:"#fff",background:"#0C1A2B"}}>
         <div style={{fontWeight:800,marginBottom:6}}>Seu bem-estar também é importante</div>
         <div className="small" style={{opacity:.9}}>Dicas simples para o seu dia.</div>
