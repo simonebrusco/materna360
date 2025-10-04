@@ -1,6 +1,11 @@
+'use client';
+
+import { useState } from "react";
 import Btn from "../components/ui/Btn";
+import MoodSheet from "../components/mood/MoodSheet";
 
 export default function Home() {
+  const [openMood, setOpenMood] = useState(false);
   return (
     <div className="container">
       <section className="stack-xl">
@@ -22,6 +27,7 @@ export default function Home() {
               <div>
                 <h3>Como você se sente?</h3>
                 <p className="muted">Toque para registrar</p>
+                <Btn className="mt-2" onClick={() => setOpenMood(true)}>Register</Btn>
               </div>
             </div>
           </div>
@@ -53,6 +59,7 @@ export default function Home() {
           <h3>Seu bem-estar também é importante</h3>
           <p className="muted">Dicas simples para o seu dia.</p>
         </div>
+        <MoodSheet open={openMood} onClose={() => setOpenMood(false)} />
       </section>
     </div>
   );
