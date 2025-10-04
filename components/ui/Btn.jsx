@@ -1,16 +1,15 @@
-"use client";
-ai_main_76441ebb1c05
-export default function Btn({children,variant="solid",className="",...rest}){
-  const classes = `btn ${variant==="ghost" ? "btn-ghost" : "btn-primary"} ${className}`.trim();
+export default function Btn({ children, variant = 'primary', className = '', ...rest }) {
+  const base = 'btn';
+  const map = {
+    primary: 'btn-primary',
+    solid:   'btn-primary', // compat
+    ghost:   'btn-ghost',
+    subtle:  'btn-subtle',
+  };
+  const cls = `${base} ${map[variant] ?? 'btn-primary'} ${className}`.trim();
   return (
-    <button {...rest} className={classes}>
+    <button className={cls} {...rest}>
       {children}
     </button>
   );
-
-export default function Btn({children,variant="solid",style,...rest}){
-  return <button {...rest} className={`btn ${variant==="ghost"?"btn-ghost":""}`} style={style}>
-    {children}
-  </button>;
-main
 }
