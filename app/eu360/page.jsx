@@ -31,7 +31,7 @@ export default function Eu360(){
       <Card>
         <strong>Humor da semana</strong>
         <div style={{display:"flex",alignItems:"center",gap:10,marginTop:8}}>
-          <div className="iconToken" style={{color:"#0C1A2B",borderColor:"#0C1A2B"}}>🙂</div>
+          <div className="iconToken" style={{color:"var(--navy)",borderColor:"var(--navy)"}}>🙂</div>
           <div className="small">Feliz</div>
         </div>
       </Card>
