@@ -17,9 +17,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="text-gray-900 antialiased">
         <header className="mx-auto max-w-2xl px-4 pt-4">
           <BrandLogo />
-          <p className="mt-1 text-[15px] text-[color:var(--brand-navy)]/80">
-            Que bom ter você aqui, vamos juntos criar momentos especiais hoje.
-          </p>
         </header>
         <main className="pb-20">{children}</main>
       </body>
