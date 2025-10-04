@@ -1,6 +1,7 @@
 "use client";
 import * as React from "react";
 import { COLORS, FONT_STACK, RADIUS, SHADOW } from "../lib/ui/tokens";
+import { hoverLift, MOTION_OK } from "../lib/ui/motion";
 
 const MOODS = [
   { emoji: "😞", label: "Cansada" },
@@ -13,6 +14,7 @@ const MOODS = [
 export default function MoodCheck() {
   const [selected, setSelected] = React.useState<number | null>(null);
   const [message, setMessage] = React.useState<string>("");
+  const [lift, setLift] = React.useState(false);
 
   function handleSelect(i: number) {
     setSelected(i);
@@ -28,10 +30,14 @@ export default function MoodCheck() {
 
   return (
     <div
+      onMouseEnter={() => MOTION_OK && setLift(true)}
+      onMouseLeave={() => setLift(false)}
       style={{
+        ...hoverLift,
+        transform: lift ? "translateY(-1px)" : "translateY(0)",
+        boxShadow: lift ? "0 12px 32px rgba(47,58,86,0.12)" : "0 8px 28px rgba(47,58,86,0.08)",
         background: COLORS.white,
-        borderRadius: RADIUS,
-        boxShadow: SHADOW,
+        borderRadius: 20,
         padding: 16,
         display: "grid",
         gap: 12,
