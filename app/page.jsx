@@ -17,7 +17,7 @@ export default function Home(){
 
         <Card>
           <div style={{display:"grid",gridTemplateColumns:"48px 1fr",gap:12,alignItems:"center"}}>
-            <div className="iconToken" style={{color:"#0C1A2B",borderColor:"#0C1A2B"}}>🙂</div>
+            <div className="iconToken" style={{color:"var(--navy)",borderColor:"var(--navy)"}}>🙂</div>
             <div>
               <div style={{fontWeight:800}}>Como você se sente?</div>
               <div className="small" style={{opacity:.75}}>Toque para registrar</div>
