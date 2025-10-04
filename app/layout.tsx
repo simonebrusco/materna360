@@ -15,6 +15,21 @@ export default function RootLayout({children}:{children:React.ReactNode}){
             data-debug="false"
           />
         ) : null}
+        {process.env.NODE_ENV !== "production" ? (
+          <script dangerouslySetInnerHTML={{
+            __html: `
+              (function(){
+                function ignore(e){
+                  var msg = (e && (e.reason?.message || e.message || "")) + "";
+                  if (msg.includes("Failed to fetch")) { e.preventDefault && e.preventDefault(); return true; }
+                  return false;
+                }
+                window.addEventListener("unhandledrejection", function(e){ if(ignore(e)) return; }, {capture:true});
+                window.addEventListener("error", function(e){ if(ignore(e)) return; }, {capture:true});
+              })();
+            `
+          }} />
+        ) : null}
       </head>
       <body style={{margin:0}}>{children}</body>
     </html>
