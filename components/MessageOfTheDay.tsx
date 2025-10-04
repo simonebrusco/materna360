@@ -1,8 +1,7 @@
-"use client";
-
 import { useState } from "react";
 import { getRandomMessage } from "../data/messages";
 import Button from "./ui/Button";
+import { COLORS, FONT_STACK } from "../lib/ui/tokens";
 
 type MessageOfTheDayProps = {
   initial: string;
@@ -19,13 +18,18 @@ export default function MessageOfTheDay({ initial, textClassName = "", buttonCla
   };
 
   return (
-    <div>
+    <div style={{ color: COLORS.secondary }}>
       <div className="flex items-start gap-3">
-        <div className="text-neutral text-3xl leading-none select-none" aria-hidden>
+        <div className="text-3xl leading-none select-none" aria-hidden>
           ❝
         </div>
         <div className="flex-1">
-          <p className={["mt-0.5 text-sm sm:text-base text-grayMid leading-relaxed", textClassName].filter(Boolean).join(" ")}>{message}</p>
+          <p
+            className={["mt-0.5 text-sm sm:text-base leading-relaxed", textClassName].filter(Boolean).join(" ")}
+            style={{ color: COLORS.secondary }}
+          >
+            {message}
+          </p>
         </div>
       </div>
 
@@ -36,7 +40,14 @@ export default function MessageOfTheDay({ initial, textClassName = "", buttonCla
           onClick={handleNew}
           variant="primary"
           size="md"
-          className={["w-full sm:w-auto", "font-bold uppercase rounded-md shadow-sm", buttonClassName].filter(Boolean).join(" ")}
+          className={["w-full sm:w-auto", "rounded-md shadow-sm", buttonClassName].filter(Boolean).join(" ")}
+          style={{
+            background: COLORS.primary,
+            color: COLORS.white,
+            borderRadius: 999,
+            fontFamily: FONT_STACK,
+            fontWeight: 600,
+          }}
         >
           Nova mensagem
         </Button>
