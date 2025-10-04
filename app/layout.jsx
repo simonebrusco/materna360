@@ -1,5 +1,5 @@
 import './globals.css';
-import BottomTabBar from '../components/BottomTabBar';
+import TabBar from '../components/TabBar';
 
 export const metadata = {
   title: 'Materna360',
@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
         <main>
           {children}
         </main>
-        <BottomTabBar />
+        <TabBar />
       </body>
     </html>
   );
