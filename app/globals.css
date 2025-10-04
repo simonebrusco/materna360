@@ -27,16 +27,43 @@ main{min-height:100vh;display:flex;justify-content:center}
 .card-navy{background:var(--navy);color:#fff;border-radius:20px;padding:18px;box-shadow:0 10px 26px rgba(12,26,43,.12)}
 
 /* Buttons */
-.btn{display:inline-block;border:0;border-radius:999px;padding:12px 16px;font-weight:800;cursor:pointer}
-.btn-ghost{background:#fff;color:var(--magenta);border:1.5px solid var(--magenta)}
-.btn-primary{background:var(--magenta);color:var(--white);border-radius:999px;box-shadow:
-    0 10px 22px -12px rgba(255,0,94,.3),
-    0 6px 14px -8px rgba(255,0,94,.2)}
-.btn-primary:hover{background:#E60056;box-shadow:
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:.5rem; padding:.75rem 1rem; border-radius:999px;
+  font-weight:600; border:0; cursor:pointer;
+  transition:transform .12s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
+}
+.btn-ghost{
+  background:var(--white); color:var(--navy);
+  box-shadow: var(--shadow-rose);
+  border:1px solid var(--rose-2);
+}
+.btn-ghost:hover{
+  box-shadow:
+    0 0 0 1px var(--magenta) inset,
+    0 12px 26px -10px rgba(255,0,94,.16),
+    0 4px 10px -6px rgba(255,0,94,.12);
+  transform: translateY(-1px);
+}
+.btn-primary{
+  background:var(--magenta); color:var(--white);
+  box-shadow:
+    0 10px 22px -12px rgba(255,0,94,.30),
+    0 6px 14px -8px rgba(255,0,94,.22);
+}
+.btn-primary:hover{
+  background:#E60056;
+  box-shadow:
     0 12px 26px -10px rgba(255,0,94,.36),
-    0 8px 18px -10px rgba(255,0,94,.24)}
-.btn-subtle{background:var(--rose-1);color:var(--magenta);border:1px solid var(--rose-2);box-shadow:none}
-.btn-subtle:hover{background:var(--rose-2)}
+    0 8px 18px -10px rgba(255,0,94,.24);
+  transform: translateY(-1px);
+}
+.btn-subtle{
+  background: linear-gradient(180deg, #fff 0%, var(--rose-0) 100%);
+  color: var(--ink-70);
+  border:1px solid var(--rose-2);
+  box-shadow: var(--shadow-rose);
+}
 
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .badge{display:inline-block;background:#FFE0EE;color:#B80045;border-radius:999px;padding:8px 12px;font-weight:700;font-size:12px}
