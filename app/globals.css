@@ -121,3 +121,8 @@ nav { background: var(--white); border-top: 1px solid rgba(255, 0, 94, 0.1); box
 .week-day.is-current { border-color: var(--magenta); cursor: pointer; }
 .week-day.is-completed { background: var(--magenta); color: var(--white); border-color: var(--magenta); }
 .week-summary { margin-top: 10px; }
+
+/* Chips */
+.chips-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { background: var(--magenta); color: var(--white); border: none; border-radius: 9999px; padding: 8px 14px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 8px rgba(255, 0, 94, 0.2); }
+.chip-active { box-shadow: 0 6px 16px rgba(255, 0, 94, 0.28); transform: translateY(-1px); }

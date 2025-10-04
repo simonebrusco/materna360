@@ -1,6 +1,7 @@
 import Card from "../../components/ui/Card";
 import NavyCard from "../../components/ui/NavyCard";
 import Btn from "../../components/ui/Btn";
+import ActivitiesByRange from "../../components/descobrir/ActivitiesByRange";
 
 export const metadata={title:"Descobrir • Materna360"};
 
@@ -10,13 +11,8 @@ export default function Descobrir(){
       <h1 className="h1">Descobrir</h1>
 
       <Card className="card-navy">
-        <div style={{display:"grid",gridTemplateColumns:"32px 1fr",gap:12,alignItems:"center"}}>
-          <div className="iconToken">🐻</div>
-          <div>
-            <div style={{fontWeight:800,marginBottom:6}}>Atividades para 3 a 4 anos</div>
-            <Btn variant="solid">Ver sugestões</Btn>
-          </div>
-        </div>
+        <div style={{fontWeight:800,marginBottom:6}}>Filtrar por idade</div>
+        <ActivitiesByRange />
       </Card>
 
       <div className="space"></div>

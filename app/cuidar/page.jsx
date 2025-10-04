@@ -1,6 +1,7 @@
 import Card from "../../components/ui/Card";
 import NavyCard from "../../components/ui/NavyCard";
 import Btn from "../../components/ui/Btn";
+import RecipeOfTheDay from "../../components/cuidar/RecipeOfTheDay";
 
 export const metadata={title:"Cuidar • Materna360"};
 
@@ -16,10 +17,7 @@ export default function Cuidar(){
 
       <div className="space"></div>
 
-      <Card className="card-navy">
-        <div style={{fontWeight:800,marginBottom:6}}>Receita saudável</div>
-        <div className="small" style={{opacity:.9}}>Omelete de espinafre</div>
-      </Card>
+      <RecipeOfTheDay />
 
       <div className="space"></div>
 
