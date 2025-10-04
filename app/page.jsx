@@ -30,9 +30,9 @@ export default function Home(){
 
       <div className="grid-2">
         <NavyCard><div className="iconToken">◐</div><div>Respirar</div></NavyCard>
-        <NavyCard><div className="iconToken">♡</div><div>Refletir</div></NavyCard>
+        <Card style={{minHeight:110,display:"grid",placeItems:"center"}}><div className="iconStack"><div className="iconToken" style={{color:"var(--navy)",borderColor:"var(--navy)"}}>♡</div><div>Refletir</div></div></Card>
         <NavyCard><div className="iconToken">🔔</div><div>Inspirar</div></NavyCard>
-        <NavyCard><div className="iconToken">Ⅱ</div><div>Pausar</div></NavyCard>
+        <Card style={{minHeight:110,display:"grid",placeItems:"center"}}><div className="iconStack"><div className="iconToken" style={{color:"var(--navy)",borderColor:"var(--navy)"}}>Ⅱ</div><div>Pausar</div></div></Card>
       </div>
 
       <div className="space"></div>
