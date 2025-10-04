@@ -1,5 +1,3 @@
-"use client";
-
 import Card from "../../components/ui/Card";
 import Btn from "../../components/ui/Btn";
 
