@@ -1,21 +1,24 @@
 import dynamic from "next/dynamic";
-import { COLORS, FONT_STACK } from "../lib/ui/tokens";
-const GreetingLine = dynamic(() => import("../components/GreetingLine"), { ssr: false });
+import { COLORS, FONT_STACK, SPACING } from "../lib/ui/tokens";
+
+const GreetingLine = dynamic(()=>import("../components/GreetingLine"),{ssr:false});
+const MessageOfTheDay = dynamic(()=>import("../components/MessageOfTheDay"),{ssr:false});
 
 export default function Page(){
   return (
     <main style={{
-      padding:24,
-      fontFamily: FONT_STACK,
-      background: COLORS.light,
-      color: COLORS.secondary,
-      borderTop: `4px solid ${COLORS.primary}`,
+      padding:SPACING,
+      fontFamily:FONT_STACK,
+      background:COLORS.light,
+      minHeight:"100vh"
     }}>
-      <h1 style={{margin:0, color: COLORS.secondary}}>Materna360</h1>
-      <div style={{height:12}} />
-      <GreetingLine name="Simone" />
-      <div style={{height:12}} />
-      <p style={{margin:0}}>Home is up with a safe greeting block (App Router).</p>
+      <div style={{maxWidth:720,margin:"0 auto",display:"grid",gap:SPACING}}>
+        {/* Saudação */}
+        <GreetingLine name="Simone" />
+        {/* Mensagem do Dia */}
+        <MessageOfTheDay />
+        {/* Aqui virão os próximos blocos: Check-in, Atividade do Dia, Planner, etc */}
+      </div>
     </main>
   );
 }
