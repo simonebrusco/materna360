@@ -1,38 +1,61 @@
 :root{
-  --navy:#0C1A2B;
+  --rose-0:#FFF8FB;
+  --rose-1:#FFEFF4;
+  --rose-2:#FFD6E5;
   --magenta:#FF005E;
-  --muted:#F6F8FC;
+  --magenta-40:rgba(255,0,94,.4);
+  --navy:#0D1B2A;
+  --ink-70:rgba(13,27,42,.70);
   --white:#FFFFFF;
-  --ink:#0C1A2B;
+  --shadow-rose:
+    0 0 0 1px var(--rose-2) inset,
+    0 12px 26px -10px rgba(255,0,94,.16),
+    0 4px 10px -6px rgba(255,0,94,.12);
+  /* legacy tokens preserved */
+  --muted:#F6F8FC;
+  --ink:#0D1B2A;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--muted);color:var(--ink);
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Poppins,Arial}
+html,body{margin:0;padding:0;background: linear-gradient(180deg,var(--rose-1) 0%, var(--rose-0) 60%, #fff 100%);color: var(--navy);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Poppins,Arial;min-height:100%;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 main{min-height:100vh;display:flex;justify-content:center}
 .container{width:min(960px,100%);padding:24px}
 .h1{font-family:Poppins,system-ui;font-weight:800;font-size:30px;letter-spacing:.2px;margin:0 0 8px}
 .sub{opacity:.8;margin:0 0 18px}
-.card{background:var(--white);border-radius:20px;padding:18px;box-shadow:0 14px 34px rgba(12,26,43,.08)}
+.card{background:var(--white);border-radius:18px;padding:18px;box-shadow:var(--shadow-rose);border:1px solid var(--rose-2)}
 .card-navy{background:var(--navy);color:#fff;border-radius:20px;padding:18px;box-shadow:0 10px 26px rgba(12,26,43,.12)}
-.btn{display:inline-block;border:0;border-radius:999px;padding:12px 16px;font-weight:800;background:var(--magenta);color:#fff;cursor:pointer}
+
+/* Buttons */
+.btn{display:inline-block;border:0;border-radius:999px;padding:12px 16px;font-weight:800;cursor:pointer}
 .btn-ghost{background:#fff;color:var(--magenta);border:1.5px solid var(--magenta)}
+.btn-primary{background:var(--magenta);color:var(--white);border-radius:999px;box-shadow:
+    0 10px 22px -12px rgba(255,0,94,.3),
+    0 6px 14px -8px rgba(255,0,94,.2)}
+.btn-primary:hover{background:#E60056;box-shadow:
+    0 12px 26px -10px rgba(255,0,94,.36),
+    0 8px 18px -10px rgba(255,0,94,.24)}
+
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .badge{display:inline-block;background:#FFE0EE;color:#B80045;border-radius:999px;padding:8px 12px;font-weight:700;font-size:12px}
 .small{font-size:14px;opacity:.9}
 .space{height:18px}
 
+/* Surfaces */
+.tile{background:var(--white);border-radius:20px;box-shadow:var(--shadow-rose);display:flex;align-items:center;justify-content:center;transition:transform .2s ease}
+.tile:hover{transform:translateY(-1px)}
+
 /* Tab bar */
 .bottom-nav{position:sticky;bottom:0;left:0;right:0;display:flex;gap:6px;
-  justify-content:space-around;align-items:center;background:rgba(255,255,255,.96);
-  backdrop-filter:blur(10px);padding:10px 8px;border-top:1px solid #EAEFF6}
+  justify-content:space-around;align-items:center;background:var(--white);
+  padding:10px 8px;border-top:1px solid var(--rose-2);box-shadow:0 -6px 24px rgba(13,27,42,.06)}
 .tab{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--navy);font-size:12px}
 .tab .icon{width:22px;height:22px;border-radius:8px;border:1.7px solid currentColor;
   display:flex;align-items:center;justify-content:center}
 .tab-active{position:relative}
 .tab-active::after{content:"";position:absolute;bottom:-6px;width:6px;height:6px;border-radius:50%;background:var(--magenta)}
 
-body{background: radial-gradient(1200px 700px at 50% -100px,#FBFCFF 0%,#F6F8FC 45%,#F3F5FA 100%);}
+body{background: linear-gradient(180deg,var(--rose-1) 0%, var(--rose-0) 60%, #fff 100%)}
 
 /* Eu360 ring */
 .ring{--s:120px;position:relative;width:var(--s);height:var(--s);border-radius:50%;
