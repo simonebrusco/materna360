@@ -84,6 +84,16 @@ main { min-height: 100vh; display: flex; justify-content: center; }
 /* Grid */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
+/* Age tabs */
+.age-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 16px; }
+.age-tab { padding: 8px 14px; border-radius: 999px; background: var(--white); color: var(--navy); border: 1px solid rgba(13,27,42,.1); box-shadow: var(--shadow-soft-1); font-weight: 600; cursor: pointer; transition: all .2s ease; }
+.age-tab:active { transform: scale(.98); }
+.age-tab-active { background: var(--magenta); color: var(--white); border-color: transparent; box-shadow: var(--shadow-magenta-1); }
+
+/* Layout helpers */
+.hero-row { display: grid; grid-template-columns: 32px 1fr; gap: 12px; align-items: center; }
+.recommend-ctas { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+
 /* Tab bar */
 .bottom-nav { position: sticky; bottom: 0; left: 0; right: 0; display: flex; gap: 6px; justify-content: space-around; align-items: center; background: var(--white); padding: 10px 8px; border-top: 1px solid var(--rose-2); box-shadow: 0 -6px 24px rgba(13,27,42,.06); }
 .tab { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--navy); font-size: 12px; }
