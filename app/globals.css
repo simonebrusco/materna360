@@ -24,6 +24,13 @@
   /* Radii */
   --r-lg: 20px;
   --r-xl: 24px;
+
+  /* Theme aliases */
+  --rose-bg: var(--rose-1);
+  --card: var(--white);
+  --magenta-20: rgba(255, 0, 94, 0.2);
+  --ring: 0 0 0 3px rgba(255, 0, 94, 0.16);
+  --shadow-soft: var(--shadow-soft-1);
 }
 
 /* Reset e base */
@@ -34,7 +41,7 @@ a { color: inherit; text-decoration: none; }
 
 body {
   color: var(--navy);
-  background: linear-gradient(180deg, var(--rose-1) 0%, var(--white) 100%);
+  background: linear-gradient(180deg, var(--rose-bg) 0%, var(--white) 100%);
 }
 
 main { min-height: 100vh; display: flex; justify-content: center; }
@@ -47,15 +54,15 @@ main { min-height: 100vh; display: flex; justify-content: center; }
 
 /* Cards */
 .card {
-  background: var(--white);
+  background: var(--card);
   border-radius: 20px;
-  box-shadow: 0 6px 16px rgba(255, 0, 94, 0.08);
+  box-shadow: var(--shadow-soft);
   padding: 20px;
   transition: all 0.2s ease;
   color: var(--navy);
 }
 .card:hover { transform: translateY(-2px); }
-.card-navy { background: #fff; color: var(--navy); border: 1px solid rgba(13,27,42,.06); border-radius: var(--r-lg); box-shadow: var(--shadow-soft-1); }
+.card-navy { background: var(--card); color: var(--navy); border: 1px solid rgba(13,27,42,.06); border-radius: var(--r-lg); box-shadow: var(--shadow-soft); }
 
 /* Botões base + variantes */
 .btn {
@@ -73,26 +80,28 @@ main { min-height: 100vh; display: flex; justify-content: center; }
 }
 .btn:active { transform: scale(.98); }
 
-.btn-primary { background: var(--magenta); color: var(--white); box-shadow: 0 3px 8px rgba(255, 0, 94, 0.25); }
-.btn-ghost { background: transparent; border: 1.5px solid var(--navy); color: var(--navy); }
-.btn-subtle { background: var(--white); box-shadow: 0 4px 10px rgba(255, 0, 94, 0.1); color: var(--navy); }
+.btn:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.btn-primary { background: var(--magenta); color: var(--white); box-shadow: var(--shadow-soft); }
+.btn-ghost { background: transparent; border: 1.5px solid var(--magenta-20); color: var(--navy); }
+.btn-subtle { background: var(--card); box-shadow: var(--shadow-soft); color: var(--navy); }
 
 /* Surfaces */
-.tile { background: var(--white); border-radius: var(--r-lg); box-shadow: var(--shadow-soft-1); display: flex; align-items: center; justify-content: center; transition: transform .2s ease; }
+.tile { background: var(--card); border-radius: var(--r-lg); box-shadow: var(--shadow-soft); display: flex; align-items: center; justify-content: center; transition: transform .2s ease; }
 .tile:hover { transform: translateY(-1px); }
 
 /* Grid */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
 /* Tab bar */
-.bottom-nav { position: sticky; bottom: 0; left: 0; right: 0; display: flex; gap: 6px; justify-content: space-around; align-items: center; background: var(--white); padding: 10px 8px; border-top: 1px solid var(--rose-2); box-shadow: 0 -6px 24px rgba(13,27,42,.06); }
+.bottom-nav { position: sticky; bottom: 0; left: 0; right: 0; display: flex; gap: 6px; justify-content: space-around; align-items: center; background: var(--card); padding: 10px 8px; border-top: 1px solid var(--rose-2); box-shadow: var(--shadow-soft); }
 .tab { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--navy); font-size: 12px; }
 .tab .icon { width: 22px; height: 22px; border-radius: 8px; border: 1.7px solid currentColor; display: flex; align-items: center; justify-content: center; }
 .tab-active { position: relative; color: var(--magenta); }
 .tab-active::after { content: ""; position: absolute; bottom: -6px; width: 6px; height: 6px; border-radius: 50%; background: var(--magenta); }
 
 /* Generic nav styling */
-nav { background: var(--white); border-top: 1px solid rgba(255, 0, 94, 0.1); box-shadow: 0 -4px 10px rgba(255, 0, 94, 0.05); }
+nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shadow: var(--shadow-soft); }
 
 /* Eu360 ring */
 .ring { --s:120px; position: relative; width: var(--s); height: var(--s); border-radius: 50%; background: conic-gradient(var(--magenta) var(--p,40%), rgba(255,255,255,.2) 0); display: grid; place-items: center; outline: 2px solid rgba(255,255,255,.25); outline-offset: -6px; }
@@ -100,29 +109,29 @@ nav { background: var(--white); border-top: 1px solid rgba(255, 0, 94, 0.1); box
 
 /* Icon label inside navy cards */
 .iconStack { display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; text-align: center; }
-.iconToken { width: 28px; height: 28px; border-radius: 10px; border: 1.5px solid rgba(21,42,58,0.8); color: rgba(21,42,58,0.8); display: flex; align-items: center; justify-content: center; }
+.iconToken { width: 28px; height: 28px; border-radius: 10px; border: 1.5px solid var(--navy); color: var(--navy); display: flex; align-items: center; justify-content: center; }
 
 /* soft-luxury polish v1 */
 
 /* Materna360 Modal styles */
-.m360-overlay { position: fixed; inset: 0; background: rgba(255, 246, 248, 0.85); display: grid; place-items: center; padding: 16px; z-index: 50; animation: m360-fade .25s ease both; }
-.m360-modal { width: min(560px, 92vw); background: #FFFFFF; border-radius: 24px; box-shadow: 0 24px 60px rgba(255, 0, 94, 0.15); padding: 24px; color: var(--navy); animation: m360-rise .25s ease both; }
-.m360-modal-title { color: #0D1B2A; font-weight: 700; font-size: 20px; line-height: 1.2; margin: 0 0 8px; }
-.m360-modal-text { color: #4B5563; line-height: 1.5; margin: 4px 0 0; }
+.m360-overlay { position: fixed; inset: 0; background: rgba(255, 246, 248, 0.6); backdrop-filter: blur(8px); display: grid; place-items: center; padding: 16px; z-index: 50; animation: m360-fade .25s ease both; }
+.m360-modal { width: min(560px, 92vw); background: var(--card); border-radius: 24px; box-shadow: var(--shadow-soft); padding: 24px; color: var(--navy); animation: m360-rise .25s ease both; }
+.m360-modal-title { color: var(--navy); font-weight: 700; font-size: 20px; line-height: 1.2; margin: 0 0 8px; }
+.m360-modal-text { color: var(--ink); line-height: 1.5; margin: 4px 0 0; }
 .m360-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
 
 /* Inputs and chips */
 .m360-field { margin: 8px 0; }
 .m360-input { width: 100%; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(0,0,0,.15); transition: border-color .2s ease, box-shadow .2s ease; }
-.m360-input:focus { outline: none; border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(255,0,94,.12); }
+.m360-input:focus { outline: none; border-color: var(--magenta); box-shadow: var(--ring); }
 
 .m360-chip-row, .m360-emoji-row { display: flex; gap: 8px; margin: 12px 0; flex-wrap: wrap; }
-.m360-chip { all: unset; background: #FFFFFF; color: var(--navy); border: 1px solid rgba(0,0,0,.15); border-radius: 12px; padding: 8px 12px; cursor: pointer; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
-.m360-chip:hover { border-color: var(--magenta); box-shadow: 0 2px 6px rgba(255,0,94,.12); transform: translateY(-1px); }
+.m360-chip { all: unset; background: var(--card); color: var(--navy); border: 1px solid var(--magenta-20); border-radius: 12px; padding: 8px 12px; cursor: pointer; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+.m360-chip:hover { border-color: var(--magenta); box-shadow: var(--shadow-soft); transform: translateY(-1px); }
 .m360-chip.is-selected { border: 2px solid var(--magenta); }
 
-.m360-emoji { all: unset; background: #FFFFFF; color: var(--navy); border: 1px solid rgba(0,0,0,.15); border-radius: 12px; padding: 10px 12px; cursor: pointer; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; font-size: 18px; line-height: 1; }
-.m360-emoji:hover { border-color: var(--magenta); box-shadow: 0 2px 6px rgba(255,0,94,.12); transform: translateY(-1px); }
+.m360-emoji { all: unset; background: var(--card); color: var(--navy); border: 1px solid var(--magenta-20); border-radius: 12px; padding: 10px 12px; cursor: pointer; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; font-size: 18px; line-height: 1; }
+.m360-emoji:hover { border-color: var(--magenta); box-shadow: var(--shadow-soft); transform: translateY(-1px); }
 .m360-emoji.is-selected { border: 2px solid var(--magenta); }
 
 /* Buttons inside modal */
