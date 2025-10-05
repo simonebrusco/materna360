@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import BaseModal from "./BaseModal";
+import Modal from "../ui/Modal";
 
 const PHRASES = [
-  "Breathe deeply. You’re stronger than you imagine.",
-  "Small pauses bring big changes.",
-  "You deserve a moment of peace.",
+  "Respire fundo. Você é mais forte do que imagina.",
+  "Um passo de cada vez, no seu ritmo.",
+  "Você merece cuidado hoje.",
 ];
 
 function nextIndex() {
@@ -25,28 +25,20 @@ function nextIndex() {
 export default function InspireModal({ open, onClose = () => {}, onComplete = () => {} }) {
   const [text, setText] = useState(PHRASES[0]);
 
-  useEffect(() => {
-    if (open) setText(PHRASES[nextIndex()]);
-  }, [open]);
+  useEffect(() => { if (open) setText(PHRASES[nextIndex()]); }, [open]);
 
   if (!open) return null;
 
   return (
-    <BaseModal open={open} onClose={onClose}>
-      <h2 className="m360-modal-title">Inspiração</h2>
+    <Modal
+      title="Inspiração"
+      onClose={onClose}
+      primaryLabel="Concluir"
+      onPrimary={() => { onComplete(); onClose(); }}
+      secondaryLabel="Cancelar"
+      onSecondary={onClose}
+    >
       <p className="m360-modal-text">“{text}”</p>
-      <div className="m360-actions">
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => {
-            onComplete();
-            onClose();
-          }}
-        >
-          Concluir
-        </button>
-      </div>
-    </BaseModal>
+    </Modal>
   );
 }
