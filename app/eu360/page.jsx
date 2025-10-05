@@ -1,15 +1,19 @@
+"use client";
+
 import Card from "../../components/ui/Card";
 import Btn from "../../components/ui/Btn";
-
+import { useScore } from "../../hooks/useScore";
 
 export default function Eu360(){
+  const { score } = useScore();
+  const circleValue = typeof score === "number" ? Math.round((score / 100) * 350) : 350;
   return (
     <div className="container">
       <h1 className="h1">Eu360</h1>
 
       <Card className="card-navy" style={{display:"grid",gridTemplateColumns:"140px 1fr",gap:18,alignItems:"center"}}>
         <div className="ring" style={{"--p":"72%",background:"conic-gradient(#FF3B84 var(--p), rgba(255,255,255,.25) 0)"}}>
-          <div>Círculo<br/>350</div>
+          <div>Círculo<br/>{circleValue}</div>
         </div>
         <div>
           <div style={{fontWeight:800,marginBottom:6}}>Você é importante</div>
