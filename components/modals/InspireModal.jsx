@@ -39,7 +39,7 @@ export default function InspireModal({ open, onClose = () => {}, onComplete = ()
             type="button"
             onClick={() => {
               if (firstOpenTodayRef.current) {
-                onComplete({ type: "inspire" });
+                onComplete();
                 try { window.localStorage?.setItem("m360:inspire_logged_day", todayKey()); } catch {}
               }
               onClose();
