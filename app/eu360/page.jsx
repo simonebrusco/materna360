@@ -8,7 +8,7 @@ export default function Eu360(){
       <h1 className="h1">Eu360</h1>
 
       <Card className="card-navy" style={{display:"grid",gridTemplateColumns:"140px 1fr",gap:18,alignItems:"center"}}>
-        <div className="ring" style={{"--p":"72%",background:"conic-gradient(#FF3B84 var(--p), rgba(255,255,255,.25) 0)"}}>
+        <div className="ring" style={{"--p":"72%",background:"conic-gradient(var(--magenta) var(--p), rgba(255,255,255,.25) 0)"}}>
           <div>Círculo<br/>350</div>
         </div>
         <div>
