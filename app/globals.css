@@ -103,3 +103,49 @@ nav { background: var(--white); border-top: 1px solid rgba(255, 0, 94, 0.1); box
 .iconToken { width: 28px; height: 28px; border-radius: 10px; border: 1.5px solid rgba(21,42,58,0.8); color: rgba(21,42,58,0.8); display: flex; align-items: center; justify-content: center; }
 
 /* soft-luxury polish v1 */
+
+/* Modal base */
+.modal-root{ position:fixed; inset:0; z-index:50; display:grid; place-items:center; }
+.modal-backdrop{
+  position:absolute; inset:0;
+  background: radial-gradient(1200px 800px at 50% 20%, rgba(255,0,94,0.10), rgba(255,246,248,0.85));
+  backdrop-filter: blur(6px);
+  animation: modalFade .18s ease-out;
+}
+.modal-panel{
+  position:relative;
+  width:90vw;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.86);
+  box-shadow: 0 12px 40px rgba(13,27,42,0.10);
+  border: 1px solid rgba(255,0,94,0.12);
+  animation: modalSlide .22s ease-out;
+}
+.modal-header{ display:flex; align-items:center; justify-content:space-between; padding:18px 20px 6px; }
+.modal-title{ font-weight:700; font-size:18px; color:#0D1B2A; letter-spacing:0.2px; }
+.modal-x{
+  all:unset; cursor:pointer; line-height:1; font-size:22px; padding:4px 8px; border-radius:10px;
+  color:#0D1B2A;
+}
+.modal-x:hover{ background: rgba(13,27,42,0.06); }
+.modal-x--floating{ position:absolute; top:10px; right:12px; }
+.modal-body{ padding:16px 20px; }
+.modal-footer{ display:flex; gap:10px; justify-content:flex-end; padding:8px 20px 16px; }
+
+@keyframes modalFade{ from{ opacity:0 } to{ opacity:1 } }
+@keyframes modalSlide{
+  from{ transform: translateY(6px); opacity:.98 }
+  to{ transform: translateY(0); opacity:1 }
+}
+
+/* Optional width helpers for the component prop widthClass */
+.max-w-md{ max-width: 420px; }
+.max-w-lg{ max-width: 560px; }
+.max-w-xl{ max-width: 720px; }
+
+/* Tiny helpers used by modals */
+.emoji-chip{ all:unset; cursor:pointer; font-size:22px; padding:6px 8px; border-radius:12px; }
+.emoji-chip--active{ outline:2px solid rgba(255,0,94,.35); background:rgba(255,0,94,.06); }
+.input{ width:100%; margin:10px 0; padding:10px 12px; border-radius:12px; border:1px solid rgba(13,27,42,0.12); background:#fff; }
+.chip{ all:unset; cursor:pointer; padding:8px 14px; border-radius:12px; border:1px solid rgba(13,27,42,0.12); }
+.chip--active{ border-color: rgba(255,0,94,.35); background:rgba(255,0,94,.06); }

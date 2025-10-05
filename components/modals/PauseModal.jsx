@@ -1,38 +1,22 @@
 "use client";
+import { useState } from "react";
+import Modal from "../ui/Modal";
+const OPTIONS=[3,5,10];
 
-import React, { useState } from "react";
-
-export default function PauseModal({ open, onClose = () => {}, onComplete = () => {} }) {
-  const [minutes, setMinutes] = useState(3);
-  if (!open) return null;
+export default function PauseModal({ open, onClose = () => {}, onComplete = () => {} }){
+  const [m,setM]=useState(3);
   return (
-    <div role="dialog" aria-modal="true">
-      <div>
-        <h2>Pausa</h2>
-        <p>Escolha uma pausa rápida:</p>
-        <div style={{ display: "flex", gap: 8, margin: "8px 0" }}>
-          {[3, 5, 10].map((m) => (
-            <button
-              key={m}
-              type="button"
-              onClick={() => setMinutes(m)}
-              style={{
-                all: "unset",
-                cursor: "pointer",
-                padding: "8px 10px",
-                borderRadius: 8,
-                border: minutes === m ? "2px solid currentColor" : "1px solid rgba(0,0,0,.15)",
-              }}
-            >
-              {m} min
-            </button>
-          ))}
-        </div>
-        <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
-          <button type="button" onClick={onClose} style={{ padding: "8px 12px" }}>Cancelar</button>
-          <button type="button" onClick={() => { onComplete(minutes); onClose(); }} style={{ padding: "8px 12px" }}>Confirmar</button>
-        </div>
+    <Modal open={open} onClose={onClose} title="Pausa" widthClass="max-w-md">
+      <p style={{ marginBottom:8 }}>Escolha uma pausa rápida:</p>
+      <div style={{ display:"flex", gap:8, padding:"8px 0" }}>
+        {OPTIONS.map(n=> (
+          <button key={n} type="button" className={`chip ${m===n?"chip--active":""}`} onClick={()=>setM(n)}>{n} min</button>
+        ))}
       </div>
-    </div>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-ghost" onClick={onClose}>Cancelar</button>
+        <button type="button" className="btn" onClick={()=>onComplete(m)}>Confirmar</button>
+      </div>
+    </Modal>
   );
 }

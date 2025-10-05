@@ -1,18 +1,13 @@
 "use client";
-
-import React from "react";
-
-export default function InspireModal({ open, onClose = () => {}, onComplete = () => {} }) {
-  if (!open) return null;
+import Modal from "../ui/Modal";
+export default function InspireModal({ open, onClose = () => {}, onComplete = () => {} }){
   return (
-    <div role="dialog" aria-modal="true">
-      <div>
-        <h2>Inspiração</h2>
-        <p>“Respire fundo. Você é mais forte do que imagina.”</p>
-        <button type="button" onClick={() => { onComplete(); onClose(); }}>
-          Concluir
-        </button>
+    <Modal open={open} onClose={onClose} title="Inspiração" widthClass="max-w-md">
+      <p>“Respire fundo. Você é mais forte do que imagina.”</p>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-ghost" onClick={onClose}>Cancelar</button>
+        <button type="button" className="btn" onClick={()=>onComplete()}>Concluir</button>
       </div>
-    </div>
+    </Modal>
   );
 }

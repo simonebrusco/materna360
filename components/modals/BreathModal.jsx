@@ -1,18 +1,13 @@
 "use client";
-
-import React from "react";
-
-export default function BreathModal({ open, onClose = () => {}, onComplete = () => {} }) {
-  if (!open) return null;
+import Modal from "../ui/Modal";
+export default function BreathModal({ open, onClose = () => {}, onComplete = () => {} }){
   return (
-    <div role="dialog" aria-modal="true">
-      <div>
-        <h2>Respiração</h2>
-        <p>Exercício de respiração de 60s.</p>
-        <button type="button" onClick={() => { onComplete({ duration: 60 }); onClose(); }}>
-          Concluir
-        </button>
+    <Modal open={open} onClose={onClose} title="Respiração" widthClass="max-w-md">
+      <p>Exercício de respiração de 60s.</p>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-ghost" onClick={onClose}>Cancelar</button>
+        <button type="button" className="btn" onClick={() => onComplete({ duration: 60 })}>Concluir</button>
       </div>
-    </div>
+    </Modal>
   );
 }
