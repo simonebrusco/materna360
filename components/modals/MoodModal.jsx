@@ -17,17 +17,18 @@ export default function MoodModal({ open, onClose = () => {}, onComplete = () =>
   ];
 
   return (
-    <div className="m360-overlay" role="dialog" aria-modal="true">
-      <div className="m360-modal" role="document">
-        <h2 className="m360-modal-title">Como você está?</h2>
+    <div className="modal-overlay open" role="dialog" aria-modal="true" aria-hidden="false">
+      <div className="modal open" role="document">
+        <button className="close" aria-label="Fechar" type="button" onClick={onClose}>×</button>
+        <h2>Como você está?</h2>
 
-        <div className="m360-emoji-row">
+        <div className="emojis">
           {options.map((o) => (
             <button
               key={o.v}
               type="button"
               onClick={() => setMood(o.v)}
-              className={`m360-emoji${mood === o.v ? " is-selected" : ""}`}
+              className={`emoji-btn${mood === o.v ? " active" : ""}`}
               aria-pressed={mood === o.v}
             >
               <span aria-label={`mood-${o.v}`} role="img">{o.e}</span>
@@ -35,16 +36,16 @@ export default function MoodModal({ open, onClose = () => {}, onComplete = () =>
           ))}
         </div>
 
-        <div className="m360-field">
+        <div>
           <input
+            type="text"
             value={note}
             onChange={(e) => setNote(e.target.value)}
             placeholder="Nota (opcional)"
-            className="m360-input"
           />
         </div>
 
-        <div className="m360-actions">
+        <div className="actions">
           <button type="button" className="btn btn-ghost" onClick={onClose}>Cancelar</button>
           <button
             type="button"

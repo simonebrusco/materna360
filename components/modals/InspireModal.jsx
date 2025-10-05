@@ -5,11 +5,14 @@ import React from "react";
 export default function InspireModal({ open, onClose = () => {}, onComplete = () => {} }) {
   if (!open) return null;
   return (
-    <div className="m360-overlay" role="dialog" aria-modal="true">
-      <div className="m360-modal" role="document">
-        <h2 className="m360-modal-title">Inspiração</h2>
-        <p className="m360-modal-text">“Respire fundo. Você é mais forte do que imagina.”</p>
-        <div className="m360-actions">
+    <div className="modal-overlay open" role="dialog" aria-modal="true" aria-hidden="false">
+      <div className="modal open" role="document">
+        <button className="close" aria-label="Fechar" type="button" onClick={onClose}>×</button>
+        <h2>Inspiração</h2>
+        <div className="body">
+          <blockquote className="quote">“Respire fundo. Você é mais forte do que imagina.”</blockquote>
+        </div>
+        <div className="actions">
           <button
             type="button"
             className="btn btn-primary"
