@@ -8,8 +8,8 @@ export default function BreathModal({ open, onClose = () => {}, onComplete = () 
     <div role="dialog" aria-modal="true">
       <div>
         <h2>Respiração</h2>
-        <p>Exercício de respiração. Conteúdo em breve.</p>
-        <button type="button" onClick={() => { onComplete(); onClose(); }}>
+        <p>Exercício de respiração de 60s.</p>
+        <button type="button" onClick={() => { onComplete({ duration: 60 }); onClose(); }}>
           Concluir
         </button>
       </div>

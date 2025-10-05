@@ -95,14 +95,26 @@ export function getWeeklyPlan() {
   return fresh;
 }
 
-/** @param {number} index */
-export function toggleDayDone(index) {
-  const plan = getWeeklyPlan();
-  if (typeof index !== "number" || index < 0 || index >= plan.length) return plan;
-  const next = plan.slice();
-  next[index] = !next[index];
-  safeSet(WEEKLY_PLAN_KEY, next);
-  return next;
+/** @param {number|Date} dateOrIndex */
+export function toggleDayDone(dateOrIndex) {
+  try {
+    const plan = getWeeklyPlan();
+    let idx = null;
+    if (typeof dateOrIndex === "number") {
+      idx = dateOrIndex;
+    } else if (dateOrIndex instanceof Date) {
+      idx = dateOrIndex.getDay();
+    } else if (dateOrIndex && typeof dateOrIndex.getDay === "function") {
+      try { idx = dateOrIndex.getDay(); } catch {}
+    }
+    if (typeof idx !== "number" || idx < 0 || idx >= plan.length) return plan;
+    const next = plan.slice();
+    next[idx] = !next[idx];
+    safeSet(WEEKLY_PLAN_KEY, next);
+    return next;
+  } catch {
+    return getWeeklyPlan();
+  }
 }
 
 /** @returns {string[]} */
