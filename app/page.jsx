@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Card from "../components/ui/Card";
 import NavyCard from "../components/ui/NavyCard";
 import Btn from "../components/ui/Btn";
@@ -8,7 +8,57 @@ import BreathModal from "../components/modals/BreathModal";
 import MoodModal from "../components/modals/MoodModal";
 import InspireModal from "../components/modals/InspireModal";
 import PauseModal from "../components/modals/PauseModal";
-import { addAction, addMood, toggleDayDone } from "../lib/storage";
+import { addAction, addMood, toggleDayDone, getWeeklyPlan, togglePlanDay, getTipsIndex, bumpTipsIndex } from "../lib/storage";
+
+function WeeklyPlannerAndTip(){
+  const DAYS = ["S","T","Q","Q","S","S","D"];
+  const TIPS = [
+    "Hidrate-se e faça uma pausa de 1 minuto para respirar.",
+    "Movimente-se por 3 minutos e alongue os ombros.",
+    "Envie uma mensagem carinhosa para você mesma no futuro.",
+    "Hoje, escolha uma tarefa pequena e conclua com calma.",
+    "Três respirações profundas podem mudar o seu momento."
+  ];
+  const [plan, setPlan] = useState([false,false,false,false,false,false,false]);
+  const [tipIdx, setTipIdx] = useState(0);
+  const done = useMemo(()=> plan.filter(Boolean).length, [plan]);
+
+  useEffect(()=>{
+    try {
+      setPlan(getWeeklyPlan());
+      const i = getTipsIndex();
+      setTipIdx(i % TIPS.length);
+      bumpTipsIndex(TIPS.length);
+    } catch {}
+  },[]);
+
+  function onToggle(i){
+    const p = togglePlanDay(i);
+    setPlan(p);
+  }
+
+  return (
+    <section data-planner-root style={{marginTop:16}}>
+      <div style={{fontWeight:800,fontSize:18,color:"#0D1B2A", marginBottom:10}}>
+        Planner da semana <span style={{opacity:.6,fontWeight:600}}>— {done}/7</span>
+      </div>
+      <div className="chips-row" role="group" aria-label="Planner semanal">
+        {DAYS.map((d,i)=>(
+          <button key={i}
+            className={`chip ${plan[i] ? "is-active" : ""}`}
+            onClick={()=>onToggle(i)}
+            aria-pressed={plan[i]}
+            title={`Dia ${i+1}`}>{d}</button>
+        ))}
+      </div>
+
+      <div className="card rec" style={{padding:"16px 18px", marginTop:10}}>
+        <div style={{fontWeight:700, color:"#0D1B2A", marginBottom:6}}>Seu bem-estar também é importante</div>
+        <div style={{opacity:.85}}>{TIPS[tipIdx]}</div>
+      </div>
+    </section>
+  );
+}
 
 export default function Home(){
   const [openBreath, setOpenBreath] = useState(false);
@@ -50,10 +100,7 @@ export default function Home(){
 
       <div className="space"></div>
 
-      <Card className="card-navy">
-        <div style={{fontWeight:800,marginBottom:6}}>Seu bem-estar também é importante</div>
-        <div className="small" style={{opacity:.9}}>Dicas simples para o seu dia.</div>
-      </Card>
+      <WeeklyPlannerAndTip />
 
       <BreathModal
         open={openBreath}
