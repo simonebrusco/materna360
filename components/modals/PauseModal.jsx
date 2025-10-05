@@ -6,31 +6,26 @@ export default function PauseModal({ open, onClose = () => {}, onComplete = () =
   const [minutes, setMinutes] = useState(3);
   if (!open) return null;
   return (
-    <div role="dialog" aria-modal="true">
-      <div>
-        <h2>Pausa</h2>
-        <p>Escolha uma pausa rápida:</p>
-        <div style={{ display: "flex", gap: 8, margin: "8px 0" }}>
+    <div className="m360-overlay" role="dialog" aria-modal="true">
+      <div className="m360-modal" role="document">
+        <h2 className="m360-modal-title">Pausa</h2>
+        <p className="m360-modal-text">Escolha uma pausa rápida:</p>
+        <div className="m360-chip-row">
           {[3, 5, 10].map((m) => (
             <button
               key={m}
               type="button"
               onClick={() => setMinutes(m)}
-              style={{
-                all: "unset",
-                cursor: "pointer",
-                padding: "8px 10px",
-                borderRadius: 8,
-                border: minutes === m ? "2px solid currentColor" : "1px solid rgba(0,0,0,.15)",
-              }}
+              className={`m360-chip${minutes === m ? " is-selected" : ""}`}
+              aria-pressed={minutes === m}
             >
               {m} min
             </button>
           ))}
         </div>
-        <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
-          <button type="button" onClick={onClose} style={{ padding: "8px 12px" }}>Cancelar</button>
-          <button type="button" onClick={() => { onComplete(minutes); onClose(); }} style={{ padding: "8px 12px" }}>Confirmar</button>
+        <div className="m360-actions">
+          <button type="button" className="btn btn-ghost" onClick={onClose}>Cancelar</button>
+          <button type="button" className="btn btn-primary" onClick={() => { onComplete(minutes); onClose(); }}>Confirmar</button>
         </div>
       </div>
     </div>
