@@ -95,12 +95,25 @@ export function getWeeklyPlan() {
   return fresh;
 }
 
-/** @param {number} index */
-export function toggleDayDone(index) {
+/**
+ * Toggle planner day done. Accepts index (0=Mon..6=Sun) or Date/string.
+ * @param {number|Date|string} indexOrDate
+ */
+export function toggleDayDone(indexOrDate) {
   const plan = getWeeklyPlan();
-  if (typeof index !== "number" || index < 0 || index >= plan.length) return plan;
+  let idx = -1;
+  if (typeof indexOrDate === "number") {
+    idx = indexOrDate;
+  } else if (indexOrDate) {
+    try {
+      const d = indexOrDate instanceof Date ? indexOrDate : new Date(indexOrDate);
+      const weekday = d.getDay(); // 0..6 Sun..Sat
+      idx = (weekday + 6) % 7; // Mon=0..Sun=6
+    } catch {}
+  }
+  if (typeof idx !== "number" || idx < 0 || idx >= plan.length) return plan;
   const next = plan.slice();
-  next[index] = !next[index];
+  next[idx] = !next[idx];
   safeSet(WEEKLY_PLAN_KEY, next);
   return next;
 }
