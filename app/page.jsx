@@ -1,6 +1,5 @@
 "use client";
-
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../components/ui/Card";
 import NavyCard from "../components/ui/NavyCard";
 import Btn from "../components/ui/Btn";
@@ -8,54 +7,38 @@ import BreathModal from "../components/modals/BreathModal";
 import MoodModal from "../components/modals/MoodModal";
 import InspireModal from "../components/modals/InspireModal";
 import PauseModal from "../components/modals/PauseModal";
-import { addAction, addMood, toggleDayDone, getWeeklyPlan, togglePlanDay, getTipsIndex, bumpTipsIndex } from "../lib/storage";
+import { addAction, addMood, toggleDayDone, getWeeklyPlan } from "../lib/storage";
+import WeekChips from "../components/planner/WeekChips";
+import TipsRotator from "../components/planner/TipsRotator";
 
 function WeeklyPlannerAndTip(){
-  const DAYS = ["S","T","Q","Q","S","S","D"];
-  const TIPS = [
-    "Hidrate-se e faça uma pausa de 1 minuto para respirar.",
-    "Movimente-se por 3 minutos e alongue os ombros.",
-    "Envie uma mensagem carinhosa para você mesma no futuro.",
-    "Hoje, escolha uma tarefa pequena e conclua com calma.",
-    "Três respirações profundas podem mudar o seu momento."
-  ];
-  const [plan, setPlan] = useState([false,false,false,false,false,false,false]);
-  const [tipIdx, setTipIdx] = useState(0);
-  const done = useMemo(()=> plan.filter(Boolean).length, [plan]);
+  const [plan, setPlan] = useState(Array(7).fill(false));
+  const done = plan.filter(Boolean).length;
 
-  useEffect(()=>{
-    try {
-      setPlan(getWeeklyPlan());
-      const i = getTipsIndex();
-      setTipIdx(i % TIPS.length);
-      bumpTipsIndex(TIPS.length);
-    } catch {}
-  },[]);
+  useEffect(()=>{ try{ setPlan(getWeeklyPlan()); }catch{} },[]);
 
   function onToggle(i){
-    const p = togglePlanDay(i);
+    const p = toggleDayDone(i);
     setPlan(p);
+    if (typeof window !== 'undefined') window.dispatchEvent(new Event('refreshEu360'));
   }
 
   return (
     <section data-planner-root style={{marginTop:16}}>
-      <div style={{fontWeight:800,fontSize:18,color:"#0D1B2A", marginBottom:10}}>
-        Planner da semana <span style={{opacity:.6,fontWeight:600}}>— {done}/7</span>
+      <div style={{fontWeight:800,fontSize:18,color:"#0D1B2A", marginBottom:10, display:"flex", alignItems:"center", justifyContent:"space-between", gap:12}}>
+        <span>Planner da semana</span>
+        <span className="small" style={{opacity:.7}}>{done}/7 concluídos</span>
       </div>
-      <div className="chips-row" role="group" aria-label="Planner semanal">
-        {DAYS.map((d,i)=>(
-          <button key={i}
-            className={`chip ${plan[i] ? "is-active" : ""}`}
-            onClick={()=>onToggle(i)}
-            aria-pressed={plan[i]}
-            title={`Dia ${i+1}`}>{d}</button>
-        ))}
-      </div>
-
-      <div className="card rec" style={{padding:"16px 18px", marginTop:10}}>
-        <div style={{fontWeight:700, color:"#0D1B2A", marginBottom:6}}>Seu bem-estar também é importante</div>
-        <div style={{opacity:.85}}>{TIPS[tipIdx]}</div>
-      </div>
+      <WeekChips value={plan} onToggle={onToggle} />
+      <TipsRotator
+        tips={[
+          "Beba água e alongue-se 1 min.",
+          "Três respirações profundas.",
+          "Envie uma mensagem carinhosa pra você mesma.",
+          "Caminhe 2 min e olhe o céu."
+        ]}
+        key={done}
+      />
     </section>
   );
 }
@@ -69,7 +52,7 @@ export default function Home(){
   return (
     <div className="container">
       <h1 className="h1">Bom dia, Simone <span>💛</span></h1>
-      <p className="sub">Como você está hoje? ���</p>
+      <p className="sub">Como você está hoje?</p>
 
       <div className="grid-2">
         <Card>
@@ -108,6 +91,7 @@ export default function Home(){
         onComplete={(data)=>{
           try{ addAction({ date:new Date().toISOString(), type:"breath", duration:data?.duration ?? 60 }); }catch{}
           try{ toggleDayDone(new Date()); }catch{}
+          if (typeof window !== 'undefined') window.dispatchEvent(new Event('refreshEu360'));
           setOpenBreath(false);
         }}
       />
@@ -116,6 +100,7 @@ export default function Home(){
         onClose={() => setOpenMood(false)}
         onComplete={(entry)=>{
           try{ addMood({ date:new Date().toISOString(), mood:entry?.mood ?? 0, note:entry?.note }); }catch{}
+          if (typeof window !== 'undefined') window.dispatchEvent(new Event('refreshEu360'));
           setOpenMood(false);
         }}
       />
@@ -125,6 +110,7 @@ export default function Home(){
         onComplete={()=>{
           try{ addAction({ date:new Date().toISOString(), type:"inspire" }); }catch{}
           try{ toggleDayDone(new Date()); }catch{}
+          if (typeof window !== 'undefined') window.dispatchEvent(new Event('refreshEu360'));
           setOpenInspire(false);
         }}
       />
@@ -134,6 +120,7 @@ export default function Home(){
         onComplete={(minutes)=>{
           try{ addAction({ date:new Date().toISOString(), type:"pause", duration:minutes||3 }); }catch{}
           try{ toggleDayDone(new Date()); }catch{}
+          if (typeof window !== 'undefined') window.dispatchEvent(new Event('refreshEu360'));
           setOpenPause(false);
         }}
       />
