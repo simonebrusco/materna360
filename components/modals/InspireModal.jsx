@@ -8,7 +8,7 @@ export default function InspireModal({ open, onClose = () => {}, onComplete = ()
     <div role="dialog" aria-modal="true">
       <div>
         <h2>Inspiração</h2>
-        <p>Ideias e frases motivacionais. Conteúdo em breve.</p>
+        <p>“Respire fundo. Você é mais forte do que imagina.”</p>
         <button type="button" onClick={() => { onComplete(); onClose(); }}>
           Concluir
         </button>
