@@ -1,33 +1,70 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import BaseModal from "./BaseModal";
+import { showToast } from "../../lib/ui/toast";
 
 export default function PauseModal({ open, onClose = () => {}, onComplete = () => {} }) {
   const [minutes, setMinutes] = useState(3);
+  const [running, setRunning] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    setMinutes(3);
+    setRunning(false);
+  }, [open]);
+
+  useEffect(() => {
+    if (!running) return;
+    const t = setTimeout(() => {
+      onComplete(minutes);
+      onClose();
+      showToast("☀️ Break complete! Your well-being matters.");
+      setRunning(false);
+    }, 2000); // placeholder countdown
+    return () => clearTimeout(t);
+  }, [running, minutes, onClose, onComplete]);
+
   if (!open) return null;
+
   return (
-    <div className="m360-overlay" role="dialog" aria-modal="true">
-      <div className="m360-modal" role="document">
-        <h2 className="m360-modal-title">Pausa</h2>
-        <p className="m360-modal-text">Escolha uma pausa rápida:</p>
-        <div className="m360-chip-row">
-          {[3, 5, 10].map((m) => (
-            <button
-              key={m}
-              type="button"
-              onClick={() => setMinutes(m)}
-              className={`m360-chip${minutes === m ? " is-selected" : ""}`}
-              aria-pressed={minutes === m}
-            >
-              {m} min
-            </button>
-          ))}
-        </div>
-        <div className="m360-actions">
-          <button type="button" className="btn btn-ghost" onClick={onClose}>Cancelar</button>
-          <button type="button" className="btn btn-primary" onClick={() => { onComplete(minutes); onClose(); }}>Confirmar</button>
-        </div>
+    <BaseModal open={open} onClose={() => { if (!running) onClose(); }}>
+      <h2 className="m360-modal-title">Pausa</h2>
+      <p className="m360-modal-text">Escolha uma pausa rápida:</p>
+
+      <div className="m360-chip-row">
+        {[3, 5, 10].map((m) => (
+          <button
+            key={m}
+            type="button"
+            onClick={() => !running && setMinutes(m)}
+            className={`m360-chip${minutes === m ? " is-selected" : ""}`}
+            aria-pressed={minutes === m}
+            disabled={running}
+          >
+            {m} min
+          </button>
+        ))}
       </div>
-    </div>
+
+      {running && (
+        <div className="m360-countdown" aria-live="polite">
+          <div className="m360-spinner" />
+          <div className="small" style={{ opacity: .8 }}>Contagem regressiva...</div>
+        </div>
+      )}
+
+      <div className="m360-actions">
+        <button type="button" className="btn btn-ghost" disabled={running} onClick={onClose}>Cancelar</button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => setRunning(true)}
+          disabled={running}
+        >
+          Confirmar
+        </button>
+      </div>
+    </BaseModal>
   );
 }
