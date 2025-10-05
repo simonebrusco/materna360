@@ -167,3 +167,6 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .m360-countdown { display: grid; place-items: center; gap: 8px; margin: 14px 0; }
 .m360-spinner { width: 44px; height: 44px; border-radius: 50%; border: 3px dashed var(--magenta); animation: m360-spin 1s linear infinite; }
 @keyframes m360-spin { from { transform: rotate(0) } to { transform: rotate(360deg) } }
+
+/* utilities */
+.m360-soft { opacity: .8; }
