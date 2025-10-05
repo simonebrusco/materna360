@@ -5,9 +5,9 @@ import Card from "../../components/ui/Card";
 import NavyCard from "../../components/ui/NavyCard";
 import Btn from "../../components/ui/Btn";
 import AgeTitle from "../../components/discover/AgeTitle";
-import { getLastAgeGroup, setLastAgeGroup, getLastContext, setLastContext, getLastRecCategory, setLastRecCategory } from "../../lib/storage";
-import { generateIdeas } from "../../lib/ideas";
-import { productCatalog } from "../../lib/recs";
+import { getLastAgeGroup, setLastAgeGroup, getLastContext, setLastContext, getLastRecCategory, setLastRecCategory } from "../../lib/storage.js";
+import { generateIdeas } from "../../lib/ideas.js";
+import { productCatalog } from "../../lib/recs.js";
 
 export default function Descobrir(){
   const ages = ["0-2","3-4","5-7","8+"];
@@ -30,7 +30,6 @@ export default function Descobrir(){
     <div className="container">
       <h1 className="h1">Descobrir</h1>
 
-      {/* Keep existing hero/card */}
       <Card className="card-navy">
         <div style={{display:"grid",gridTemplateColumns:"32px 1fr",gap:12,alignItems:"center"}}>
           <div className="iconToken">🐻</div>
@@ -41,7 +40,6 @@ export default function Descobrir(){
         </div>
       </Card>
 
-      {/* A) Age + Context + Ideas */}
       <section className="mt-3">
         <div className="chips-row" role="tablist" aria-label="Idade">
           {ages.map(a => (
@@ -68,7 +66,6 @@ export default function Descobrir(){
         ) : null}
       </section>
 
-      {/* B) Showcase */}
       <section className="mt-4 showcase">
         <div className="chips-row" role="tablist" aria-label="Categorias">
           {categories.map(c => (
