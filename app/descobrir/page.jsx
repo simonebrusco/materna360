@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import Card from "../../components/ui/Card";
 import NavyCard from "../../components/ui/NavyCard";
 import Btn from "../../components/ui/Btn";
@@ -8,6 +9,8 @@ import AgeTitle from "../../components/discover/AgeTitle";
 import { getLastAgeGroup, setLastAgeGroup, getLastContext, setLastContext, getLastRecCategory, setLastRecCategory } from "../../lib/storage";
 import { generateIdeas } from "../../lib/ideas";
 import { productCatalog } from "../../lib/recs";
+
+const Vitrine = dynamic(() => import("../../components/discover/Vitrine"), { ssr: false });
 
 export default function Descobrir(){
   const ages = ["0-2","3-4","5-7","8+"];
@@ -66,6 +69,11 @@ export default function Descobrir(){
             ))}
           </div>
         ) : null}
+      </section>
+
+      {/* New Recommendations Vitrine (client) */}
+      <section className="mt-4">
+        <Vitrine age={age} />
       </section>
 
       {/* B) Showcase */}
