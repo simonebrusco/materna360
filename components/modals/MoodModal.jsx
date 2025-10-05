@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import BaseModal from "./BaseModal";
+import Modal from "../ui/Modal";
 
 export default function MoodModal({ open, onClose = () => {}, onComplete = () => {} }) {
   const [mood, setMood] = useState(0);
@@ -16,19 +16,24 @@ export default function MoodModal({ open, onClose = () => {}, onComplete = () =>
   }, [open]);
 
   const options = [
-    { v: -2, e: "😞" },
-    { v: -1, e: "🙁" },
-    { v: 0, e: "😐" },
-    { v: 1, e: "🙂" },
-    { v: 2, e: "😄" },
+    { v: -2, e: "😔" },
+    { v: -1, e: "😟" },
+    { v: 0,  e: "😐" },
+    { v: 1,  e: "🙂" },
+    { v: 2,  e: "😄" },
   ];
 
   if (!open) return null;
 
   return (
-    <BaseModal open={open} onClose={onClose}>
-      <h2 className="m360-modal-title">Como você está?</h2>
-
+    <Modal
+      title="Como você está?"
+      onClose={onClose}
+      secondaryLabel="Cancelar"
+      onSecondary={onClose}
+      primaryLabel="Salvar"
+      onPrimary={() => { try { window.localStorage.setItem("reflectionNotes", note || ""); } catch {}; onComplete({ mood, note: note || undefined }); onClose(); }}
+    >
       <div className="m360-emoji-row">
         {options.map((o) => (
           <button
@@ -51,26 +56,11 @@ export default function MoodModal({ open, onClose = () => {}, onComplete = () =>
             setNote(v);
             try { window.localStorage.setItem("reflectionNotes", v); } catch {}
           }}
-          placeholder="Escreva como você se sente (opcional)"
+          placeholder="Nota (opcional)"
           className="m360-input"
           rows={3}
         />
       </div>
-
-      <div className="m360-actions">
-        <button type="button" className="btn btn-ghost" onClick={onClose}>Cancelar</button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => {
-            try { window.localStorage.setItem("reflectionNotes", note || ""); } catch {}
-            onComplete({ mood, note: note || undefined });
-            onClose();
-          }}
-        >
-          Salvar
-        </button>
-      </div>
-    </BaseModal>
+    </Modal>
   );
 }
