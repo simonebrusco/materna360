@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getLastAgeGroup, setLastAgeGroup } from "../../lib/storage";
+import { getLastAgeGroup, setLastAgeGroup } from "../../lib/storage.js";
 
 const allowed = ["0-2","3-4","5-7","8+"];
 
