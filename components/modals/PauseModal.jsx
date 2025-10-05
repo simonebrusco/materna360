@@ -6,7 +6,7 @@ import CountdownCircle from "../ui/CountdownCircle";
 
 export default function PauseModal({ open, onClose = () => {}, onComplete = () => {} }) {
   const [minutes, setMinutes] = useState(3);
-  const [phase, setPhase] = useState<"select" | "countdown">("select");
+  const [phase, setPhase] = useState("select");
 
   useEffect(() => {
     if (!open) return;
