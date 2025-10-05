@@ -114,7 +114,7 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 /* soft-luxury polish v1 */
 
 /* Materna360 Modal styles */
-.m360-overlay { position: fixed; inset: 0; background: rgba(255, 246, 248, 0.6); backdrop-filter: blur(8px); display: grid; place-items: center; padding: 16px; z-index: 50; animation: m360-fade .25s ease both; }
+.m360-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.1); backdrop-filter: blur(8px); display: grid; place-items: center; padding: 16px; z-index: 50; animation: m360-fade .25s ease both; }
 .m360-modal { width: min(560px, 92vw); background: var(--card); border-radius: 24px; box-shadow: var(--shadow-soft); padding: 24px; color: var(--navy); animation: m360-rise .25s ease both; }
 .m360-modal-title { color: var(--navy); font-weight: 700; font-size: 20px; line-height: 1.2; margin: 0 0 8px; }
 .m360-modal-text { color: var(--ink); line-height: 1.5; margin: 4px 0 0; }
@@ -140,3 +140,30 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 /* Animations */
 @keyframes m360-fade { from { opacity: 0 } to { opacity: 1 } }
 @keyframes m360-rise { from { opacity: 0; transform: translateY(8px) scale(.98) } to { opacity: 1; transform: translateY(0) scale(1) } }
+/* exit animations */
+@keyframes m360-fade-out { from { opacity: 1 } to { opacity: 0 } }
+@keyframes m360-drop { from { opacity: 1; transform: translateY(0) scale(1) } to { opacity: 0; transform: translateY(8px) scale(.98) } }
+
+/* closing states */
+.m360-overlay.is-closing { animation: m360-fade-out .22s ease both; }
+.m360-modal.is-closing { animation: m360-drop .22s ease both; }
+
+/* modal-specific button tweaks */
+.m360-modal .btn-ghost { border-color: rgba(13,27,42,.15); }
+
+/* toast system */
+.m360-toast-wrap { position: fixed; left: 0; right: 0; bottom: 24px; display: grid; place-items: center; pointer-events: none; z-index: 60; }
+.m360-toast { background: var(--card); color: var(--navy); border: 1px solid rgba(13,27,42,.06); box-shadow: var(--shadow-soft); padding: 12px 16px; border-radius: 14px; font-weight: 600; animation: m360-rise .25s ease both; pointer-events: auto; }
+
+/* breath timer */
+.m360-breath-wrap { display: grid; place-items: center; gap: 10px; margin: 14px 0; }
+.m360-breath-svg { width: 160px; height: 160px; }
+.m360-breath-track { stroke: rgba(13,27,42,.1); stroke-width: 10; fill: none; }
+.m360-breath-progress { stroke: var(--magenta); stroke-width: 10; fill: none; stroke-linecap: round; animation: m360-stroke 60s linear forwards; }
+@keyframes m360-stroke { from { stroke-dashoffset: var(--circ); } to { stroke-dashoffset: 0; } }
+.m360-breath-label { font-weight: 700; color: var(--navy); }
+
+/* pause countdown placeholder */
+.m360-countdown { display: grid; place-items: center; gap: 8px; margin: 14px 0; }
+.m360-spinner { width: 44px; height: 44px; border-radius: 50%; border: 3px dashed var(--magenta); animation: m360-spin 1s linear infinite; }
+@keyframes m360-spin { from { transform: rotate(0) } to { transform: rotate(360deg) } }
