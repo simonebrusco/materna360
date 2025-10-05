@@ -170,3 +170,13 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 
 /* utilities */
 .m360-soft { opacity: .8; }
+
+/* Discover page: age tabs and grids */
+.age-tabs{ display:flex; gap:10px; margin:12px 0 8px; }
+.age-tab{ all:unset; cursor:pointer; padding:8px 14px; border-radius:999px; border:1.5px solid rgba(13,27,42,.12); color:#0D1B2A; background:#fff; }
+.age-tab.is-active{ border-color:#FF005E; box-shadow:0 8px 18px rgba(255,0,94,.10); }
+
+.grid-activities, .grid-recs{ display:grid; gap:12px; }
+@media (min-width:768px){ .grid-activities, .grid-recs{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+
+.rec-actions{ display:flex; gap:10px; margin-top:10px; }
