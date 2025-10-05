@@ -1,5 +1,6 @@
 import './globals.css';
 import BottomTabBar from '../components/BottomTabBar';
+import { Toaster } from '../lib/ui/toast';
 
 export const metadata = {
   title: 'Materna360',
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
         <main>
           {children}
         </main>
+        <Toaster />
         <BottomTabBar />
       </body>
     </html>
