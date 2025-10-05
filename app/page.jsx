@@ -1,8 +1,14 @@
+"use client";
+
 import Card from "../components/ui/Card";
 import NavyCard from "../components/ui/NavyCard";
 import Btn from "../components/ui/Btn";
+import { useState } from "react";
+import BreathModal from "../components/modals/BreathModal";
+import { addAction } from "../lib/storage";
 
 export default function Home(){
+  const [openBreath, setOpenBreath] = useState(false);
   return (
     <div className="container">
       <h1 className="h1">Bom dia, Simone <span>💛</span></h1>
@@ -29,7 +35,7 @@ export default function Home(){
       <div className="space"></div>
 
       <div className="grid-2">
-        <NavyCard><div className="iconToken">◐</div><div>Respirar</div></NavyCard>
+        <NavyCard onClick={() => setOpenBreath(true)}><div className="iconToken">◐</div><div>Respirar</div></NavyCard>
         <Card style={{minHeight:110,display:"grid",placeItems:"center"}}><div className="iconStack"><div className="iconToken">♡</div><div>Refletir</div></div></Card>
         <NavyCard><div className="iconToken">🔔</div><div>Inspirar</div></NavyCard>
         <Card style={{minHeight:110,display:"grid",placeItems:"center"}}><div className="iconStack"><div className="iconToken">Ⅱ</div><div>Pausar</div></div></Card>
@@ -41,6 +47,15 @@ export default function Home(){
         <div style={{fontWeight:800,marginBottom:6}}>Seu bem-estar também é importante</div>
         <div className="small" style={{opacity:.9}}>Dicas simples para o seu dia.</div>
       </Card>
+
+      <BreathModal
+        open={openBreath}
+        onClose={() => setOpenBreath(false)}
+        onComplete={(log) => {
+          addAction({ date: new Date().toISOString(), ...log });
+          setOpenBreath(false);
+        }}
+      />
     </div>
   );
 }
