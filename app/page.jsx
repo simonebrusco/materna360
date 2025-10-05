@@ -93,8 +93,10 @@ export default function Home(){
         open={openBreath}
         onClose={() => setOpenBreath(false)}
         onComplete={(log) => {
-          try { addAction({ date: new Date().toISOString(), ...log }); } catch {}
-          markFirstActionDone();
+          try {
+            addAction({ date: new Date().toISOString(), type: "breath", duration: log?.duration ?? 60 });
+            try { const next = toggleDayDone(new Date()); setPlan(next); } catch {}
+          } catch {}
           refresh();
           setOpenBreath(false);
         }}
@@ -104,8 +106,9 @@ export default function Home(){
         open={openMood}
         onClose={() => setOpenMood(false)}
         onComplete={(entry) => {
-          try { addMood(entry); } catch {}
-          markFirstActionDone();
+          try {
+            addMood({ date: new Date().toISOString(), mood: entry?.mood ?? 0, note: entry?.note });
+          } catch {}
           refresh();
           setOpenMood(false);
         }}
@@ -114,9 +117,11 @@ export default function Home(){
       <InspireModal
         open={openInspire}
         onClose={() => setOpenInspire(false)}
-        onComplete={(log) => {
-          try { addAction({ date: new Date().toISOString(), ...log }); } catch {}
-          markFirstActionDone();
+        onComplete={() => {
+          try {
+            addAction({ date: new Date().toISOString(), type: "inspire" });
+            try { const next = toggleDayDone(new Date()); setPlan(next); } catch {}
+          } catch {}
           refresh();
           setOpenInspire(false);
         }}
@@ -125,9 +130,11 @@ export default function Home(){
       <PauseModal
         open={openPause}
         onClose={() => setOpenPause(false)}
-        onComplete={(log) => {
-          try { addAction({ date: new Date().toISOString(), ...log }); } catch {}
-          markFirstActionDone();
+        onComplete={(minutes) => {
+          try {
+            addAction({ date: new Date().toISOString(), type: "pause", duration: minutes });
+            try { const next = toggleDayDone(new Date()); setPlan(next); } catch {}
+          } catch {}
           refresh();
           setOpenPause(false);
         }}
