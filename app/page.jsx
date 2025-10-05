@@ -8,7 +8,7 @@ import BreathModal from "../components/modals/BreathModal";
 import MoodModal from "../components/modals/MoodModal";
 import InspireModal from "../components/modals/InspireModal";
 import PauseModal from "../components/modals/PauseModal";
-import { addAction, addMood, toggleDayDone } from "../lib/storage";
+import { addAction, addMood, toggleDayDone, saveMood, recordAction } from "../lib/storage";
 
 export default function Home(){
   const [openBreath, setOpenBreath] = useState(false);
