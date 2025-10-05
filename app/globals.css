@@ -88,6 +88,10 @@ main { min-height: 100vh; display: flex; justify-content: center; }
 }
 .btn:active { transform: scale(.98); }
 
+/* Focus rings */
+.btn-primary:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+.btn-ghost:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+
 .btn-primary { background: var(--magenta); color: var(--white); box-shadow: var(--shadow-soft); }
 .btn-ghost { background: transparent; border: 1.5px solid var(--magenta-20); color: var(--navy); }
 .btn-subtle { background: var(--card); box-shadow: var(--shadow-soft); color: var(--navy); }
