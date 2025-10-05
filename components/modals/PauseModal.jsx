@@ -12,7 +12,7 @@ export default function PauseModal({ open, onClose = () => {}, onComplete = () =
         <h2>Pausa</h2>
         <div style={{display:"flex", gap:8, margin:"8px 0"}}>
           {options.map(min => (
-            <button key={min} type="button" onClick={() => { onComplete({ type: "pause", duration: min }); onClose(); }}>
+            <button key={min} type="button" onClick={() => { onComplete(min); onClose(); }}>
               {min} min
             </button>
           ))}
