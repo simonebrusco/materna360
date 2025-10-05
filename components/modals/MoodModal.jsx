@@ -17,41 +17,42 @@ export default function MoodModal({ open, onClose = () => {}, onComplete = () =>
   ];
 
   return (
-    <div role="dialog" aria-modal="true">
-      <div>
-        <h2>Como você está?</h2>
-        <div style={{ display: "flex", gap: 8, margin: "8px 0" }}>
+    <div className="m360-overlay" role="dialog" aria-modal="true">
+      <div className="m360-modal" role="document">
+        <h2 className="m360-modal-title">Como você está?</h2>
+
+        <div className="m360-emoji-row">
           {options.map((o) => (
             <button
               key={o.v}
               type="button"
               onClick={() => setMood(o.v)}
-              style={{
-                all: "unset",
-                cursor: "pointer",
-                padding: "8px 10px",
-                borderRadius: 8,
-                border: mood === o.v ? "2px solid currentColor" : "1px solid rgba(0,0,0,.15)",
-              }}
+              className={`m360-emoji${mood === o.v ? " is-selected" : ""}`}
+              aria-pressed={mood === o.v}
             >
               <span aria-label={`mood-${o.v}`} role="img">{o.e}</span>
             </button>
           ))}
         </div>
-        <div style={{ margin: "8px 0" }}>
+
+        <div className="m360-field">
           <input
             value={note}
             onChange={(e) => setNote(e.target.value)}
             placeholder="Nota (opcional)"
-            style={{ width: "100%", padding: "8px 10px", borderRadius: 8, border: "1px solid rgba(0,0,0,.15)" }}
+            className="m360-input"
           />
         </div>
-        <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
-          <button type="button" onClick={onClose} style={{ padding: "8px 12px" }}>Cancelar</button>
+
+        <div className="m360-actions">
+          <button type="button" className="btn btn-ghost" onClick={onClose}>Cancelar</button>
           <button
             type="button"
-            onClick={() => { onComplete({ mood, note: note || undefined }); onClose(); }}
-            style={{ padding: "8px 12px" }}
+            className="btn btn-primary"
+            onClick={() => {
+              onComplete({ mood, note: note || undefined });
+              onClose();
+            }}
           >
             Salvar
           </button>
