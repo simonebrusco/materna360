@@ -132,3 +132,35 @@ export function addGratitude(text) {
   safeSet(GRATITUDES_KEY, list);
   return list;
 }
+
+// ---- New lightweight storage (local-only) ----
+export type MoodValue = -2 | -1 | 0 | 1 | 2;
+export type MoodEntry = { date: string; mood: MoodValue; note?: string };
+export type ActionEntry = { date: string; action: "breathe" | "reflect" | "inspire" | "pause"; payload?: any };
+
+const KEY_MOOD = "m360_mood";
+const KEY_ACTIONS = "m360_actions";
+
+export function listMood(): MoodEntry[] {
+  const list = safeGet(KEY_MOOD, []);
+  return Array.isArray(list) ? list : [];
+}
+
+export function saveMood(entry: MoodEntry) {
+  const prev = listMood();
+  prev.push({ date: entry?.date || nowIso(), mood: entry?.mood ?? 0, note: entry?.note || undefined });
+  safeSet(KEY_MOOD, prev);
+  return prev;
+}
+
+export function listActions(): ActionEntry[] {
+  const list = safeGet(KEY_ACTIONS, []);
+  return Array.isArray(list) ? list : [];
+}
+
+export function recordAction(entry: ActionEntry) {
+  const prev = listActions();
+  prev.push({ date: entry?.date || nowIso(), action: entry?.action || "inspire", payload: entry?.payload });
+  safeSet(KEY_ACTIONS, prev);
+  return prev;
+}
