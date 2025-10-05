@@ -36,11 +36,8 @@ export default function BreathModal({ open, onClose = () => {}, onComplete = () 
             cx={C/2}
             cy={C/2}
             r={R}
-            style={{ strokeDasharray: circumference, strokeDashoffset: "var(--circ)" }}
+            style={{ strokeDasharray: circumference, strokeDashoffset: "var(--circ)", "--circ": circumference }}
           />
-          <defs>
-            <style>{`:root{--circ:${circumference};}`}</style>
-          </defs>
         </svg>
         <div className="m360-breath-label">60s</div>
       </div>
