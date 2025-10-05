@@ -52,7 +52,7 @@ export default function BreathModal({ open, onClose = () => {}, onComplete = () 
         <button
           type="button"
           onClick={() => {
-            onComplete({ type: "breath", duration: DURATION });
+            onComplete({ duration: DURATION });
             onClose();
           }}
         >
