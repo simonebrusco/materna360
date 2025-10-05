@@ -2,8 +2,6 @@ import Card from "../../components/ui/Card";
 import NavyCard from "../../components/ui/NavyCard";
 import Btn from "../../components/ui/Btn";
 
-export const metadata={title:"Cuidar • Materna360"};
-
 export default function Cuidar(){
   return (
     <div className="container">
