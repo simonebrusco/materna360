@@ -50,7 +50,7 @@ export default function PauseModal({ open, onClose = () => {}, onComplete = () =
       {running && (
         <div className="m360-countdown" aria-live="polite">
           <div className="m360-spinner" />
-          <div className="small" style={{ opacity: .8 }}>Contagem regressiva...</div>
+          <div className="small m360-soft">Contagem regressiva...</div>
         </div>
       )}
 
