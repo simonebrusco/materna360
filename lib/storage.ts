@@ -133,5 +133,24 @@ export function addGratitude(text) {
   return list;
 }
 
-// Re-export age group helpers from the JS storage module to support imports from "../../lib/storage"
-export { getLastAgeGroup, setLastAgeGroup } from "./storage.js";
+// Discover: persist last selections (SSR-safe try/catch)
+export function getLastAgeGroup(defaultVal = "3-4") {
+  try { return localStorage.getItem("m360.lastAge") || defaultVal } catch { return defaultVal }
+}
+export function setLastAgeGroup(v) {
+  try { localStorage.setItem("m360.lastAge", v) } catch {}
+}
+
+export function getLastContext(defaultVal = "Casa") {
+  try { return localStorage.getItem("m360.lastCtx") || defaultVal } catch { return defaultVal }
+}
+export function setLastContext(v) {
+  try { localStorage.setItem("m360.lastCtx", v) } catch {}
+}
+
+export function getLastRecCategory(defaultVal = "Livros") {
+  try { return localStorage.getItem("m360.lastRecCat") || defaultVal } catch { return defaultVal }
+}
+export function setLastRecCategory(v) {
+  try { localStorage.setItem("m360.lastRecCat", v) } catch {}
+}

@@ -180,3 +180,26 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 @media (min-width:768px){ .grid-activities, .grid-recs{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
 
 .rec-actions{ display:flex; gap:10px; margin-top:10px; }
+
+/* chips */
+.chips-row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.chip{all:unset;cursor:pointer;padding:8px 14px;border-radius:999px;background:#fff;border:1.5px solid rgba(13,27,42,.12);color:#0D1B2A}
+.chip.is-active{border-color:#FF005E;box-shadow:0 8px 18px rgba(255,0,94,.12)}
+
+/* grids */
+.grid-ideas,.grid-recs{display:grid;gap:12px}
+@media(min-width:768px){.grid-ideas{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-recs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.card.idea,.card.rec{background:#fff;border-radius:20px;padding:16px;box-shadow:0 12px 32px rgba(255,0,94,.06)}
+
+/* modal */
+.modal{display:none}
+.modal.is-open{display:block;position:fixed;inset:0;z-index:60}
+.modal .overlay{position:absolute;inset:0;background:rgba(0,0,0,.22);backdrop-filter:blur(8px)}
+.modal .modal-content{position:relative;z-index:1;margin:6vh auto;max-width:980px;background:#fff;border-radius:24px;padding:20px}
+.modal .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.modal .close{all:unset;cursor:pointer;font-size:28px;line-height:1;padding:6px}
+
+.thumb{width:100%;height:180px;object-fit:cover;border-radius:16px;margin-bottom:10px}
+.chip.subtle{background:#FFF6F8;border-color:#FFD3E3;color:#0D1B2A}
+
+/* keep existing .btn, .btn-primary, .btn-ghost styles */
