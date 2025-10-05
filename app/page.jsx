@@ -68,7 +68,9 @@ export default function Home(){
         open={openMood}
         onClose={() => setOpenMood(false)}
         onComplete={(entry)=>{
-          try{ addMood({ date:new Date().toISOString(), mood:entry?.mood ?? 0, note:entry?.note }); }catch{}
+          try{ saveMood({ date:new Date().toISOString(), mood:entry?.mood ?? 0, note:entry?.note }); }catch{}
+          try{ recordAction({ date:new Date().toISOString(), action:"reflect" }); }catch{}
+          try{ toggleDayDone(new Date()); }catch{}
           setOpenMood(false);
         }}
       />
@@ -76,7 +78,7 @@ export default function Home(){
         open={openInspire}
         onClose={() => setOpenInspire(false)}
         onComplete={()=>{
-          try{ addAction({ date:new Date().toISOString(), type:"inspire" }); }catch{}
+          try{ recordAction({ date:new Date().toISOString(), action:"inspire" }); }catch{}
           try{ toggleDayDone(new Date()); }catch{}
           setOpenInspire(false);
         }}
@@ -85,7 +87,7 @@ export default function Home(){
         open={openPause}
         onClose={() => setOpenPause(false)}
         onComplete={(minutes)=>{
-          try{ addAction({ date:new Date().toISOString(), type:"pause", duration:minutes||3 }); }catch{}
+          try{ recordAction({ date:new Date().toISOString(), action:"pause", payload:{ minutes: minutes||3 } }); }catch{}
           try{ toggleDayDone(new Date()); }catch{}
           setOpenPause(false);
         }}
