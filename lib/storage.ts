@@ -132,3 +132,6 @@ export function addGratitude(text) {
   safeSet(GRATITUDES_KEY, list);
   return list;
 }
+
+// Re-export age group helpers from the JS storage module to support imports from "../../lib/storage"
+export { getLastAgeGroup, setLastAgeGroup } from "./storage.js";

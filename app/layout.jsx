@@ -1,6 +1,7 @@
 import './globals.css';
 import BottomTabBar from '../components/BottomTabBar';
 import { Toaster } from '../lib/ui/toast';
+import DevErrorSuppressor from '../components/DevErrorSuppressor';
 
 export const metadata = {
   title: 'Materna360',
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
           {children}
         </main>
         <Toaster />
+        <DevErrorSuppressor />
         <BottomTabBar />
       </body>
     </html>
