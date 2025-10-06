@@ -1,13 +1,13 @@
 "use client";
-"use client";
 import { useEffect, useState } from "react";
 import Card from "../../components/ui/Card";
 import Btn from "../../components/ui/Btn";
 import { getGratitude, deleteGratitude, readJSON, getMoodHistory, getActions } from "../../lib/storage";
-import { computeScore, summarizeActions } from "../../lib/score";
+import { summarizeActions } from "../../lib/score";
 import { onEu360Refresh } from "../../lib/clientEvents";
 import GratitudeModal from "../../components/eu360/GratitudeModal";
 import { showToast } from "../../lib/ui/toast";
+import Eu360CircleBinder from "../../components/Eu360CircleBinder";
 
 function useGratitudeModel(){
   const [items, setItems] = useState([]);
@@ -45,7 +45,6 @@ function GratitudeSection({ g }){
 
 export default function Eu360(){
   const g = useGratitudeModel();
-  const [score, setScore] = useState(0);
   const [achText, setAchText] = useState("");
   const [weeklyMood, setWeeklyMood] = useState("—");
   const [openGrat, setOpenGrat] = useState(false);
@@ -59,8 +58,6 @@ export default function Eu360(){
         return v >= 1 && v <= 5 ? (v - 1) : v; // normalize 0..4
       });
       const acts = Array.isArray(readJSON("m360:actions", null)) ? readJSON("m360:actions", null) : getActions();
-      const { score: sc } = computeScore({ moodHistory: mh, actions: acts });
-      setScore(Math.max(0, Math.min(1000, sc)));
       const { count7d } = summarizeActions(acts);
       setAchText(count7d >= 2 ? "2 metas alcançadas" : (count7d >= 1 ? "1 meta alcançada" : "comece hoje!"));
       const last7 = mh.slice(-7);
@@ -85,20 +82,28 @@ export default function Eu360(){
     };
   },[]);
 
-  const pct = Math.max(0, Math.min(100, score/10));
-
   return (
     <div className="container">
       <h1 className="h1">Eu360</h1>
 
       <Card className="card-navy" style={{display:"grid",gridTemplateColumns:"140px 1fr",gap:18,alignItems:"center"}}>
-        <div className="ring" style={{"--p": `${pct}%`}}>
-          <div>Círculo<br/>{score}</div>
-        </div>
-        <div>
-          <div style={{fontWeight:800,marginBottom:6}}>Você é importante</div>
-          <div className="small" style={{opacity:.9}}>Siga no seu ritmo 💛</div>
-        </div>
+        <Eu360CircleBinder>
+          {(circle) => {
+            const val = Number(circle) || 0;
+            const pct = Math.max(0, Math.min(100, val/10));
+            return (
+              <>
+                <div className="ring" style={{"--p": `${pct}%`}}>
+                  <div>Círculo<br/>{val}</div>
+                </div>
+                <div>
+                  <div style={{fontWeight:800,marginBottom:6}}>Você é importante</div>
+                  <div className="small" style={{opacity:.9}}>Siga no seu ritmo 💛</div>
+                </div>
+              </>
+            );
+          }}
+        </Eu360CircleBinder>
       </Card>
 
       <div className="space"></div>
