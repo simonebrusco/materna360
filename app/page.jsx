@@ -10,19 +10,20 @@ import PauseModal from "../components/modals/PauseModal";
 import { addAction, addMood, toggleDayDone, getWeeklyPlan, getMotd, setMotd } from "../lib/storage";
 import { emitEu360Refresh } from "../lib/clientEvents";
 import WeekProgressCard from "../components/planner/WeekProgressCard";
+import MotdBinder from "../components/MotdBinder";
 
 export default function Home(){
   const [openBreath, setOpenBreath] = useState(false);
   const [openMood, setOpenMood] = useState(false);
   const [openInspire, setOpenInspire] = useState(false);
   const [openPause, setOpenPause] = useState(false);
-  const [motd, setMotdState] = useState("");
+  const [motd, setMotdState] = useState(null);
 
   // Planner state and actions (same data flow as before)
   const [plan, setPlan] = useState(Array(7).fill(false));
   const done = Array.isArray(plan) ? plan.filter(Boolean).length : 0;
   useEffect(()=>{ try{ setPlan(getWeeklyPlan()); }catch{} },[]);
-  useEffect(()=>{ try{ setMotdState(getMotd("")); }catch{} },[]);
+  useEffect(()=>{ try{ setMotdState(getMotd(null)); }catch{} },[]);
   function onToggle(i){
     try {
       const p = toggleDayDone(i);
@@ -40,14 +41,15 @@ export default function Home(){
 
   return (
     <div className="container">
+      <MotdBinder nameHint={null} />
       <h1 className="h1">Bom dia, Simone <span>💛</span></h1>
       <p className="sub">Como você está hoje?</p>
 
       <div className="grid-2">
         <Card>
           <strong style={{display:"block",marginBottom:8}}>“Mensagem do dia”</strong>
-          <p className="small" style={{margin:"0 0 12px"}}>{motd || "Com você, por você. Força."}</p>
-          <Btn onClick={() => { try { const cur = motd || ""; const next = window.prompt("Digite sua mensagem do dia:", cur); if (next != null) { const v = String(next).trim(); if (v) { setMotd(v); setMotdState(v); } } } catch {} }}>Nova mensagem</Btn>
+          <p className="small" style={{margin:"0 0 12px"}}>{(motd && typeof motd === 'object' ? motd.body : motd) || "Com você, por você. Força."}</p>
+          <Btn onClick={() => { try { const cur = (motd && typeof motd === 'object' ? motd.body : motd) || ""; const next = window.prompt("Digite sua mensagem do dia:", cur); if (next != null) { const v = String(next).trim(); if (v) { const base = (motd && typeof motd === 'object') ? motd : {}; const update = { ...base, body: v, at: new Date().toISOString() }; setMotd(update); setMotdState(update); } } } catch {} }}>Nova mensagem</Btn>
         </Card>
 
         <Card>
