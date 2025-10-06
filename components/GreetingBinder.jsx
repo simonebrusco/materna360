@@ -8,9 +8,15 @@ function periodOfDay(h = new Date().getHours()) {
 }
 
 export default function GreetingBinder({ name, children }) {
-  const [greet, setGreet] = useState(periodOfDay());
+  // Start with a deterministic server-friendly default to avoid
+  // server/client text mismatch during hydration.
+  const [greet, setGreet] = useState(() => 'Bom dia');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // compute real greeting only on client after mount
+    setMounted(true);
+    setGreet(periodOfDay());
     const t = setInterval(() => setGreet(periodOfDay()), 5 * 60 * 1000);
     return () => clearInterval(t);
   }, []);
