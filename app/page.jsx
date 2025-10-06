@@ -9,16 +9,32 @@ import InspireModal from "../components/modals/InspireModal";
 import PauseModal from "../components/modals/PauseModal";
 import { addAction, addMood, toggleDayDone, getWeeklyPlan } from "../lib/storage";
 import { emitEu360Refresh } from "../lib/clientEvents";
-import WeekChips from "../components/planner/WeekChips";
-import TipsRotator from "../components/planner/TipsRotator";
-import WeekProgress from "../components/planner/WeekProgress";
-
+import WeekProgressCard from "../components/planner/WeekProgressCard";
 
 export default function Home(){
   const [openBreath, setOpenBreath] = useState(false);
   const [openMood, setOpenMood] = useState(false);
   const [openInspire, setOpenInspire] = useState(false);
   const [openPause, setOpenPause] = useState(false);
+
+  // Planner state and actions (same data flow as before)
+  const [plan, setPlan] = useState(Array(7).fill(false));
+  const done = Array.isArray(plan) ? plan.filter(Boolean).length : 0;
+  useEffect(()=>{ try{ setPlan(getWeeklyPlan()); }catch{} },[]);
+  function onToggle(i){
+    try {
+      const p = toggleDayDone(i);
+      setPlan(p);
+      emitEu360Refresh();
+    } catch {}
+  }
+  const tips = [
+    "Beba água e alongue-se 1 min.",
+    "Três respirações profundas.",
+    "Envie uma mensagem carinhosa pra você mesma.",
+    "Caminhe 2 min e olhe o céu."
+  ];
+  const bonus = tips[done % tips.length];
 
   return (
     <div className="container">
@@ -50,7 +66,7 @@ export default function Home(){
         <Card style={{minHeight:110,display:"grid",placeItems:"center"}} onClick={() => setOpenMood(true)}><div className="iconStack"><div className="iconToken">♡</div><div>Refletir</div></div></Card>
         <NavyCard onClick={() => setOpenInspire(true)}><div className="iconToken">🔔</div><div>Inspirar</div></NavyCard>
         <Card style={{minHeight:110,display:"grid",placeItems:"center"}} onClick={() => setOpenPause(true)}><div className="iconStack"><div className="iconToken">Ⅱ</div><div>Pausar</div></div></Card>
-        <WeekProgress />
+        <WeekProgressCard completedCount={done} total={7} days={plan} onDayPress={onToggle} bonus={bonus} />
       </div>
 
 

@@ -17,7 +17,7 @@ export default function BaseModal({ open, onClose = () => {}, children }) {
       closeTimer.current = setTimeout(() => {
         setVisible(false);
         setClosing(false);
-      }, 220);
+      }, 120);
     }
     return () => clearTimeout(closeTimer.current);
   }, [open, visible]);
