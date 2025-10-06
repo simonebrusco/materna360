@@ -10,6 +10,7 @@ import PauseModal from "../components/modals/PauseModal";
 import { addAction, addMood, toggleDayDone, getWeeklyPlan } from "../lib/storage";
 import { emitEu360Refresh } from "../lib/clientEvents";
 import WeekProgressCard from "../components/planner/WeekProgressCard";
+import MessageOfDayCard from "../components/motd/MessageOfDayCard";
 
 export default function Home(){
   const [openBreath, setOpenBreath] = useState(false);
@@ -42,11 +43,7 @@ export default function Home(){
       <p className="sub">Como você está hoje?</p>
 
       <div className="grid-2">
-        <Card>
-          <strong style={{display:"block",marginBottom:8}}>“Mensagem do dia”</strong>
-          <p className="small" style={{margin:"0 0 12px"}}>Com você, por você. Força.</p>
-          <Btn>Nova mensagem</Btn>
-        </Card>
+        <MessageOfDayCard />
 
         <Card>
           <div style={{display:"grid",gridTemplateColumns:"48px 1fr",gap:12,alignItems:"center"}}>
