@@ -2,9 +2,11 @@ import Card from "../../components/ui/Card";
 import NavyCard from "../../components/ui/NavyCard";
 import Btn from "../../components/ui/Btn";
 import MentoringCard from "../../components/mentoring/MentoringCard";
+import AudioCompleteToast from "../../components/AudioCompleteToast";
 
 export default function Cuidar(){
   return (
+    <>
     <div className="container">
       <h1 className="h1">Cuidar</h1>
 
@@ -28,5 +30,7 @@ export default function Cuidar(){
         <NavyCard><div className="iconToken">🎵</div><div>Alegrar</div></NavyCard>
       </div>
     </div>
+    <AudioCompleteToast />
+  </>
   );
 }
