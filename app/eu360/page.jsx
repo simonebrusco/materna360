@@ -10,6 +10,8 @@ import GratitudeModal from "../../components/eu360/GratitudeModal";
 import { showToast } from "../../lib/ui/toast";
 import BadgesBinder from "../../components/BadgesBinder";
 import Eu360CircleBinder from "../../components/Eu360CircleBinder";
+import BadgesStrip from "../../components/BadgesStrip";
+import BadgesLevelToast from "../../components/BadgesLevelToast";
 
 function useGratitudeModel(){
   const [items, setItems] = useState([]);
@@ -105,6 +107,10 @@ export default function Eu360(){
         </div>
       </Card>
 
+      <section style={{marginTop:16}}>
+        <BadgesStrip />
+      </section>
+
       <div className="space"></div>
 
       <Card>
@@ -146,6 +152,8 @@ export default function Eu360(){
         onClose={() => setOpenGrat(false)}
         onSaved={() => { refresh(); showToast("Gratidão registrada ✨"); }}
       />
+
+      <BadgesLevelToast />
     </div>
   );
 }
