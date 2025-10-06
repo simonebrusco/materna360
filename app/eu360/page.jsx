@@ -1,9 +1,10 @@
 "use client";
+"use client";
 import { useEffect, useState } from "react";
 import Card from "../../components/ui/Card";
 import Btn from "../../components/ui/Btn";
-import { getGratitude, deleteGratitude } from "../../lib/storage";
-import { computeScoreNow, computeAchievements } from "../../lib/score";
+import { getGratitude, deleteGratitude, readJSON, getMoodHistory, getActions } from "../../lib/storage";
+import { computeScore, summarizeActions } from "../../lib/score";
 import { onEu360Refresh } from "../../lib/clientEvents";
 import GratitudeModal from "../../components/gratitude/GratitudeModal";
 import { showToast } from "../../lib/ui/toast";
