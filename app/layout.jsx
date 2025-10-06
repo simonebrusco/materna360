@@ -5,6 +5,7 @@ import DevErrorSuppressor from '../components/DevErrorSuppressor';
 import Image from 'next/image';
 import Link from 'next/link';
 import ClientMigrator from '../components/ClientMigrator';
+import BadgesLevelToast from '../components/BadgesLevelToast';
 
 export const metadata = {
   title: "Materna360",
@@ -85,6 +86,7 @@ export default function RootLayout({ children }) {
           {children}
         </main>
         <Toaster />
+        <BadgesLevelToast />
         <DevErrorSuppressor />
         <BottomTabBar />
       </body>
