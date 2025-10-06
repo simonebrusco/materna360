@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { writeJSON, onUpdate, getAll } from "../lib/storage";
+import { writeJSON, onUpdate } from "../lib/storage";
 import { computeAchievements } from "../lib/score";
 
 function computeBadges(){
