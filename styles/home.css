@@ -1,0 +1,83 @@
+/* --- Home responsive refinements --------------------------------------- */
+
+/* Soft spacing tokens (keeps current palette/shadows) */
+:root {
+  --m360-gap-xs: 8px;
+  --m360-gap-sm: 12px;
+  --m360-gap-md: 16px;
+  --m360-gap-lg: 24px;
+  --m360-radius-lg: 20px;
+}
+
+/* Actions grid: the 4 quick action cards */
+.actionsGrid {
+  display: grid;
+  gap: var(--m360-gap-md);
+}
+
+/* Mobile first (<= 768px): 2x2 grid, bigger touch targets */
+@media (max-width: 768px) {
+  .actionsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Give the cards a bit more breathing room on mobile */
+  .actionsGrid > * {
+    border-radius: var(--m360-radius-lg);
+  }
+
+  /* Planner card highlighted, full width under actions */
+  .plannerWrap .weekProgressCard {
+    border-radius: var(--m360-radius-lg);
+    box-shadow: 0 8px 20px rgba(16, 12, 40, 0.06);
+    padding: var(--m360-gap-lg);
+  }
+
+  /* Optional: tighten inside spacing if planner uses chips */
+  .plannerWrap .weekProgressCard .chips,
+  .plannerWrap .weekProgressCard .days,
+  .plannerWrap .weekProgressCard .footer {
+    gap: var(--m360-gap-sm);
+  }
+}
+
+/* Tablet (769–1024px): 3 columns for actions, planner 80% width centered */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .actionsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--m360-gap-lg);
+  }
+
+  .plannerWrap {
+    display: grid;
+    place-items: center;
+    margin-top: var(--m360-gap-lg);
+  }
+
+  .plannerWrap .weekProgressCard {
+    width: min(800px, 80%);
+    border-radius: var(--m360-radius-lg);
+    box-shadow: 0 10px 24px rgba(16, 12, 40, 0.06);
+    padding: calc(var(--m360-gap-lg) + 4px);
+  }
+}
+
+/* Desktop (>=1025px): keep current layout; only gentle polish */
+@media (min-width: 1025px) {
+  .actionsGrid {
+    /* Do not force; keep existing desktop grid.
+       This class only exists to ensure spacing continuity if needed. */
+    gap: var(--m360-gap-lg);
+  }
+
+  .plannerWrap .weekProgressCard {
+    border-radius: 16px; /* slightly subtler on desktop */
+  }
+}
+
+/* Optional micro-detail: subtitle/tip inside planner (if present) */
+.plannerWrap .weekProgressCard .microTip {
+  font-size: 0.9rem;
+  color: rgba(22, 28, 45, 0.65);
+  line-height: 1.4;
+}

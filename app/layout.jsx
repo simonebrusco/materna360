@@ -2,6 +2,7 @@ import './globals.css';
 import BottomTabBar from '../components/BottomTabBar';
 import { Toaster } from '../lib/ui/toast';
 import DevErrorSuppressor from '../components/DevErrorSuppressor';
+import "../styles/home.css";
 
 export const metadata = {
   title: 'Materna360',

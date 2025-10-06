@@ -93,11 +93,6 @@ main { min-height: 100vh; display: flex; justify-content: center; }
 /* Grid */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-/* Home actions grid (mobile: 2x2, tablet: 3 columns) */
-.actions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-@media (min-width:769px) and (max-width:1024px){
-  .actions-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
-}
 
 /* Tab bar */
 .bottom-nav { position: sticky; bottom: 0; left: 0; right: 0; display: flex; gap: 6px; justify-content: space-around; align-items: center; background: var(--card); padding: 10px 8px; border-top: 1px solid var(--rose-2); box-shadow: var(--shadow-soft); }
@@ -183,28 +178,11 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .m360-scroll-x > .m360-day-chip{ display:inline-block; margin-right:8px; }
 
 /* day chips states */
-.m360-day-chip{ border-radius:999px; box-shadow: var(--shadow-soft); padding: 6px 10px; }
+.m360-day-chip{ border-radius:999px; box-shadow: var(--shadow-soft); }
 .m360-day-chip:focus-visible{ outline: none; box-shadow: var(--ring); }
 .m360-day-chip.is-today{ box-shadow: var(--ring); }
 .m360-day-chip.is-complete{ background: rgba(13,27,42,.06); border-color: rgba(13,27,42,.06); }
 
-/* Planner card styles */
-.planner-card{ border-radius: var(--r-lg); box-shadow: var(--shadow-soft); }
-.planner-head{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; margin-bottom:10px; }
-.planner-title{ font-weight:800; font-size:18px; color: var(--navy); opacity:.92; text-align:center; }
-.planner-meta{ font-size:14px; opacity:.75; text-align:center; }
-.planner-tip{ display:flex; align-items:center; gap:8px; margin-top:10px; }
-.planner-dot{ width:8px; height:8px; border-radius:999px; background: var(--magenta); display:inline-block; }
-.planner-tip-text{ font-weight:700; color: var(--navy); opacity:.9; }
-@media (min-width:769px) and (max-width:1024px){
-  .planner-card{ width:80%; margin-left:auto; margin-right:auto; }
-  .planner-title{ font-size:20px; }
-}
-@media (min-width:1025px){
-  .planner-head{ flex-direction:row; justify-content:space-between; align-items:center; }
-  .planner-title{ text-align:left; }
-  .planner-meta{ text-align:right; }
-}
 
 /* Discover page: age tabs and grids */
 .age-tabs{ display:flex; gap:10px; margin:12px 0 8px; }

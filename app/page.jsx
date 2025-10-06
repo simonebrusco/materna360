@@ -61,14 +61,16 @@ export default function Home(){
 
       <div className="space"></div>
 
-      <div className="actions-grid">
+      <section className="actionsGrid">
         <NavyCard onClick={() => setOpenBreath(true)}><div className="iconToken">◐</div><div>Respirar</div></NavyCard>
         <Card style={{minHeight:110,display:"grid",placeItems:"center"}} onClick={() => setOpenMood(true)}><div className="iconStack"><div className="iconToken">♡</div><div>Refletir</div></div></Card>
         <NavyCard onClick={() => setOpenInspire(true)}><div className="iconToken">🔔</div><div>Inspirar</div></NavyCard>
         <Card style={{minHeight:110,display:"grid",placeItems:"center"}} onClick={() => setOpenPause(true)}><div className="iconStack"><div className="iconToken">Ⅱ</div><div>Pausar</div></div></Card>
-      </div>
+      </section>
 
-      <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onDayPress={onToggle} bonus={bonus} />
+      <section className="plannerWrap">
+        <WeekProgressCard completedCount={done} total={7} days={plan} onDayPress={onToggle} bonus={bonus} />
+      </section>
 
 
       <BreathModal
