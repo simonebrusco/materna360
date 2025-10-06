@@ -124,6 +124,15 @@ export default function Eu360(){
         <strong>Gratidão</strong>
         <div className="space"></div>
         <Btn onClick={() => setOpenGrat(true)}>Registrar</Btn>
+        {g.items && g.items.length > 0 && (
+          <div style={{marginTop:12}}>
+            {g.items.slice(0,3).map(it => (
+              <div key={it.id} className="small" style={{opacity:.8, padding:"4px 0"}}>
+                {String(it.text||"").split("\n")[0]}
+              </div>
+            ))}
+          </div>
+        )}
       </Card>
 
       <GratitudeSection g={g} />
