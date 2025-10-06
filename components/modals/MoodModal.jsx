@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import BaseModal from "./BaseModal";
+import { record } from "../../lib/actions";
 
 export default function MoodModal({ open, onClose = () => {}, onComplete = () => {} }) {
   const [mood, setMood] = useState(0);
@@ -64,6 +65,7 @@ export default function MoodModal({ open, onClose = () => {}, onComplete = () =>
           className="btn btn-primary"
           onClick={() => {
             try { window.localStorage.setItem("reflectionNotes", note || ""); } catch {}
+            try { record('reflect', { saved: true }); } catch {}
             onComplete({ mood, note: note || undefined });
             onClose();
           }}
