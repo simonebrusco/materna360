@@ -110,7 +110,7 @@ export default function usePremiumDownloads(){
     const q = readQuota();
     if (q.day !== todayKey()) { q.day = todayKey(); q.used = 0; }
     if (q.used >= FREE_DAILY_LIMIT) {
-      try { window.dispatchEvent(new Event('downloads:limit')); } catch {}
+      try { window.dispatchEvent(new Event('m360:downloads:limit')); } catch {}
       try { record('download_blocked', { id: itemId, reason: 'daily_limit' }); } catch {}
       return { ok: false };
     }
