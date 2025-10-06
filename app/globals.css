@@ -259,3 +259,7 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 /* subtle pulse utility for motd refresh */
 @keyframes m360-pulse { 0%,100% { box-shadow: var(--shadow-soft); } 50% { box-shadow: var(--shadow-soft-2); } }
 .animate-pulse { animation: m360-pulse .4s ease; }
+
+/* badges progress */
+.m360-progress{ height:8px; background: rgba(13,27,42,.1); border-radius:999px; overflow:hidden; }
+.m360-progress-fill{ height:100%; background: var(--magenta); }
