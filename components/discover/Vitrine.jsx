@@ -25,9 +25,26 @@ function CategoryTabs({ value, onChange }) {
 }
 
 function ProductCard({ p, onOpen }) {
+  const [err, setErr] = useState(false);
   return (
     <div className="card rec">
-      <img src={p.img} alt={p.title} className="thumb" />
+      {!err ? (
+        <img
+          src={p.img}
+          alt={p.title}
+          className="thumb-rect"
+          loading="lazy"
+          onError={() => setErr(true)}
+        />
+      ) : (
+        <div className="m360-thumb-fallback" aria-label="Imagem indisponível">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <rect x="3" y="5" width="18" height="14" rx="3" stroke="#0D1B2A" strokeOpacity="0.9" strokeWidth="1.6"/>
+            <circle cx="9" cy="10" r="2" stroke="#0D1B2A" strokeOpacity="0.9" strokeWidth="1.6"/>
+            <path d="M21 17l-4.5-5-5.5 6" stroke="#0D1B2A" strokeOpacity="0.9" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+      )}
       <div className="card-title" style={{fontWeight:600, marginTop:6}}>{p.title}</div>
       <div className="small" style={{opacity:.8}}>{p.brand}</div>
       <div className="card-price" style={{fontWeight:700, marginTop:6}}>R$ {p.price?.toFixed?.(2)}</div>
