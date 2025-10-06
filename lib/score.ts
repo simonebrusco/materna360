@@ -1,3 +1,5 @@
+import { getAll } from './storage';
+
 /**
  * @typedef {Object} MoodEntry
  * @property {string} date
@@ -88,4 +90,35 @@ export function calcScore(input) {
   const score = clamp(Math.round(rawScore), 0, 100);
 
   return { score, weeklyMood, actionsToday };
+}
+
+// Simple aggregate score based on actions, gratitudes e planner
+// Suporta:
+// a) { done: ['2025-10-06', ...] }
+// b) { seg:{done:true}, ter:{...}, ... }
+// c) { days: [true,false,...] } ou [true,false,...]
+export function compute(input: { actions?: any[]; gratitudes?: any[]; planner?: any } = {}): number {
+  const actions = Array.isArray(input?.actions) ? input.actions : [];
+  const gratitudes = Array.isArray(input?.gratitudes) ? input.gratitudes : [];
+  const planner = input?.planner ?? {};
+
+  const actionsPts = actions.length * 5;
+  const gratPts = gratitudes.length * 10;
+
+  const daysDone = Array.isArray(planner?.done)
+    ? planner.done.length
+    : Array.isArray(planner?.days)
+      ? planner.days.filter(Boolean).length
+      : Array.isArray(planner)
+        ? planner.filter(Boolean).length
+        : Object.values(planner || {}).filter((d: any) => d && d.done).length;
+
+  const planPts = (daysDone || 0) * 15;
+  const raw = actionsPts + gratPts + planPts;
+  return Math.max(0, Math.min(1000, raw));
+}
+
+export function get(): number {
+  const data = getAll();
+  return compute(data as any);
 }
