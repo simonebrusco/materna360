@@ -2,29 +2,45 @@ import './globals.css';
 import BottomTabBar from '../components/BottomTabBar';
 import { Toaster } from '../lib/ui/toast';
 import DevErrorSuppressor from '../components/DevErrorSuppressor';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export const metadata = {
-  title: 'Materna360',
-  description: 'Bem-vinda ao seu espaço de autocuidado e equilíbrio.',
+  title: "Materna360",
+  description: "Bem-vinda ao Materna360 — seu espaço de autocuidado e maternidade consciente.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
+  openGraph: {
+    title: "Materna360",
+    description: "Cuidado, acolhimento e conexão.",
+    images: ["/1.png"],
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
       <head>
-        <link rel="icon" href="https://cdn.builder.io/api/v1/image/assets%2F0b0c3be682294df99b4cbd228a5a9c53%2Ffavicon.ico" type="image/x-icon" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#ff005e" />
       </head>
       <body>
         <header className="brand-header">
-          <a href="/" className="brand-logo-link" aria-label="Materna360">
-            <img
+          <Link href="/" className="brand-logo-link" aria-label="Materna360">
+            <Image
               className="brand-logo"
-              src="https://cdn.builder.io/api/v1/image/assets%2F0b0c3be682294df99b4cbd228a5a9c53%2F1.png"
-              alt="Materna360"
+              src="/1.png"
+              alt="Logo Materna360"
+              width={180}
+              height={60}
+              priority
             />
-          </a>
+          </Link>
         </header>
-        <main>
+        <main className="app-main">
           {children}
         </main>
         <Toaster />
