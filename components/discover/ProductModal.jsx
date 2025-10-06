@@ -7,7 +7,24 @@ export default function ProductModal({ open, onClose, category, age, closeRef })
   const wrapRef = useRef(null);
 
   useEffect(() => {
-    function onKey(e){ if(e.key === 'Escape') onClose && onClose(); }
+    function onKey(e){
+      if(e.key === 'Escape') onClose && onClose();
+      if(e.key === 'Tab'){
+        const root = wrapRef.current;
+        if (!root) return;
+        const focusables = root.querySelectorAll('a, button, textarea, input, select, [tabindex]:not([tabindex="-1"])');
+        const list = Array.from(focusables).filter(el => !el.hasAttribute('disabled'));
+        if (!list.length) return;
+        const first = list[0];
+        const last = list[list.length - 1];
+        const active = document.activeElement;
+        if (e.shiftKey) {
+          if (active === first) { e.preventDefault(); last.focus(); }
+        } else {
+          if (active === last) { e.preventDefault(); first.focus(); }
+        }
+      }
+    }
     if (open) { document.addEventListener('keydown', onKey); }
     return () => document.removeEventListener('keydown', onKey);
   }, [open, onClose]);
