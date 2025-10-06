@@ -255,3 +255,7 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 /* Message of the day */
 .motd-title{ display:block; margin-bottom:8px; font-weight:800; }
 .motd-text{ margin:0 0 12px; }
+
+/* progress bar */
+.m360-progress{ height:8px; border-radius:999px; background: rgba(13,27,42,.1); overflow:hidden; }
+.m360-progress-fill{ height:100%; background: var(--magenta); border-radius:999px; }
