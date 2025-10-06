@@ -1,15 +1,17 @@
-import React from "react";
-import Card from "../../components/ui/Card";
-import NavyCard from "../../components/ui/NavyCard";
-import Btn from "../../components/ui/Btn";
+"use client";
+
+import React, { useState } from "react";
 import HealthyRecipeModal from "../../components/recipes/HealthyRecipeModal";
 import MentoringCard from "../../components/mentoring/MentoringCard";
 import { getLastAgeGroup } from "../../lib/storage";
+import Btn from "../../components/ui/Btn";
+import Card from "../../components/ui/Card";
+import NavyCard from "../../components/ui/NavyCard";
 
 export default function Cuidar(){
-  const [recipeOpen, setRecipeOpen] = React.useState(false);
-  const [ageRange] = React.useState(getLastAgeGroup ? getLastAgeGroup() : "3-4");
-  const [place] = React.useState("home");
+  const [recipeOpen, setRecipeOpen] = useState(false);
+  const [ageRange, setAgeRange] = useState(getLastAgeGroup ? getLastAgeGroup() : "3-4");
+  const [place, setPlace] = useState("home");
 
   return (
     <div className="container">
