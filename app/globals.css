@@ -251,3 +251,7 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 @media(min-width:768px){.brand-logo{width:200px}}
 @media(min-width:1025px){.brand-logo{width:240px}}
 @keyframes m360-logo-fade{from{opacity:0}to{opacity:1}}
+
+/* Message of the day */
+.motd-title{ display:block; margin-bottom:8px; font-weight:800; }
+.motd-text{ margin:0 0 12px; }
