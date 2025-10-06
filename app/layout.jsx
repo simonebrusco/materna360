@@ -4,6 +4,7 @@ import { Toaster } from '../lib/ui/toast';
 import DevErrorSuppressor from '../components/DevErrorSuppressor';
 import Image from 'next/image';
 import Link from 'next/link';
+import ClientMigrator from '../components/ClientMigrator';
 
 export const metadata = {
   title: "Materna360",
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#ff005e" />
       </head>
       <body>
+        <ClientMigrator />
         <header className="brand-header">
           <Link href="/" className="brand-logo-link" aria-label="Materna360">
             <Image
