@@ -7,9 +7,10 @@ import Link from 'next/link';
 
 export const metadata = {
   title: "Materna360",
-  description: "Um espaço de cuidado, acolhimento e conexão para mães.",
+  description: "Bem-vinda ao Materna360 — seu espaço de autocuidado e maternidade consciente.",
   icons: {
     icon: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   openGraph: {
     title: "Materna360",
@@ -22,7 +23,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
       <head>
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#ff005e" />
       </head>
       <body>
         <header className="brand-header">
@@ -37,7 +40,7 @@ export default function RootLayout({ children }) {
             />
           </Link>
         </header>
-        <main>
+        <main className="app-main">
           {children}
         </main>
         <Toaster />
