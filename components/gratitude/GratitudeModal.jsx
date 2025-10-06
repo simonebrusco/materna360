@@ -11,6 +11,7 @@ export default function GratitudeModal({ open, onClose = () => {}, onSaved = () 
   function onSave(){
     const list = addGratitude(text);
     setText("");
+    try { emitEu360Refresh(); } catch {}
     try { onSaved(list); } catch {}
     onClose();
   }
