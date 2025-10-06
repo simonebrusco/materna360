@@ -27,6 +27,45 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
         <meta name="theme-color" content="#ff005e" />
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function(){
+            try {
+              function shouldSuppress(msg, src, stack){
+                if(!msg) return false;
+                var m = String(msg).toLowerCase();
+                if(!m.includes('failed to fetch')) return false;
+                if(src && String(src).toLowerCase().includes('fullstory')) return true;
+                if(stack && String(stack).toLowerCase().includes('fullstory')) return true;
+                return false;
+              }
+              window.addEventListener('error', function(ev){
+                try{
+                  var msg = ev && ev.message ? String(ev.message) : '';
+                  var src = ev && ev.filename ? String(ev.filename) : '';
+                  var stack = ev && ev.error && ev.error.stack ? String(ev.error.stack) : '';
+                  if(shouldSuppress(msg, src, stack)){
+                    ev.preventDefault && ev.preventDefault();
+                    ev.stopPropagation && ev.stopPropagation();
+                    console.debug('Suppressed FullStory fetch error (early):', msg, src);
+                  }
+                }catch(e){}
+              }, true);
+
+              window.addEventListener('unhandledrejection', function(ev){
+                try{
+                  var reason = ev && (ev.reason || ev.detail || null);
+                  var msg = reason && (reason.message || String(reason)) || '';
+                  var stack = reason && reason.stack ? String(reason.stack) : '';
+                  if(shouldSuppress(msg, '', stack)){
+                    ev.preventDefault && ev.preventDefault();
+                    ev.stopPropagation && ev.stopPropagation();
+                    console.debug('Suppressed FullStory fetch rejection (early):', reason);
+                  }
+                }catch(e){}
+              }, true);
+            }catch(e){}
+          })();
+        ` }} />
       </head>
       <body>
         <ClientMigrator />
