@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import BaseModal from "./BaseModal";
 import { showToast } from "../../lib/ui/toast";
+import { record } from "../../lib/actions";
 
 export default function PauseModal({ open, onClose = () => {}, onComplete = () => {} }) {
   const [minutes, setMinutes] = useState(3);
@@ -17,6 +18,7 @@ export default function PauseModal({ open, onClose = () => {}, onComplete = () =
   useEffect(() => {
     if (!running) return;
     const t = setTimeout(() => {
+      try { record('pause', { duration: minutes * 60 }); } catch {}
       onComplete(minutes);
       onClose();
       showToast("☀️ Break complete! Your well-being matters.");
