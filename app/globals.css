@@ -200,6 +200,11 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
   .planner-card{ width:80%; margin-left:auto; margin-right:auto; }
   .planner-title{ font-size:20px; }
 }
+@media (min-width:1025px){
+  .planner-head{ flex-direction:row; justify-content:space-between; align-items:center; }
+  .planner-title{ text-align:left; }
+  .planner-meta{ text-align:right; }
+}
 
 /* Discover page: age tabs and grids */
 .age-tabs{ display:flex; gap:10px; margin:12px 0 8px; }
