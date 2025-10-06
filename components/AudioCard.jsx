@@ -29,9 +29,6 @@ export default function AudioCard({ track }) {
         <button className="px-3 py-1 rounded-full bg-black/10 text-sm" onClick={handlePauseOrClose}>Parar</button>
       </div>
 
-      {/* Conecte seu player: */}
-      {/* audio.onended = handleEnded */}
-      {/* audio.onpause = handlePauseOrClose */}
     </div>
   );
 }
