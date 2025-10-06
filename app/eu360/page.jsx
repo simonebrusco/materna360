@@ -115,15 +115,7 @@ export default function Eu360(){
 
       <Card>
         <strong>Conquistas</strong>
-        {ach.length === 0 ? (
-          <div className="small" style={{marginTop:8, opacity:.8}}>Complete 2 dias do planner ou registre sua primeira gratidão para desbloquear conquistas ✨</div>
-        ) : (
-          <div style={{display:"flex",flexWrap:"wrap",gap:8,marginTop:8}}>
-            {ach.map(a => (
-              <span key={a.id} className="chip" style={{borderRadius:999, background:"#FFE6EF", color:"#0D1B2A", padding:"6px 10px", border:"1px solid #FFD6E0"}}>{a.label}</span>
-            ))}
-          </div>
-        )}
+        <div className="small" style={{marginTop:8, opacity:.85}}>{achText}</div>
       </Card>
 
       <div className="space"></div>
