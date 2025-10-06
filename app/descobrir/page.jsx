@@ -9,6 +9,7 @@ import AgeTitle from "../../components/discover/AgeTitle";
 import { getLastAgeGroup, setLastAgeGroup, getLastContext, setLastContext, getLastRecCategory, setLastRecCategory } from "../../lib/storage";
 import { generateIdeas } from "../../lib/ideas";
 import { productCatalog } from "../../lib/recs";
+import FavLimitToast from "../../components/FavLimitToast";
 
 const Vitrine = dynamic(() => import("../../components/discover/Vitrine"), { ssr: false });
 
@@ -30,6 +31,7 @@ export default function Descobrir(){
   const recs = useMemo(() => (productCatalog[recCat]?.[age] ?? []).slice(0,8), [recCat, age]);
 
   return (
+    <>
     <div className="container">
       <h1 className="h1">Descobrir</h1>
 
@@ -116,5 +118,7 @@ export default function Descobrir(){
         <NavyCard><div className="iconToken">🌙</div><div>Dormir</div></NavyCard>
       </div>
     </div>
+    <FavLimitToast />
+  </>
   );
 }
