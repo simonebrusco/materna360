@@ -11,6 +11,7 @@ import { addAction, addMood, toggleDayDone, getWeeklyPlan } from "../lib/storage
 import { emitEu360Refresh } from "../lib/clientEvents";
 import WeekProgressCard from "../components/planner/WeekProgressCard";
 import MessageOfDayCard from "../components/motd/MessageOfDayCard";
+import { recordMood } from "../lib/mood";
 
 export default function Home(){
   const [openBreath, setOpenBreath] = useState(false);
@@ -83,6 +84,7 @@ export default function Home(){
         onClose={() => setOpenMood(false)}
         onComplete={(entry)=>{
           try{ addMood({ date:new Date().toISOString(), mood:entry?.mood ?? 0, note:entry?.note }); }catch{}
+          try{ const score = Math.max(1, Math.min(5, Math.round((Number(entry?.mood)||0) + 3))); recordMood(score); }catch{}
           try{ addAction({ date:new Date().toISOString(), type:"reflect" }); }catch{}
           emitEu360Refresh();
           setOpenMood(false);
