@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import BaseModal from "./BaseModal";
+import { record } from "../../lib/actions";
 
 const PHRASES = [
   "Breathe deeply. You’re stronger than you imagine.",
@@ -31,8 +32,13 @@ export default function InspireModal({ open, onClose = () => {}, onComplete = ()
 
   if (!open) return null;
 
+  const handleClose = () => {
+    try { record('inspire', { source: 'modal' }); } catch {}
+    onClose();
+  };
+
   return (
-    <BaseModal open={open} onClose={onClose}>
+    <BaseModal open={open} onClose={handleClose}>
       <h2 className="m360-modal-title">Inspiração</h2>
       <p className="m360-modal-text">“{text}”</p>
       <div className="m360-actions">
@@ -41,7 +47,7 @@ export default function InspireModal({ open, onClose = () => {}, onComplete = ()
           className="btn btn-primary"
           onClick={() => {
             onComplete();
-            onClose();
+            handleClose();
           }}
         >
           Concluir
