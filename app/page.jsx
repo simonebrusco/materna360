@@ -8,6 +8,7 @@ import MoodModal from "../components/modals/MoodModal";
 import InspireModal from "../components/modals/InspireModal";
 import PauseModal from "../components/modals/PauseModal";
 import { addAction, addMood, toggleDayDone, getWeeklyPlan } from "../lib/storage";
+import { emitEu360Refresh } from "../lib/clientEvents";
 import WeekChips from "../components/planner/WeekChips";
 import TipsRotator from "../components/planner/TipsRotator";
 
@@ -20,7 +21,7 @@ function WeeklyPlannerAndTip(){
   function onToggle(i){
     const p = toggleDayDone(i);
     setPlan(p);
-    if (typeof window !== 'undefined') window.dispatchEvent(new Event('refreshEu360'));
+    emitEu360Refresh();
   }
 
   return (
@@ -91,7 +92,7 @@ export default function Home(){
         onComplete={(data)=>{
           try{ addAction({ date:new Date().toISOString(), type:"breath", duration:data?.duration ?? 60 }); }catch{}
           try{ toggleDayDone(new Date()); }catch{}
-          if (typeof window !== 'undefined') window.dispatchEvent(new Event('refreshEu360'));
+          emitEu360Refresh();
           setOpenBreath(false);
         }}
       />
@@ -100,7 +101,7 @@ export default function Home(){
         onClose={() => setOpenMood(false)}
         onComplete={(entry)=>{
           try{ addMood({ date:new Date().toISOString(), mood:entry?.mood ?? 0, note:entry?.note }); }catch{}
-          if (typeof window !== 'undefined') window.dispatchEvent(new Event('refreshEu360'));
+          emitEu360Refresh();
           setOpenMood(false);
         }}
       />
@@ -110,7 +111,7 @@ export default function Home(){
         onComplete={()=>{
           try{ addAction({ date:new Date().toISOString(), type:"inspire" }); }catch{}
           try{ toggleDayDone(new Date()); }catch{}
-          if (typeof window !== 'undefined') window.dispatchEvent(new Event('refreshEu360'));
+          emitEu360Refresh();
           setOpenInspire(false);
         }}
       />
@@ -120,7 +121,7 @@ export default function Home(){
         onComplete={(minutes)=>{
           try{ addAction({ date:new Date().toISOString(), type:"pause", duration:minutes||3 }); }catch{}
           try{ toggleDayDone(new Date()); }catch{}
-          if (typeof window !== 'undefined') window.dispatchEvent(new Event('refreshEu360'));
+          emitEu360Refresh();
           setOpenPause(false);
         }}
       />
