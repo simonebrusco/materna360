@@ -29,6 +29,7 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#ff005e" />
       </head>
       <body>
+        <ClientMigrator />
         <header className="brand-header">
           <Link href="/" className="brand-logo-link" aria-label="Materna360">
             <Image
