@@ -1,9 +1,10 @@
 "use client";
+"use client";
 import { useEffect, useState } from "react";
 import Card from "../../components/ui/Card";
 import Btn from "../../components/ui/Btn";
-import { getGratitude, deleteGratitude } from "../../lib/storage";
-import { computeScoreNow, computeAchievements } from "../../lib/score";
+import { getGratitude, deleteGratitude, readJSON, getMoodHistory, getActions } from "../../lib/storage";
+import { computeScore, summarizeActions } from "../../lib/score";
 import { onEu360Refresh } from "../../lib/clientEvents";
 import GratitudeModal from "../../components/gratitude/GratitudeModal";
 import { showToast } from "../../lib/ui/toast";
@@ -45,13 +46,31 @@ function GratitudeSection({ g }){
 export default function Eu360(){
   const g = useGratitudeModel();
   const [score, setScore] = useState(0);
-  const [ach, setAch] = useState([]);
+  const [achText, setAchText] = useState("");
+  const [weeklyMood, setWeeklyMood] = useState("—");
   const [openGrat, setOpenGrat] = useState(false);
 
   const refresh = () => {
-    const s = computeScoreNow();
-    setScore(Math.max(0, Math.min(1000, s.score)));
-    setAch(computeAchievements());
+    try {
+      const rawMH = readJSON("m360:moodHistory", null);
+      const mh0 = Array.isArray(rawMH) ? rawMH : getMoodHistory();
+      const mh = (mh0 || []).map(m => {
+        const v = typeof m === 'number' ? m : (typeof m?.score === 'number' ? m.score : 0);
+        return v >= 1 && v <= 5 ? (v - 1) : v; // normalize 0..4
+      });
+      const acts = Array.isArray(readJSON("m360:actions", null)) ? readJSON("m360:actions", null) : getActions();
+      const { score: sc } = computeScore({ moodHistory: mh, actions: acts });
+      setScore(Math.max(0, Math.min(1000, sc)));
+      const { count7d } = summarizeActions(acts);
+      setAchText(count7d >= 2 ? "2 metas alcançadas" : (count7d >= 1 ? "1 meta alcançada" : "comece hoje!"));
+      const last7 = mh.slice(-7);
+      const avg = last7.length ? last7.reduce((a,b)=>a+b,0)/last7.length : null;
+      if (avg == null) setWeeklyMood("—");
+      else {
+        const idx = Math.max(0, Math.min(4, Math.round(avg)));
+        const EMO = ["😞","🙁","😐","🙂","😄"]; setWeeklyMood(EMO[idx]);
+      }
+    } catch {}
     try { g.setItems(getGratitude()); } catch {}
   };
 
@@ -87,8 +106,8 @@ export default function Eu360(){
       <Card>
         <strong>Humor da semana</strong>
         <div style={{display:"flex",alignItems:"center",gap:10,marginTop:8}}>
-          <div className="iconToken">🙂</div>
-          <div className="small">Feliz</div>
+          <div className="iconToken">{weeklyMood}</div>
+          <div className="small" style={{opacity:.9}}>{weeklyMood === "—" ? "—" : "média dos últimos registros"}</div>
         </div>
       </Card>
 
@@ -96,15 +115,7 @@ export default function Eu360(){
 
       <Card>
         <strong>Conquistas</strong>
-        {ach.length === 0 ? (
-          <div className="small" style={{marginTop:8, opacity:.8}}>Complete 2 dias do planner ou registre sua primeira gratidão para desbloquear conquistas ✨</div>
-        ) : (
-          <div style={{display:"flex",flexWrap:"wrap",gap:8,marginTop:8}}>
-            {ach.map(a => (
-              <span key={a.id} className="chip" style={{borderRadius:999, background:"#FFE6EF", color:"#0D1B2A", padding:"6px 10px", border:"1px solid #FFD6E0"}}>{a.label}</span>
-            ))}
-          </div>
-        )}
+        <div className="small" style={{marginTop:8, opacity:.85}}>{achText}</div>
       </Card>
 
       <div className="space"></div>
@@ -113,6 +124,15 @@ export default function Eu360(){
         <strong>Gratidão</strong>
         <div className="space"></div>
         <Btn onClick={() => setOpenGrat(true)}>Registrar</Btn>
+        {g.items && g.items.length > 0 && (
+          <div style={{marginTop:12}}>
+            {g.items.slice(0,3).map(it => (
+              <div key={it.id} className="small" style={{opacity:.8, padding:"4px 0"}}>
+                {String(it.text||"").split("\n")[0]}
+              </div>
+            ))}
+          </div>
+        )}
       </Card>
 
       <GratitudeSection g={g} />

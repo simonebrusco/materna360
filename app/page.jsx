@@ -69,6 +69,7 @@ export default function Home(){
         onClose={() => setOpenMood(false)}
         onComplete={(entry)=>{
           try{ addMood({ date:new Date().toISOString(), mood:entry?.mood ?? 0, note:entry?.note }); }catch{}
+          try{ addAction({ date:new Date().toISOString(), type:"reflect" }); }catch{}
           emitEu360Refresh();
           setOpenMood(false);
         }}
