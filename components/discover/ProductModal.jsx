@@ -40,7 +40,7 @@ export default function ProductModal({ open, onClose, category, age, closeRef })
       <div className="m360-modal" ref={wrapRef} role="document">
         <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:8}}>
           <h3 className="m360-modal-title">{category === 'books' ? 'Livros' : 'Brinquedos'} • {age}</h3>
-          <button onClick={onClose} aria-label="Fechar" className="btn btn-ghost" style={{padding:'6px 10px'}}>✕</button>
+          <button onClick={onClose} aria-label="Fechar" className="btn btn-ghost" style={{padding:'6px 10px'}} autoFocus>✕</button>
         </div>
         <div className="grid-recs">
           {list.map((p) => (
