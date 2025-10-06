@@ -9,7 +9,7 @@ export default function MessageOfDayCard({ nameHint = null }) {
   return (
     <Card>
       <strong className="motd-title">“Mensagem do dia”</strong>
-      <p className="small motd-text">{motd?.body ?? "..."}</p>
+      <p className="small motd-text">{motd?.body ?? 'Com você, por você. Força.'}</p>
       <Btn onClick={refresh}>Nova mensagem</Btn>
     </Card>
   );
