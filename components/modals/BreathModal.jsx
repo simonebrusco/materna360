@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import BaseModal from "./BaseModal";
 import { showToast } from "../../lib/ui/toast";
+import { record } from "../../lib/actions";
 
 export default function BreathModal({ open, onClose = () => {}, onComplete = () => {} }) {
   const timeoutRef = useRef(null);
@@ -14,6 +15,7 @@ export default function BreathModal({ open, onClose = () => {}, onComplete = () 
     if (!open) return;
     clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
+      try { record('breathe', { duration: 60 }); } catch {}
       onComplete({ duration: 60 });
       onClose();
       showToast("✨ You took a moment to breathe. Keep going at your own pace 💛");
@@ -48,6 +50,7 @@ export default function BreathModal({ open, onClose = () => {}, onComplete = () 
           className="btn btn-primary"
           onClick={() => {
             clearTimeout(timeoutRef.current);
+            try { record('breathe', { duration: 60 }); } catch {}
             onComplete({ duration: 60 });
             onClose();
             showToast("✨ You took a moment to breathe. Keep going at your own pace 💛");
