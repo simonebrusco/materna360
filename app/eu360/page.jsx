@@ -106,8 +106,8 @@ export default function Eu360(){
       <Card>
         <strong>Humor da semana</strong>
         <div style={{display:"flex",alignItems:"center",gap:10,marginTop:8}}>
-          <div className="iconToken">🙂</div>
-          <div className="small">Feliz</div>
+          <div className="iconToken">{weeklyMood}</div>
+          <div className="small" style={{opacity:.9}}>{weeklyMood === "—" ? "—" : "média dos últimos registros"}</div>
         </div>
       </Card>
 
