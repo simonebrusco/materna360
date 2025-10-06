@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+"use client";
+import { useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Card from "../../components/ui/Card";
 import NavyCard from "../../components/ui/NavyCard";
