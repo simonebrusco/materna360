@@ -1,6 +1,0 @@
-.brand-header{display:flex;align-items:center;justify-content:center;padding:12px 0}
-.brand-logo{display:block;width:160px;max-height:80px;height:auto;object-fit:contain;opacity:0;box-shadow:0 2px 4px rgba(0,0,0,.05);transition:filter .2s ease-in;animation:m360-logo-fade .4s ease-in forwards}
-.brand-logo:hover{filter:brightness(1.1)}
-@media(min-width:768px){.brand-logo{width:200px}}
-@media(min-width:1025px){.brand-logo{width:240px}}
-@keyframes m360-logo-fade{from{opacity:0}to{opacity:1}}
