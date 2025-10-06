@@ -1,52 +1,45 @@
 "use client";
-import { useEffect, useRef } from "react";
-import { readJSON, writeJSON, onUpdate } from "../lib/storage";
-import { showToast } from "../lib/ui/toast";
+import { useEffect, useRef, useState } from "react";
 
-function getBadges(){
-  try {
-    const v = readJSON("m360:badges", []);
-    return Array.isArray(v) ? v.map(b => ({ id: String(b?.id||""), label: String(b?.label||"") })) : [];
-  } catch { return []; }
-}
+const NAME = {
+  conexao: "Conexão",
+  cuidado: "Cuidado",
+  equilibrio: "Equilíbrio",
+  gratidao: "Gratidão",
+  // engine ids
+  actions_week: "Conexão",
+  streak: "Conexão",
+  planner: "Cuidado",
+  score: "Equilíbrio",
+  gratitudes: "Gratidão",
+};
 
 export default function BadgesLevelToast(){
-  const ready = useRef(false);
-
-  const check = (silent = false) => {
-    const current = getBadges();
-    const seen = (() => { try { const v = readJSON("m360:badges:seen", []); return Array.isArray(v) ? v : []; } catch { return []; } })();
-    const seenSet = new Set(seen.map(x => String(x)));
-    const unseen = current.filter(b => b.id && !seenSet.has(b.id));
-
-    if (!silent && unseen.length > 0) {
-      const b = unseen[unseen.length - 1];
-      if (b && b.label) showToast(`Conquista desbloqueada: ${b.label} ✨`);
-    }
-
-    try { writeJSON("m360:badges:seen", current.map(b => b.id)); } catch {}
-  };
+  const [msg, setMsg] = useState(null);
+  const timerRef = useRef(null);
 
   useEffect(() => {
-    check(true);
-    const off = onUpdate(() => { if (ready.current) check(false); else { check(true); ready.current = true; } });
-
     function onLeveled(e){
-      const list = (e?.detail?.leveled || []).filter(Boolean);
-      list.forEach((it) => {
-        const title = it?.badge?.title || it?.id || "Conquista";
-        const to = it?.to || "";
-        if (title && to) showToast(`Novo nível ${to} em ${title} ✨`);
-      });
+      const first = e?.detail?.leveled?.[0];
+      if (!first) return;
+      const name = NAME[first.id] || first?.badge?.title || first.id;
+      const from = String(first?.from || "").toUpperCase();
+      const to = String(first?.to || "").toUpperCase();
+      setMsg(`Selo ${name}: ${from} → ${to} 🎉`);
+      if (timerRef.current) clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => setMsg(null), 2400);
     }
-
     window.addEventListener('m360:badges:leveled', onLeveled);
-
-    const onVis = () => { if (document.visibilityState === "visible") { if (ready.current) check(false); else { check(true); ready.current = true; } } };
-    document.addEventListener("visibilitychange", onVis);
-    const t = setTimeout(() => { ready.current = true; }, 300);
-    return () => { try { off && off(); } catch {} document.removeEventListener("visibilitychange", onVis); window.removeEventListener('m360:badges:leveled', onLeveled); clearTimeout(t); };
+    return () => {
+      window.removeEventListener('m360:badges:leveled', onLeveled);
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, []);
 
-  return null;
+  if (!msg) return null;
+  return (
+    <div className="m360-toast-wrap" role="status" aria-live="polite" aria-atomic="true">
+      <div className="m360-toast">{msg}</div>
+    </div>
+  );
 }
