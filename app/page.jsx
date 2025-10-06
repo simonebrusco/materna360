@@ -7,7 +7,8 @@ import BreathModal from "../components/modals/BreathModal";
 import MoodModal from "../components/modals/MoodModal";
 import InspireModal from "../components/modals/InspireModal";
 import PauseModal from "../components/modals/PauseModal";
-import { addAction, addMood, toggleDayDone, getWeeklyPlan, getMotd, setMotd } from "../lib/storage";
+import { addAction, addMood, toggleDayDone, getWeeklyPlan } from "../lib/storage";
+import MessageOfDayCard from "../components/MessageOfDayCard";
 import { emitEu360Refresh } from "../lib/clientEvents";
 import WeekProgressCard from "../components/planner/WeekProgressCard";
 import MotdBinder from "../components/MotdBinder";
@@ -17,13 +18,11 @@ export default function Home(){
   const [openMood, setOpenMood] = useState(false);
   const [openInspire, setOpenInspire] = useState(false);
   const [openPause, setOpenPause] = useState(false);
-  const [motd, setMotdState] = useState(null);
 
   // Planner state and actions (same data flow as before)
   const [plan, setPlan] = useState(Array(7).fill(false));
   const done = Array.isArray(plan) ? plan.filter(Boolean).length : 0;
   useEffect(()=>{ try{ setPlan(getWeeklyPlan()); }catch{} },[]);
-  useEffect(()=>{ try{ setMotdState(getMotd(null)); }catch{} },[]);
   function onToggle(i){
     try {
       const p = toggleDayDone(i);
@@ -46,11 +45,7 @@ export default function Home(){
       <p className="sub">Como você está hoje?</p>
 
       <div className="grid-2">
-        <Card>
-          <strong style={{display:"block",marginBottom:8}}>“Mensagem do dia”</strong>
-          <p className="small" style={{margin:"0 0 12px"}}>{(motd && typeof motd === 'object' ? motd.body : motd) || "Com você, por você. Força."}</p>
-          <Btn onClick={() => { try { const cur = (motd && typeof motd === 'object' ? motd.body : motd) || ""; const next = window.prompt("Digite sua mensagem do dia:", cur); if (next != null) { const v = String(next).trim(); if (v) { const base = (motd && typeof motd === 'object') ? motd : {}; const update = { ...base, body: v, at: new Date().toISOString() }; setMotd(update); setMotdState(update); } } } catch {} }}>Nova mensagem</Btn>
-        </Card>
+        <MessageOfDayCard nameHint={null} />
 
         <Card>
           <div style={{display:"grid",gridTemplateColumns:"48px 1fr",gap:12,alignItems:"center"}}>
