@@ -8,6 +8,8 @@ import { computeScore, summarizeActions } from "../../lib/score";
 import { onEu360Refresh } from "../../lib/clientEvents";
 import GratitudeModal from "../../components/eu360/GratitudeModal";
 import { showToast } from "../../lib/ui/toast";
+import BadgesBinder from "../../components/BadgesBinder";
+import Eu360CircleBinder from "../../components/Eu360CircleBinder";
 
 function useGratitudeModel(){
   const [items, setItems] = useState([]);
@@ -89,6 +91,8 @@ export default function Eu360(){
 
   return (
     <div className="container">
+      <BadgesBinder />
+      <Eu360CircleBinder>{() => null}</Eu360CircleBinder>
       <h1 className="h1">Eu360</h1>
 
       <Card className="card-navy" style={{display:"grid",gridTemplateColumns:"140px 1fr",gap:18,alignItems:"center"}}>
