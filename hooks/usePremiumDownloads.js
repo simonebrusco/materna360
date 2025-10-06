@@ -5,6 +5,7 @@ import { record } from '../lib/actions';
 const FREE_DAILY_LIMIT = 3;
 const QUOTA_KEY = 'm360:downloads:quota:v1';
 const PLAN_KEY = 'm360:plan:v1';
+const HISTORY_KEY = 'm360:downloads:history:v1';
 
 function todayKey(){
   try {
@@ -41,9 +42,25 @@ function readPlan(){
   } catch { return { premium: false }; }
 }
 
+function readHistory(){
+  if (typeof window === 'undefined') return { items: [] };
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY);
+    const v = raw ? JSON.parse(raw) : null;
+    if (!v || !Array.isArray(v.items)) return { items: [] };
+    return { items: v.items };
+  } catch { return { items: [] }; }
+}
+
+function writeHistory(h){
+  if (typeof window === 'undefined') return;
+  try { localStorage.setItem(HISTORY_KEY, JSON.stringify(h)); } catch {}
+}
+
 export default function usePremiumDownloads(){
   const [premium, setPremium] = useState(false);
   const [quota, setQuota] = useState({ limit: FREE_DAILY_LIMIT, remaining: FREE_DAILY_LIMIT, used: 0 });
+  const [history, setHistory] = useState({ items: [] });
 
   useEffect(() => {
     const p = readPlan();
@@ -51,6 +68,7 @@ export default function usePremiumDownloads(){
     const q = readQuota();
     const remaining = Math.max(0, FREE_DAILY_LIMIT - q.used);
     setQuota({ limit: FREE_DAILY_LIMIT, remaining, used: q.used });
+    setHistory(readHistory());
   }, []);
 
   const freeList = useMemo(() => [
@@ -74,6 +92,12 @@ export default function usePremiumDownloads(){
 
     if (isPremiumUser) {
       try { record('download', { id: itemId, tier: item.tier }); } catch {}
+      const entry = { id: item.id, title: item.title, type: item.type, at: Date.now() };
+      const current = readHistory();
+      const items = [entry, ...(current.items || [])].slice(0, 50);
+      const next = { items };
+      writeHistory(next);
+      setHistory(next);
       return { ok: true };
     }
 
@@ -91,13 +115,21 @@ export default function usePremiumDownloads(){
       return { ok: false };
     }
 
-    const next = { day: q.day, used: q.used + 1 };
-    writeQuota(next);
-    const remaining = Math.max(0, FREE_DAILY_LIMIT - next.used);
-    setQuota({ limit: FREE_DAILY_LIMIT, remaining, used: next.used });
+    const nextQuota = { day: q.day, used: q.used + 1 };
+    writeQuota(nextQuota);
+    const remaining = Math.max(0, FREE_DAILY_LIMIT - nextQuota.used);
+    setQuota({ limit: FREE_DAILY_LIMIT, remaining, used: nextQuota.used });
     try { record('download', { id: itemId, tier: item.tier }); } catch {}
+
+    const entry = { id: item.id, title: item.title, type: item.type, at: Date.now() };
+    const current = readHistory();
+    const items = [entry, ...(current.items || [])].slice(0, 50);
+    const next = { items };
+    writeHistory(next);
+    setHistory(next);
+
     return { ok: true };
   }, [freeList, premList]);
 
-  return { premium, freeList, premList, quota, requestDownload };
+  return { premium, freeList, premList, quota, requestDownload, history };
 }
