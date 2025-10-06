@@ -11,38 +11,8 @@ import { addAction, addMood, toggleDayDone, getWeeklyPlan } from "../lib/storage
 import { emitEu360Refresh } from "../lib/clientEvents";
 import WeekChips from "../components/planner/WeekChips";
 import TipsRotator from "../components/planner/TipsRotator";
+import WeekProgress from "../components/planner/WeekProgress";
 
-function WeeklyPlannerAndTip(){
-  const [plan, setPlan] = useState(Array(7).fill(false));
-  const done = plan.filter(Boolean).length;
-
-  useEffect(()=>{ try{ setPlan(getWeeklyPlan()); }catch{} },[]);
-
-  function onToggle(i){
-    const p = toggleDayDone(i);
-    setPlan(p);
-    emitEu360Refresh();
-  }
-
-  return (
-    <section data-planner-root style={{marginTop:16}}>
-      <div style={{fontWeight:800,fontSize:18,color:"#0D1B2A", marginBottom:10, display:"flex", alignItems:"center", justifyContent:"space-between", gap:12}}>
-        <span>Planner da semana</span>
-        <span className="small" style={{opacity:.7}}>{done}/7 concluídos</span>
-      </div>
-      <WeekChips value={plan} onToggle={onToggle} />
-      <TipsRotator
-        tips={[
-          "Beba água e alongue-se 1 min.",
-          "Três respirações profundas.",
-          "Envie uma mensagem carinhosa pra você mesma.",
-          "Caminhe 2 min e olhe o céu."
-        ]}
-        key={done}
-      />
-    </section>
-  );
-}
 
 export default function Home(){
   const [openBreath, setOpenBreath] = useState(false);
@@ -80,11 +50,9 @@ export default function Home(){
         <Card style={{minHeight:110,display:"grid",placeItems:"center"}} onClick={() => setOpenMood(true)}><div className="iconStack"><div className="iconToken">♡</div><div>Refletir</div></div></Card>
         <NavyCard onClick={() => setOpenInspire(true)}><div className="iconToken">🔔</div><div>Inspirar</div></NavyCard>
         <Card style={{minHeight:110,display:"grid",placeItems:"center"}} onClick={() => setOpenPause(true)}><div className="iconStack"><div className="iconToken">Ⅱ</div><div>Pausar</div></div></Card>
+        <WeekProgress />
       </div>
 
-      <div className="space"></div>
-
-      <WeeklyPlannerAndTip />
 
       <BreathModal
         open={openBreath}
