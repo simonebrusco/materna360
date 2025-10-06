@@ -7,6 +7,7 @@ import BreathModal from "../components/modals/BreathModal";
 import MoodModal from "../components/modals/MoodModal";
 import InspireModal from "../components/modals/InspireModal";
 import PauseModal from "../components/modals/PauseModal";
+import RoutineMini from "../components/RoutineMini";
 import { addAction, addMood, toggleDayDone, getWeeklyPlan } from "../lib/storage";
 import { emitEu360Refresh } from "../lib/clientEvents";
 import WeekProgressCard from "../components/planner/WeekProgressCard";
@@ -67,6 +68,10 @@ export default function Home(){
 
       <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onDayPress={onToggle} bonus={bonus} />
 
+      <div className="space"></div>
+      <section>
+        <RoutineMini />
+      </section>
 
       <BreathModal
         open={openBreath}
