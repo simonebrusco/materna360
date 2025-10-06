@@ -1,5 +1,6 @@
 "use client";
 
+"use client";
 import { useEffect, useState } from "react";
 import { getLastAgeGroup, setLastAgeGroup } from "../../lib/storage.js";
 
