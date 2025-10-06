@@ -46,13 +46,31 @@ function GratitudeSection({ g }){
 export default function Eu360(){
   const g = useGratitudeModel();
   const [score, setScore] = useState(0);
-  const [ach, setAch] = useState([]);
+  const [achText, setAchText] = useState("");
+  const [weeklyMood, setWeeklyMood] = useState("—");
   const [openGrat, setOpenGrat] = useState(false);
 
   const refresh = () => {
-    const s = computeScoreNow();
-    setScore(Math.max(0, Math.min(1000, s.score)));
-    setAch(computeAchievements());
+    try {
+      const rawMH = readJSON("m360:moodHistory", null);
+      const mh0 = Array.isArray(rawMH) ? rawMH : getMoodHistory();
+      const mh = (mh0 || []).map(m => {
+        const v = typeof m === 'number' ? m : (typeof m?.score === 'number' ? m.score : 0);
+        return v >= 1 && v <= 5 ? (v - 1) : v; // normalize 0..4
+      });
+      const acts = Array.isArray(readJSON("m360:actions", null)) ? readJSON("m360:actions", null) : getActions();
+      const { score: sc } = computeScore({ moodHistory: mh, actions: acts });
+      setScore(Math.max(0, Math.min(1000, sc)));
+      const { count7d } = summarizeActions(acts);
+      setAchText(count7d >= 2 ? "2 metas alcançadas" : (count7d >= 1 ? "1 meta alcançada" : "comece hoje!"));
+      const last7 = mh.slice(-7);
+      const avg = last7.length ? last7.reduce((a,b)=>a+b,0)/last7.length : null;
+      if (avg == null) setWeeklyMood("—");
+      else {
+        const idx = Math.max(0, Math.min(4, Math.round(avg)));
+        const EMO = ["😞","🙁","😐","🙂","😄"]; setWeeklyMood(EMO[idx]);
+      }
+    } catch {}
     try { g.setItems(getGratitude()); } catch {}
   };
 
