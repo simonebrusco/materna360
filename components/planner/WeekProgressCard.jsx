@@ -16,21 +16,20 @@ const DAY_FULL = [
 function getTodayIndex() {
   try {
     const d = new Date().getDay(); // 0=Sun..6=Sat
-    // Map to Seg..Dom (Mon..Sun) indexing used by our planner
-    return d === 0 ? 6 : d - 1;
+    return d === 0 ? 6 : d - 1; // Map to Seg..Dom (Mon..Sun)
   } catch {
     return -1;
   }
 }
 
-export default function WeekProgressCard({ completedCount = 0, total = 7, days = Array(7).fill(false), onDayPress = () => {}, bonus }){
+export default function WeekProgressCard({ completedCount = 0, total = 7, days = Array(7).fill(false), onDayPress = () => {}, bonus, className = "" }){
   const todayIdx = useMemo(() => getTodayIndex(), []);
 
   return (
-    <Card>
-      <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", gap:12, marginBottom:10}}>
-        <div style={{fontWeight:800,fontSize:18,color:"#0D1B2A", opacity:.92}}>Planner da semana</div>
-        <div className="small" style={{opacity:.75}}>{completedCount} de {total} concluídos</div>
+    <Card className={`planner-card ${className}`.trim()}>
+      <div className="planner-head">
+        <div className="planner-title">Planner da semana</div>
+        <div className="planner-meta">{completedCount} de {total} concluídos</div>
       </div>
 
       <div className="m360-scroll-x" role="group" aria-label="Planner semanal">
@@ -54,9 +53,9 @@ export default function WeekProgressCard({ completedCount = 0, total = 7, days =
       </div>
 
       {bonus ? (
-        <div style={{display:"flex", alignItems:"center", gap:8, marginTop:10}}>
-          <span aria-hidden style={{width:8,height:8,borderRadius:999,background:"#FF005E",display:"inline-block"}} />
-          <div style={{fontWeight:700, color:"#0D1B2A", opacity:.9}}>{bonus}</div>
+        <div className="planner-tip">
+          <span aria-hidden className="planner-dot" />
+          <div className="planner-tip-text">{bonus}</div>
         </div>
       ) : null}
     </Card>
