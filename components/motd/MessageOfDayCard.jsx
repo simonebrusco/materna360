@@ -1,21 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
 import Card from "../ui/Card";
 import Btn from "../ui/Btn";
-import { ensureMessage } from "../../lib/messages";
+import useMessageOfDay from "../../hooks/useMessageOfDay";
 
 export default function MessageOfDayCard({ nameHint = null }) {
-  const [motd, setMotd] = useState(null);
-
-  useEffect(() => {
-    const next = ensureMessage(nameHint);
-    setMotd(next);
-  }, [nameHint]);
-
-  function refresh() {
-    const next = ensureMessage(nameHint);
-    setMotd(next);
-  }
+  const { motd, refresh } = useMessageOfDay(nameHint);
 
   return (
     <Card>
