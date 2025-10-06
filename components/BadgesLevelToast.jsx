@@ -20,7 +20,6 @@ export default function BadgesLevelToast(){
     const unseen = current.filter(b => b.id && !seenSet.has(b.id));
 
     if (!silent && unseen.length > 0) {
-      // Announce the most recent unseen badge
       const b = unseen[unseen.length - 1];
       if (b && b.label) showToast(`Conquista desbloqueada: ${b.label} ✨`);
     }
@@ -29,14 +28,24 @@ export default function BadgesLevelToast(){
   };
 
   useEffect(() => {
-    // First run without toast to initialize seen state, then subsequent changes will toast
     check(true);
     const off = onUpdate(() => { if (ready.current) check(false); else { check(true); ready.current = true; } });
+
+    function onLeveled(e){
+      const list = (e?.detail?.leveled || []).filter(Boolean);
+      list.forEach((it) => {
+        const title = it?.badge?.title || it?.id || "Conquista";
+        const to = it?.to || "";
+        if (title && to) showToast(`Novo nível ${to} em ${title} ✨`);
+      });
+    }
+
+    window.addEventListener('m360:badges:leveled', onLeveled);
+
     const onVis = () => { if (document.visibilityState === "visible") { if (ready.current) check(false); else { check(true); ready.current = true; } } };
     document.addEventListener("visibilitychange", onVis);
-    // Mark ready after a short delay to avoid toasting on initial mount
     const t = setTimeout(() => { ready.current = true; }, 300);
-    return () => { try { off && off(); } catch {} document.removeEventListener("visibilitychange", onVis); clearTimeout(t); };
+    return () => { try { off && off(); } catch {} document.removeEventListener("visibilitychange", onVis); window.removeEventListener('m360:badges:leveled', onLeveled); clearTimeout(t); };
   }, []);
 
   return null;
