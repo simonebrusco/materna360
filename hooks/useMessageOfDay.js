@@ -4,7 +4,8 @@ import { get, keys, onUpdate } from '../lib/storage';
 import { ensureMessage } from '../lib/messages';
 
 export default function useMessageOfDay(nameHint = null) {
-  const [motd, setMotd] = useState(() => get(keys.motd, null));
+  // SSR-safe: start as null to avoid reading storage on first render
+  const [motd, setMotd] = useState(null);
 
   const read = useCallback(() => {
     const v = get(keys.motd, null);
@@ -20,18 +21,19 @@ export default function useMessageOfDay(nameHint = null) {
 
   useEffect(() => {
     if (!motd) refresh();
-    const offStorage = onUpdate(() => read());
-    function onMotdUpdated() { read(); }
+    const off = onUpdate(() => read());
+    const onMotd = () => read();
     if (typeof window !== 'undefined') {
-      window.addEventListener('m360:motd:updated', onMotdUpdated);
+      window.addEventListener('m360:motd:updated', onMotd);
     }
     return () => {
-      offStorage?.();
+      off?.();
       if (typeof window !== 'undefined') {
-        window.removeEventListener('m360:motd:updated', onMotdUpdated);
+        window.removeEventListener('m360:motd:updated', onMotd);
       }
     };
-  }, [refresh, read, motd]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refresh, read]);
 
   return { motd, refresh };
 }
