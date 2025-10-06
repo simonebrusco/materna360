@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import Card from "../../components/ui/Card";
 import Btn from "../../components/ui/Btn";
 import { getGratitude, deleteGratitude } from "../../lib/storage";
-import { computeScore } from "../../lib/score";
+import { computeScoreNow, computeAchievements } from "../../lib/score";
+import { onEu360Refresh } from "../../lib/clientEvents";
 import GratitudeModal from "../../components/gratitude/GratitudeModal";
 import { showToast } from "../../lib/ui/toast";
 
@@ -44,23 +45,24 @@ function GratitudeSection({ g }){
 export default function Eu360(){
   const g = useGratitudeModel();
   const [score, setScore] = useState(0);
+  const [ach, setAch] = useState([]);
   const [openGrat, setOpenGrat] = useState(false);
 
   const refresh = () => {
-    const { score: s } = computeScore();
-    setScore(Math.max(0, Math.min(1000, s)));
+    const s = computeScoreNow();
+    setScore(Math.max(0, Math.min(1000, s.score)));
+    setAch(computeAchievements());
     try { g.setItems(getGratitude()); } catch {}
   };
 
   useEffect(()=>{
     refresh();
     function onVis(){ if (document.visibilityState === 'visible') refresh(); }
-    function onEvt(){ refresh(); }
-    window.addEventListener('visibilitychange', onVis);
-    window.addEventListener('refreshEu360', onEvt);
+    const off = onEu360Refresh(refresh);
+    document.addEventListener('visibilitychange', onVis);
     return () => {
-      window.removeEventListener('visibilitychange', onVis);
-      window.removeEventListener('refreshEu360', onEvt);
+      document.removeEventListener('visibilitychange', onVis);
+      try { off && off(); } catch {}
     };
   },[]);
 
@@ -94,7 +96,15 @@ export default function Eu360(){
 
       <Card>
         <strong>Conquistas</strong>
-        <div className="small" style={{marginTop:8}}>2 metas alcançadas</div>
+        {ach.length === 0 ? (
+          <div className="small" style={{marginTop:8, opacity:.8}}>Complete 2 dias do planner ou registre sua primeira gratidão para desbloquear conquistas ✨</div>
+        ) : (
+          <div style={{display:"flex",flexWrap:"wrap",gap:8,marginTop:8}}>
+            {ach.map(a => (
+              <span key={a.id} className="chip" style={{borderRadius:999, background:"#FFE6EF", color:"#0D1B2A", padding:"6px 10px", border:"1px solid #FFD6E0"}}>{a.label}</span>
+            ))}
+          </div>
+        )}
       </Card>
 
       <div className="space"></div>

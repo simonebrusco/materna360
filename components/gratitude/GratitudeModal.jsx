@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import BaseModal from "../modals/BaseModal";
 import { addGratitude } from "../../lib/storage";
+import { emitEu360Refresh } from "../../lib/clientEvents";
 
 export default function GratitudeModal({ open, onClose = () => {}, onSaved = () => {} }){
   const [text, setText] = useState("");
@@ -10,6 +11,7 @@ export default function GratitudeModal({ open, onClose = () => {}, onSaved = () 
   function onSave(){
     const list = addGratitude(text);
     setText("");
+    try { emitEu360Refresh(); } catch {}
     try { onSaved(list); } catch {}
     onClose();
   }
