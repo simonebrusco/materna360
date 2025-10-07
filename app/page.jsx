@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import Card from "../components/ui/Card";
 import NavyCard from "../components/ui/NavyCard";
 import Btn from "../components/ui/Btn";
+import Icon from "../components/ui/Icon";
+import PlannerNotepad from "../components/planner/PlannerNotepad";
 import BreathModal from "../components/modals/BreathModal";
 import MoodModal from "../components/modals/MoodModal";
 import InspireModal from "../components/modals/InspireModal";
 import PauseModal from "../components/modals/PauseModal";
-import { addAction, addMood, toggleDayDone, getWeeklyPlan } from "../lib/storage";
+import { addAction, addMood, toggleDayDone, getWeeklyPlan, ensurePlannerWeek, getPlanner, getPlannerDaysDone } from "../lib/storage";
 import { emitEu360Refresh } from "../lib/clientEvents";
 import WeekProgressCard from "../components/planner/WeekProgressCard";
 import GreetingBinder from "../components/GreetingBinder";
@@ -20,18 +22,18 @@ export default function Home(){
   const [openInspire, setOpenInspire] = useState(false);
   const [openPause, setOpenPause] = useState(false);
 
-  // Planner state and actions (same data flow as before)
+  // Planner computed from notepad entries; fall back to legacy weekly plan
   const [plan, setPlan] = useState(Array(7).fill(false));
+  const [openPad, setOpenPad] = useState(false);
+  const [padDay, setPadDay] = useState(() => { try{ const d=new Date().getDay(); return d===0?6:d-1; }catch{ return 0; } });
   const done = Array.isArray(plan) ? plan.filter(Boolean).length : 0;
-  useEffect(()=>{ try{ setPlan(getWeeklyPlan()); }catch{} },[]);
-  function onToggle(i){
-    try {
-      const p = toggleDayDone(i);
-      setPlan(p);
-      try { addAction({ type: 'planner_toggle', date: new Date().toISOString() }); } catch {}
-      emitEu360Refresh();
-    } catch {}
-  }
+  useEffect(()=>{ try{ ensurePlannerWeek(); setPlan(getPlannerDaysDone() || getWeeklyPlan()); }catch{} },[]);
+  useEffect(()=>{
+    const off = () => setPlan(getPlannerDaysDone() || getWeeklyPlan());
+    try { window.addEventListener('m360:data:updated', off); } catch {}
+    return () => { try { window.removeEventListener('m360:data:updated', off); } catch {} };
+  },[]);
+  function openNotepad(i){ if (typeof i==='number') setPadDay(i); setOpenPad(true); }
   const tips = [
     "Beba água e alongue-se 1 min.",
     "Três respirações profundas.",
@@ -56,7 +58,7 @@ export default function Home(){
 
         <Card>
           <div style={{display:"grid",gridTemplateColumns:"48px 1fr",gap:12,alignItems:"center"}}>
-            <div className="iconToken">🙂</div>
+            <Icon name="mood" className="icon-24 icon-default" />
             <div>
               <div style={{fontWeight:800}}>Como você se sente?</div>
               <div className="small" style={{opacity:.75}}>Toque para registrar</div>
@@ -68,13 +70,15 @@ export default function Home(){
       <div className="space"></div>
 
       <div className="actions-grid">
-        <NavyCard onClick={() => setOpenBreath(true)}><div className="iconToken">◐</div><div>Respirar</div></NavyCard>
-        <Card style={{minHeight:110,display:"grid",placeItems:"center",cursor:"pointer"}} onClick={() => setOpenMood(true)}><div className="iconStack"><div className="iconToken">♡</div><div>Refletir</div></div></Card>
-        <NavyCard onClick={() => setOpenInspire(true)}><div className="iconToken">🔔</div><div>Inspirar</div></NavyCard>
-        <Card style={{minHeight:110,display:"grid",placeItems:"center",cursor:"pointer"}} onClick={() => setOpenPause(true)}><div className="iconStack"><div className="iconToken">Ⅱ</div><div>Pausar</div></div></Card>
+        <NavyCard onClick={() => setOpenBreath(true)}><div className="iconStack"><Icon name="breath" className="icon-24 icon-action" /><div>Respirar</div></div></NavyCard>
+        <Card style={{minHeight:110,display:"grid",placeItems:"center",cursor:"pointer"}} onClick={() => setOpenMood(true)}><div className="iconStack"><Icon name="reflect" className="icon-24 icon-action" /><div>Refletir</div></div></Card>
+        <NavyCard onClick={() => setOpenInspire(true)}><div className="iconStack"><Icon name="inspire" className="icon-24 icon-action" /><div>Inspirar</div></div></NavyCard>
+        <Card style={{minHeight:110,display:"grid",placeItems:"center",cursor:"pointer"}} onClick={() => setOpenPause(true)}><div className="iconStack"><Icon name="pause" className="icon-24 icon-action" /><div>Pausar</div></div></Card>
       </div>
 
-      <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onDayPress={onToggle} bonus={bonus} />
+      <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onOpenDay={(i)=>openNotepad(i)} onOpenCard={()=>openNotepad(padDay)} bonus={bonus} />
+
+      <PlannerNotepad open={openPad} onClose={()=>setOpenPad(false)} dayIndex={padDay} onChangeDay={(i)=>setPadDay(i)} />
 
 
       <BreathModal
