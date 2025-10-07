@@ -259,3 +259,16 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .mood-inline{ display:flex; gap:10px; }
 .mood-emoji-btn{ width:42px; height:42px; border-radius:12px; border:1px solid #E7E7E7; background:#fff; color: var(--navy); font-size:18px; }
 .mood-emoji-btn.is-active{ background: var(--navy); color:#fff; }
+
+/* Planner drawer */
+.planner-overlay{ position:fixed; inset:0; background: rgba(0,0,0,.28); z-index:60; }
+.planner-drawer{ position:absolute; right:0; top:0; bottom:0; width:360px; background:#fff; padding:16px; border-top-left-radius: var(--r-xl); border-bottom-left-radius: var(--r-xl); box-shadow: var(--shadow-soft); }
+.planner-title{ margin-top:4px; font-weight:700; }
+.planner-label{ font-weight:600; }
+.planner-textarea{ width:100%; height:90px; border:1px solid #eee; border-radius:10px; padding:8px; margin-bottom:12px; }
+.planner-grid-2{ display:grid; grid-template-columns:1fr auto; gap:8px; margin-bottom:12px; }
+.planner-grid-3{ display:grid; grid-template-columns:100px 1fr auto; gap:8px; }
+.planner-input{ border:1px solid #eee; border-radius:10px; padding:8px; }
+.planner-btn{ border-radius:10px; padding:8px 10px; }
+.planner-subtitle{ margin-top:16px; }
+.planner-list{ padding-left:18px; margin-top:6px; }
