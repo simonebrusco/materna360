@@ -1,4 +1,9 @@
 "use client";
+import { Suspense } from 'react';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
 
 import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
