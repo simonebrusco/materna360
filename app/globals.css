@@ -256,3 +256,6 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .motd-title{ display:block; margin-bottom:8px; font-weight:800; }
 .motd-text{ margin:0 0 12px; }
 .motd-standalone{ font-size:16px; line-height:1.45; color: var(--navy); }
+.mood-inline{ display:flex; gap:10px; }
+.mood-emoji-btn{ width:42px; height:42px; border-radius:12px; border:1px solid #E7E7E7; background:#fff; color: var(--navy); font-size:18px; }
+.mood-emoji-btn.is-active{ background: var(--navy); color:#fff; }
