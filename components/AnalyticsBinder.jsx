@@ -3,35 +3,33 @@ import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { trackEvent, trackRoute } from '../lib/analytics';
 
-export default function AnalyticsBinder() {
+export default function AnalyticsBinder(){
   const pathname = usePathname();
   const search = useSearchParams();
 
+  // Rota (evita função no deps)
   useEffect(() => {
     if (!pathname) return;
-    const qs = search?.toString();
-    trackRoute(pathname, { qs: qs || '' });
+    const qs = search ? String(search) : '';
+    trackRoute(pathname, { qs });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, search?.toString()]);
+  }, [pathname, search]); // ok: search é um objeto estável do App Router
 
   useEffect(() => {
-    const onData = (e) => trackEvent('storage:update', { key: e?.detail?.key || '' });
+    // Guards extras para SSR/hidratação
+    if (typeof window === 'undefined') return;
 
+    const onData = (e) => trackEvent('storage:update', { key: e?.detail?.key || '' });
     const onLeveled = (e) => {
       const f = e?.detail?.leveled?.[0];
       if (f) trackEvent('badge:level_up', { id: f.id, from: f.from, to: f.to });
     };
-
     const onAudioCompleted = (e) => trackEvent('audio:completed', { type: e?.detail?.type, ms: e?.detail?.ms });
-
     const onDownload = (e) => trackEvent('download:item', e?.detail || {});
     const onDownloadLimit = (e) => trackEvent('download:limit', e?.detail || {});
-
     const onFav = (e) => trackEvent(`fav:${e?.detail?.op || 'change'}`, { kind: e?.detail?.kind, id: e?.detail?.id });
     const onFavLimit = () => trackEvent('fav:limit', {});
-
     const onUpgrade = (e) => trackEvent('upgrade:prompt', e?.detail || {});
-
     const onMotd = () => trackEvent('motd:update', {});
 
     window.addEventListener('m360:data:updated', onData);
