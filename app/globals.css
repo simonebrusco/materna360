@@ -275,6 +275,28 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .card-press:active { transform: translateY(1px) scale(0.995); }
 .card-press:hover { box-shadow: 0 8px 24px rgba(0,0,0,.06); }
 
+/* Icon button for header bell */
+.icon-btn{ all:unset; cursor:pointer; font-size:20px; line-height:1; padding:6px; border-radius:12px; }
+.icon-btn:hover{ box-shadow: var(--ring); }
+
+/* Floating Action Button for adding notes */
+.fab{
+  position:fixed; right:20px; bottom:84px; z-index:35;
+  background: var(--magenta); color:#fff; border:none; border-radius:999px;
+  width:56px; height:56px; font-size:28px; box-shadow:0 8px 20px rgba(255,0,94,.35);
+  transition:transform .2s ease;
+}
+.fab:hover{ transform: scale(1.05); box-shadow:0 0 12px rgba(255,0,94,.45); }
+
+/* Simple toast for Small Wins */
+.toast{ position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+  background:#111; color:#fff; padding:10px 14px; border-radius:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,.25); z-index:50; }
+
+/* Outline button alias */
+.btn-outline { background-color: transparent; color: var(--magenta); border: 2px solid var(--magenta); border-radius: 16px; font-weight: 500; padding: 8px 18px; transition: all 0.2s ease-in-out; }
+.btn-outline:hover { background-color: var(--magenta); color: var(--white); }
+
 /* ================= Typography tokens and rules (pt-BR) ================= */
 :root{
   --m360-font: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
