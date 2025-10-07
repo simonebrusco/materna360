@@ -2,7 +2,6 @@
 import { Suspense } from 'react';
 
 export const dynamic = 'force-dynamic';
-export const revalidate = 0;
 export const fetchCache = 'force-no-store';
 import { useEffect, useState } from "react";
 import Card from "../../components/ui/Card";
@@ -107,7 +106,7 @@ export default function Eu360(){
         </div>
         <div>
           <div style={{fontWeight:800,marginBottom:6}}>Você é importante</div>
-          <div className="small" style={{opacity:.9}}>Siga no seu ritmo 💛</div>
+          <div className="small" style={{opacity:.9}}>Siga no seu ritmo ���</div>
         </div>
       </Card>
 
