@@ -73,17 +73,20 @@ main { min-height: 100vh; display: flex; justify-content: center; }
   gap: .5rem;
   padding: 12px 20px;
   border: none;
-  border-radius: 12px;
+  border-radius: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform .12s ease-out, box-shadow .2s ease, background-color .15s ease;
   text-decoration: none;
 }
 .btn:active { transform: scale(.98); }
 
 .btn:focus-visible { outline: none; box-shadow: var(--ring); }
 
-.btn-primary { background: var(--magenta); color: var(--white); box-shadow: var(--shadow-soft); }
+.btn[disabled], .btn:disabled { opacity: .6; box-shadow: none; cursor: not-allowed; }
+
+.btn-primary { background: #F15A2E; color: var(--white); box-shadow: var(--shadow-soft); }
+.btn-primary:hover { filter: brightness(1.06); }
 .btn-ghost { background: transparent; border: 1.5px solid var(--magenta-20); color: var(--navy); }
 .btn-subtle { background: var(--card); box-shadow: var(--shadow-soft); color: var(--navy); }
 
@@ -258,6 +261,11 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 
 /* Icon utility */
 .icon { width: 22px; height: 22px; display: inline-block; vertical-align: middle; }
+.icon-24 { width: 24px; height: 24px; }
+.icon-20 { width: 20px; height: 20px; }
+.icon-default { color: #1E1E1E; }
+.icon-action { color: #F15A2E; }
+.icon-secondary { color: #6C4AB6; }
 
 /* Pressable card interaction */
 .card-press { transition: transform .12s ease, box-shadow .12s ease; }
