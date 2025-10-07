@@ -274,3 +274,108 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .card-press { transition: transform .12s ease, box-shadow .12s ease; }
 .card-press:active { transform: translateY(1px) scale(0.995); }
 .card-press:hover { box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+
+/* ================= Typography tokens and rules (pt-BR) ================= */
+:root{
+  --m360-font: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+  --m360-h1: clamp(22px, 2.2vw, 28px);
+  --m360-h2: clamp(18px, 1.8vw, 22px);
+  --m360-body: 15px;
+  --m360-small: 13px;
+  --m360-weight-regular: 400;
+  --m360-weight-medium: 500;
+  --m360-weight-semibold: 600;
+  --m360-leading-tight: 1.15;
+  --m360-leading-normal: 1.35;
+  --m360-letter-tight: -0.2px;
+}
+html, body { font-family: var(--m360-font); }
+
+/* Headings & body defaults */
+h1{
+  font-size: var(--m360-h1);
+  line-height: var(--m360-leading-tight);
+  letter-spacing: var(--m360-letter-tight);
+  font-weight: var(--m360-weight-semibold);
+  margin: 0 0 6px;
+}
+h2{
+  font-size: var(--m360-h2);
+  line-height: var(--m360-leading-tight);
+  font-weight: var(--m360-weight-semibold);
+  margin: 0 0 4px;
+}
+p, label, input, textarea, button{
+  font-size: var(--m360-body);
+  line-height: var(--m360-leading-normal);
+  font-weight: var(--m360-weight-regular);
+}
+.small, .helper, .microcopy{ font-size: var(--m360-small); opacity: .85; }
+
+/* Cards: titles + microcopy truncation */
+.card-title{
+  font-size: var(--m360-h2);
+  font-weight: var(--m360-weight-semibold);
+  line-height: var(--m360-leading-tight);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-sub{
+  font-size: var(--m360-small);
+  line-height: var(--m360-leading-normal);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+/* Buttons (keep magenta + glow, ensure fit) */
+.btn-primary, button[type="submit"], .button-main{
+  font-size: 15px;
+  font-weight: var(--m360-weight-semibold);
+  padding: 10px 22px;
+  white-space: nowrap;
+}
+.btn-outline, button.secondary{
+  font-size: 14px;
+  padding: 8px 18px;
+  white-space: nowrap;
+}
+
+/* Planner specifics (map to existing classes) */
+.planner .day-chip, .m360-chip{
+  font-size: 14px;
+  font-weight: var(--m360-weight-medium);
+  letter-spacing: .2px;
+}
+.planner .progress-label{ font-size: var(--m360-small); white-space: nowrap; }
+.planner .entry-title{
+  font-weight: var(--m360-weight-medium);
+  line-height: var(--m360-leading-normal);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.planner .entry-content{
+  font-size: var(--m360-small);
+  line-height: 1.4;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+
+/* Notepad placeholders */
+input::placeholder, textarea::placeholder{
+  color: rgba(0,0,0,.45);
+  font-size: var(--m360-small);
+}
+label{ font-weight: var(--m360-weight-medium); }
+
+/* Word breaks & hyphenation (pt) */
+* { word-break: break-word; overflow-wrap: anywhere; }
+.card-sub, .entry-content { hyphens: auto; }
+
+/* Responsive guards */
+@media (max-width: 360px){
+  .card-title{ font-size: 16px; }
+  .planner .day-chip, .m360-chip{ font-size: 13px; }
+}
