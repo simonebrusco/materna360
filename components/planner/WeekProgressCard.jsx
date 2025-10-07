@@ -70,7 +70,7 @@ export default function WeekProgressCard({ completedCount = 0, total = 7, days =
               className={`m360-chip m360-day-chip${isDone ? " is-complete" : ""}${isToday ? " is-today" : ""}`}
               aria-pressed={isDone}
               aria-label={aria}
-              onClick={() => onDayPress(i)}
+              onClick={() => onOpenDay(i)}
             >
               {d}
             </button>
