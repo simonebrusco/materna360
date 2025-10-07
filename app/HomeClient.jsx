@@ -12,6 +12,7 @@ import { addAction, addMood, toggleDayDone, getWeeklyPlan } from "../lib/storage
 import { emitEu360Refresh } from "../lib/clientEvents";
 import WeekProgressCard from "../components/planner/WeekProgressCard";
 import MessageOfDayCard from "../components/motd/MessageOfDayCard";
+import { PauseIcon } from "../components/icons/PauseIcon";
 
 export default function HomeClient(){
   const [openBreath, setOpenBreath] = useState(false);
