@@ -4,7 +4,7 @@ import Card from "../ui/Card";
 import Btn from "../ui/Btn";
 import { ensureMessage } from "../../lib/messages";
 
-export default function MessageOfDayCard({ nameHint = null }) {
+export default function MessageOfDayCard({ nameHint = null, showTitle = true, showButton = true }) {
   const [motd, setMotd] = useState(null);
 
   useEffect(() => {
@@ -19,9 +19,9 @@ export default function MessageOfDayCard({ nameHint = null }) {
 
   return (
     <Card>
-      <strong className="motd-title">“Mensagem do dia”</strong>
+      {showTitle ? <strong className="motd-title">“Mensagem do dia”</strong> : null}
       <p className="small motd-text">{motd?.body ?? "..."}</p>
-      <Btn onClick={refresh}>Nova mensagem</Btn>
+      {showButton ? <Btn onClick={refresh}>Nova mensagem</Btn> : null}
     </Card>
   );
 }
