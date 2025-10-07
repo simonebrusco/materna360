@@ -10,8 +10,9 @@ function daypart(date = new Date()){
 }
 
 export default function GreetingBinder({ children }) {
-  const [name, setName] = useState('');
-  const [part, setPart] = useState(daypart());
+  const [mounted, setMounted] = useState(false);
+  const [name, setName] = useState('Mãe');
+  const [part, setPart] = useState('');
 
   useEffect(() => {
     const read = () => {
@@ -23,10 +24,13 @@ export default function GreetingBinder({ children }) {
       }
     };
     read();
+    setPart(daypart());
+    setMounted(true);
     const off = onUpdate((k) => { if (k === keys.lastCtx) read(); });
     const t = setInterval(() => setPart(daypart()), 60 * 1000);
     return () => { off?.(); clearInterval(t); };
   }, []);
 
+  if (!mounted) return null;
   return typeof children === 'function' ? children({ name, part }) : null;
 }
