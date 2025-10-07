@@ -65,11 +65,19 @@ export default function Home(){
 
   return (
     <div className="container">
-      <GreetingBinder>
-        {({ name, part }) => (
-          <h1 className="h1" suppressHydrationWarning>{part}, {name} <span aria-hidden>💛</span></h1>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:12}}>
+        <GreetingBinder>
+          {({ name, part }) => (
+            <h1 className="h1" suppressHydrationWarning>{part}, {name} <span aria-hidden>💛</span></h1>
+          )}
+        </GreetingBinder>
+        {flags.globalReminders && (
+          <SafeBoundary><ReminderBell /></SafeBoundary>
         )}
-      </GreetingBinder>
+      </div>
+      {flags.messageOfDay && (
+        <SafeBoundary><MessageOfDay /></SafeBoundary>
+      )}
       <p className="sub">Como você está hoje?</p>
 
       <QuickRow />
