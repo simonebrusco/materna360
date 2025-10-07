@@ -43,7 +43,7 @@ export default function DevErrorSuppressor() {
     window.addEventListener("unhandledrejection", onUnhandledRejection);
     window.addEventListener("error", onError);
 
-    return () => { try { if (typeof window !== 'undefined' && window.__devErrorSuppressor_restore) { try { window.__devErrorSuppressor_restore(); } catch(e){} window.__devErrorSuppressor_restore = null; } } catch(e){}
+    return () => {
       window.removeEventListener("unhandledrejection", onUnhandledRejection);
       window.removeEventListener("error", onError);
     };
