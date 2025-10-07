@@ -38,10 +38,10 @@ function ProductCard({ p, onOpen }) {
         />
       ) : (
         <div className="m360-thumb-fallback" aria-label="Imagem indisponível">
-          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-            <rect x="3" y="5" width="18" height="14" rx="3" stroke="#0D1B2A" strokeOpacity="0.9" strokeWidth="1.6"/>
-            <circle cx="9" cy="10" r="2" stroke="#0D1B2A" strokeOpacity="0.9" strokeWidth="1.6"/>
-            <path d="M21 17l-4.5-5-5.5 6" stroke="#0D1B2A" strokeOpacity="0.9" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <rect x="3" y="5" width="18" height="14" rx="3" stroke="#1E1E1E" strokeOpacity="0.9" strokeWidth="1.6"/>
+            <circle cx="9" cy="10" r="2" stroke="#1E1E1E" strokeOpacity="0.9" strokeWidth="1.6"/>
+            <path d="M21 17l-4.5-5-5.5 6" stroke="#1E1E1E" strokeOpacity="0.9" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </div>
       )}
