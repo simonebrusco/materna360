@@ -53,7 +53,7 @@ export default function WeekProgressCard({ completedCount = 0, total = 7, days =
 
   return (
     <Card className={`planner-card ${className}`.trim()}>
-      <div className="planner-head">
+      <div className="planner-head" onClick={()=>onOpenCard()} style={{cursor:"pointer"}}>
         <div className="planner-title">Planner da semana</div>
         <div className="planner-meta">{done} de {denom} concluídos</div>
       </div>
