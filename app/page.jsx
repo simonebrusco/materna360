@@ -109,6 +109,9 @@ export default function Home(){
       </div>
 
       <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onOpenDay={(i)=>openNotepad(i)} onOpenCard={()=>openNotepad(padDay)} bonus={bonus} />
+      {flags.homeTodayCard && (
+        <SafeBoundary><TodayChecklist /></SafeBoundary>
+      )}
 
       <PlannerNotepad open={openPad} onClose={()=>setOpenPad(false)} dayIndex={padDay} onChangeDay={(i)=>setPadDay(i)} />
 
