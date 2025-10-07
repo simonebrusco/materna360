@@ -1,0 +1,7 @@
+.panelContainer{border:1px solid #eee;border-radius:16px;padding:16px;background:#fff;max-width:620px}
+.title{margin:0 0 12px 0}
+.segments{display:flex;gap:10px;margin-bottom:8px}
+.segmentBtn{padding:10px 14px;border-radius:10px;border:1px solid #ddd;background:#fafafa;cursor:pointer}
+.segmentBtn:focus{outline:none;box-shadow:0 0 0 2px rgba(13,27,42,.15)}
+.active{background:#0D1B2A;color:#fff;border:1px solid #0D1B2A}
+.meta{opacity:.85}
