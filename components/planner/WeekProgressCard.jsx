@@ -78,7 +78,7 @@ export default function WeekProgressCard({ completedCount = 0, total = 7, days =
         })}
       </div>
 
-      <div style={{marginTop:10}}>
+      <div style={{marginTop:10, cursor:"pointer"}} onClick={()=>onOpenCard()}>
         <div aria-hidden style={{height:8, background:"rgba(13,27,42,.06)", borderRadius:999}}>
           <div style={{height:8, width:`${pct}%`, background:"#F15A2E", borderRadius:999}} />
         </div>
