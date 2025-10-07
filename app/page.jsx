@@ -1,5 +1,7 @@
 // app/page.jsx  (SERVER)
-import HomeClient from './HomeClient';
+import dynamic from 'next/dynamic';
+
+const HomeClient = dynamic(() => import('./HomeClient'), { ssr: false });
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
