@@ -10,6 +10,8 @@ import PauseModal from "../components/modals/PauseModal";
 import { addAction, addMood, toggleDayDone, getWeeklyPlan } from "../lib/storage";
 import { emitEu360Refresh } from "../lib/clientEvents";
 import WeekProgressCard from "../components/planner/WeekProgressCard";
+import GreetingBinder from "../components/GreetingBinder";
+import QuickRow from "../components/QuickRow";
 import MessageOfDayCard from "../components/motd/MessageOfDayCard";
 
 export default function Home(){
@@ -39,11 +41,17 @@ export default function Home(){
 
   return (
     <div className="container">
-      <h1 className="h1">Bom dia, Simone <span>💛</span></h1>
+      <GreetingBinder>
+        {({ name, part }) => (
+          <h1 className="h1">{part}, {name} <span>💛</span></h1>
+        )}
+      </GreetingBinder>
       <p className="sub">Como você está hoje?</p>
 
+      <QuickRow />
+
       <div className="grid-2">
-        <MessageOfDayCard />
+        <MessageOfDayCard showTitle={false} showButton={false} />
 
         <Card>
           <div style={{display:"grid",gridTemplateColumns:"48px 1fr",gap:12,alignItems:"center"}}>
