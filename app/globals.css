@@ -263,3 +263,11 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .card-press { transition: transform .12s ease, box-shadow .12s ease; }
 .card-press:active { transform: translateY(1px) scale(0.995); }
 .card-press:hover { box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+
+/* Pressable/layout utilities */
+.pressable-card-center{ min-height:110px; display:grid; place-items:center; }
+.icon-list-row{ display:grid; grid-template-columns:48px 1fr; gap:12px; align-items:center; }
+.text-strong{ font-weight:800; }
+.text-soft{ opacity:.75; }
+.mb-6{ margin-bottom:6px; }
+.section-title-tight{ margin:0 0 10px; }
