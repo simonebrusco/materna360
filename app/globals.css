@@ -274,9 +274,10 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .planner-list{ padding-left:18px; margin-top:6px; }
 
 /* Planner CTA card */
-.card-press{ background: var(--card); border-radius: var(--r-lg); box-shadow: var(--shadow-soft); padding: 16px; color: var(--navy); cursor: pointer; transition: transform .2s ease; }
+.card-press{ background: var(--card); border-radius: var(--r-lg); box-shadow: var(--shadow-soft); padding: 16px; color: var(--navy); cursor: pointer; transition: transform .12s ease, box-shadow .12s ease; }
 .card-press:focus-visible{ outline: none; box-shadow: var(--ring); }
-.card-press:hover{ transform: translateY(-1px); }
+.card-press:active{ transform: translateY(1px) scale(0.995); }
+.card-press:hover{ box-shadow: 0 8px 24px rgba(0,0,0,.06); }
 .planner-cta{ color: var(--navy); }
 .planner-cta-title{ display:block; }
 .planner-cta-subtle{ opacity: .8; }
@@ -289,3 +290,6 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 
 /* Greeting */
 .greeting-title{ margin:0; color: var(--navy); }
+
+/* Generic icon */
+.icon{ width: 22px; height: 22px; display:inline-block; vertical-align:middle; }
