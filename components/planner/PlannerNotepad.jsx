@@ -72,6 +72,28 @@ export default function PlannerNotepad({ open, onClose, dayIndex=0, onChangeDay 
     try{
       if (editing === "edit" && item.id){ setDays(addOrUpdate(idx, item, true)); }
       else { setDays(addOrUpdate(idx, item, false)); }
+      // Schedule reminder if any
+      try {
+        if (item.reminderAt) {
+          const when = Date.parse(item.reminderAt) || 0;
+          const delay = Math.max(0, when - Date.now());
+          if (delay > 0 && typeof window !== 'undefined') {
+            const setup = async () => {
+              try {
+                const perm = await Notification.requestPermission();
+                if (perm === 'granted') {
+                  setTimeout(() => {
+                    try { new Notification('Lembrete', { body: item.title || 'Anotação' }); } catch {}
+                  }, Math.min(delay, 2_147_000_000)); // cap ~24d
+                } else {
+                  showToast('Para lembretes, permita notificações no navegador.');
+                }
+              } catch { showToast('Para lembretes, permita notificações no navegador.'); }
+            };
+            setup();
+          }
+        }
+      } catch {}
       setEditing(null); setDraft(null);
       try { localStorage.removeItem(`m360:planner:draft:${idx}`); } catch {}
       showToast("Salvo");
