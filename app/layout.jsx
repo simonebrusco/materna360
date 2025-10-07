@@ -1,11 +1,13 @@
 import './globals.css';
 import BottomTabBar from '../components/BottomTabBar';
-import { Toaster } from '../lib/ui/toast';
 import DevErrorSuppressor from '../components/DevErrorSuppressor';
 import Image from 'next/image';
 import Link from 'next/link';
 import ClientMigrator from '../components/ClientMigrator';
-import ReminderToasts from '../components/ReminderToasts';
+import NextDynamic from 'next/dynamic';
+
+const ToastHost = NextDynamic(() => import('../components/ToastHost'), { ssr: false });
+const ReminderToasts = NextDynamic(() => import('../components/ReminderToasts'), { ssr: false });
 // ❌ comente temporariamente
 // import dynamic from 'next/dynamic';
 // const AnalyticsBinder = dynamic(() => import('../components/AnalyticsBinder'), { ssr:false });
@@ -52,7 +54,7 @@ export default function RootLayout({ children }) {
         <main className="app-main">
           {children}
         </main>
-        <Toaster />
+        <ToastHost />
         <ReminderToasts />
         <DevErrorSuppressor />
         <BottomTabBar />
