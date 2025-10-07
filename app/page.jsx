@@ -43,7 +43,7 @@ export default function Home(){
       <GreetingBinder>
         {({ name, part }) => (
           <>
-            <h1 className="h1">{part}, {name} <span>💛</span></h1>
+            <h1 className="h1" suppressHydrationWarning>{part}, {name} <span>💛</span></h1>
             <p className="sub">Como você está hoje?</p>
           </>
         )}
