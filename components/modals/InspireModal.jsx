@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 import BaseModal from "./BaseModal";
 
 const PHRASES = [
-  "Breathe deeply. You’re stronger than you imagine.",
-  "Small pauses bring big changes.",
-  "You deserve a moment of peace.",
+  "Respire profundamente. Você é mais forte do que imagina.",
+  "Pequenas pausas trazem grandes mudanças.",
+  "Você merece um momento de paz.",
 ];
 
 function nextIndex() {
