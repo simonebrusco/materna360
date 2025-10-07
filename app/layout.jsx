@@ -5,6 +5,7 @@ import DevErrorSuppressor from '../components/DevErrorSuppressor';
 import Image from 'next/image';
 import Link from 'next/link';
 import ClientMigrator from '../components/ClientMigrator';
+import ReminderToasts from '../components/ReminderToasts';
 // ❌ comente temporariamente
 // import dynamic from 'next/dynamic';
 // const AnalyticsBinder = dynamic(() => import('../components/AnalyticsBinder'), { ssr:false });
