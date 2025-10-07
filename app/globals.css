@@ -252,6 +252,25 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 
 /* keep existing .btn, .btn-primary, .btn-ghost styles */
 
+/* Outline buttons */
+.btn-outline,
+button.secondary {
+  background-color: transparent;
+  color: var(--magenta);
+  border: 2px solid var(--magenta);
+  border-radius: 16px;
+  font-weight: 500;
+  padding: 8px 18px;
+  transition: all 0.25s ease-in-out;
+}
+
+.btn-outline:hover,
+button.secondary:hover {
+  background-color: var(--magenta);
+  color: var(--white);
+  box-shadow: 0 0 10px 2px rgba(255, 0, 94, 0.35);
+}
+
 /* Brand header */
 .brand-header{position:fixed;top:0;left:0;width:100%;display:flex;align-items:center;justify-content:center;padding:12px 0;background:rgba(255,255,255,.8);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.05);z-index:1000}
 .brand-logo{display:block;width:160px;max-height:80px;height:auto;object-fit:contain;opacity:0;box-shadow:0 2px 4px rgba(0,0,0,.05);transition:filter .2s ease-in;animation:m360-logo-fade .4s ease-in forwards}
