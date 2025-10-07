@@ -28,6 +28,7 @@ export default function Home(){
     try {
       const p = toggleDayDone(i);
       setPlan(p);
+      try { addAction({ type: 'planner_toggle', date: new Date().toISOString() }); } catch {}
       emitEu360Refresh();
     } catch {}
   }
