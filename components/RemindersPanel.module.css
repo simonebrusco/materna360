@@ -65,20 +65,42 @@
 }
 
 .resetButton {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  background: #fafafa;
+  background-color: transparent;
+  color: #FF005E;
+  border: 2px solid #FF005E;
+  border-radius: 16px;
+  font-weight: 500;
+  padding: 8px 18px;
+  transition: all 0.2s ease-in-out;
+}
+.resetButton:hover {
+  background-color: #FF005E;
+  color: #FFFFFF;
 }
 
 .saveButton {
-  padding: 10px 14px;
-  border-radius: 10px;
+  background-color: #FF005E;
+  color: #FFFFFF;
+  font-weight: 600;
   border: none;
-  background: #0D1B2A;
-  color: #fff;
+  border-radius: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 3px 6px rgba(255, 0, 94, 0.25);
+}
+.saveButton:hover {
+  background-color: #ff2a75;
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(255, 0, 94, 0.35);
+}
+.saveButton:active {
+  transform: scale(0.97);
+  background-color: #e60054;
 }
 
 .saveButton:disabled {
-  background: #888;
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
 }
