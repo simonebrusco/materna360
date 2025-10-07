@@ -1,0 +1,84 @@
+.panelContainer {
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 16px;
+  background: #fff;
+  max-width: 620px;
+}
+
+.panelTitle {
+  margin: 0 0 12px 0;
+}
+
+.rowToggle {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.labelStrong {
+  font-weight: 600;
+}
+
+.toggleLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggleHelp {
+  opacity: 0.8;
+}
+
+.rowInput {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.hintText {
+  opacity: 0.9;
+}
+
+.numberInput {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.textInput {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.actionsRow {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.resetButton {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+}
+
+.saveButton {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  background: #0D1B2A;
+  color: #fff;
+}
+
+.saveButton:disabled {
+  background: #888;
+}
