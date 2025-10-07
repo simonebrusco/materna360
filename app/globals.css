@@ -255,3 +255,4 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 /* Message of the day */
 .motd-title{ display:block; margin-bottom:8px; font-weight:800; }
 .motd-text{ margin:0 0 12px; }
+.motd-standalone{ font-size:16px; line-height:1.45; color: var(--navy); }
