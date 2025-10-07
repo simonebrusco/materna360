@@ -12,7 +12,8 @@ import PauseModal from "../components/modals/PauseModal";
 import { addAction, addMood, toggleDayDone, getWeeklyPlan, ensurePlannerWeek, getPlanner, getPlannerDaysDone } from "../lib/storage";
 import { emitEu360Refresh } from "../lib/clientEvents";
 import WeekProgressCard from "../components/planner/WeekProgressCard";
-import GreetingBinder from "../components/GreetingBinder";
+import dynamic from "next/dynamic";
+const GreetingBinder = dynamic(() => import("../components/GreetingBinder"), { ssr: false });
 import QuickRow from "../components/QuickRow";
 import MessageOfDayCard from "../components/motd/MessageOfDayCard";
 
