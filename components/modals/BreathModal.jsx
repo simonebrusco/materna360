@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useRef } from "react";
 import BaseModal from "./BaseModal";
-import { showToast } from "../../lib/ui/toast";
+import { showToast } from "../../lib/toast";
 
 export default function BreathModal({ open, onClose = () => {}, onComplete = () => {} }) {
   const timeoutRef = useRef(null);
