@@ -12,7 +12,8 @@ import PauseModal from "../components/modals/PauseModal";
 import { addAction, addMood, toggleDayDone, getWeeklyPlan, ensurePlannerWeek, getPlanner, getPlannerDaysDone } from "../lib/storage";
 import { emitEu360Refresh } from "../lib/clientEvents";
 import WeekProgressCard from "../components/planner/WeekProgressCard";
-import GreetingBinder from "../components/GreetingBinder";
+import dynamic from "next/dynamic";
+const GreetingBinder = dynamic(() => import("../components/GreetingBinder"), { ssr: false });
 import QuickRow from "../components/QuickRow";
 import MessageOfDayCard from "../components/motd/MessageOfDayCard";
 
@@ -46,7 +47,7 @@ export default function Home(){
     <div className="container">
       <GreetingBinder>
         {({ name, part }) => (
-          <h1 className="h1">{part}, {name} <span>💛</span></h1>
+          <h1 className="h1" suppressHydrationWarning>{part}, {name} <span aria-hidden>💛</span></h1>
         )}
       </GreetingBinder>
       <p className="sub">Como você está hoje?</p>

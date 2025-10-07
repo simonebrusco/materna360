@@ -35,7 +35,7 @@ function GratitudeSection({ g }){
           {model.items.slice(0,6).map(it=>(
             <div key={it.id} className="card rec" style={{display:"flex",justifyContent:"space-between",gap:10,alignItems:"center"}}>
               <div>
-                <div style={{fontWeight:700, marginBottom:6}}>{new Date(it.ts).toLocaleDateString()}</div>
+                <div style={{fontWeight:700, marginBottom:6}}>{(new Date(it.ts)).toISOString().slice(0,10)}</div>
                 <div style={{opacity:.9}}>{it.text}</div>
               </div>
               <button className="chip" onClick={()=>model.remove(it.id)} title="Excluir">Excluir</button>
