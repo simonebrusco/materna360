@@ -5,7 +5,7 @@ import { getGreeting } from '../lib/utils/greeting';
 
 export default function GreetingBinder({ children }) {
   const [name, setName] = useState('');
-  const [part, setPart] = useState(getGreeting());
+  const [part, setPart] = useState('Olá');
 
   useEffect(() => {
     const read = () => {
@@ -17,6 +17,7 @@ export default function GreetingBinder({ children }) {
       }
     };
     read();
+    setPart(getGreeting());
     const off = onUpdate((k) => { if (k === keys.lastCtx) read(); });
     const t = setInterval(() => setPart(getGreeting()), 60 * 1000);
     return () => { off?.(); clearInterval(t); };
