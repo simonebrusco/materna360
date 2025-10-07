@@ -1,12 +1,12 @@
 import './globals.css';
-import BottomTabBar from '../components/BottomTabBar';
-import { Toaster } from '../lib/ui/toast';
-import DevErrorSuppressor from '../components/DevErrorSuppressor';
+import dynamic from 'next/dynamic';
+const BottomTabBar = dynamic(() => import('../components/BottomTabBar'), { ssr: false });
+const Toaster = dynamic(() => import('../lib/ui/toast').then(mod => ({ default: mod.Toaster })), { ssr: false });
+const DevErrorSuppressor = dynamic(() => import('../components/DevErrorSuppressor'), { ssr: false });
 import Image from 'next/image';
 import Link from 'next/link';
-import ClientMigrator from '../components/ClientMigrator';
+const ClientMigrator = dynamic(() => import('../components/ClientMigrator'), { ssr: false });
 // ❌ comente temporariamente
-// import dynamic from 'next/dynamic';
 // const AnalyticsBinder = dynamic(() => import('../components/AnalyticsBinder'), { ssr:false });
 // const RemindersAgent = dynamic(() => import('../components/RemindersAgent'), { ssr:false });
 
