@@ -379,3 +379,84 @@ label{ font-weight: var(--m360-weight-medium); }
   .card-title{ font-size: 16px; }
   .planner .day-chip, .m360-chip{ font-size: 13px; }
 }
+
+/* Container com respiro premium */
+.m360-container{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 16px 96px;
+}
+
+/* Hero e Planner em blocos amplos e elegantes */
+.m360-hero,
+.m360-planner{
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(17, 17, 17, 0.06);
+  margin-bottom: 16px;
+}
+
+/* Grade de cards: nunca empilhar (>=360px já é 2 colunas) */
+.m360-grid{
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px){
+  .m360-grid{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+
+/* Linha dupla: Hoje + Descobrir lado a lado em telas médias */
+.m360-row{
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px){
+  .m360-row{ grid-template-columns: 1fr 1fr; }
+}
+.m360-col{
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(17,17,17,0.06);
+}
+
+/* Card premium (aplicar às tags .card existentes via cascade) */
+.card{
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(17,17,17,0.05);
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+}
+.card .row{ margin-top: auto; display:flex; gap:10px; }
+
+/* Títulos e subtítulos com consistência e truncamento */
+.card-title{
+  font-weight: 600;
+  margin-bottom: 6px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.card-sub{
+  opacity: .9;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Planner summary respira bem */
+.m360-planner .progress-label{ white-space: nowrap; }
+
+/* FAB já existente — mantém efeito magenta+glow */
+.fab{
+  position: fixed; right: 20px; bottom: 84px; z-index: 35;
+}
+
+/* Micro polimentos premium */
+.m360-container .btn-primary{ box-shadow: 0 3px 8px rgba(255,0,94,0.25); }
+.m360-container .btn-primary:hover{ box-shadow: 0 0 12px 3px rgba(255,0,94,0.45); transform: scale(1.03); }
