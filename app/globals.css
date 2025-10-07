@@ -255,3 +255,6 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 /* Message of the day */
 .motd-title{ display:block; margin-bottom:8px; font-weight:800; }
 .motd-text{ margin:0 0 12px; }
+
+/* Utility: pressable card text color */
+.card-press{ color:#0D1B2A; }
