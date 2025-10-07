@@ -10,7 +10,7 @@ function daypart(date = new Date()){
 }
 
 export default function GreetingBinder({ children }) {
-  const [name, setName] = useState('');
+  const [name, setName] = useState('Mãe');
   const [part, setPart] = useState(daypart());
 
   useEffect(() => {
