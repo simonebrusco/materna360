@@ -7,7 +7,7 @@ import { getGratitude, deleteGratitude, readJSON, getMoodHistory, getActions } f
 import { computeScore, summarizeActions } from "../../lib/score";
 import { onEu360Refresh } from "../../lib/clientEvents";
 import GratitudeModal from "../../components/eu360/GratitudeModal";
-import { showToast } from "../../lib/ui/toast";
+import { showToast } from "../../lib/toast";
 import BadgesBinder from "../../components/BadgesBinder";
 import Eu360CircleBinder from "../../components/Eu360CircleBinder";
 import BadgesStrip from "../../components/BadgesStrip";
