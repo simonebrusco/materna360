@@ -114,6 +114,9 @@ export default function Home(){
       )}
 
       <PlannerNotepad open={openPad} onClose={()=>setOpenPad(false)} dayIndex={padDay} onChangeDay={(i)=>setPadDay(i)} />
+      {flags.discoverTip && (
+        <SafeBoundary><DiscoverTip /></SafeBoundary>
+      )}
 
 
       <BreathModal
