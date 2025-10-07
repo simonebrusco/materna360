@@ -16,6 +16,15 @@ import dynamic from "next/dynamic";
 const GreetingBinder = dynamic(() => import("../components/GreetingBinder"), { ssr: false });
 import QuickRow from "../components/QuickRow";
 import MessageOfDayCard from "../components/motd/MessageOfDayCard";
+import SafeBoundary from "../components/SafeBoundary";
+import { flags } from "../lib/flags";
+import MessageOfDay from "../components/MessageOfDay";
+import MoodQuickPanel from "../components/MoodQuickPanel";
+import TodayChecklist from "../components/TodayChecklist";
+import ReminderBell from "../components/ReminderBell";
+import FabAddNote from "../components/FabAddNote";
+import SmallWins from "../components/SmallWins";
+import DiscoverTip from "../components/DiscoverTip";
 
 export default function Home(){
   const [openBreath, setOpenBreath] = useState(false);
