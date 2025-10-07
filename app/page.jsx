@@ -159,6 +159,12 @@ export default function Home(){
           setOpenPause(false);
         }}
       />
+      {flags.floatingAddNote && (
+        <SafeBoundary><FabAddNote /></SafeBoundary>
+      )}
+      {flags.smallWins && (
+        <SafeBoundary><SmallWins /></SafeBoundary>
+      )}
     </div>
   );
 }
