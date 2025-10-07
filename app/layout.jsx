@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ClientMigrator from '../components/ClientMigrator';
 import AnalyticsBinder from '../components/AnalyticsBinder';
+import RemindersAgent from '../components/RemindersAgent';
 
 export const metadata = {
   title: "Materna360",
@@ -50,6 +51,8 @@ export default function RootLayout({ children }) {
         </main>
         <Toaster />
         <DevErrorSuppressor />
+        <AnalyticsBinder />
+        <RemindersAgent />
         <BottomTabBar />
       </body>
     </html>
