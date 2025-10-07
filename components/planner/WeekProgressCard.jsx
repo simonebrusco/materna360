@@ -23,9 +23,9 @@ function getTodayIndex() {
 }
 
 function microcopy(percent){
-  if (percent <= 33) return "Você está começando—um passo de cada vez.";
-  if (percent <= 66) return "Ótimo ritmo—siga em frente!";
-  return "Você está indo muito bem—quase lá!";
+  if (percent <= 33) return "You’re getting started—one step at a time.";
+  if (percent <= 66) return "Great rhythm—keep going!";
+  return "You’re doing amazing—almost there!";
 }
 
 export default function WeekProgressCard({ completedCount = 0, total = 7, days = Array(7).fill(false), onDayPress = () => {}, bonus, className = "" }){
