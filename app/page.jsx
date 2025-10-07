@@ -54,11 +54,11 @@ export default function Home(){
         <MessageOfDayCard showTitle={false} showButton={false} />
 
         <Card>
-          <div style={{display:"grid",gridTemplateColumns:"48px 1fr",gap:12,alignItems:"center"}}>
+          <div className="icon-list-row">
             <div className="iconToken">🙂</div>
             <div>
-              <div style={{fontWeight:800}}>Como você se sente?</div>
-              <div className="small" style={{opacity:.75}}>Toque para registrar</div>
+              <div className="text-strong">Como você se sente?</div>
+              <div className="small text-soft">Toque para registrar</div>
             </div>
           </div>
         </Card>
@@ -68,9 +68,9 @@ export default function Home(){
 
       <div className="actions-grid">
         <NavyCard onClick={() => setOpenBreath(true)}><div className="iconToken">◐</div><div>Respirar</div></NavyCard>
-        <Card style={{minHeight:110,display:"grid",placeItems:"center"}} onClick={() => setOpenMood(true)}><div className="iconStack"><div className="iconToken">♡</div><div>Refletir</div></div></Card>
+        <Card className="pressable-card-center card-press" onClick={() => setOpenMood(true)}><div className="iconStack"><div className="iconToken">♡</div><div>Refletir</div></div></Card>
         <NavyCard onClick={() => setOpenInspire(true)}><div className="iconToken">🔔</div><div>Inspirar</div></NavyCard>
-        <Card style={{minHeight:110,display:"grid",placeItems:"center"}} onClick={() => setOpenPause(true)}><div className="iconStack"><div className="iconToken">Ⅱ</div><div>Pausar</div></div></Card>
+        <Card className="pressable-card-center card-press" onClick={() => setOpenPause(true)}><div className="iconStack"><div className="iconToken">Ⅱ</div><div>Pausar</div></div></Card>
       </div>
 
       <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onDayPress={onToggle} bonus={bonus} />

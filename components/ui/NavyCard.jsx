@@ -1,6 +1,6 @@
 "use client";
-export default function NavyCard({children, style, ...props}) {
-  return <div className="card-navy" style={{minHeight:110,display:"grid",placeItems:"center",...style}} {...props}>
+export default function NavyCard({children, className = "", style, ...props}) {
+  return <div className={`card-navy card-press pressable-card-center ${className}`} style={style} {...props}>
     <div className="iconStack">{children}</div>
   </div>;
 }
