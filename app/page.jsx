@@ -41,7 +41,18 @@ export default function Home(){
   useEffect(()=>{
     const off = () => setPlan(getPlannerDaysDone() || getWeeklyPlan());
     try { window.addEventListener('m360:data:updated', off); } catch {}
-    return () => { try { window.removeEventListener('m360:data:updated', off); } catch {} };
+    const onFab = (e)=>{
+      try{
+        const iso = e?.detail?.date || new Date().toISOString().slice(0,10);
+        const d = new Date(iso);
+        const dow = d.getDay();
+        const idx = dow===0?6:dow-1;
+        setPadDay(idx);
+        setOpenPad(true);
+      }catch{}
+    };
+    try { window.addEventListener('m360:planner:newEntry', onFab); } catch {}
+    return () => { try { window.removeEventListener('m360:data:updated', off); window.removeEventListener('m360:planner:newEntry', onFab); } catch {} };
   },[]);
   function openNotepad(i){ if (typeof i==='number') setPadDay(i); setOpenPad(true); }
   const tips = [
