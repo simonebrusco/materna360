@@ -1,17 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { get, keys, onUpdate } from '../lib/storage';
-
-function daypart(date = new Date()){
-  const h = date.getHours();
-  if (h < 12) return 'Bom dia';
-  if (h < 18) return 'Boa tarde';
-  return 'Boa noite';
-}
+import { getGreeting } from '../lib/utils/greeting';
 
 export default function GreetingBinder({ children }) {
   const [name, setName] = useState('');
-  const [part, setPart] = useState(daypart());
+  const [part, setPart] = useState(getGreeting());
 
   useEffect(() => {
     const read = () => {
@@ -24,7 +18,7 @@ export default function GreetingBinder({ children }) {
     };
     read();
     const off = onUpdate((k) => { if (k === keys.lastCtx) read(); });
-    const t = setInterval(() => setPart(daypart()), 60 * 1000);
+    const t = setInterval(() => setPart(getGreeting()), 60 * 1000);
     return () => { off?.(); clearInterval(t); };
   }, []);
 
