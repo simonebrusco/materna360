@@ -1,22 +1,39 @@
 'use client';
 import { useEffect } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
 import { trackEvent, trackRoute } from '../lib/analytics';
 
-export default function AnalyticsBinder(){
-  const pathname = usePathname();
-  const search = useSearchParams();
-
-  // Rota (evita função no deps)
+// Hook simples para escutar mudanças de rota via History API
+function usePathWatcher() {
   useEffect(() => {
-    if (!pathname) return;
-    const qs = search ? String(search) : '';
-    trackRoute(pathname, { qs });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, search]); // ok: search é um objeto estável do App Router
+    if (typeof window === 'undefined') return;
+
+    const emit = () => {
+      const path = window.location.pathname;
+      const qs = window.location.search?.slice(1) || '';
+      trackRoute(path, { qs });
+    };
+
+    const origPush = history.pushState;
+    const origReplace = history.replaceState;
+    history.pushState = function (...args) { origPush.apply(this, args); emit(); };
+    history.replaceState = function (...args) { origReplace.apply(this, args); emit(); };
+
+    window.addEventListener('popstate', emit);
+
+    emit();
+
+    return () => {
+      history.pushState = origPush;
+      history.replaceState = origReplace;
+      window.removeEventListener('popstate', emit);
+    };
+  }, []);
+}
+
+export default function AnalyticsBinder() {
+  usePathWatcher();
 
   useEffect(() => {
-    // Guards extras para SSR/hidratação
     if (typeof window === 'undefined') return;
 
     const onData = (e) => trackEvent('storage:update', { key: e?.detail?.key || '' });
