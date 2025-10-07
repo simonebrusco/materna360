@@ -257,12 +257,13 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .motd-text{ margin:0 0 12px; font-size:18px; font-style:italic; line-height:1.6; color: var(--navy); text-align:center; }
 
 /* Icon utility */
-.icon { width: 22px; height: 22px; display: inline-block; vertical-align: middle; }
+.icon { width: 26px; height: 26px; display: inline-block; vertical-align: middle; transition: transform 0.1s ease; }
 
 /* Pressable card interaction */
 .card-press { transition: transform .12s ease, box-shadow .12s ease; }
 .card-press:active { transform: translateY(1px) scale(0.995); }
 .card-press:hover { box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+.card-press:hover .icon { transform: scale(1.05); }
 
 /* Pressable/layout utilities */
 .pressable-card-center{ min-height:110px; display:grid; place-items:center; }
