@@ -161,6 +161,8 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 /* toast system */
 .m360-toast-wrap { position: fixed; left: 0; right: 0; bottom: 24px; display: grid; place-items: center; pointer-events: none; z-index: 60; }
 .m360-toast { background: var(--card); color: var(--navy); border: 1px solid rgba(13,27,42,.06); box-shadow: var(--shadow-soft); padding: 12px 16px; border-radius: 14px; font-weight: 600; animation: m360-rise .25s ease both; pointer-events: auto; }
+.m360-toast-title{ font-weight: 800; margin-bottom: 4px; }
+.m360-toast-message{ font-weight: 600; opacity: .95; line-height: 1.35; }
 
 /* breath timer */
 .m360-breath-wrap { display: grid; place-items: center; gap: 10px; margin: 14px 0; }
