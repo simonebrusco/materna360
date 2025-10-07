@@ -207,6 +207,13 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
   .planner-meta{ text-align:right; }
 }
 
+/* Planner tasks card */
+.planner-tasks-card{ border:1px solid rgba(13,27,42,.08); background: var(--card); }
+.tasks-input-row{ display:flex; gap:8px; margin: 8px 0; }
+.tasks-list{ margin-top:10px; padding-left:16px; }
+.task-item{ cursor:pointer; margin-bottom:4px; color: var(--navy); }
+.task-item.is-done{ text-decoration: line-through; color: rgba(13,27,42,.5); }
+
 /* Discover page: age tabs and grids */
 .age-tabs{ display:flex; gap:10px; margin:12px 0 8px; }
 .age-tab{ all:unset; cursor:pointer; padding:8px 14px; border-radius:999px; border:1.5px solid rgba(13,27,42,.12); color:#0D1B2A; background:#fff; }
