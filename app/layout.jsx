@@ -28,6 +28,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
         <meta name="theme-color" content="#ff005e" />
+        <script dangerouslySetInnerHTML={{__html: `(function(){try{const handleRej=(ev)=>{try{const reason=ev&&(ev.reason||ev.detail||null);const message=reason&&(reason.message||String(reason)||"");const stack=reason&&reason.stack?String(reason.stack):"";if(message&&message.toLowerCase().includes("failed to fetch")&&(stack.toLowerCase().includes("fullstory")||String(reason).toLowerCase().includes("fullstory"))){ev.preventDefault&&ev.preventDefault();ev.stopPropagation&&ev.stopPropagation();console.debug("Suppressed FullStory fetch error (early):",reason);}}catch(e){} };const handleErr=(ev)=>{try{const msg=ev&&ev.message?String(ev.message):"";const src=ev&&ev.filename?String(ev.filename):(ev&&ev.target&&ev.target.src)||"";if(msg.toLowerCase().includes("failed to fetch")&&src.toLowerCase().includes("fullstory")){ev.preventDefault&&ev.preventDefault();ev.stopPropagation&&ev.stopPropagation();console.debug("Suppressed FullStory fetch error (early error):",msg,src);} }catch(e){} };window.addEventListener('unhandledrejection',handleRej,true);window.addEventListener('error',handleErr,true);}catch(e){} })();`}} />
       </head>
       <body>
         <ClientMigrator />
