@@ -1,4 +1,5 @@
 "use client";
+'use client';
 import { useEffect, useState } from "react";
 import Card from "../components/ui/Card";
 import NavyCard from "../components/ui/NavyCard";
