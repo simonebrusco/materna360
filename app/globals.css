@@ -255,3 +255,11 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 /* Message of the day */
 .motd-title{ display:block; margin-bottom:8px; font-weight:800; }
 .motd-text{ margin:0 0 12px; }
+
+/* Icon utility */
+.icon { width: 22px; height: 22px; display: inline-block; vertical-align: middle; }
+
+/* Pressable card interaction */
+.card-press { transition: transform .12s ease, box-shadow .12s ease; }
+.card-press:active { transform: translateY(1px) scale(0.995); }
+.card-press:hover { box-shadow: 0 8px 24px rgba(0,0,0,.06); }
