@@ -11,7 +11,7 @@ import { addAction, addMood, toggleDayDone, getWeeklyPlan } from "../lib/storage
 import { emitEu360Refresh } from "../lib/clientEvents";
 import WeekProgressCard from "../components/planner/WeekProgressCard";
 import MessageOfDayCard from "../components/motd/MessageOfDayCard";
-import GreetingBinder from "../components/GreetingBinder";
+import GreetingClient from "../components/GreetingClient";
 
 export default function Home(){
   const [openBreath, setOpenBreath] = useState(false);
@@ -40,14 +40,9 @@ export default function Home(){
 
   return (
     <div className="container">
-      <GreetingBinder>
-        {({ name, part }) => (
-          <>
-            <h1 className="h1">{part}, {name} <span>💛</span></h1>
-            <p className="sub">Como você está hoje?</p>
-          </>
-        )}
-      </GreetingBinder>
+      <h1 className="h1"><span id="greeting-text">Bom dia, Simone 💛</span></h1>
+      <p className="sub">Como você está hoje?</p>
+      <GreetingClient />
 
       <div className="grid-2">
         <MessageOfDayCard />
