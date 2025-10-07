@@ -33,6 +33,7 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#ff005e" />
       </head>
       <body>
+        <DevErrorSuppressor />
         <ClientMigrator />
         {/* <AnalyticsBinder /> */}
         {/* <RemindersAgent /> */}
