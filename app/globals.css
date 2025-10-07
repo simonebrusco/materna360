@@ -88,8 +88,9 @@ main { min-height: 100vh; display: flex; justify-content: center; }
 .btn-primary,
 button[type="submit"],
 .button-main { background-color: var(--magenta); color: var(--white); font-weight: 600; font-size: 15px; border: none; border-radius: 16px; padding: 10px 22px; cursor: pointer; transition: all 0.25s ease-in-out; box-shadow: 0 3px 8px rgba(255, 0, 94, 0.25); }
-.btn-primary:hover { background-color: #ff2a75; transform: scale(1.03); box-shadow: 0 4px 10px rgba(255, 0, 94, 0.35); }
-.btn-primary:active { transform: scale(0.97); background-color: #e60054; }
+.btn-primary:hover,
+.btn-primary:focus { background-color: #ff2a75; transform: scale(1.03); box-shadow: 0 0 12px 3px rgba(255, 0, 94, 0.45); }
+.btn-primary:active { transform: scale(0.97); background-color: #e60054; box-shadow: 0 2px 6px rgba(255, 0, 94, 0.25); }
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; box-shadow: none; }
 .btn-ghost { background-color: transparent; color: var(--magenta); border: 2px solid var(--magenta); border-radius: 16px; font-weight: 500; padding: 8px 18px; transition: all 0.2s ease-in-out; }
 .btn-ghost:hover { background-color: var(--magenta); color: var(--white); }
