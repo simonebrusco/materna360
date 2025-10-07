@@ -3,9 +3,10 @@ import { Suspense } from 'react';
 
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
+export const revalidate = 0;
 
 import { useMemo, useState } from "react";
-import dynamic from "next/dynamic";
+import NextDynamic from "next/dynamic";
 import Card from "../../components/ui/Card";
 import NavyCard from "../../components/ui/NavyCard";
 import Btn from "../../components/ui/Btn";
@@ -14,7 +15,7 @@ import { getLastAgeGroup, setLastAgeGroup, getLastContext, setLastContext, getLa
 import { generateIdeas } from "../../lib/ideas";
 import { productCatalog } from "../../lib/recs";
 
-const Vitrine = dynamic(() => import("../../components/discover/Vitrine"), { ssr: false });
+const Vitrine = NextDynamic(() => import("../../components/discover/Vitrine"), { ssr: false });
 
 export default function Descobrir(){
   const ages = ["0-2","3-4","5-7","8+"];
