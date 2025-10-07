@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { readJSON, writeJSON, onUpdate } from "../lib/storage";
-import { showToast } from "../lib/ui/toast";
+import { showToast } from "../lib/toast";
 
 function getBadges(){
   try {
