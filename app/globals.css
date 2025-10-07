@@ -286,3 +286,6 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .quick-link{ display:flex; flex-direction:column; align-items:center; justify-content:center; border:1px solid #eee; border-radius:14px; padding:10px 8px; color: var(--navy); text-decoration:none; }
 .quick-icon{ font-size:18px; line-height:1; }
 .quick-label{ font-size:12px; margin-top:6px; }
+
+/* Greeting */
+.greeting-title{ margin:0; color: var(--navy); }
