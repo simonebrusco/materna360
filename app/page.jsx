@@ -91,6 +91,9 @@ export default function Home(){
             <div>
               <div style={{fontWeight:800}}>Como você se sente?</div>
               <div className="small" style={{opacity:.75}}>Toque para registrar</div>
+              {flags.moodQuickPanel && (
+                <SafeBoundary><MoodQuickPanel /></SafeBoundary>
+              )}
             </div>
           </div>
         </Card>
