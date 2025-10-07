@@ -136,6 +136,7 @@ export default function Home(){
           try{ addMood({ date:new Date().toISOString(), mood:entry?.mood ?? 0, note:entry?.note }); }catch{}
           try{ addAction({ date:new Date().toISOString(), type:"reflect" }); }catch{}
           emitEu360Refresh();
+          try{ dispatchEvent(new CustomEvent('m360:win', { detail:{ type:'mood' } })); }catch{}
           setOpenMood(false);
         }}
       />
