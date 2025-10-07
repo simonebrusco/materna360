@@ -85,9 +85,12 @@ main { min-height: 100vh; display: flex; justify-content: center; }
 
 .btn[disabled], .btn:disabled { opacity: .6; box-shadow: none; cursor: not-allowed; }
 
-.btn-primary { background: #F15A2E; color: var(--white); box-shadow: var(--shadow-soft); }
-.btn-primary:hover { filter: brightness(1.06); }
-.btn-ghost { background: transparent; border: 1.5px solid var(--magenta-20); color: var(--navy); }
+.btn-primary { background-color: #FF005E; color: var(--white); font-weight: 600; border: none; border-radius: 16px; padding: 10px 20px; cursor: pointer; transition: all 0.2s ease-in-out; box-shadow: 0 3px 6px rgba(255, 0, 94, 0.25); }
+.btn-primary:hover { background-color: #ff2a75; transform: scale(1.03); box-shadow: 0 4px 10px rgba(255, 0, 94, 0.35); }
+.btn-primary:active { transform: scale(0.97); background-color: #e60054; }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; box-shadow: none; }
+.btn-ghost { background-color: transparent; color: #FF005E; border: 2px solid #FF005E; border-radius: 16px; font-weight: 500; padding: 8px 18px; transition: all 0.2s ease-in-out; }
+.btn-ghost:hover { background-color: #FF005E; color: #FFFFFF; }
 .btn-subtle { background: var(--card); box-shadow: var(--shadow-soft); color: var(--navy); }
 
 /* Surfaces */
@@ -159,7 +162,7 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .m360-modal.is-closing { animation: m360-drop .12s ease both; }
 
 /* modal-specific button tweaks */
-.m360-modal .btn-ghost { border-color: rgba(13,27,42,.15); }
+.m360-modal .btn-ghost { border-color: #FF005E; }
 
 /* toast system */
 .m360-toast-wrap { position: fixed; left: 0; right: 0; bottom: 24px; display: grid; place-items: center; pointer-events: none; z-index: 60; }
