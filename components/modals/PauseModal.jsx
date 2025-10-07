@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import BaseModal from "./BaseModal";
-import { showToast } from "../../lib/ui/toast";
+import { showToast } from "../../lib/toast";
 
 export default function PauseModal({ open, onClose = () => {}, onComplete = () => {} }) {
   const [minutes, setMinutes] = useState(3);
