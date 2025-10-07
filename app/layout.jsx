@@ -5,8 +5,10 @@ import DevErrorSuppressor from '../components/DevErrorSuppressor';
 import Image from 'next/image';
 import Link from 'next/link';
 import ClientMigrator from '../components/ClientMigrator';
-import AnalyticsBinder from '../components/AnalyticsBinder';
-import RemindersAgent from '../components/RemindersAgent';
+// ❌ comente temporariamente
+// import dynamic from 'next/dynamic';
+// const AnalyticsBinder = dynamic(() => import('../components/AnalyticsBinder'), { ssr:false });
+// const RemindersAgent = dynamic(() => import('../components/RemindersAgent'), { ssr:false });
 
 export const metadata = {
   title: "Materna360",
@@ -32,8 +34,8 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <ClientMigrator />
-        <AnalyticsBinder />
-        <RemindersAgent />
+        {/* <AnalyticsBinder /> */}
+        {/* <RemindersAgent /> */}
         <header className="brand-header">
           <Link href="/" className="brand-logo-link" aria-label="Materna360">
             <Image
