@@ -263,7 +263,6 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 
 /* Message of the day */
 .motd-title{ display:block; margin-bottom:8px; font-weight:800; }
-ai_main_7d7878c4bdcc
 .motd-text{ margin:0 0 12px; font-style: italic; }
 .motd-quote{ color:#F17324; font-weight:800; margin-right:6px; }
 
