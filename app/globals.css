@@ -545,3 +545,53 @@ label{ font-weight: var(--m360-weight-medium); }
   box-shadow: 0 6px 18px rgba(17,17,17,.05);
   background: #fff;
 }
+
+/* New Maternal Actions grid styles */
+.m360-maternal-actions {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin-top: 2rem;
+}
+
+.m360-action {
+  text-align: left;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(255, 0, 94, 0.08);
+  padding: 24px;
+  transition: all 0.25s ease;
+}
+.m360-action:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(255, 0, 94, 0.15);
+}
+
+.m360-action h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--m360-ink);
+  margin-bottom: 4px;
+}
+
+.m360-action p {
+  font-size: 0.95rem;
+  color: var(--m360-ink-60);
+  margin-bottom: 16px;
+}
+
+.m360-action .card-icon {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.m360-action .card-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.m360-action .btn {
+  flex: 1;
+  min-width: 130px;
+}
