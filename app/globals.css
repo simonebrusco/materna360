@@ -526,15 +526,36 @@ label{ font-weight: var(--m360-weight-medium); }
   box-shadow: var(--m360-shadow-outline);
 }
 
-/* Meu Dia scoped palette overrides */
-.meu-dia .btn-primary{ background:#F15A2E !important; color:#FFFFFF !important; border:2px solid #F15A2E !important; box-shadow: 0 3px 8px rgba(241,90,46,.25); }
-.meu-dia .btn-primary:hover{ background:#e45129 !important; border-color:#e45129 !important; }
-.meu-dia .btn-outline{ background:transparent !important; color:#6C4AB6 !important; border:2px solid #6C4AB6 !important; }
-.meu-dia .btn-outline:hover{ background:rgba(108,74,182,.08) !important; }
+/* Meu Dia soft-luxury theme variables (scoped) */
+:root .meu-dia{
+  --m360-primary:  #FF005E;  /* magenta (brand) */
+  --m360-secondary:#2F3A56;  /* navy discreto */
+  --m360-accent:   #F9C9B7;  /* rosé suave */
+  --m360-bg:       #FFFFFF;  /* branco */
+  --m360-text:     #2F3A56;  /* navy para textos */
+}
 
-/* Meu Dia heading/subtext typography and color */
-.meu-dia .m360-hero h1{ font-family:Poppins, system-ui; font-weight:700; font-size:24px; color:#1E1E1E; }
-.meu-dia .m360-hero .sub{ font-family:Poppins, system-ui; font-weight:400; font-size:16px; color:#1E1E1E; }
+/* Meu Dia component mappings (scoped) */
+.meu-dia .m360-hero h1{ font-family:Poppins, system-ui; font-weight:700; font-size:24px; color:var(--m360-text); }
+.meu-dia .m360-hero .sub{ font-family:Poppins, system-ui; font-weight:400; font-size:16px; color:var(--m360-text); }
+.meu-dia .motd-quote{ color: var(--m360-accent); }
+.meu-dia .card{ background: var(--m360-bg); border-radius:16px; }
+
+/* Icons mapping */
+.meu-dia .icon-default,
+.meu-dia .icon-action{ color: var(--m360-primary); }
+.meu-dia .icon-secondary{ color: var(--m360-secondary); }
+.meu-dia .icon-accent{ color: var(--m360-accent); }
+
+/* Buttons (scoped to Meu Dia) */
+.meu-dia .btn-primary{ background:var(--m360-primary) !important; color:#FFFFFF !important; border:2px solid var(--m360-primary) !important; box-shadow: 0 3px 8px rgba(255,0,94,.25); }
+.meu-dia .btn-primary:hover{ background:#e60054 !important; border-color:#e60054 !important; }
+.meu-dia .btn-outline{ background:transparent !important; color:var(--m360-secondary) !important; border:2px solid var(--m360-secondary) !important; }
+.meu-dia .btn-outline:hover{ background:rgba(47,58,86,.08) !important; }
+.meu-dia .btn-ghost, .meu-dia .btn.btn-ghost{ background:transparent !important; color:var(--m360-primary) !important; border-color:transparent !important; }
+
+/* Chips/Pills */
+.meu-dia .m360-chip{ border-color: var(--m360-accent) !important; color: var(--m360-secondary) !important; }
 
 /* Chips */
 .m360-container .chip {
