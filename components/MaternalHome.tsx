@@ -3,8 +3,6 @@
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Card from "./ui/Card";
-import NavyCard from "./ui/NavyCard";
-import Btn from "./ui/Btn";
 import Icon from "./ui/Icon";
 import PlannerNotepad from "./planner/PlannerNotepad";
 import WeekProgressCard from "./planner/WeekProgressCard";
@@ -15,13 +13,17 @@ import InspireModal from "./modals/InspireModal";
 import PauseModal from "./modals/PauseModal";
 import MessageOfDayCard from "./motd/MessageOfDayCard";
 import Vitrine from "./discover/Vitrine";
-ai_main_7d7878c4bdcc
 import ChecklistToday from "./planner/ChecklistToday";
-import { addAction, addMood, ensurePlannerWeek, getPlannerDaysDone, getWeeklyPlan, toggleDayDone, ensureSegmentedPlanners, getSegmentDaysDone } from "../lib/storage";
-
+import {
+  addAction,
+  addMood,
+  ensurePlannerWeek,
+  getWeeklyPlan,
+  toggleDayDone,
+  ensureSegmentedPlanners,
+  getSegmentDaysDone,
+} from "../lib/storage";
 import QuickAddModal from "./planner/QuickAddModal";
-import { addAction, addMood, ensurePlannerWeek, getPlannerDaysDone, getWeeklyPlan, toggleDayDone } from "../lib/storage";
-main
 import { emitEu360Refresh } from "../lib/clientEvents";
 import BadgesLevelToast from "./BadgesLevelToast";
 import { showToast } from "../lib/ui/toast";
@@ -134,11 +136,8 @@ export default function MaternalHome(){
           <MessageOfDayCard showTitle={false} showButton={false} />
           <Card className="tap-scale" onClick={()=>setOpenMood(true)}>
             <div style={{display:"grid",gridTemplateColumns:"48px 1fr",gap:12,alignItems:"center"}}>
-ai_main_7d7878c4bdcc
               <Icon name="mood" className="icon-24 icon-accent" />
-
               <Icon name="mood" className="icon-24 icon-secondary" />
-main
               <div>
                 <div style={{fontWeight:800,color:'#1E1E1E'}}>Como você se sente?</div>
                 <div className="small" style={{opacity:.75}}>Toque para registrar</div>
@@ -153,7 +152,6 @@ main
       </section>
 
       {/* 2) Planner da Família (full-width) */}
-ai_main_7d7878c4bdcc
       <section className="m360-planner">
         <div className="m360-chip-row" role="tablist" aria-label="Planner categorias">
           {['home','kids','me'].map((k)=>{
@@ -165,13 +163,6 @@ ai_main_7d7878c4bdcc
           })}
         </div>
         <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onOpenDay={(i)=>openNotepad(i)} onOpenCard={()=>openNotepad(padDay)} bonus={bonus} extraPct={extraPct} />
-
-      <section className="m360-planner" style={{marginBottom:24}}>
-        {/* Segmented tabs */}
-        <PlannerTabs />
-        <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onOpenDay={(i)=>openNotepad(i)} onOpenCard={()=>openNotepad(padDay)} bonus={bonus} />
-        <DailyChecklist />
-main
       </section>
 
       {/* 3) Ações (2x2) */}
