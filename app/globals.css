@@ -569,6 +569,8 @@ label{ font-weight: var(--m360-weight-medium); }
 
 /* Chips/Pills */
 .meu-dia .m360-chip{ border-color: var(--m360-accent) !important; color: var(--m360-secondary) !important; }
+/* Recs pills in Meu Dia */
+.meu-dia .chips-row .chip{ border-color:#F9C9B7; color:#2F3A56; }
 
 /* Chips */
 .m360-container .chip {
@@ -671,7 +673,7 @@ label{ font-weight: var(--m360-weight-medium); }
 }
 
 /* Hero topo */
-.meu-dia .hero{max-width:1120px;margin:12px auto 24px;}
+.meu-dia .hero{max-width:1120px;margin:8px auto 16px;}
 .meu-dia .hero h1{font-family:Poppins,system-ui; font-weight:700; font-size:26px; line-height:32px; color:var(--m360-text);}
 .meu-dia .hero h2{font-family:Poppins,system-ui; font-weight:400; font-size:16px; line-height:24px; color:rgba(47,58,86,.85); margin:0 0 12px;}
 .meu-dia .hero h1,.meu-dia .hero h2{word-break:normal; overflow-wrap:anywhere; hyphens:manual;}
@@ -691,10 +693,11 @@ label{ font-weight: var(--m360-weight-medium); }
 /* Mensagem do dia */
 .meu-dia .motd-quote{color:var(--m360-accent); font-size:20px; margin-right:6px;}
 .meu-dia .motd-text{font-family:Poppins,system-ui; font-style:italic; font-size:16px; line-height:24px; color:rgba(47,58,86,.92);}
+.meu-dia .motd-skeleton{ width:60%; height:10px; border-radius:6px; background: rgba(47,58,86,.08); margin-top:6px; }
 
 /* Mood card – evitar texto “em coluna” */
-.meu-dia .mood-card h3{font:600 18px/24px Poppins,system-ui; margin:0 0 4px; white-space:normal; overflow-wrap:break-word;}
-.meu-dia .mood-card p{font:400 14px/20px Poppins,system-ui; color:rgba(47,58,86,.70);}
+.meu-dia .mood-card h3{font:600 18px/24px Poppins,system-ui; margin:0 0 4px; white-space:normal; overflow-wrap:break-word; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+.meu-dia .mood-card p{font:400 14px/20px Poppins,system-ui; color:rgba(47,58,86,.70); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 
 /* Ícones e botões dentro do Meu Dia */
 .meu-dia .icon-accent{color:var(--m360-primary);} 
