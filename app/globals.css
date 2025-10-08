@@ -705,3 +705,5 @@ label{ font-weight: var(--m360-weight-medium); }
 .meu-dia section{margin-bottom:24px;}
 
 /* ci: retrigger preview */
+
+/* no-op: trigger Vercel preview build */

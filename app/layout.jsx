@@ -31,6 +31,53 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
         <meta name="theme-color" content="#ff005e" />
+        {process.env.NODE_ENV === 'development' && (
+          <script dangerouslySetInnerHTML={{ __html: `
+            (function(){
+              try{
+                if(typeof window === 'undefined') return;
+                function filterConsole(fn,args){
+                  try{
+                    var joined = args.map(function(a){return typeof a === 'string' ? a : String(a);}).join(' ');
+                    if(joined.toLowerCase().includes('failed to fetch') && joined.toLowerCase().includes('fullstory')){
+                      return;
+                    }
+                  }catch(e){}
+                  fn.apply(console, args);
+                }
+                var origErr = console.error, origWarn = console.warn;
+                console.error = function(){ filterConsole(origErr, Array.prototype.slice.call(arguments)); };
+                console.warn = function(){ filterConsole(origWarn, Array.prototype.slice.call(arguments)); };
+                function onUnhandledRejection(ev){
+                  try{
+                    var reason = ev && (ev.reason || ev.detail || null);
+                    var message = reason && (reason.message || String(reason));
+                    var stack = reason && reason.stack ? String(reason.stack) : '';
+                    if(message && message.toLowerCase().includes('failed to fetch') && stack.toLowerCase().includes('fullstory')){
+                      ev.preventDefault && ev.preventDefault();
+                      ev.stopPropagation && ev.stopPropagation();
+                      console.debug('Suppressed FullStory fetch error (dev):', reason);
+                    }
+                  }catch(e){}
+                }
+                function onError(ev){
+                  try{
+                    var msg = ev && ev.message ? String(ev.message) : '';
+                    var src = ev && ev.filename ? String(ev.filename) : '';
+                    if(msg.toLowerCase().includes('failed to fetch') && src.toLowerCase().includes('fullstory')){
+                      ev.preventDefault && ev.preventDefault();
+                      ev.stopPropagation && ev.stopPropagation();
+                      console.debug('Suppressed FullStory fetch error (dev error event):', msg, src);
+                    }
+                  }catch(e){}
+                }
+                window.addEventListener('unhandledrejection', onUnhandledRejection);
+                window.addEventListener('error', onError);
+                window.__devErrorSuppressor_restore = function(){ console.error = origErr; console.warn = origWarn; window.removeEventListener('unhandledrejection', onUnhandledRejection); window.removeEventListener('error', onError); };
+              }catch(e){}
+            })();
+          ` }} />
+        )}
       </head>
       <body>
         <DevErrorSuppressor />
