@@ -10,6 +10,7 @@ import Vitrine from "./discover/Vitrine";
 import PlannerFamilySummary from "./planner/PlannerFamilySummary";
 import { ensurePlannerWeek, getPlannerDaysDone, addPlannerEntry } from "../lib/storage";
 import BadgesLevelToast from "./BadgesLevelToast";
+import { grantBadge } from "../lib/badges";
 import { useRouter } from "next/navigation";
 
 const GreetingBinder = dynamic(() => import("./GreetingBinder"), { ssr: false });
@@ -49,6 +50,8 @@ export default function MaternalHome(){
     setPadDay(i); setOpenPad(true);
   }
 
+  function emit(name: string, detail: any){ try{ window.dispatchEvent(new CustomEvent(name, { detail })); }catch{} }
+
   return (
     <div className="m360-container">
       {/* 1) Hero (saudação + mensagem do dia) */}
@@ -80,10 +83,22 @@ export default function MaternalHome(){
 
       {/* 3) Maternal card grid (2–3 colunas) */}
       <section className="m360-grid">
-        <CardRotinaDaCasa onAdd={()=>quickAdd({ scope:"casa", tags:["casa"], kind:"task", title:"Tarefa da casa" })} onOpen={()=>openNotepad(todayIndexMonBased())} />
-        <CardTempoComMeuFilho onAdd={()=>quickAdd({ scope:"filhos", tags:["filhos","momento"], kind:"event", title:"Momento com meu filho" })} onOpen={()=>openNotepad(todayIndexMonBased())} />
-        <CardAtividadeDoDia onAdd={()=>quickAdd({ scope:"filhos", tags:["atividade","brincadeira"], kind:"event", title:"Atividade do dia" })} onSee={()=>router.push("/descobrir")} />
-        <CardMomentoParaMim onAdd={()=>quickAdd({ scope:"eu", tags:["eu","pausa"], kind:"note", title:"Pausa para mim" })} onOpen={()=>openNotepad(todayIndexMonBased())} />
+        <CardRotinaDaCasa
+          onAdd={()=>{ emit("m360:planner:newEntry",{ date: todayISO(), scope:"casa", tags:["casa"], kind:"task", title:"Tarefa da casa" }); quickAdd({ scope:"casa", tags:["casa"], kind:"task", title:"Tarefa da casa" }); }}
+          onOpen={()=>{ emit("m360:planner:open",{ tab:"casa" }); openNotepad(todayIndexMonBased()); }}
+        />
+        <CardTempoComMeuFilho
+          onAdd={()=>{ emit("m360:planner:newEntry",{ date: todayISO(), scope:"filhos", tags:["filhos","momento"], kind:"event", title:"Momento com meu filho" }); try{ grantBadge("MaePresente","Mãe Presente"); }catch{} quickAdd({ scope:"filhos", tags:["filhos","momento"], kind:"event", title:"Momento com meu filho" }); }}
+          onOpen={()=>{ emit("m360:planner:open",{ tab:"filhos" }); openNotepad(todayIndexMonBased()); }}
+        />
+        <CardAtividadeDoDia
+          onAdd={()=>{ emit("m360:planner:newEntry",{ date: todayISO(), scope:"filhos", tags:["atividade","brincadeira"], kind:"event", title:"Atividade do dia" }); quickAdd({ scope:"filhos", tags:["atividade","brincadeira"], kind:"event", title:"Atividade do dia" }); }}
+          onSee={()=>{ emit("m360:discover:open",{}); router.push("/descobrir"); }}
+        />
+        <CardMomentoParaMim
+          onAdd={()=>{ emit("m360:planner:newEntry",{ date: todayISO(), scope:"eu", tags:["eu","pausa"], kind:"note", title:"Pausa para mim" }); try{ grantBadge("CuidarDeMim","Cuidar de Mim"); }catch{} quickAdd({ scope:"eu", tags:["eu","pausa"], kind:"note", title:"Pausa para mim" }); }}
+          onOpen={()=>{ emit("m360:planner:open",{ tab:"eu" }); openNotepad(todayIndexMonBased()); }}
+        />
       </section>
 
       {/* 4) Hoje + Descobrir (lado a lado em telas médias+) */}
