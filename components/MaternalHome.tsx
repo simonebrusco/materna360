@@ -132,7 +132,7 @@ export default function MaternalHome(){
   }
 
   return (
-    <div className="m360-container meu-dia">
+    <div className={`m360-container meu-dia${flags.newHomeMaternal ? ' hub' : ''}`}>
       {/* 1) Hero (saudação + mensagem do dia) */}
       <section className="m360-hero hero">
         <GreetingBinder>
