@@ -1,10 +1,6 @@
 "use client";
-ai_main_d2bddf17272b
 
 import { useEffect, useMemo, useRef, useState } from "react";
-
-import { useEffect, useMemo, useState } from "react";
-main
 import dynamic from "next/dynamic";
 import Card from "./ui/Card";
 import Icon from "./ui/Icon";
@@ -34,11 +30,7 @@ const QuickAddModal = dynamic(() => import("./planner/QuickAddModal"), { ssr: fa
 import { emitEu360Refresh } from "../lib/clientEvents";
 const BadgesLevelToast = dynamic(() => import("./BadgesLevelToast"), { ssr: false });
 import { showToast } from "../lib/ui/toast";
-ai_main_d2bddf17272b
-import { hasWindow, safeGet, safeMergeObject, safeSet } from "../lib/utils/safeStorage";
-
-import { safeGet, safeSet } from "@/lib/utils/safeStorage";
-main
+import { safeGet, safeMergeObject, safeSet } from "@/lib/utils/safeStorage";
 
 const GreetingBinder = dynamic(() => import("./GreetingBinder"), { ssr: false });
 
@@ -137,20 +129,12 @@ export default function MaternalHome(){
     const [tab, setTab] = useState<string>('home');
     useEffect(()=>{
       try{
-
-ai_main_d2bddf17272b
-        const stored = localStorage.getItem('m360:planner:tab');
-        if (stored) setTab(stored);
-      }catch{}
-    }, []);
-    useEffect(()=>{ try{ localStorage.setItem('m360:planner:tab', tab); }catch{} }, [tab]);
-
         const stored = safeGet('m360:planner:tab', null);
         if (stored) setTab(stored as any);
       }catch{}
     }, []);
     useEffect(()=>{ try{ safeSet('m360:planner:tab', tab); }catch{} }, [tab]);
-main
+
     const items = [
       { id: 'home', label: 'Casa' },
       { id: 'kids', label: 'Filhos' },
@@ -165,28 +149,18 @@ main
     );
   }
 
-main
   function DailyChecklist(){
     const today = useMemo(()=>{ try{ return new Date().toISOString().slice(0,10); }catch{ return ''; } }, []);
     const key = `m360:microtasks:${today}`;
     const [state, setState] = useState<{water:boolean;stretch:boolean;play:boolean}>({ water:false, stretch:false, play:false });
     useEffect(()=>{
       try{
-
-ai_main_d2bddf17272b
-        const raw = localStorage.getItem(key) || '';
-        const parsed = raw ? JSON.parse(raw) : null;
-        if (parsed) setState(parsed);
-      }catch{}
-    }, [key]);
-    useEffect(()=>{ try{ localStorage.setItem(key, JSON.stringify(state)); }catch{} }, [state]);
-
         const parsed = safeGet(key, null);
         if (parsed) setState(parsed);
       }catch{}
     }, [key]);
     useEffect(()=>{ try{ safeSet(key, state); }catch{} }, [state]);
-main
+
     const total = 3; const count = Number(state.water) + Number(state.stretch) + Number(state.play);
     const pct = Math.round((count/total)*100);
     function toggleItem(k: 'water'|'stretch'|'play'){
@@ -220,8 +194,6 @@ main
     );
   }
 
-
-ai_main_d2bddf17272b
   return (
     <div className={`m360-container meu-dia${flags.newHomeMaternal ? ' hub' : ''}`}>
       {/* 1) Hero (saudação + mensagem do dia) */}
