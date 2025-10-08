@@ -53,7 +53,6 @@ export default function RootLayout({ children }) {
           {children}
         </main>
         <Toaster />
-        <DevErrorSuppressor />
         <BottomTabBar />
       </body>
     </html>
