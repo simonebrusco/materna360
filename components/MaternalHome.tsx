@@ -13,6 +13,7 @@ import BreathModal from "./modals/BreathModal";
 import MoodModal from "./modals/MoodModal";
 import InspireModal from "./modals/InspireModal";
 import PauseModal from "./modals/PauseModal";
+import FABQuickNote from "./planner/FABQuickNote";
 import MessageOfDayCard from "./motd/MessageOfDayCard";
 import Vitrine from "./discover/Vitrine";
 import TodayChecklist from "./planner/TodayChecklist";
@@ -39,6 +40,32 @@ export default function MaternalHome(){
     const off = () => { try { setPlan(getPlannerDaysDone() || getWeeklyPlan()); } catch {} };
     try { window.addEventListener('m360:data:updated', off); } catch {}
     return () => { try { window.removeEventListener('m360:data:updated', off); } catch {} };
+  },[]);
+
+  useEffect(()=>{
+    function onOpen(){ try{ setOpenPad(true); }catch{} }
+    function onNew(e: any){
+      try{
+        ensurePlannerWeek();
+        const dStr = e?.detail?.date;
+        const title = String(e?.detail?.title || "Anotação rápida");
+        const kind = String(e?.detail?.kind || "note");
+        const scope = String(e?.detail?.scope || "eu");
+        const dt = new Date(dStr || new Date().toISOString());
+        const i = (dt.getDay()+6)%7;
+        setPadDay(i);
+        try{ addAction({ date:new Date().toISOString(), type:"quick_note" }); }catch{}
+        try{ addPlannerEntry(i, { title, kind, tags:[scope] }); }catch{}
+        try{ setPlan(getPlannerDaysDone() || getWeeklyPlan()); }catch{}
+        try{ setOpenPad(true); }catch{}
+      }catch{}
+    }
+    try { window.addEventListener("m360:planner:open", onOpen as any); } catch {}
+    try { window.addEventListener("m360:planner:newEntry", onNew as any); } catch {}
+    return () => {
+      try { window.removeEventListener("m360:planner:open", onOpen as any); } catch {}
+      try { window.removeEventListener("m360:planner:newEntry", onNew as any); } catch {}
+    };
   },[]);
 
   function openNotepad(i?: number){ if (typeof i==='number') setPadDay(i); setOpenPad(true); }
@@ -106,7 +133,7 @@ export default function MaternalHome(){
 
       {/* 5) FAB (fica como já está) */}
       {flags.floatingQuickNote ? (
-        <button className="fab" aria-label="Nova anotação" onClick={()=>openNotepad(padDay)}>＋</button>
+        <FABQuickNote />
       ) : null}
 
       {/* 6) Toasts (já existentes) */}
