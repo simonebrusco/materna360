@@ -707,3 +707,15 @@ label{ font-weight: var(--m360-weight-medium); }
 /* ci: retrigger preview */
 
 /* no-op: trigger Vercel preview build */
+
+/* Hero refinado */
+.m360-container.meu-dia .hero{ margin:8px auto 24px; }
+.m360-container.meu-dia .motd-card,
+.m360-container.meu-dia .mood-card{ min-height:200px; box-shadow:0 12px 28px rgba(18,21,26,.06); }
+
+.m360-container.meu-dia .motd-skeleton{
+  width:60%; height:10px; border-radius:6px;
+  background:linear-gradient(90deg, #f7e9e4 0%, #fff 50%, #f7e9e4 100%);
+  animation:pulse 1.6s infinite; opacity:.6; margin-top:10px;
+}
+@keyframes pulse{0%{background-position:0 0}100%{background-position:120% 0}}
