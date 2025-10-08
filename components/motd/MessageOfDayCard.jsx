@@ -30,7 +30,9 @@ export default function MessageOfDayCard({ nameHint = null, showTitle = true, sh
   return (
     <Card>
       {showTitle ? <strong className="motd-title">“Mensagem do dia”</strong> : null}
-      <p className="small motd-text">{motd?.body ?? "..."}</p>
+      <p className="small motd-text" style={{fontStyle:"italic", color:"#1E1E1E"}}>
+        <span className="motd-quote" aria-hidden>“</span>{motd || "..."}<span className="motd-quote" aria-hidden>”</span>
+      </p>
       {showButton ? <Btn onClick={refresh}>Nova mensagem</Btn> : null}
     </Card>
   );
