@@ -137,6 +137,7 @@ export default function MaternalHome(){
           <Card className="mood-card tap-scale" onClick={()=>setOpenMood(true)}>
             <Icon name="mood" className="icon-24 icon-accent" />
             <div>
+              <span aria-hidden className="mood-dot" />
               <h3>Como você se sente?</h3>
               <p className="small">Toque para registrar</p>
             </div>
@@ -179,7 +180,7 @@ export default function MaternalHome(){
           <h3>Tempo com Meu Filho</h3>
           <p>Registre um momento especial do dia com seu filho.</p>
           <div className="card-actions">
-            <button className="btn btn-primary" onClick={()=>{ try{ (window as any).requestAnimationFrame?.(()=>{}); }catch{}; }}>Registrar momento</button>
+            <button className="btn btn-primary" onClick={()=>{ try{ showToast("Momento com seu filho registrado com sucesso!"); }catch{}; try{ import("../lib/storage").then(m=>{ const cur = m.readJSON("m360:badges", []); const arr = Array.isArray(cur)?cur.slice():[]; if (!arr.some(b=>String(b?.id)==="maePresente")) arr.push({ id:"maePresente", label:"Mãe Presente", ts: Date.now() }); m.writeJSON("m360:badges", arr); }).catch(()=>{});}catch{} }}>Registrar momento</button>
             <button className="btn btn-outline">Ver timeline</button>
           </div>
         </div>
@@ -242,7 +243,8 @@ export default function MaternalHome(){
         onComplete={(entry)=>{
           try{ addMood({ date:new Date().toISOString(), mood:entry?.mood ?? 0, note:entry?.note }); }catch{}
           try{ addAction({ date:new Date().toISOString(), type:"reflect" }); }catch{}
-          try{ import("../lib/ui/toast").then(m=>m.showToast("Mãe Presente 💗")).catch(()=>{}); }catch{}
+          try{ import("../lib/ui/toast").then(m=>m.showToast("Momento com seu filho registrado com sucesso!")).catch(()=>{}); }catch{}
+          try{ import("../lib/storage").then(m=>{ const cur = m.readJSON("m360:badges", []); const arr = Array.isArray(cur)?cur.slice():[]; if (!arr.some(b=>String(b?.id)==="maePresente")) arr.push({ id:"maePresente", label:"Mãe Presente", ts: Date.now() }); m.writeJSON("m360:badges", arr); }).catch(()=>{});}catch{}
           emitEu360Refresh();
           setOpenMood(false);
         }}
