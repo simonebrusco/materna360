@@ -265,13 +265,11 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 
 /* Message of the day */
 .motd-title{ display:block; margin-bottom:8px; font-weight:800; }
-ai_main_7d7878c4bdcc
 .motd-text{ margin:0 0 12px; font-style: italic; }
 .motd-quote{ color:#F17324; font-weight:800; margin-right:6px; }
 
 .motd-text{ margin:0 0 12px; }
 .motd-quote{ color:#F17324; font-weight:700; }
-main
 
 /* Icon utility */
 .icon { width: 22px; height: 22px; display: inline-block; vertical-align: middle; }
@@ -742,15 +740,10 @@ label{ font-weight: var(--m360-weight-medium); }
 }
 @keyframes pulse{0%{background-position:0 0}100%{background-position:120% 0}}
 
-ai_main_d2bddf17272b
-main
-
-main
 .m360-container.meu-dia.hub .block { border-radius:16px; box-shadow:0 6px 18px rgba(18,21,26,.06); padding:14px; background:#FFF; margin-bottom:16px; }
 .m360-container.meu-dia.hub h3 { font:600 18px/24px Poppins,system-ui; color:#2F3A56; margin:0 0 8px; }
 .m360-container.meu-dia.hub .hub-grid{ display:grid; grid-template-columns:1fr; gap:12px; }
 @media (min-width:768px){ .m360-container.meu-dia.hub .hub-grid{ grid-template-columns:1fr 1fr; } }
-ai_main_d2bddf17272b
 
 /* ===== Meu Dia: premium polish (scoped) ===== */
 .m360-container.meu-dia .icon-primary{ color:#FF005E; }
@@ -785,6 +778,3 @@ ai_main_d2bddf17272b
 
 .m360-container.meu-dia .m360-day-chip:focus-visible,
 .m360-container.meu-dia .btn:focus-visible{ outline:none; box-shadow: var(--m360-shadow-outline, var(--ring)); }
-ai_main_d2bddf17272b
-
-main
