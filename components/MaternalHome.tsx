@@ -235,6 +235,7 @@ export default function MaternalHome(){
         onComplete={()=>{
           try{ addAction({ date:new Date().toISOString(), type:"inspire" }); }catch{}
           try{ toggleDayDone(new Date()); }catch{}
+          showToast("Mãe Presente");
           emitEu360Refresh();
           setOpenInspire(false);
         }}
@@ -245,6 +246,7 @@ export default function MaternalHome(){
         onComplete={(minutes)=>{
           try{ addAction({ date:new Date().toISOString(), type:"pause", duration:minutes||3 }); }catch{}
           try{ toggleDayDone(new Date()); }catch{}
+          showToast("Mãe Presente");
           emitEu360Refresh();
           setOpenPause(false);
         }}
