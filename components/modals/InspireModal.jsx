@@ -11,11 +11,13 @@ const PHRASES = [
 
 function nextIndex() {
   try {
+    const { safeGet, safeSet, isBrowser } = require("@/lib/utils/safeStorage");
+    if (!isBrowser) return Math.floor(Math.random() * PHRASES.length);
     const key = "m360:inspireIndex";
-    const raw = typeof window !== "undefined" ? window.localStorage.getItem(key) : null;
-    const idx = raw ? parseInt(raw, 10) || 0 : 0;
+    const raw = safeGet(key, 0);
+    const idx = typeof raw === 'number' ? raw : (parseInt(String(raw), 10) || 0);
     const next = (idx + 1) % PHRASES.length;
-    window.localStorage.setItem(key, String(next));
+    safeSet(key, next);
     return idx;
   } catch {
     return Math.floor(Math.random() * PHRASES.length);
