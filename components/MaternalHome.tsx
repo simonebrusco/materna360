@@ -224,15 +224,18 @@ export default function MaternalHome(){
           </Card>
         </div>
 
-        {/* Checklist do Dia */}
-        <div className="space" />
-        <ChecklistToday onProgress={(p)=>setExtraPct(Math.max(0, Math.min(10, p)))} onUndo={()=>{ try{ if (completeTimerRef.current){ clearTimeout(completeTimerRef.current); completeTimerRef.current=null; } }catch{} }} />
       </section>
 
       {/* Meu Dia Hub (gated) */}
       {flags.newHomeMaternal ? (
         <HomeHub />
       ) : null}
+
+      {/* 1) Checklist do Dia */}
+      <section aria-label="Checklist do Dia">
+        <div className="space" />
+        <ChecklistToday onProgress={(p)=>setExtraPct(Math.max(0, Math.min(10, p)))} onUndo={()=>{ try{ if (completeTimerRef.current){ clearTimeout(completeTimerRef.current); completeTimerRef.current=null; } }catch{} }} />
+      </section>
 
       {/* 2) Planner da Família (full-width) */}
       <section className="m360-planner" role="region" aria-label="Planner da Família">
