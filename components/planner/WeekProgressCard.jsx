@@ -28,7 +28,7 @@ function microcopy(percent){
   return "You’re doing amazing—almost there!";
 }
 
-export default function WeekProgressCard({ completedCount = 0, total = 7, days = Array(7).fill(false), onOpenDay = () => {}, onOpenCard = () => {}, bonus, className = "" }){
+export default function WeekProgressCard({ completedCount = 0, total = 7, days = Array(7).fill(false), onOpenDay = () => {}, onOpenCard = () => {}, bonus, className = "", extraPct = 0 }){
   const todayIdx = useMemo(() => getTodayIndex(), []);
   const scrollRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
