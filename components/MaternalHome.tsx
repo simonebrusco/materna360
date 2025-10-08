@@ -15,7 +15,7 @@ import InspireModal from "./modals/InspireModal";
 import PauseModal from "./modals/PauseModal";
 import MessageOfDayCard from "./motd/MessageOfDayCard";
 import Vitrine from "./discover/Vitrine";
-import PlannerFamilySummary from "./planner/PlannerFamilySummary";
+import TodayChecklist from "./planner/TodayChecklist";
 import { flags } from "../lib/flags";
 import { addAction, addMood, ensurePlannerWeek, getPlannerDaysDone, getWeeklyPlan, toggleDayDone } from "../lib/storage";
 import { emitEu360Refresh } from "../lib/clientEvents";
@@ -95,7 +95,7 @@ export default function MaternalHome(){
           <TipsRotator tips={tips} />
           {flags.todayChecklist ? (
             <Card style={{marginTop:12}}>
-              <PlannerFamilySummary />
+              <TodayChecklist />
             </Card>
           ) : null}
         </div>
