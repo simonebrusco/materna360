@@ -1,15 +1,13 @@
-"use client";
-
 import { flags } from "../lib/flags";
 import MaternalHome from "../components/MaternalHome";
 import LegacyHome from "../components/LegacyHome";
 import SafeBoundary from "../components/SafeBoundary";
 
 export default function HomePage() {
-  const search = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
-  const forceNew = search?.get("newHome") === "1";
+  const isBrowser = typeof window !== "undefined";
+  const enableNew = flags.newHomeMaternal || (isBrowser && new URLSearchParams(location.search).has("newHome"));
 
-  if (forceNew || flags.newHomeMaternal) {
+  if (enableNew) {
     return (
       <SafeBoundary>
         <MaternalHome />

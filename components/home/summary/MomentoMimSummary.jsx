@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
+
+ai_main_d2bddf17272b
 import { safeGet, hasWindow } from "../../../lib/utils/safeStorage";
+
+import { safeGet, isBrowser } from "@/lib/utils/safeStorage";
+main
 
 export default function MomentoMimSummary(){
   const [count, setCount] = useState(0);
   const [loaded, setLoaded] = useState(false);
   useEffect(()=>{
     try{
+
+ai_main_d2bddf17272b
       if(!hasWindow) return;
       const raw = safeGet('m360:activities');
       if(raw){
@@ -16,6 +23,13 @@ export default function MomentoMimSummary(){
             setCount(n);
           }
         }catch{}
+
+      if(!isBrowser) return;
+      const arr = safeGet('m360:activities', []);
+      if(Array.isArray(arr)){
+        const n = arr.filter(a=>a && a.type==='pause').length;
+        setCount(n);
+main
       }
     }catch{}
     setLoaded(true);

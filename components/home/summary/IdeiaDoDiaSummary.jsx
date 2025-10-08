@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
+
+ai_main_d2bddf17272b
 import { safeGet, hasWindow } from "../../../lib/utils/safeStorage";
+
+import { safeGet, isBrowser } from "@/lib/utils/safeStorage";
+main
 
 export default function IdeiaDoDiaSummary(){
   const [idea, setIdea] = useState("");
   const [loaded, setLoaded] = useState(false);
   useEffect(()=>{
     try{
+
+ai_main_d2bddf17272b
       if(!hasWindow) return;
       const raw = safeGet('m360:activities');
       if(raw){
@@ -16,6 +23,13 @@ export default function IdeiaDoDiaSummary(){
             if(it && it.title) setIdea(String(it.title));
           }
         }catch{}
+
+      if(!isBrowser) return;
+      const arr = safeGet('m360:activities', []);
+      if(Array.isArray(arr)){
+        const it = arr.find(a=>a && a.type==='idea');
+        if(it && it.title) setIdea(String(it.title));
+main
       }
     }catch{}
     setLoaded(true);
