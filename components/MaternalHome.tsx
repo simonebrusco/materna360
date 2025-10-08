@@ -37,6 +37,7 @@ function CardRotinaDaCasa() {
       done: false,
     });
     toast("Tarefa adicionada ao Planner 🏠");
+    badge("Organizada", "Organizada");
   };
   return (
     <article className="card m360-action">
