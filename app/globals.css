@@ -396,6 +396,68 @@ label{ font-weight: var(--m360-weight-medium); }
   padding: 16px 16px 96px;
 }
 
+/* Meu Dia — hero polish */
+.meu-dia .hero{
+  max-width: 1120px;
+  margin: 12px auto 24px;
+  padding-top: 8px;
+  border-radius: 20px;
+}
+.meu-dia .greeting-title{
+  font-family: Poppins, system-ui;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 32px;
+  color: var(--m360-text, #2F3A56);
+}
+.meu-dia .greeting-sub{
+  font-family: Poppins, system-ui;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(47,58,86,.85);
+  margin-bottom: 12px;
+}
+.meu-dia .hero h1, .meu-dia .hero h2{ word-break: normal; overflow-wrap: anywhere; hyphens: manual; }
+
+/* Cards grid */
+.meu-dia .hero-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+@media(max-width:920px){ .meu-dia .hero-grid{ gap:12px; } }
+@media(max-width:768px){ .meu-dia .hero-grid{ grid-template-columns: 1fr; gap:12px; } }
+
+/* Equal heights and visuals */
+.meu-dia .motd-card, .meu-dia .mood-card{
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 120ms ease-out;
+}
+.meu-dia .motd-card:active, .meu-dia .mood-card:active{ transform: scale(1.02); }
+
+/* MOTD
+   - leading quote color via CSS variable
+   - internal padding
+*/
+.meu-dia .motd-card{ padding: 16px 18px; }
+.motd-quote{ color: var(--m360-accent, #F9C9B7); font-size: 20px; margin-right: 6px; }
+.motd-text{ font-style: italic; font-family: Poppins, system-ui; font-weight: 400; font-size: 16px; line-height: 24px; color: rgba(47,58,86,.92); }
+
+/* Mood card text fixes */
+.meu-dia .mood-card{ min-width: 0; }
+.meu-dia .mood-card .mood-text{ max-width: 100%; }
+.meu-dia .mood-card .mood-title, .meu-dia .mood-card h3{
+  font: 600 18px/24px Poppins, system-ui;
+  margin: 0 0 4px;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.meu-dia .mood-card .mood-sub{ font: 400 14px/20px Poppins, system-ui; color: rgba(47,58,86,.70); }
+.meu-dia .mood-card .icon-24{ vertical-align: middle; margin-right: 6px; }
+
 /* Hero e Planner em blocos amplos e elegantes */
 .m360-hero,
 .m360-planner{
