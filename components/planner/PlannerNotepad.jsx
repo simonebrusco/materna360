@@ -5,6 +5,7 @@ import Btn from "../ui/Btn";
 import Icon from "../ui/Icon";
 import { showToast } from "../../lib/ui/toast";
 import { ensurePlannerWeek, getPlanner, setPlanner, addPlannerEntry, updatePlannerEntry, deletePlannerEntry, togglePlannerTaskDone } from "../../lib/storage";
+import { safeGet, safeSet, safeRemove, isBrowser } from "@/lib/utils/safeStorage";
 
 function formatDateLabel(d){
   try{
@@ -32,7 +33,7 @@ export default function PlannerNotepad({ open, onClose, dayIndex=0, onChangeDay 
   useEffect(()=>{
     const id = setInterval(()=>{
       if (editing && draft) {
-        try { import("@/lib/utils/safeStorage").then(m=>m.safeSet(`m360:planner:draft:${idx}`, draft)).catch(()=>{}); } catch {}
+        try { safeSet(`m360:planner:draft:${idx}`, draft); } catch {}
       }
     }, 2000);
     return () => clearInterval(id);
@@ -40,10 +41,8 @@ export default function PlannerNotepad({ open, onClose, dayIndex=0, onChangeDay 
 
   useEffect(()=>{
     try{
-      import("@/lib/utils/safeStorage").then(m=>{
-        const v = m.safeGet(`m360:planner:draft:${idx}`, null);
-        if (v) setDraft(v);
-      }).catch(()=>{});
+      const v = safeGet(`m360:planner:draft:${idx}`, null);
+      if (v) setDraft(v);
     }catch{}
   }, [idx]);
 
@@ -97,7 +96,7 @@ export default function PlannerNotepad({ open, onClose, dayIndex=0, onChangeDay 
         }
       } catch {}
       setEditing(null); setDraft(null);
-      try { import("@/lib/utils/safeStorage").then(m=>m.safeRemove(`m360:planner:draft:${idx}`)).catch(()=>{}); } catch {}
+      try { safeRemove(`m360:planner:draft:${idx}`); } catch {}
       showToast("Salvo");
     }catch{ showToast("Não conseguimos salvar agora. Tente novamente."); }
   }, [draft, editing, idx]);
@@ -115,7 +114,7 @@ export default function PlannerNotepad({ open, onClose, dayIndex=0, onChangeDay 
   function onToggle(entry){ try{ togglePlannerTaskDone(idx, entry.id); setDays(getPlanner()); }catch{} }
 
   useEffect(()=>{
-    if (typeof window === 'undefined') return;
+    if (!isBrowser) return;
     function onKey(e){
       if (!open) return;
       if ((e.metaKey || e.ctrlKey) && e.key === "Enter") { e.preventDefault(); saveForm(); }
