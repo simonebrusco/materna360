@@ -167,6 +167,9 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 /* toast system */
 .m360-toast-wrap { position: fixed; left: 0; right: 0; bottom: 24px; display: grid; place-items: center; pointer-events: none; z-index: 60; }
 .m360-toast { background: var(--card); color: var(--navy); border: 1px solid rgba(13,27,42,.06); box-shadow: var(--shadow-soft); padding: 12px 16px; border-radius: 14px; font-weight: 600; animation: m360-rise .25s ease both; pointer-events: auto; }
+.m360-toast-pulse{ position:relative; }
+.m360-toast-pulse::before{ content:"💗"; position:absolute; left:-10px; top:50%; transform: translateY(-50%) scale(1); animation: m360-beat .6s ease-in-out 2; }
+@keyframes m360-beat{ 0%,100%{ transform: translateY(-50%) scale(1); opacity:.9 } 50%{ transform: translateY(-50%) scale(1.25); opacity:1 } }
 
 /* breath timer */
 .m360-breath-wrap { display: grid; place-items: center; gap: 10px; margin: 14px 0; }
