@@ -28,7 +28,7 @@ function microcopy(percent){
   return "You’re doing amazing—almost there!";
 }
 
-export default function WeekProgressCard({ completedCount = 0, total = 7, days = Array(7).fill(false), onOpenDay = () => {}, onOpenCard = () => {}, bonus, className = "", extraPct = 0 }){
+export default function WeekProgressCard({ completedCount = 0, total = 7, days = Array(7).fill(false), onOpenDay = () => {}, onOpenCard = () => {}, bonus, className = "", basePct, extraPct = 0 }){
   const todayIdx = useMemo(() => getTodayIndex(), []);
   const scrollRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
@@ -47,9 +47,12 @@ export default function WeekProgressCard({ completedCount = 0, total = 7, days =
     try { localStorage.setItem('m360:planner:scrollX', String(x)); } catch {}
   }
 
-  const done = Array.isArray(days) ? days.filter(Boolean).length : 0;
+  const done = Array.isArray(days) ? days.filter(Boolean).length : (typeof completedCount === 'number' ? completedCount : 0);
   const denom = Math.max(1, Math.min(7, total || 7));
-  const pct = Math.max(0, Math.min(100, Math.round((done / denom) * 100)));
+  const computed = Math.round((done / denom) * 100);
+  const clamp = (n) => Math.max(0, Math.min(100, Number.isFinite(n) ? n : 0));
+  const base = clamp(basePct != null ? basePct : computed);
+  const extra = clamp(extraPct);
 
   return (
     <Card className={`planner-card ${className}`.trim()}>
@@ -79,13 +82,13 @@ export default function WeekProgressCard({ completedCount = 0, total = 7, days =
       </div>
 
       <div style={{marginTop:10, cursor:"pointer"}} onClick={()=>onOpenCard()}>
-        <div aria-hidden style={{position:"relative", height:8, background:"rgba(13,27,42,.06)", borderRadius:999, overflow:"hidden"}}>
-          <div style={{height:8, width:`${pct}%`, background:"#F15A2E", borderRadius:999}} />
-          {extraPct ? (
-            <div style={{position:"absolute", top:0, left:0, height:8, width:`${Math.min(100, pct + extraPct)}%`, background:"rgba(241,115,36,.35)", borderRadius:999}} />
+        <div aria-hidden className="progress">
+          <div className="base" style={{ width: `${base}%` }} />
+          {extra > 0 ? (
+            <div className="extra" style={{ width: `${Math.min(100, base + extra)}%` }} />
           ) : null}
         </div>
-        <div className="small" style={{opacity:.8, marginTop:6}}>{microcopy(pct)}</div>
+        <div className="small" style={{opacity:.8, marginTop:6}}>{microcopy(base)}</div>
       </div>
 
       {bonus ? (
