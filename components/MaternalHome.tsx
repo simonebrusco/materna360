@@ -15,9 +15,11 @@ import InspireModal from "./modals/InspireModal";
 import PauseModal from "./modals/PauseModal";
 import MessageOfDayCard from "./motd/MessageOfDayCard";
 import Vitrine from "./discover/Vitrine";
+import QuickAddModal from "./planner/QuickAddModal";
 import { addAction, addMood, ensurePlannerWeek, getPlannerDaysDone, getWeeklyPlan, toggleDayDone } from "../lib/storage";
 import { emitEu360Refresh } from "../lib/clientEvents";
 import BadgesLevelToast from "./BadgesLevelToast";
+import { showToast } from "../lib/ui/toast";
 
 const GreetingBinder = dynamic(() => import("./GreetingBinder"), { ssr: false });
 
@@ -28,6 +30,7 @@ export default function MaternalHome(){
   const [openPause, setOpenPause] = useState(false);
 
   const [plan, setPlan] = useState<boolean[]>(Array(7).fill(false));
+  const [openQuick, setOpenQuick] = useState(false);
   const [openPad, setOpenPad] = useState(false);
   const [padDay, setPadDay] = useState(() => { try{ const d=new Date().getDay(); return d===0?6:d-1; }catch{ return 0; } });
   const done = useMemo(() => (Array.isArray(plan) ? plan.filter(Boolean).length : 0), [plan]);
@@ -48,6 +51,65 @@ export default function MaternalHome(){
     "Caminhe 2 min e olhe o céu."
   ];
   const bonus = tips[done % tips.length];
+
+  function PlannerTabs(){
+    const [tab, setTab] = useState<string>(() => {
+      try{ return localStorage.getItem('m360:planner:tab') || 'home'; }catch{ return 'home'; }
+    });
+    useEffect(()=>{ try{ localStorage.setItem('m360:planner:tab', tab); }catch{} }, [tab]);
+    const items = [
+      { id: 'home', label: 'Casa' },
+      { id: 'kids', label: 'Filhos' },
+      { id: 'me', label: 'Eu' }
+    ];
+    return (
+      <div className="segmented" role="tablist" aria-label="Planner da Família">
+        {items.map(it => (
+          <button key={it.id} role="tab" aria-selected={tab===it.id} className={`segmented-item${tab===it.id?' is-active':''}`} onClick={()=>setTab(it.id)}>{it.label}</button>
+        ))}
+      </div>
+    );
+  }
+
+  function DailyChecklist(){
+    const today = useMemo(()=>{ try{ return new Date().toISOString().slice(0,10); }catch{ return ''; } }, []);
+    const key = `m360:microtasks:${today}`;
+    const [state, setState] = useState<{water:boolean;stretch:boolean;play:boolean}>(()=>{
+      try{ return JSON.parse(localStorage.getItem(key)||'') || { water:false, stretch:false, play:false }; }catch{ return { water:false, stretch:false, play:false }; }
+    });
+    useEffect(()=>{ try{ localStorage.setItem(key, JSON.stringify(state)); }catch{} }, [state]);
+    const total = 3; const count = Number(state.water) + Number(state.stretch) + Number(state.play);
+    const pct = Math.round((count/total)*100);
+    function toggleItem(k: 'water'|'stretch'|'play'){
+      setState(s => {
+        const next = { ...s, [k]: !s[k] };
+        showToast(next[k] ? 'Boa! Tarefa concluída.' : 'Marcado como não concluído.');
+        if (Number(next.water) + Number(next.stretch) + Number(next.play) === 3) {
+          try { toggleDayDone(new Date()); } catch {}
+          showToast('Organizada');
+        }
+        return next;
+      });
+    }
+    return (
+      <div className="card" style={{marginTop:12}}>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:8}}>
+          <div style={{fontWeight:800,color:'#1E1E1E'}}>Checklist do dia</div>
+          <div className="small" style={{opacity:.75}}>{count} de {total} concluídos</div>
+        </div>
+        <div style={{display:'grid',gap:8}}>
+          <label style={{display:'flex',alignItems:'center',gap:8}}><input type="checkbox" checked={state.water} onChange={()=>toggleItem('water')} /> Beber água 💧</label>
+          <label style={{display:'flex',alignItems:'center',gap:8}}><input type="checkbox" checked={state.stretch} onChange={()=>toggleItem('stretch')} /> Alongar-se 🧘</label>
+          <label style={{display:'flex',alignItems:'center',gap:8}}><input type="checkbox" checked={state.play} onChange={()=>toggleItem('play')} /> Brincar com meu filho 🎲</label>
+        </div>
+        <div style={{marginTop:10}} aria-hidden>
+          <div style={{height:8, background:"rgba(13,27,42,.06)", borderRadius:999}}>
+            <div style={{height:8, width:`${pct}%`, background:"#F15A2E", borderRadius:999}} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="m360-container meu-dia">
