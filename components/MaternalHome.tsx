@@ -135,7 +135,7 @@ export default function MaternalHome(){
         <div className="m360-grid hero-grid">
           <MessageOfDayCard className="motd-card" showTitle={false} showButton={false} />
           <Card className="tap-scale mood-card" onClick={()=>setOpenMood(true)}>
-            <div className="mood-row" style={{display:"grid",gridTemplateColumns:"48px 1fr",gap:12,alignItems:"center"}}>
+            <div className="mood-row" style={{display:"grid",gridTemplateColumns:"48px 1fr",gap:12,alignItems:"center", minWidth:0}}>
               <Icon name="mood" className="icon-24 icon-accent" />
               <Icon name="mood" className="icon-24 icon-secondary" />
               <div className="mood-text">
