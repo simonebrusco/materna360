@@ -263,8 +263,13 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 
 /* Message of the day */
 .motd-title{ display:block; margin-bottom:8px; font-weight:800; }
+ai_main_7d7878c4bdcc
 .motd-text{ margin:0 0 12px; font-style: italic; }
 .motd-quote{ color:#F17324; font-weight:800; margin-right:6px; }
+
+.motd-text{ margin:0 0 12px; }
+.motd-quote{ color:#F17324; font-weight:700; }
+main
 
 /* Icon utility */
 .icon { width: 22px; height: 22px; display: inline-block; vertical-align: middle; }
@@ -294,6 +299,7 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
   --m360-leading-normal: 1.35;
   --m360-letter-tight: -0.2px;
 }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Quicksand:wght@600;700&display=swap');
 html, body { font-family: var(--m360-font); }
 
 /* Headings & body defaults */
@@ -459,14 +465,20 @@ label{ font-weight: var(--m360-weight-medium); }
 /* Planner summary respira bem */
 .m360-planner .progress-label{ white-space: nowrap; }
 
-/* FAB já existente — mantém efeito magenta+glow */
+/* FAB — no Meu Dia usamos rótulo */
 .fab{
   position: fixed; right: 20px; bottom: 84px; z-index: 35;
+  border-radius: 999px;
 }
 
 /* Micro polimentos premium */
 .m360-container .btn-primary{ box-shadow: 0 3px 8px rgba(255,0,94,0.25); }
 .m360-container .btn-primary:hover{ box-shadow: 0 0 12px 3px rgba(255,0,94,0.45); transform: scale(1.03); }
+
+/* Meu Dia: palette para botões */
+.meu-dia .btn-primary{ background:#F15A2E !important; border-color:#F15A2E !important; color:#fff !important; }
+.meu-dia .btn-outline, .meu-dia .btn-ghost{ background:#fff !important; color:#6C4AB6 !important; border:2px solid #6C4AB6 !important; }
+.meu-dia .btn-outline:hover, .meu-dia .btn-ghost:hover{ background: rgba(108,74,182,0.08) !important; }
 
 /* ===== Materna360 Premium Theme Lock ===== */
 :root {
@@ -585,26 +597,40 @@ label{ font-weight: var(--m360-weight-medium); }
   background: #fff;
 }
 
-/* New Maternal Actions grid styles */
+/* Greeting styles */
+.greeting-title{ font-family: Poppins, system-ui; font-weight: 700; font-size: 24px; color: #1E1E1E; }
+.greeting-sub{ font-family: Poppins, system-ui; font-weight: 400; font-size: 16px; color: #1E1E1E; opacity:.85; margin-top:4px; }
+
+/* Segmented control */
+.segmented{ display:inline-flex; background:#fff; border:1px solid rgba(0,0,0,.1); border-radius:999px; padding:4px; gap:4px; margin-bottom:12px; }
+.segmented-item{ all:unset; cursor:pointer; padding:6px 12px; border-radius:999px; color:#1E1E1E; }
+.segmented-item.is-active{ background:#F1F1F1; font-weight:700; }
+
+/* Tap micro animation utility */
+.tap-scale:active{ transform: scale(1.02); }
+
+/* Pulsing heart */
+@keyframes pulse-heart { 0%{ transform: scale(1) } 50%{ transform: scale(1.06) } 100%{ transform: scale(1) } }
+.greeting-title span[aria-hidden]{ display:inline-block; animation: pulse-heart 2s ease-in-out infinite; }
+
+/* Maternal Actions grid 2x2 no Meu Dia */
 .m360-maternal-actions {
   display: grid;
-  gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  margin-top: 2rem;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  margin-top: 1rem;
 }
 
 .m360-action {
   text-align: left;
-  border-radius: 20px;
+  border-radius: 16px;
   background: #fff;
-  box-shadow: 0 10px 30px rgba(255, 0, 94, 0.08);
-  padding: 24px;
-  transition: all 0.25s ease;
+  box-shadow: 0 8px 20px rgba(17, 17, 17, 0.06);
+  padding: 16px;
+  transition: transform .12s ease, box-shadow .2s ease;
 }
-.m360-action:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(255, 0, 94, 0.15);
-}
+.m360-action:active { transform: scale(1.02); }
+.m360-action:hover { box-shadow: 0 10px 28px rgba(17,17,17,.08); }
 
 .m360-action h3 {
   font-size: 1.15rem;
