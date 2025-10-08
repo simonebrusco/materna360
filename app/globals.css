@@ -533,6 +533,7 @@ label{ font-weight: var(--m360-weight-medium); }
   --m360-accent:   #F9C9B7;  /* rosé suave */
   --m360-bg:       #FFFFFF;  /* branco */
   --m360-text:     #2F3A56;  /* navy para textos */
+  /* ci: retrigger on soft-luxury scope */
 }
 
 /* Meu Dia component mappings (scoped) */
