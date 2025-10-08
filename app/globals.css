@@ -661,45 +661,56 @@ label{ font-weight: var(--m360-weight-medium); }
   min-width: 130px;
 }
 
-/* ===== Materna360 – Meu Dia (soft-luxury scoped) ===== */
-.meu-dia{
+/* ===== Materna360 – Meu Dia (scoped to .m360-container.meu-dia) ===== */
+.m360-container.meu-dia{
   --m360-primary:#FF005E;      /* magenta */
-  --m360-secondary:#2F3A56;    /* navy discreto */
-  --m360-accent:#F9C9B7;       /* rosé suave */
+  --m360-secondary:#2F3A56;    /* navy */
+  --m360-accent:#F9C9B7;       /* rosé */
   --m360-bg:#FFFFFF;
   --m360-text:#2F3A56;
 }
 
 /* Hero topo */
-.meu-dia .hero{max-width:1120px;margin:12px auto 24px;}
-.meu-dia .hero h1{font-family:Poppins,system-ui; font-weight:700; font-size:26px; line-height:32px; color:var(--m360-text);}
-.meu-dia .hero h2{font-family:Poppins,system-ui; font-weight:400; font-size:16px; line-height:24px; color:rgba(47,58,86,.85); margin:0 0 12px;}
-.meu-dia .hero h1,.meu-dia .hero h2{word-break:normal; overflow-wrap:anywhere; hyphens:manual;}
+.m360-container.meu-dia .hero{max-width:1120px;margin:12px auto 24px;}
+.m360-container.meu-dia .hero h1{
+  font-family:Poppins,system-ui;font-weight:700;font-size:26px;line-height:32px;color:var(--m360-text);
+}
+.m360-container.meu-dia .hero h2{
+  font-family:Poppins,system-ui;font-weight:400;font-size:16px;line-height:24px;color:rgba(47,58,86,.85);margin:0 0 12px;
+}
+.m360-container.meu-dia .hero h1,
+.m360-container.meu-dia .hero h2{word-break:normal;overflow-wrap:anywhere;hyphens:manual;}
 
-/* Grid dos 2 cards */
-.meu-dia .hero-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-@media (max-width:768px){ .meu-dia .hero-grid{grid-template-columns:1fr; gap:12px;} }
+/* Grid 2 col → 1 col */
+.m360-container.meu-dia .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media (max-width:768px){
+  .m360-container.meu-dia .hero-grid{grid-template-columns:1fr;gap:12px;}
+}
 
 /* Cards consistentes */
-.meu-dia .motd-card,.meu-dia .mood-card{
-  background:#FFF; border-radius:16px; box-shadow:0 8px 24px rgba(18,21,26,.06);
-  min-height:180px; padding:16px 18px; display:flex; align-items:flex-start; justify-content:flex-start;
-  transform:translateZ(0); transition:transform 120ms ease-out;
+.m360-container.meu-dia .motd-card,
+.m360-container.meu-dia .mood-card{
+  background:#FFF;border-radius:16px;box-shadow:0 8px 24px rgba(18,21,26,.06);
+  min-height:180px;padding:16px 18px;display:flex;align-items:flex-start;justify-content:flex-start;
+  transform:translateZ(0);transition:transform 120ms ease-out;
 }
-.meu-dia .motd-card:active,.meu-dia .mood-card:active{ transform:scale(1.02); }
+.m360-container.meu-dia .motd-card:active,
+.m360-container.meu-dia .mood-card:active{transform:scale(1.02);}
 
-/* Mensagem do dia */
-.meu-dia .motd-quote{color:var(--m360-accent); font-size:20px; margin-right:6px;}
-.meu-dia .motd-text{font-family:Poppins,system-ui; font-style:italic; font-size:16px; line-height:24px; color:rgba(47,58,86,.92);}
+/* Mensagem do Dia */
+.m360-container.meu-dia .motd-quote{color:var(--m360-accent);font-size:20px;margin-right:6px;}
+.m360-container.meu-dia .motd-text{font-family:Poppins,system-ui;font-style:italic;font-size:16px;line-height:24px;color:rgba(47,58,86,.92);}
 
-/* Mood card – evitar texto “em coluna” */
-.meu-dia .mood-card h3{font:600 18px/24px Poppins,system-ui; margin:0 0 4px; white-space:normal; overflow-wrap:break-word;}
-.meu-dia .mood-card p{font:400 14px/20px Poppins,system-ui; color:rgba(47,58,86,.70);}
+/* Mood card — impedir “texto em coluna” */
+.m360-container.meu-dia .mood-card h3{font:600 18px/24px Poppins,system-ui;margin:0 0 4px;white-space:normal;overflow-wrap:break-word;}
+.m360-container.meu-dia .mood-card p{font:400 14px/20px Poppins,system-ui;color:rgba(47,58,86,.70);}
+.m360-container.meu-dia .mood-card{min-width:0;}
+.m360-container.meu-dia .mood-card *{max-width:100%;}
 
-/* Ícones e botões dentro do Meu Dia */
-.meu-dia .icon-accent{color:var(--m360-primary);}
-.meu-dia .btn-primary{background:var(--m360-primary); color:#FFF; border:none;}
-.meu-dia .btn-outline{background:transparent; color:var(--m360-secondary); border:1px solid var(--m360-secondary);}
+/* Botões e ícones no Meu Dia */
+.m360-container.meu-dia .icon-accent{color:var(--m360-primary);}
+.m360-container.meu-dia .btn-primary{background:var(--m360-primary);color:#FFF;border:none;}
+.m360-container.meu-dia .btn-outline{background:transparent;color:var(--m360-secondary);border:1px solid var(--m360-secondary);}
 
-/* Espaçamento entre seções */
-.meu-dia section{margin-bottom:24px;}
+/* Espaçamento entre seções do Meu Dia */
+.m360-container.meu-dia section{margin-bottom:24px;}
