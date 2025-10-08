@@ -14,6 +14,8 @@ import PauseModal from "./modals/PauseModal";
 import MessageOfDayCard from "./motd/MessageOfDayCard";
 import Vitrine from "./discover/Vitrine";
 import ChecklistToday from "./planner/ChecklistToday";
+import { flags } from "../lib/flags";
+import MeuDiaHub from "./meu-dia/MeuDiaHub";
 import {
   addAction,
   addMood,
