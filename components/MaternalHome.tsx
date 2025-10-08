@@ -201,7 +201,7 @@ export default function MaternalHome({ flags: incomingFlags }: MaternalHomeProps
   }
 
   return (
-    <div className={`m360-container meu-dia${flags.newHomeMaternal ? ' hub' : ''}`}>
+    <div className={`m360-container meu-dia${f.newHomeMaternal ? ' hub' : ''}`}>
       {/* 1) Hero (saudação + mensagem do dia) */}
       <section className="m360-hero hero" role="banner" aria-label="Saudação">
         <GreetingBinder>
@@ -229,7 +229,7 @@ export default function MaternalHome({ flags: incomingFlags }: MaternalHomeProps
       </section>
 
       {/* Meu Dia Hub (gated) */}
-      {flags.newHomeMaternal ? (
+      {f.newHomeMaternal ? (
         <HomeHub />
       ) : null}
 
