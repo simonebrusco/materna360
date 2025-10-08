@@ -5,16 +5,26 @@ import Btn from "../ui/Btn";
 import { allMessages } from "../../lib/messages";
 
 export default function MessageOfDayCard({ nameHint = null, showTitle = true, showButton = true }) {
-  const [motd, setMotd] = useState(null);
+  const [motd, setMotd] = useState("");
 
   useEffect(() => {
-    const next = ensureMessage(nameHint);
-    setMotd(next);
+    const msgs = allMessages();
+    const dayIndex = Math.floor(Date.now() / 86400000);
+    const idx = msgs.length ? (dayIndex % msgs.length) : 0;
+    const body = msgs[idx] || "";
+    const safeName = typeof nameHint === "string" ? nameHint.trim() : "";
+    const personalized = safeName ? `${safeName}, ${body.charAt(0).toLowerCase()}${body.slice(1)}` : body;
+    setMotd(personalized);
   }, [nameHint]);
 
   function refresh() {
-    const next = ensureMessage(nameHint);
-    setMotd(next);
+    const msgs = allMessages();
+    const dayIndex = Math.floor(Date.now() / 86400000);
+    const idx = msgs.length ? (dayIndex % msgs.length) : 0;
+    const body = msgs[idx] || "";
+    const safeName = typeof nameHint === "string" ? nameHint.trim() : "";
+    const personalized = safeName ? `${safeName}, ${body.charAt(0).toLowerCase()}${body.slice(1)}` : body;
+    setMotd(personalized);
   }
 
   return (
