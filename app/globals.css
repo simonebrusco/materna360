@@ -567,6 +567,10 @@ label{ font-weight: var(--m360-weight-medium); }
 /* Tap micro animation utility */
 .tap-scale:active{ transform: scale(1.02); }
 
+/* Pulsing heart */
+@keyframes pulse-heart { 0%{ transform: scale(1) } 50%{ transform: scale(1.06) } 100%{ transform: scale(1) } }
+.greeting-title span[aria-hidden]{ display:inline-block; animation: pulse-heart 2s ease-in-out infinite; }
+
 /* Maternal Actions grid 2x2 no Meu Dia */
 .m360-maternal-actions {
   display: grid;
