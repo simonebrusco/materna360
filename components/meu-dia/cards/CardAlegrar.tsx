@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Icon from "../../ui/Icon";
+import { getGratitudes } from "../../../lib/storage";
 
 export default function CardAlegrar(){
   const [count, setCount] = useState(0);
@@ -10,8 +11,7 @@ export default function CardAlegrar(){
 
   useEffect(()=>{
     try{
-      const raw = typeof window !== 'undefined' ? window.localStorage.getItem('m360:gratitudes') : null;
-      const list = raw ? JSON.parse(raw) : [];
+      const list = getGratitudes();
       setCount(Array.isArray(list)?list.length:0);
       setLast(Array.isArray(list) && list.length ? new Date(list[list.length-1]?.date||Date.now()).toLocaleDateString() : null);
     }catch{ setCount(0); setLast(null); }
