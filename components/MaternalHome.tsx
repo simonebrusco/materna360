@@ -67,8 +67,8 @@ export default function MaternalHome(){
     const [tab, setTab] = useState<string>('home');
     useEffect(()=>{
       try{
-        const stored = safeGet('m360:planner:tab');
-        if (stored) setTab(stored);
+        const stored = safeGet('m360:planner:tab', null);
+        if (stored) setTab(stored as any);
       }catch{}
     }, []);
     useEffect(()=>{ try{ safeSet('m360:planner:tab', tab); }catch{} }, [tab]);
@@ -92,12 +92,11 @@ export default function MaternalHome(){
     const [state, setState] = useState<{water:boolean;stretch:boolean;play:boolean}>({ water:false, stretch:false, play:false });
     useEffect(()=>{
       try{
-        const raw = safeGet(key) || '';
-        const parsed = raw ? JSON.parse(raw) : null;
+        const parsed = safeGet(key, null);
         if (parsed) setState(parsed);
       }catch{}
     }, [key]);
-    useEffect(()=>{ try{ safeSet(key, JSON.stringify(state)); }catch{} }, [state]);
+    useEffect(()=>{ try{ safeSet(key, state); }catch{} }, [state]);
     const total = 3; const count = Number(state.water) + Number(state.stretch) + Number(state.play);
     const pct = Math.round((count/total)*100);
     function toggleItem(k: 'water'|'stretch'|'play'){
