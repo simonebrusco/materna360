@@ -167,6 +167,9 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 /* toast system */
 .m360-toast-wrap { position: fixed; left: 0; right: 0; bottom: 24px; display: grid; place-items: center; pointer-events: none; z-index: 60; }
 .m360-toast { background: var(--card); color: var(--navy); border: 1px solid rgba(13,27,42,.06); box-shadow: var(--shadow-soft); padding: 12px 16px; border-radius: 14px; font-weight: 600; animation: m360-rise .25s ease both; pointer-events: auto; }
+.m360-toast-pulse{ position:relative; }
+.m360-toast-pulse::before{ content:"💗"; position:absolute; left:-10px; top:50%; transform: translateY(-50%) scale(1); animation: m360-beat .6s ease-in-out 2; }
+@keyframes m360-beat{ 0%,100%{ transform: translateY(-50%) scale(1); opacity:.9 } 50%{ transform: translateY(-50%) scale(1.25); opacity:1 } }
 
 /* breath timer */
 .m360-breath-wrap { display: grid; place-items: center; gap: 10px; margin: 14px 0; }
@@ -260,8 +263,13 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 
 /* Message of the day */
 .motd-title{ display:block; margin-bottom:8px; font-weight:800; }
+ai_main_7d7878c4bdcc
+.motd-text{ margin:0 0 12px; font-style: italic; }
+.motd-quote{ color:#F17324; font-weight:800; margin-right:6px; }
+
 .motd-text{ margin:0 0 12px; }
 .motd-quote{ color:#F17324; font-weight:700; }
+main
 
 /* Icon utility */
 .icon { width: 22px; height: 22px; display: inline-block; vertical-align: middle; }
@@ -397,7 +405,7 @@ label{ font-weight: var(--m360-weight-medium); }
   border-radius: 16px;
   padding: 16px;
   box-shadow: 0 8px 24px rgba(17, 17, 17, 0.06);
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 /* Grade de cards: nunca empilhar (>=360px já é 2 colunas) */
@@ -437,7 +445,9 @@ label{ font-weight: var(--m360-weight-medium); }
   display: flex;
   flex-direction: column;
   min-height: 180px;
+  transition: transform 120ms ease-out;
 }
+.card:hover, .card:active { transform: scale(1.02); }
 .card .row{ margin-top: auto; display:flex; gap:10px; }
 
 /* Títulos e subtítulos com consistência e truncamento */
@@ -527,6 +537,38 @@ label{ font-weight: var(--m360-weight-medium); }
   outline: none;
   box-shadow: var(--m360-shadow-outline);
 }
+
+/* Meu Dia soft-luxury theme variables (scoped) */
+:root .meu-dia{
+  --m360-primary:  #FF005E;  /* magenta (brand) */
+  --m360-secondary:#2F3A56;  /* navy discreto */
+  --m360-accent:   #F9C9B7;  /* rosé suave */
+  --m360-bg:       #FFFFFF;  /* branco */
+  --m360-text:     #2F3A56;  /* navy para textos */
+  /* ci: retrigger on soft-luxury scope */
+}
+
+/* Meu Dia component mappings (scoped) */
+.meu-dia .m360-hero h1{ font-family:Poppins, system-ui; font-weight:700; font-size:24px; color:var(--m360-text); }
+.meu-dia .m360-hero .sub{ font-family:Poppins, system-ui; font-weight:400; font-size:16px; color:var(--m360-text); }
+.meu-dia .motd-quote{ color: var(--m360-accent); }
+.meu-dia .card{ background: var(--m360-bg); border-radius:16px; }
+
+/* Icons mapping */
+.meu-dia .icon-default,
+.meu-dia .icon-action{ color: var(--m360-primary); }
+.meu-dia .icon-secondary{ color: var(--m360-secondary); }
+.meu-dia .icon-accent{ color: var(--m360-accent); }
+
+/* Buttons (scoped to Meu Dia) */
+.meu-dia .btn-primary{ background:var(--m360-primary) !important; color:#FFFFFF !important; border:2px solid var(--m360-primary) !important; box-shadow: 0 3px 8px rgba(255,0,94,.25); }
+.meu-dia .btn-primary:hover{ background:#e60054 !important; border-color:#e60054 !important; }
+.meu-dia .btn-outline{ background:transparent !important; color:var(--m360-secondary) !important; border:2px solid var(--m360-secondary) !important; }
+.meu-dia .btn-outline:hover{ background:rgba(47,58,86,.08) !important; }
+.meu-dia .btn-ghost, .meu-dia .btn.btn-ghost{ background:transparent !important; color:var(--m360-primary) !important; border-color:transparent !important; }
+
+/* Chips/Pills */
+.meu-dia .m360-chip{ border-color: var(--m360-accent) !important; color: var(--m360-secondary) !important; }
 
 /* Chips */
 .m360-container .chip {

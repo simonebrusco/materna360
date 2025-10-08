@@ -28,7 +28,7 @@ function microcopy(percent){
   return "You’re doing amazing—almost there!";
 }
 
-export default function WeekProgressCard({ completedCount = 0, total = 7, days = Array(7).fill(false), onOpenDay = () => {}, onOpenCard = () => {}, bonus, className = "" }){
+export default function WeekProgressCard({ completedCount = 0, total = 7, days = Array(7).fill(false), onOpenDay = () => {}, onOpenCard = () => {}, bonus, className = "", extraPct = 0 }){
   const todayIdx = useMemo(() => getTodayIndex(), []);
   const scrollRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
@@ -79,8 +79,11 @@ export default function WeekProgressCard({ completedCount = 0, total = 7, days =
       </div>
 
       <div style={{marginTop:10, cursor:"pointer"}} onClick={()=>onOpenCard()}>
-        <div aria-hidden style={{height:8, background:"rgba(13,27,42,.06)", borderRadius:999}}>
+        <div aria-hidden style={{position:"relative", height:8, background:"rgba(13,27,42,.06)", borderRadius:999, overflow:"hidden"}}>
           <div style={{height:8, width:`${pct}%`, background:"#F15A2E", borderRadius:999}} />
+          {extraPct ? (
+            <div style={{position:"absolute", top:0, left:0, height:8, width:`${Math.min(100, pct + extraPct)}%`, background:"rgba(241,115,36,.35)", borderRadius:999}} />
+          ) : null}
         </div>
         <div className="small" style={{opacity:.8, marginTop:6}}>{microcopy(pct)}</div>
       </div>
