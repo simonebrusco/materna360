@@ -150,6 +150,11 @@ export default function MaternalHome(){
         <ChecklistToday onProgress={(p)=>setExtraPct(p)} />
       </section>
 
+      {/* Meu Dia Hub (gated) */}
+      {flags.newHomeMaternal ? (
+        <MeuDiaHub />
+      ) : null}
+
       {/* 2) Planner da Família (full-width) */}
       <section className="m360-planner">
         <div className="m360-chip-row" role="tablist" aria-label="Planner categorias">
