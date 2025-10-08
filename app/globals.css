@@ -611,6 +611,26 @@ label{ font-weight: var(--m360-weight-medium); }
 /* Tap micro animation utility */
 .tap-scale:active{ transform: scale(1.02); }
 
+/* Meu Dia Hub (scoped) */
+.m360-container.meu-dia .meu-dia-hub{ margin: 8px 0 20px; }
+.m360-container.meu-dia .hub-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width:768px){ .m360-container.meu-dia .hub-grid{ grid-template-columns:1fr; gap:10px; } }
+.m360-container.meu-dia .hub-card{
+  background: var(--m360-bg, #FFF);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(18,21,26,.06);
+  padding: 14px;
+  min-height: 128px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+.m360-container.meu-dia .hub-card-head{ display:flex; align-items:center; gap:10px; }
+.m360-container.meu-dia .hub-card-title{ font:600 16px/20px Poppins, system-ui; color: var(--m360-text, #2F3A56); }
+.m360-container.meu-dia .hub-card-sub{ font:500 12px/16px Poppins, system-ui; color: rgba(47,58,86,.7); }
+.m360-container.meu-dia .hub-card-body{ margin:10px 0; }
+.m360-container.meu-dia .hub-meta{ font:500 13px/18px Poppins, system-ui; color: var(--m360-secondary, #2F3A56); }
+.m360-container.meu-dia .hub-card-actions{ display:flex; gap:8px; }
+
 /* Pulsing heart */
 @keyframes pulse-heart { 0%{ transform: scale(1) } 50%{ transform: scale(1.06) } 100%{ transform: scale(1) } }
 .greeting-title span[aria-hidden]{ display:inline-block; animation: pulse-heart 2s ease-in-out infinite; }
