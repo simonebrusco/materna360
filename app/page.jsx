@@ -5,7 +5,12 @@ import SafeBoundary from "../components/SafeBoundary";
 
 export default function HomePage() {
   const isBrowser = typeof window !== "undefined";
-  const enableNew = flags.newHomeMaternal || (isBrowser && new URLSearchParams(location.search).has("newHome"));
+  let enableNew = flags.newHomeMaternal;
+  if (isBrowser) {
+    const q = new URLSearchParams(location.search).get("newHome");
+    if (q === "1") enableNew = true;
+    if (q === "0") enableNew = false;
+  }
 
   if (enableNew) {
     return (
