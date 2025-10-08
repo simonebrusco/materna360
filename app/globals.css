@@ -216,6 +216,8 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
   .planner-meta{ text-align:right; }
 }
 
+/* ci: retrigger vercel preview (no-op) */
+
 /* Discover page: age tabs and grids */
 .age-tabs{ display:flex; gap:10px; margin:12px 0 8px; }
 .age-tab{ all:unset; cursor:pointer; padding:8px 14px; border-radius:999px; border:1.5px solid rgba(13,27,42,.12); color:#0D1B2A; background:#fff; }
