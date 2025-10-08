@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Icon from "../../ui/Icon";
+import { getAll } from "../../../lib/storage";
 
 export default function CardRespirar(){
   const [count, setCount] = useState(0);
@@ -10,9 +11,9 @@ export default function CardRespirar(){
 
   useEffect(()=>{
     try{
-      const raw = typeof window !== 'undefined' ? window.localStorage.getItem('m360:actions') : null;
-      const list = raw ? JSON.parse(raw) : [];
-      const breaths = Array.isArray(list) ? list.filter((a:any)=>a?.type==='breath') : [];
+      const all = getAll();
+      const list = Array.isArray(all?.actions) ? all.actions : [];
+      const breaths = list.filter((a:any)=>a?.type==='breath');
       setCount(breaths.length);
       setLast(breaths.length ? new Date(breaths[breaths.length-1]?.date||Date.now()).toLocaleDateString() : null);
     }catch{ setCount(0); setLast(null); }
