@@ -127,8 +127,8 @@ export default function MaternalHome(){
         <GreetingBinder>
           {({ name, part }) => (
             <div>
-              <h1 className="greeting-title" suppressHydrationWarning>{part}, {name} <span aria-hidden>💛</span></h1>
-              <p className="greeting-sub">Como você está hoje?</p>
+              <h1 suppressHydrationWarning>{part}, {name} <span aria-hidden>💛</span></h1>
+              <h2>Como você está hoje?</h2>
             </div>
           )}
         </GreetingBinder>
