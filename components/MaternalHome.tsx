@@ -15,7 +15,8 @@ import InspireModal from "./modals/InspireModal";
 import PauseModal from "./modals/PauseModal";
 import MessageOfDayCard from "./motd/MessageOfDayCard";
 import Vitrine from "./discover/Vitrine";
-import { addAction, addMood, ensurePlannerWeek, getPlannerDaysDone, getWeeklyPlan, toggleDayDone } from "../lib/storage";
+import ChecklistToday from "./planner/ChecklistToday";
+import { addAction, addMood, ensurePlannerWeek, getPlannerDaysDone, getWeeklyPlan, toggleDayDone, ensureSegmentedPlanners, getSegmentDaysDone } from "../lib/storage";
 import { emitEu360Refresh } from "../lib/clientEvents";
 import BadgesLevelToast from "./BadgesLevelToast";
 
@@ -27,17 +28,19 @@ export default function MaternalHome(){
   const [openInspire, setOpenInspire] = useState(false);
   const [openPause, setOpenPause] = useState(false);
 
+  const [activeTab, setActiveTab] = useState<'home'|'kids'|'me'>('home');
   const [plan, setPlan] = useState<boolean[]>(Array(7).fill(false));
   const [openPad, setOpenPad] = useState(false);
   const [padDay, setPadDay] = useState(() => { try{ const d=new Date().getDay(); return d===0?6:d-1; }catch{ return 0; } });
+  const [extraPct, setExtraPct] = useState(0);
   const done = useMemo(() => (Array.isArray(plan) ? plan.filter(Boolean).length : 0), [plan]);
 
-  useEffect(()=>{ try{ ensurePlannerWeek(); setPlan(getPlannerDaysDone() || getWeeklyPlan()); }catch{} },[]);
+  useEffect(()=>{ try{ ensurePlannerWeek(); ensureSegmentedPlanners(); setPlan(getSegmentDaysDone(activeTab)); }catch{} },[activeTab]);
   useEffect(()=>{
-    const off = () => { try { setPlan(getPlannerDaysDone() || getWeeklyPlan()); } catch {} };
+    const off = () => { try { setPlan(getSegmentDaysDone(activeTab) || getWeeklyPlan()); } catch {} };
     try { window.addEventListener('m360:data:updated', off); } catch {}
     return () => { try { window.removeEventListener('m360:data:updated', off); } catch {} };
-  },[]);
+  },[activeTab]);
 
   function openNotepad(i?: number){ if (typeof i==='number') setPadDay(i); setOpenPad(true); }
 
@@ -71,11 +74,24 @@ export default function MaternalHome(){
             </div>
           </Card>
         </div>
+
+        {/* Checklist do Dia */}
+        <div className="space" />
+        <ChecklistToday onProgress={(p)=>setExtraPct(p)} />
       </section>
 
       {/* 2) Planner da Família (full-width) */}
       <section className="m360-planner">
-        <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onOpenDay={(i)=>openNotepad(i)} onOpenCard={()=>openNotepad(padDay)} bonus={bonus} />
+        <div className="m360-chip-row" role="tablist" aria-label="Planner categorias">
+          {['home','kids','me'].map((k)=>{
+            const labels = { home: 'Casa', kids: 'Filhos', me: 'Eu' } as const;
+            const is = activeTab===k;
+            return (
+              <button key={k} className={`m360-chip${is?' is-selected':''}`} role="tab" aria-selected={is} onClick={()=>setActiveTab(k as any)}>{labels[k as keyof typeof labels]}</button>
+            );
+          })}
+        </div>
+        <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onOpenDay={(i)=>openNotepad(i)} onOpenCard={()=>openNotepad(padDay)} bonus={bonus} extraPct={extraPct} />
       </section>
 
       <section className="m360-grid m360-maternal-actions">
@@ -156,6 +172,7 @@ export default function MaternalHome(){
         onComplete={(entry)=>{
           try{ addMood({ date:new Date().toISOString(), mood:entry?.mood ?? 0, note:entry?.note }); }catch{}
           try{ addAction({ date:new Date().toISOString(), type:"reflect" }); }catch{}
+          try{ import("../lib/ui/toast").then(m=>m.showToast("Mãe Presente 💗")); }catch{}
           emitEu360Refresh();
           setOpenMood(false);
         }}
