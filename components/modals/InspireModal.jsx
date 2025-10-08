@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import BaseModal from "./BaseModal";
+import { safeGet, safeSet, isBrowser } from "@/lib/utils/safeStorage";
 
 const PHRASES = [
   "Breathe deeply. You’re stronger than you imagine.",
@@ -11,7 +12,6 @@ const PHRASES = [
 
 function nextIndex() {
   try {
-    const { safeGet, safeSet, isBrowser } = require("@/lib/utils/safeStorage");
     if (!isBrowser) return Math.floor(Math.random() * PHRASES.length);
     const key = "m360:inspireIndex";
     const raw = safeGet(key, 0);
