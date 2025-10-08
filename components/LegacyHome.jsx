@@ -47,8 +47,8 @@ export default function LegacyHome(){
   return (
     <div className="container">
       <GreetingBinder>
-        {({ name, part }) => (
-          <h1 className="h1" suppressHydrationWarning>{part}, {name} <span aria-hidden>💛</span></h1>
+        {({ greet }) => (
+          <h1 className="h1" suppressHydrationWarning>{greet}</h1>
         )}
       </GreetingBinder>
       <p className="sub">Como você está hoje?</p>
