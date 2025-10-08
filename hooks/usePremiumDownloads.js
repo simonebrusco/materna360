@@ -1,6 +1,8 @@
 'use client';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { record } from '../lib/actions';
+import { safeGet, safeSet, isBrowser } from '@/lib/utils/safeStorage';
+import { emit } from '@/lib/utils/events';
 
 const FREE_DAILY_LIMIT = 3;
 const QUOTA_KEY = 'm360:downloads:quota:v1';
@@ -17,26 +19,23 @@ function todayKey(){
 }
 
 function readQuota(){
-  if (typeof window === 'undefined') return { day: todayKey(), used: 0 };
+  if (!isBrowser) return { day: todayKey(), used: 0 };
   try {
-    const raw = localStorage.getItem(QUOTA_KEY);
-    const v = raw ? JSON.parse(raw) : null;
+    const v = safeGet(QUOTA_KEY, null);
     if (!v || v.day !== todayKey()) return { day: todayKey(), used: 0 };
     return { day: v.day, used: Math.max(0, Number(v.used) || 0) };
   } catch { return { day: todayKey(), used: 0 }; }
 }
 
 function writeQuota(q){
-  if (typeof window === 'undefined') return;
-  try { localStorage.setItem(QUOTA_KEY, JSON.stringify(q)); } catch {}
+  if (!isBrowser) return;
+  try { safeSet(QUOTA_KEY, q); } catch {}
 }
 
 function readPlan(){
-  if (typeof window === 'undefined') return { premium: false };
+  if (!isBrowser) return { premium: false };
   try {
-    const raw = localStorage.getItem(PLAN_KEY);
-    if (!raw) return { premium: false };
-    const v = JSON.parse(raw);
+    const v = safeGet(PLAN_KEY, { premium: false });
     return { premium: !!v?.premium };
   } catch { return { premium: false }; }
 }
@@ -78,7 +77,7 @@ export default function usePremiumDownloads(){
     }
 
     if (item.tier === 'premium') {
-      try { window.dispatchEvent(new Event('m360:upgrade:prompt')); } catch {}
+      try { emit('m360:upgrade:prompt'); } catch {}
       try { record('download_blocked', { id: itemId, reason: 'premium_required' }); } catch {}
       return { ok: false };
     }
@@ -86,7 +85,7 @@ export default function usePremiumDownloads(){
     const q = readQuota();
     if (q.day !== todayKey()) { q.day = todayKey(); q.used = 0; }
     if (q.used >= FREE_DAILY_LIMIT) {
-      try { window.dispatchEvent(new Event('downloads:limit')); } catch {}
+      try { emit('downloads:limit'); } catch {}
       try { record('download_blocked', { id: itemId, reason: 'daily_limit' }); } catch {}
       return { ok: false };
     }

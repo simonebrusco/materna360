@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { safeGet, hasWindow } from "../../../lib/utils/safeStorage";
+import { safeGet, isBrowser } from "@/lib/utils/safeStorage";
 
 export default function HumorSemanaMini(){
   const [avg, setAvg] = useState(null);
   const [loaded, setLoaded] = useState(false);
   useEffect(()=>{
     try{
-      if(!hasWindow) return;
-      const raw = safeGet('m360:moods');
-      if(raw){
-        try{
-          const arr = JSON.parse(raw);
-          if(Array.isArray(arr) && arr.length){
-            const last7 = arr.slice(-7);
-            const m = last7.reduce((s,a)=> s + (Number(a?.mood)||0), 0) / last7.length;
-            setAvg(Math.round(m*10)/10);
-          }
-        }catch{}
+      if(!isBrowser) return;
+      const arr = safeGet('m360:moods', []);
+      if(Array.isArray(arr) && arr.length){
+        const last7 = arr.slice(-7);
+        const m = last7.reduce((s,a)=> s + (Number(a?.mood)||0), 0) / last7.length;
+        setAvg(Math.round(m*10)/10);
       }
     }catch{}
     setLoaded(true);

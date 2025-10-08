@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import BaseModal from "./BaseModal";
+import { safeGet, safeSet } from "@/lib/utils/safeStorage";
 
 export default function MoodModal({ open, onClose = () => {}, onComplete = () => {} }) {
   const [mood, setMood] = useState(0);
@@ -10,7 +11,7 @@ export default function MoodModal({ open, onClose = () => {}, onComplete = () =>
   useEffect(() => {
     if (!open) return;
     try {
-      const prev = typeof window !== "undefined" ? window.localStorage.getItem("reflectionNotes") : null;
+      const prev = safeGet("reflectionNotes", "");
       if (prev) setNote(prev);
     } catch {}
   }, [open]);
@@ -49,7 +50,7 @@ export default function MoodModal({ open, onClose = () => {}, onComplete = () =>
           onChange={(e) => {
             const v = e.target.value;
             setNote(v);
-            try { window.localStorage.setItem("reflectionNotes", v); } catch {}
+            try { safeSet("reflectionNotes", v); } catch {}
           }}
           placeholder="Escreva como você se sente (opcional)"
           className="m360-input"
@@ -63,7 +64,7 @@ export default function MoodModal({ open, onClose = () => {}, onComplete = () =>
           type="button"
           className="btn btn-primary"
           onClick={() => {
-            try { window.localStorage.setItem("reflectionNotes", note || ""); } catch {}
+            try { safeSet("reflectionNotes", note || ""); } catch {}
             onComplete({ mood, note: note || undefined });
             onClose();
           }}

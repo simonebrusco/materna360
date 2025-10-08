@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { safeGet, hasWindow } from "../../../lib/utils/safeStorage";
+import { safeGet, isBrowser } from "@/lib/utils/safeStorage";
 
 export default function MomentosFilhoSummary(){
   const [count, setCount] = useState(0);
   const [loaded, setLoaded] = useState(false);
   useEffect(()=>{
     try{
-      if(!hasWindow) return;
-      const raw = safeGet('m360:connections');
-      if(raw){ try{ const arr = JSON.parse(raw); setCount(Array.isArray(arr)? arr.length : 0); }catch{} }
+      if(!isBrowser) return;
+      const arr = safeGet('m360:connections', []);
+      setCount(Array.isArray(arr)? arr.length : 0);
     }catch{}
     setLoaded(true);
   },[]);

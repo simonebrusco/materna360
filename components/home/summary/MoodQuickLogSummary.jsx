@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { safeGet, hasWindow } from "../../../lib/utils/safeStorage";
+import { safeGet, isBrowser } from "@/lib/utils/safeStorage";
 
 export default function MoodQuickLogSummary(){
   const [count, setCount] = useState(0);
   const [loaded, setLoaded] = useState(false);
   useEffect(()=>{
     try{
-      if(!hasWindow) return;
-      const raw = safeGet('m360:moods');
-      if(raw){
-        try{ const parsed = JSON.parse(raw); setCount(Array.isArray(parsed)? parsed.length : 0); }catch{}
-      }
+      if(!isBrowser) return;
+      const parsed = safeGet('m360:moods', []);
+      setCount(Array.isArray(parsed)? parsed.length : 0);
     }catch{}
     setLoaded(true);
   },[]);
