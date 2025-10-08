@@ -13,7 +13,6 @@ import MessageOfDayCard from "./motd/MessageOfDayCard";
 import Vitrine from "./discover/Vitrine";
 import ChecklistToday from "./planner/ChecklistToday";
 import { flags as defaultFlags } from "@/lib/flags";
-import HomeHub from "./home/HomeHub";
 import CardRotinaCasa from "./meu-dia/cards/CardRotinaCasa";
 import CardTempoFilho from "./meu-dia/cards/CardTempoFilho";
 import CardIdeiaDoDia from "./meu-dia/cards/CardIdeiaDoDia";
@@ -38,6 +37,7 @@ const GreetingBinder = dynamic(() => import("./GreetingBinder"), { ssr: false })
 
 export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<string, any> }){
   const flags = { ...defaultFlags, ...(incomingFlags || {}) };
+  const f = flags;
   const [openBreath, setOpenBreath] = useState(false);
   const [openMood, setOpenMood] = useState(false);
   const [openInspire, setOpenInspire] = useState(false);
@@ -225,52 +225,56 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
 
       </section>
 
-      {/* Meu Dia Hub (gated) */}
-      {flags.newHomeMaternal ? (
-        <HomeHub />
-      ) : null}
 
       {/* 1) Checklist do Dia */}
-      <section aria-label="Checklist do Dia">
-        <div className="space" />
-        <ChecklistToday onProgress={(p)=>setExtraPct(Math.max(0, Math.min(10, p)))} onUndo={()=>{ try{ if (completeTimerRef.current){ clearTimeout(completeTimerRef.current); completeTimerRef.current=null; } }catch{} }} />
-      </section>
+      {f.microtasksToday ? (
+        <section aria-label="Checklist do Dia">
+          <div className="space" />
+          <ChecklistToday onProgress={(p)=>setExtraPct(Math.max(0, Math.min(10, p)))} onUndo={()=>{ try{ if (completeTimerRef.current){ clearTimeout(completeTimerRef.current); completeTimerRef.current=null; } }catch{} }} />
+        </section>
+      ) : null}
 
       {/* 2) Planner da Família (full-width) */}
-      <section className="m360-planner" role="region" aria-label="Planner da Família">
-        <div className="m360-chip-row" role="tablist" aria-label="Planner categorias">
-          {['home','kids','me'].map((k)=>{
-            const labels = { home: 'Casa', kids: 'Filhos', me: 'Eu' } as const;
-            const is = activeTab===k;
-            return (
-              <button key={k} className={`m360-chip${is?' is-selected':''}`} role="tab" aria-selected={is} onClick={()=>setActiveTab(k as any)}>{labels[k as keyof typeof labels]}</button>
-            );
-          })}
-        </div>
-        <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onOpenDay={(i)=>openNotepad(i)} onOpenCard={()=>openNotepad(padDay)} bonus={bonus} extraPct={extraPct} />
-        {isEmptyTab ? (
-          <div className="card" style={{marginTop:12}} role="note" aria-label="Planner vazio">
-            <div className="card-title">Que tal começar?</div>
-            <p className="card-sub">Adicione sua primeira tarefa nesta aba para organizar sua semana.</p>
-            <div className="row" style={{display:'flex', gap:10, marginTop:8}}>
-              <button className="btn btn-primary" onClick={()=>openNotepad(padDay)}>Adicionar primeira tarefa</button>
-            </div>
+      {f.plannerFamily ? (
+        <section className="m360-planner" role="region" aria-label="Planner da Família">
+          <div className="m360-chip-row" role="tablist" aria-label="Planner categorias">
+            {['home','kids','me'].map((k)=>{
+              const labels = { home: 'Casa', kids: 'Filhos', me: 'Eu' } as const;
+              const is = activeTab===k;
+              return (
+                <button key={k} className={`m360-chip${is?' is-selected':''}`} role="tab" aria-selected={is} onClick={()=>setActiveTab(k as any)}>{labels[k as keyof typeof labels]}</button>
+              );
+            })}
           </div>
-        ) : null}
-      </section>
+          <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onOpenDay={(i)=>openNotepad(i)} onOpenCard={()=>openNotepad(padDay)} bonus={bonus} extraPct={extraPct} />
+          {isEmptyTab ? (
+            <div className="card" style={{marginTop:12}} role="note" aria-label="Planner vazio">
+              <div className="card-title">Que tal começar?</div>
+              <p className="card-sub">Adicione sua primeira tarefa nesta aba para organizar sua semana.</p>
+              <div className="row" style={{display:'flex', gap:10, marginTop:8}}>
+                <button className="btn btn-primary" onClick={()=>openNotepad(padDay)}>Adicionar primeira tarefa</button>
+              </div>
+            </div>
+          ) : null}
+        </section>
+      ) : null}
 
       {/* 3) Ações (2x2) */}
-      <section className="hub-grid" aria-label="Ações do dia" style={{marginBottom:24}}>
-        <CardRotinaCasa />
-        <CardTempoFilho />
-        <CardIdeiaDoDia />
-        <CardMomentoMim />
-      </section>
+      {f.houseRoutine && f.childrenProfiles ? (
+        <section className="hub-grid" aria-label="Ações do dia" style={{marginBottom:24}}>
+          <CardRotinaCasa />
+          <CardTempoFilho />
+          <CardIdeiaDoDia />
+          <CardMomentoMim />
+        </section>
+      ) : null}
 
       {/* 4) Recomendações */}
-      <section aria-label="Recomendações" style={{marginBottom:24}}>
-        <Vitrine />
-      </section>
+      {f.discoverIdeas ? (
+        <section aria-label="Recomendações" style={{marginBottom:24}}>
+          <Vitrine />
+        </section>
+      ) : null}
 
       {/* 5) FAB */}
       <button className="fab btn btn-primary" aria-label="Anotar" onClick={()=>setOpenQuick(true)}>＋ Anotar</button>
