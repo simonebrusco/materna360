@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Card from "./ui/Card";
@@ -29,6 +27,7 @@ const QuickAddModal = dynamic(() => import("./planner/QuickAddModal"), { ssr: fa
 import { emitEu360Refresh } from "../lib/clientEvents";
 const BadgesLevelToast = dynamic(() => import("./BadgesLevelToast"), { ssr: false });
 import { showToast } from "../lib/ui/toast";
+import { safeGet, safeSet } from "@/lib/utils/safeStorage";
 
 const GreetingBinder = dynamic(() => import("./GreetingBinder"), { ssr: false });
 
@@ -48,6 +47,7 @@ export default function MaternalHome(){
 
   useEffect(()=>{ try{ ensurePlannerWeek(); ensureSegmentedPlanners(); setPlan(getSegmentDaysDone(activeTab)); }catch{} },[activeTab]);
   useEffect(()=>{
+    if (typeof window === 'undefined') return;
     const off = () => { try { setPlan(getSegmentDaysDone(activeTab) || getWeeklyPlan()); } catch {} };
     try { window.addEventListener('m360:data:updated', off); } catch {}
     return () => { try { window.removeEventListener('m360:data:updated', off); } catch {} };
@@ -67,11 +67,11 @@ export default function MaternalHome(){
     const [tab, setTab] = useState<string>('home');
     useEffect(()=>{
       try{
-        const stored = localStorage.getItem('m360:planner:tab');
+        const stored = safeGet('m360:planner:tab');
         if (stored) setTab(stored);
       }catch{}
     }, []);
-    useEffect(()=>{ try{ localStorage.setItem('m360:planner:tab', tab); }catch{} }, [tab]);
+    useEffect(()=>{ try{ safeSet('m360:planner:tab', tab); }catch{} }, [tab]);
     const items = [
       { id: 'home', label: 'Casa' },
       { id: 'kids', label: 'Filhos' },
@@ -92,12 +92,12 @@ export default function MaternalHome(){
     const [state, setState] = useState<{water:boolean;stretch:boolean;play:boolean}>({ water:false, stretch:false, play:false });
     useEffect(()=>{
       try{
-        const raw = localStorage.getItem(key) || '';
+        const raw = safeGet(key) || '';
         const parsed = raw ? JSON.parse(raw) : null;
         if (parsed) setState(parsed);
       }catch{}
     }, [key]);
-    useEffect(()=>{ try{ localStorage.setItem(key, JSON.stringify(state)); }catch{} }, [state]);
+    useEffect(()=>{ try{ safeSet(key, JSON.stringify(state)); }catch{} }, [state]);
     const total = 3; const count = Number(state.water) + Number(state.stretch) + Number(state.play);
     const pct = Math.round((count/total)*100);
     function toggleItem(k: 'water'|'stretch'|'play'){
@@ -266,7 +266,7 @@ export default function MaternalHome(){
       <InspireModal
         open={openInspire}
         onClose={() => setOpenInspire(false)}
-        onComplete={()=>{
+        onComplete(()=>{
           try{ addAction({ date:new Date().toISOString(), type:"inspire" }); }catch{}
           try{ toggleDayDone(new Date()); }catch{}
           showToast("Mãe Presente");

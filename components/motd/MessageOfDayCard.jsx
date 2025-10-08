@@ -1,8 +1,8 @@
-"use client";
 import { useEffect, useState } from "react";
 import Card from "../ui/Card";
 import Btn from "../ui/Btn";
 import { ensureMessage } from "../../lib/messages";
+import { safeGet, safeSet } from "@/lib/utils/safeStorage";
 
 export default function MessageOfDayCard({ nameHint = null, showTitle = true, showButton = true, className = "" }) {
   const [motd, setMotd] = useState("");
@@ -33,7 +33,7 @@ export default function MessageOfDayCard({ nameHint = null, showTitle = true, sh
   function readStored() {
     const { key, iso } = todayKey();
     try {
-      const raw = window.localStorage.getItem(key);
+      const raw = safeGet(key);
       if (!raw) return null;
       const obj = JSON.parse(raw);
       if (obj && obj.date === iso && typeof obj.text === "string" && obj.text.trim()) {
@@ -49,7 +49,7 @@ export default function MessageOfDayCard({ nameHint = null, showTitle = true, sh
     const { key, iso } = todayKey();
     try {
       const payload = { date: iso, text: text || "" };
-      window.localStorage.setItem(key, JSON.stringify(payload));
+      safeSet(key, JSON.stringify(payload));
     } catch {}
   }
 
