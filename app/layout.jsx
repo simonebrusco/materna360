@@ -80,7 +80,6 @@ export default function RootLayout({ children }) {
         )}
       </head>
       <body className="bg-gray-50 text-gray-900 antialiased">
-        <div data-build-stamp className="sr-only">BUILD: {new Date().toISOString()}</div>
         <DevErrorSuppressor />
         <ClientMigrator />
         {/* <AnalyticsBinder /> */}
