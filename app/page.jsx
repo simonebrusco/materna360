@@ -1,32 +1,13 @@
 import { flags } from "../lib/flags";
 import MaternalHome from "../components/MaternalHome";
-import LegacyHome from "../components/LegacyHome";
 import SafeBoundary from "../components/SafeBoundary";
+import { resolveFlagsFromSearch } from "@/lib/flags";
 
-export default function HomePage() {
-  const isBrowser = typeof window !== "undefined";
-  const enableNew = flags.newHomeMaternal || (isBrowser && new URLSearchParams(location.search).has("newHome"));
-
-  if (enableNew) {
-    return (
-      <SafeBoundary>
-        <MaternalHome />
-      </SafeBoundary>
-    );
-  }
-
-  if (flags.oldHomeWellness) {
-    return (
-      <SafeBoundary>
-        <LegacyHome />
-      </SafeBoundary>
-    );
-  }
-
+export default async function HomePage({ searchParams }) {
+  const resolvedFlags = resolveFlagsFromSearch?.(searchParams) ?? null;
   return (
-    <main style={{ padding: 32, textAlign: "center" }}>
-      <p>Bem-vinda ao Materna360 💗</p>
-      <p>Ative uma das homes nas flags para visualizar o conteúdo.</p>
-    </main>
+    <SafeBoundary>
+      <MaternalHome flags={resolvedFlags} />
+    </SafeBoundary>
   );
 }
