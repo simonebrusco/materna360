@@ -4,14 +4,14 @@ import BaseModal from "../modals/BaseModal";
 import Btn from "../ui/Btn";
 import { addPlannerEntry } from "../../lib/storage";
 import { showToast } from "../../lib/ui/toast";
+import { safeGet, safeSet } from "@/lib/utils/safeStorage";
 
 function getCurrentTab(){
-  try{ const { safeGet } = require("@/lib/utils/safeStorage"); return safeGet("m360:planner:tab", "home"); }catch{ return "home"; }
+  try{ return safeGet("m360:planner:tab", "home"); }catch{ return "home"; }
 }
 
 function persistToTab(tab, payload){
   try{
-    const { safeGet, safeSet } = require("@/lib/utils/safeStorage");
     const key = tab === "kids" ? "m360:planner.kids" : (tab === "me" ? "m360:planner.me" : "m360:planner.home");
     const list = safeGet(key, []);
     const base = Array.isArray(list) ? list : (Array.isArray(list?.items) ? list.items : []);
