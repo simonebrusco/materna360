@@ -85,7 +85,7 @@ function CardAtividadeDoDia() {
   };
   return (
     <article className="card m360-action">
-      <div className="card-icon">🎨</div>
+      <div className="card-icon">��</div>
       <h3>Atividade do Dia</h3>
       <p>Receba sugestões educativas e brincadeiras do dia.</p>
       <div className="card-actions">
@@ -229,7 +229,7 @@ export default function MaternalHome(){
         <InspireModal
           open={openInspire}
           onClose={() => setOpenInspire(false)}
-          onComplete(()=>{
+          onComplete={() => {
             try{ addAction({ date:new Date().toISOString(), type:"inspire" }); }catch{}
             try{ toggleDayDone(new Date()); }catch{}
             emitEu360Refresh();
