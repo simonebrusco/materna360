@@ -4,7 +4,7 @@ import Card from "../ui/Card";
 import Btn from "../ui/Btn";
 import { ensureMessage } from "../../lib/messages";
 
-export default function MessageOfDayCard({ nameHint = null, showTitle = true, showButton = true }) {
+export default function MessageOfDayCard({ nameHint = null, showTitle = true, showButton = true, className = "" }) {
   const [motd, setMotd] = useState("");
 
   function sanitizeMessage(text) {
