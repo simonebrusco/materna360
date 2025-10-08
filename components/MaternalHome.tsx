@@ -125,9 +125,9 @@ export default function MaternalHome(){
       {/* 1) Hero (saudação + mensagem do dia) */}
       <section className="m360-hero hero">
         <GreetingBinder>
-          {({ name, part }) => (
+          {({ greet }) => (
             <div>
-              <h1 className="greeting-title" suppressHydrationWarning>{part}, {name} <span aria-hidden>💛</span></h1>
+              <h1 className="greeting-title" suppressHydrationWarning>{greet}</h1>
               <p className="greeting-sub">Como você está hoje?</p>
             </div>
           )}
