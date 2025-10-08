@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { safeGet, hasWindow } from "../../../lib/utils/safeStorage";
+import { safeGet, isBrowser } from "@/lib/utils/safeStorage";
 
 export default function MeditarSummary(){
   const [minutes, setMinutes] = useState(0);
   const [loaded, setLoaded] = useState(false);
   useEffect(()=>{
     try{
-      if(!hasWindow) return;
-      const raw = safeGet('m360:activities');
-      if(raw){
-        try{
-          const arr = JSON.parse(raw);
-          if(Array.isArray(arr)){
-            const mins = arr.filter(a=>a && a.type==='meditation').reduce((s,a)=> s + (Number(a.duration)||0), 0);
-            setMinutes(mins);
-          }
-        }catch{}
+      if(!isBrowser) return;
+      const arr = safeGet('m360:activities', []);
+      if(Array.isArray(arr)){
+        const mins = arr.filter(a=>a && a.type==='meditation').reduce((s,a)=> s + (Number(a.duration)||0), 0);
+        setMinutes(mins);
       }
     }catch{}
     setLoaded(true);
