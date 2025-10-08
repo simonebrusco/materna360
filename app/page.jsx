@@ -17,7 +17,7 @@ export default function HomePage() {
     );
   }
 
-  if (flags.oldHomeWellness) {
+  if (flags.showLegacyWellnessActions) {
     return (
       <SafeBoundary>
         <LegacyHome />

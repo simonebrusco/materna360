@@ -545,3 +545,6 @@ label{ font-weight: var(--m360-weight-medium); }
   box-shadow: 0 6px 18px rgba(17,17,17,.05);
   background: #fff;
 }
+
+/* Safety: hide legacy wellness section if mounted */
+.m360-container [data-section="wellness-actions"] { display: none !important; }

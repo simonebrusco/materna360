@@ -18,6 +18,7 @@ import Vitrine from "./discover/Vitrine";
 import { addAction, addMood, ensurePlannerWeek, getPlannerDaysDone, getWeeklyPlan, toggleDayDone } from "../lib/storage";
 import { emitEu360Refresh } from "../lib/clientEvents";
 import BadgesLevelToast from "./BadgesLevelToast";
+import { flags } from "../lib/flags";
 
 const GreetingBinder = dynamic(() => import("./GreetingBinder"), { ssr: false });
 
@@ -78,13 +79,15 @@ export default function MaternalHome(){
         <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onOpenDay={(i)=>openNotepad(i)} onOpenCard={()=>openNotepad(padDay)} bonus={bonus} />
       </section>
 
-      {/* 3) Grade de cards (nunca empilhar): 2–3 colunas conforme breakpoint */}
-      <section className="m360-grid">
-        <NavyCard onClick={() => setOpenBreath(true)}><div className="iconStack"><Icon name="breath" className="icon-24 icon-action" /><div>Respirar</div></div></NavyCard>
-        <Card style={{minHeight:110,display:"grid",placeItems:"center",cursor:"pointer"}} onClick={() => setOpenMood(true)}><div className="iconStack"><Icon name="reflect" className="icon-24 icon-action" /><div>Refletir</div></div></Card>
-        <NavyCard onClick={() => setOpenInspire(true)}><div className="iconStack"><Icon name="inspire" className="icon-24 icon-action" /><div>Inspirar</div></div></NavyCard>
-        <Card style={{minHeight:110,display:"grid",placeItems:"center",cursor:"pointer"}} onClick={() => setOpenPause(true)}><div className="iconStack"><Icon name="pause" className="icon-24 icon-action" /><div>Pausar</div></div></Card>
-      </section>
+      {/* 3) Legacy wellness actions — guarded by flag */}
+      {flags.showLegacyWellnessActions && (
+        <section className="m360-grid" data-section="wellness-actions">
+          <NavyCard onClick={() => setOpenBreath(true)}><div className="iconStack"><Icon name="breath" className="icon-24 icon-action" /><div>Respirar</div></div></NavyCard>
+          <Card style={{minHeight:110,display:"grid",placeItems:"center",cursor:"pointer"}} onClick={() => setOpenMood(true)}><div className="iconStack"><Icon name="reflect" className="icon-24 icon-action" /><div>Refletir</div></div></Card>
+          <NavyCard onClick={() => setOpenInspire(true)}><div className="iconStack"><Icon name="inspire" className="icon-24 icon-action" /><div>Inspirar</div></div></NavyCard>
+          <Card style={{minHeight:110,display:"grid",placeItems:"center",cursor:"pointer"}} onClick={() => setOpenPause(true)}><div className="iconStack"><Icon name="pause" className="icon-24 icon-action" /><div>Pausar</div></div></Card>
+        </section>
+      )}
 
       {/* 4) Hoje + Descobrir (lado a lado em telas médias+) */}
       <section className="m360-row">
