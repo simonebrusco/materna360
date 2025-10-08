@@ -123,7 +123,7 @@ export default function MaternalHome(){
   return (
     <div className="m360-container meu-dia">
       {/* 1) Hero (saudação + mensagem do dia) */}
-      <section className="m360-hero" style={{marginBottom:24}}>
+      <section className="m360-hero hero" style={{marginBottom:24}}>
         <GreetingBinder>
           {({ name, part }) => (
             <div>
@@ -132,15 +132,15 @@ export default function MaternalHome(){
             </div>
           )}
         </GreetingBinder>
-        <div className="m360-grid" style={{marginBottom:0}}>
-          <MessageOfDayCard showTitle={false} showButton={false} />
-          <Card className="tap-scale" onClick={()=>setOpenMood(true)}>
-            <div style={{display:"grid",gridTemplateColumns:"48px 1fr",gap:12,alignItems:"center"}}>
+        <div className="m360-grid hero-grid" style={{marginBottom:0}}>
+          <MessageOfDayCard className="motd-card" showTitle={false} showButton={false} />
+          <Card className="tap-scale mood-card" onClick={()=>setOpenMood(true)}>
+            <div className="mood-row" style={{display:"grid",gridTemplateColumns:"48px 1fr",gap:12,alignItems:"center"}}>
               <Icon name="mood" className="icon-24 icon-accent" />
               <Icon name="mood" className="icon-24 icon-secondary" />
-              <div>
-                <div style={{fontWeight:800,color:'#1E1E1E'}}>Como você se sente?</div>
-                <div className="small" style={{opacity:.75}}>Toque para registrar</div>
+              <div className="mood-text">
+                <h3 className="mood-title">Como você se sente?</h3>
+                <div className="mood-sub small">Toque para registrar</div>
               </div>
             </div>
           </Card>
