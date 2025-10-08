@@ -127,7 +127,7 @@ export default function MaternalHome(){
         <GreetingBinder>
           {({ name, part }) => (
             <div>
-              <h1 className="greeting-title" suppressHydrationWarning>{part}, {name} <span aria-hidden>💛</span></h1>
+              <h1 className="greeting-title" suppressHydrationWarning>{part}, {(name||'Mãe')} <span aria-hidden>💛</span></h1>
               <p className="greeting-sub">Como você está hoje?</p>
             </div>
           )}
@@ -179,7 +179,7 @@ export default function MaternalHome(){
           <h3>Tempo com Meu Filho</h3>
           <p>Registre um momento especial do dia com seu filho.</p>
           <div className="card-actions">
-            <button className="btn btn-primary" onClick={()=>{ try{ (window as any).requestAnimationFrame?.(()=>{}); }catch{}; }}>Registrar momento</button>
+            <button className="btn btn-primary" onClick={()=>{ try{ import("../lib/ui/toast").then(m=>m.showToast("Momento com seu filho registrado com sucesso!")); }catch{}; try{ import("../lib/storage").then(m=>m.upsertBadges && m.upsertBadges({ maePresente: true })); }catch{}; }}>Registrar momento</button>
             <button className="btn btn-outline">Ver timeline</button>
           </div>
         </div>
