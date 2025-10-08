@@ -363,6 +363,18 @@ p, label, input, textarea, button{
   display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
 }
 
+/* Planner family summary */
+.planner-summary{ }
+.planner-summary-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.planner-summary-tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+.planner-progress-track{ height:6px; background:#eee; border-radius:6px; margin-bottom:10px; }
+.planner-progress-bar{ height:6px; border-radius:6px; background: var(--magenta); width:0%; }
+.planner-list{ margin:8px 0 0 0; padding:0; list-style:none; }
+.planner-list-item{ display:flex; align-items:center; gap:10px; padding:6px 0; border-bottom:1px solid #f3f3f3; }
+.planner-entry-title{ flex:1; }
+.planner-entry-title.is-done{ opacity:.6; text-decoration: line-through; }
+.planner-scope-chip{ margin-left:auto; }
+
 /* Notepad placeholders */
 input::placeholder, textarea::placeholder{
   color: rgba(0,0,0,.45);

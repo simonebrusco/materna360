@@ -15,6 +15,8 @@ import InspireModal from "./modals/InspireModal";
 import PauseModal from "./modals/PauseModal";
 import MessageOfDayCard from "./motd/MessageOfDayCard";
 import Vitrine from "./discover/Vitrine";
+import PlannerFamilySummary from "./planner/PlannerFamilySummary";
+import { flags } from "../lib/flags";
 import { addAction, addMood, ensurePlannerWeek, getPlannerDaysDone, getWeeklyPlan, toggleDayDone } from "../lib/storage";
 import { emitEu360Refresh } from "../lib/clientEvents";
 import BadgesLevelToast from "./BadgesLevelToast";
@@ -91,6 +93,11 @@ export default function MaternalHome(){
         <div className="m360-col">
           <h2 className="h3" style={{marginBottom:8}}>Hoje</h2>
           <TipsRotator tips={tips} />
+          {flags.todayChecklist ? (
+            <Card style={{marginTop:12}}>
+              <PlannerFamilySummary />
+            </Card>
+          ) : null}
         </div>
         <div className="m360-col">
           <Vitrine />
@@ -98,7 +105,9 @@ export default function MaternalHome(){
       </section>
 
       {/* 5) FAB (fica como já está) */}
-      <button className="fab" aria-label="Nova anotação" onClick={()=>openNotepad(padDay)}>＋</button>
+      {flags.floatingQuickNote ? (
+        <button className="fab" aria-label="Nova anotação" onClick={()=>openNotepad(padDay)}>＋</button>
+      ) : null}
 
       {/* 6) Toasts (já existentes) */}
       <BadgesLevelToast />
