@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Icon from "../../ui/Icon";
+import { getAll } from "../../../lib/storage";
 
 export default function CardMeditar(){
   const [count, setCount] = useState(0);
@@ -10,9 +11,9 @@ export default function CardMeditar(){
 
   useEffect(()=>{
     try{
-      const raw = typeof window !== 'undefined' ? window.localStorage.getItem('m360:actions') : null;
-      const list = raw ? JSON.parse(raw) : [];
-      const meds = Array.isArray(list) ? list.filter((a:any)=>a?.type==='meditate' || a?.type==='inspire') : [];
+      const all = getAll();
+      const list = Array.isArray(all?.actions) ? all.actions : [];
+      const meds = list.filter((a:any)=>a?.type==='meditate' || a?.type==='inspire');
       setCount(meds.length);
       setLast(meds.length ? new Date(meds[meds.length-1]?.date||Date.now()).toLocaleDateString() : null);
     }catch{ setCount(0); setLast(null); }
