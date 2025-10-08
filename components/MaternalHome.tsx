@@ -16,6 +16,10 @@ import Vitrine from "./discover/Vitrine";
 import ChecklistToday from "./planner/ChecklistToday";
 import { flags } from "../lib/flags";
 import HomeHub from "./home/HomeHub";
+const CardRotinaCasa = dynamic(() => import("./meu-dia/cards/CardRotinaCasa"), { ssr: false });
+const CardTempoFilho = dynamic(() => import("./meu-dia/cards/CardTempoFilho"), { ssr: false });
+const CardIdeiaDoDia = dynamic(() => import("./meu-dia/cards/CardIdeiaDoDia"), { ssr: false });
+const CardMomentoMim = dynamic(() => import("./meu-dia/cards/CardMomentoMim"), { ssr: false });
 import {
   addAction,
   addMood,
