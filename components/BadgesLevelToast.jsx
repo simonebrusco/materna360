@@ -3,10 +3,21 @@ import { useEffect, useRef } from "react";
 import { readJSON, writeJSON, onUpdate } from "../lib/storage";
 import { showToast } from "../lib/ui/toast";
 
+function normalizeMap(map){
+  const labels = { organizada: "Organizada", maePresente: "Mãe Presente" };
+  const out = [];
+  try{ for (const k of Object.keys(map||{})) if (map[k]) out.push({ id: String(k), label: labels[k] || String(k) }); }catch{}
+  return out;
+}
 function getBadges(){
   try {
-    const v = readJSON("m360:badges", []);
-    return Array.isArray(v) ? v.map(b => ({ id: String(b?.id||""), label: String(b?.label||"") })) : [];
+    const map = readJSON("m360:badges", {});
+    const list = readJSON("m360:badges:list", []);
+    const a = Array.isArray(list) ? list.map(b => ({ id: String(b?.id||""), label: String(b?.label||"") })) : [];
+    const m = map && typeof map==='object' && !Array.isArray(map) ? normalizeMap(map) : [];
+    const merged = [...a, ...m];
+    const seen = new Set();
+    return merged.filter(b=>{ const key=b.id||b.label; if (seen.has(key)) return false; seen.add(key); return Boolean(b.id||b.label); });
   } catch { return []; }
 }
 
