@@ -1,5 +1,6 @@
 "use client";
 
+'use client';
 import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Card from "./ui/Card";
@@ -13,7 +14,7 @@ const PauseModal = dynamic(() => import("./modals/PauseModal"), { ssr: false });
 import MessageOfDayCard from "./motd/MessageOfDayCard";
 import Vitrine from "./discover/Vitrine";
 import ChecklistToday from "./planner/ChecklistToday";
-import { flags } from "../lib/flags";
+import { flags as defaultFlags } from "@/lib/flags";
 import HomeHub from "./home/HomeHub";
 import CardRotinaCasa from "./meu-dia/cards/CardRotinaCasa";
 import CardTempoFilho from "./meu-dia/cards/CardTempoFilho";
@@ -37,7 +38,8 @@ import { safeGet, safeMergeObject, safeSet } from "@/lib/utils/safeStorage";
 
 const GreetingBinder = dynamic(() => import("./GreetingBinder"), { ssr: false });
 
-export default function MaternalHome(){
+export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<string, any> }){
+  const flags = { ...defaultFlags, ...(incomingFlags || {}) };
   const [openBreath, setOpenBreath] = useState(false);
   const [openMood, setOpenMood] = useState(false);
   const [openInspire, setOpenInspire] = useState(false);
