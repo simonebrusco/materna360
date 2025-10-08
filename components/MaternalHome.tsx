@@ -64,9 +64,13 @@ export default function MaternalHome(){
   const bonus = tips[done % tips.length];
 
   function PlannerTabs(){
-    const [tab, setTab] = useState<string>(() => {
-      try{ return localStorage.getItem('m360:planner:tab') || 'home'; }catch{ return 'home'; }
-    });
+    const [tab, setTab] = useState<string>('home');
+    useEffect(()=>{
+      try{
+        const stored = localStorage.getItem('m360:planner:tab');
+        if (stored) setTab(stored);
+      }catch{}
+    }, []);
     useEffect(()=>{ try{ localStorage.setItem('m360:planner:tab', tab); }catch{} }, [tab]);
     const items = [
       { id: 'home', label: 'Casa' },
@@ -85,9 +89,14 @@ export default function MaternalHome(){
   function DailyChecklist(){
     const today = useMemo(()=>{ try{ return new Date().toISOString().slice(0,10); }catch{ return ''; } }, []);
     const key = `m360:microtasks:${today}`;
-    const [state, setState] = useState<{water:boolean;stretch:boolean;play:boolean}>(()=>{
-      try{ return JSON.parse(localStorage.getItem(key)||'') || { water:false, stretch:false, play:false }; }catch{ return { water:false, stretch:false, play:false }; }
-    });
+    const [state, setState] = useState<{water:boolean;stretch:boolean;play:boolean}>({ water:false, stretch:false, play:false });
+    useEffect(()=>{
+      try{
+        const raw = localStorage.getItem(key) || '';
+        const parsed = raw ? JSON.parse(raw) : null;
+        if (parsed) setState(parsed);
+      }catch{}
+    }, [key]);
     useEffect(()=>{ try{ localStorage.setItem(key, JSON.stringify(state)); }catch{} }, [state]);
     const total = 3; const count = Number(state.water) + Number(state.stretch) + Number(state.play);
     const pct = Math.round((count/total)*100);
