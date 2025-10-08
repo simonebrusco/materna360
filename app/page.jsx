@@ -1,13 +1,8 @@
 import { flags } from "../lib/flags";
-import MaternalHome from "../components/MaternalHome";
-import SafeBoundary from "../components/SafeBoundary";
+import MaternalHome from "@/components/MaternalHome";
 import { resolveFlagsFromSearch } from "@/lib/flags";
 
-export default async function HomePage({ searchParams }) {
+export default async function Page({ searchParams }) {
   const resolvedFlags = resolveFlagsFromSearch?.(searchParams) ?? null;
-  return (
-    <SafeBoundary>
-      <MaternalHome flags={resolvedFlags} />
-    </SafeBoundary>
-  );
+  return <MaternalHome flags={resolvedFlags} />;
 }
