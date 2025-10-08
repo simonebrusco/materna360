@@ -151,7 +151,7 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .m360-modal .btn-ghost:hover { border-color: var(--magenta); }
 
 /* Animations */
-@keyframes m360-fade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes m360-fade { from { opacity: 0 } to { opacity:  1 } }
 @keyframes m360-rise { from { opacity: 0; transform: translateY(8px) scale(.98) } to { opacity: 1; transform: translateY(0) scale(1) } }
 /* exit animations */
 @keyframes m360-fade-out { from { opacity: 1 } to { opacity: 0 } }
@@ -217,7 +217,7 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 }
 
 /* Discover page: age tabs and grids */
-.age-tabs{ display:flex; gap:10px; margin:12px 0 8px; }
+age-tabs{ display:flex; gap:10px; margin:12px 0 8px; }
 .age-tab{ all:unset; cursor:pointer; padding:8px 14px; border-radius:999px; border:1.5px solid rgba(13,27,42,.12); color:#0D1B2A; background:#fff; }
 .age-tab.is-active{ border-color:#FF005E; box-shadow:0 8px 18px rgba(255,0,94,.10); }
 
@@ -697,9 +697,11 @@ label{ font-weight: var(--m360-weight-medium); }
 .meu-dia .mood-card p{font:400 14px/20px Poppins,system-ui; color:rgba(47,58,86,.70);}
 
 /* Ícones e botões dentro do Meu Dia */
-.meu-dia .icon-accent{color:var(--m360-primary);}
+.meu-dia .icon-accent{color:var(--m360-primary);} 
 .meu-dia .btn-primary{background:var(--m360-primary); color:#FFF; border:none;}
 .meu-dia .btn-outline{background:transparent; color:var(--m360-secondary); border:1px solid var(--m360-secondary);}
 
 /* Espaçamento entre seções */
 .meu-dia section{margin-bottom:24px;}
+
+/* ci: retrigger preview */
