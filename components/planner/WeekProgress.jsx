@@ -23,7 +23,7 @@ export default function WeekProgress(){
   return (
     <Card>
       <div style={{fontWeight:800,fontSize:18,color:"#0D1B2A", marginBottom:10, display:"flex", alignItems:"center", justifyContent:"space-between", gap:12}}>
-        <span>Planner da semana</span>
+        <span>Planner da Família</span>
         <span className="small" style={{opacity:.7}}>{done}/7 concluídos</span>
       </div>
       <WeekChips value={plan} onToggle={onToggle} />
