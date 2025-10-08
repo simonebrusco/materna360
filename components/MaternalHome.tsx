@@ -163,7 +163,7 @@ export default function MaternalHome(){
       </section>
 
       {/* 3) Ações (2x2) */}
-      <section className="m360-grid m360-maternal-actions" style={{gap:16, marginBottom:24}}>
+      <section className="m360-grid m360-maternal-actions">
         <div className="card m360-action tap-scale">
           <div className="card-icon" aria-hidden>🏠</div>
           <h3>Rotina da Casa</h3>
