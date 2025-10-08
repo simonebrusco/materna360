@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Card from "./ui/Card";
-import NavyCard from "./ui/NavyCard";
 import PlannerNotepad from "./planner/PlannerNotepad";
 import TipsRotator from "./planner/TipsRotator";
 import MessageOfDayCard from "./motd/MessageOfDayCard";
