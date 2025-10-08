@@ -268,7 +268,6 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 
 .motd-text{ margin:0 0 12px; }
 .motd-quote{ color:#F17324; font-weight:700; }
-main
 
 /* Icon utility */
 .icon { width: 22px; height: 22px; display: inline-block; vertical-align: middle; }
