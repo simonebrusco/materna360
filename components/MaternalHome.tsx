@@ -123,7 +123,7 @@ export default function MaternalHome(){
   return (
     <div className="m360-container meu-dia">
       {/* 1) Hero (saudação + mensagem do dia) */}
-      <section className="m360-hero hero" style={{marginBottom:24}}>
+      <section className="m360-hero hero">
         <GreetingBinder>
           {({ name, part }) => (
             <div>
@@ -132,7 +132,7 @@ export default function MaternalHome(){
             </div>
           )}
         </GreetingBinder>
-        <div className="m360-grid hero-grid" style={{marginBottom:0}}>
+        <div className="m360-grid hero-grid">
           <MessageOfDayCard className="motd-card" showTitle={false} showButton={false} />
           <Card className="tap-scale mood-card" onClick={()=>setOpenMood(true)}>
             <div className="mood-row" style={{display:"grid",gridTemplateColumns:"48px 1fr",gap:12,alignItems:"center"}}>
