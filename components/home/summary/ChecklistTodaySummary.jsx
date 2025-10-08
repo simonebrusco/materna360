@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { safeGet, hasWindow } from "../../../lib/utils/safeStorage";
+import { safeGet, isBrowser } from "@/lib/utils/safeStorage";
 
 export default function ChecklistTodaySummary(){
   const [count, setCount] = useState(0);
@@ -7,11 +7,10 @@ export default function ChecklistTodaySummary(){
   const [loaded, setLoaded] = useState(false);
   useEffect(()=>{
     try{
-      if(!hasWindow) return;
+      if(!isBrowser) return;
       const today = new Date().toISOString().slice(0,10);
-      const raw = safeGet(`m360:microtasks:${today}`);
-      if(raw){
-        const parsed = JSON.parse(raw);
+      const parsed = safeGet(`m360:microtasks:${today}`, null);
+      if(parsed){
         const c = Number(!!parsed?.water) + Number(!!parsed?.stretch) + Number(!!parsed?.play);
         setCount(c); setTotal(3);
       }
