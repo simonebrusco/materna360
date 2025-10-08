@@ -261,53 +261,11 @@ export default function MaternalHome(){
       </section>
 
       {/* 3) Ações (2x2) */}
-      <section className="m360-grid m360-maternal-actions" style={{gap:16, marginBottom:24}}>
-        <div className="card m360-action tap-scale" role="region" aria-label="Rotina da Casa">
-          <div className="card-icon" aria-hidden>🏠</div>
-          <h3>Rotina da Casa</h3>
-          <p>Organize tarefas do lar — arrumar, preparar, compras.</p>
-          <div className="card-actions">
-            <button className="btn btn-primary" onClick={()=>setOpenPad(true)}>Adicionar tarefa</button>
-            <button className="btn btn-outline" onClick={()=>setOpenPad(true)}>Ver agenda</button>
-          </div>
-        </div>
-
-        <div className="card m360-action tap-scale" role="region" aria-label="Tempo com Meu Filho">
-          <div className="card-icon" aria-hidden>💕</div>
-          <h3>Tempo com Meu Filho</h3>
-          <p>Registre um momento especial do dia com seu filho.</p>
-          <div className="card-actions">
-            <button className="btn btn-primary" onClick={()=>{
-              try{ showToast('Momento com seu filho registrado com sucesso!'); }catch{}
-              try{ addAction({ date:new Date().toISOString(), type:'momento_registrado' }); }catch{}
-              try{
-                const badges = safeGet('m360:badges', {}) || {};
-                if (!badges.maePresente) safeMergeObject('m360:badges', { maePresente:true });
-              }catch{}
-            }}>Registrar momento</button>
-            <button className="btn btn-outline">Ver timeline</button>
-          </div>
-        </div>
-
-        <div className="card m360-action tap-scale" role="region" aria-label="Atividade do Dia">
-          <div className="card-icon" aria-hidden>🎨</div>
-          <h3>Atividade do Dia</h3>
-          <p>Receba sugestões educativas e brincadeiras do dia.</p>
-          <div className="card-actions">
-            <button className="btn btn-primary" onClick={()=>setOpenPad(true)}>Salvar no planner</button>
-            <button className="btn btn-outline">Ver sugestões</button>
-          </div>
-        </div>
-
-        <div className="card m360-action tap-scale" role="region" aria-label="Momento para Mim">
-          <div className="card-icon" aria-hidden>🌿</div>
-          <h3>Momento para Mim</h3>
-          <p>Uma pequena pausa de cuidado e carinho com você.</p>
-          <div className="card-actions">
-            <button className="btn btn-primary" onClick={()=>setOpenPause(true)}>Fazer agora</button>
-            <button className="btn btn-outline">Planejar</button>
-          </div>
-        </div>
+      <section className="hub-grid" aria-label="Ações do dia" style={{marginBottom:24}}>
+        <CardRotinaCasa />
+        <CardTempoFilho />
+        <CardIdeiaDoDia />
+        <CardMomentoMim />
       </section>
 
       {/* 4) Hoje + Descobrir (lado a lado em telas médias+) */}
