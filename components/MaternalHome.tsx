@@ -29,7 +29,7 @@ import {
   getSegmentDaysDone,
   getSegmentPlanner,
 } from "../lib/storage";
-const QuickAddModal = dynamic(() => import("./planner/QuickAddModal"), { ssr: false });
+import QuickAddModal from "./planner/QuickAddModal";
 import { emitEu360Refresh } from "../lib/clientEvents";
 const BadgesLevelToast = dynamic(() => import("./BadgesLevelToast"), { ssr: false });
 import { showToast } from "../lib/ui/toast";
