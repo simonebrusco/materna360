@@ -289,6 +289,7 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
   --m360-leading-normal: 1.35;
   --m360-letter-tight: -0.2px;
 }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Quicksand:wght@600;700&display=swap');
 html, body { font-family: var(--m360-font); }
 
 /* Headings & body defaults */
