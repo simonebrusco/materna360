@@ -32,7 +32,7 @@ export default function PlannerNotepad({ open, onClose, dayIndex=0, onChangeDay 
   useEffect(()=>{
     const id = setInterval(()=>{
       if (editing && draft) {
-        try { localStorage.setItem(`m360:planner:draft:${idx}`, JSON.stringify(draft)); } catch {}
+        try { import("@/lib/utils/safeStorage").then(m=>m.safeSet(`m360:planner:draft:${idx}`, draft)).catch(()=>{}); } catch {}
       }
     }, 2000);
     return () => clearInterval(id);
@@ -40,8 +40,10 @@ export default function PlannerNotepad({ open, onClose, dayIndex=0, onChangeDay 
 
   useEffect(()=>{
     try{
-      const raw = localStorage.getItem(`m360:planner:draft:${idx}`);
-      if (raw) setDraft(JSON.parse(raw));
+      import("@/lib/utils/safeStorage").then(m=>{
+        const v = m.safeGet(`m360:planner:draft:${idx}`, null);
+        if (v) setDraft(v);
+      }).catch(()=>{});
     }catch{}
   }, [idx]);
 
@@ -95,7 +97,7 @@ export default function PlannerNotepad({ open, onClose, dayIndex=0, onChangeDay 
         }
       } catch {}
       setEditing(null); setDraft(null);
-      try { localStorage.removeItem(`m360:planner:draft:${idx}`); } catch {}
+      try { import("@/lib/utils/safeStorage").then(m=>m.safeRemove(`m360:planner:draft:${idx}`)).catch(()=>{}); } catch {}
       showToast("Salvo");
     }catch{ showToast("Não conseguimos salvar agora. Tente novamente."); }
   }, [draft, editing, idx]);
@@ -113,6 +115,7 @@ export default function PlannerNotepad({ open, onClose, dayIndex=0, onChangeDay 
   function onToggle(entry){ try{ togglePlannerTaskDone(idx, entry.id); setDays(getPlanner()); }catch{} }
 
   useEffect(()=>{
+    if (typeof window === 'undefined') return;
     function onKey(e){
       if (!open) return;
       if ((e.metaKey || e.ctrlKey) && e.key === "Enter") { e.preventDefault(); saveForm(); }
