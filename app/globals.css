@@ -732,3 +732,5 @@ label{ font-weight: var(--m360-weight-medium); }
 
 /* Mood dot decoration */
 .m360-container.meu-dia .mood-card .mood-dot{ display:inline-block; width:8px; height:8px; border-radius:999px; background:#F9C9B7; margin-bottom:6px; }
+
+/* ci: retrigger preview (no-op) */
