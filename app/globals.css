@@ -436,7 +436,9 @@ label{ font-weight: var(--m360-weight-medium); }
   display: flex;
   flex-direction: column;
   min-height: 180px;
+  transition: transform 120ms ease-out;
 }
+.card:hover, .card:active { transform: scale(1.02); }
 .card .row{ margin-top: auto; display:flex; gap:10px; }
 
 /* Títulos e subtítulos com consistência e truncamento */
