@@ -268,15 +268,9 @@ export default function MaternalHome(){
         <CardMomentoMim />
       </section>
 
-      {/* 4) Hoje + Descobrir (lado a lado em telas médias+) */}
-      <section className="m360-row" style={{marginBottom:24}}>
-        <div className="m360-col">
-          <h2 className="h3" style={{marginBottom:8}}>Hoje</h2>
-          <TipsRotator tips={tips} />
-        </div>
-        <div className="m360-col">
-          <Vitrine />
-        </div>
+      {/* 4) Recomendações */}
+      <section aria-label="Recomendações" style={{marginBottom:24}}>
+        <Vitrine />
       </section>
 
       {/* 5) FAB */}
