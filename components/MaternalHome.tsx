@@ -78,12 +78,46 @@ export default function MaternalHome(){
         <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onOpenDay={(i)=>openNotepad(i)} onOpenCard={()=>openNotepad(padDay)} bonus={bonus} />
       </section>
 
-      {/* 3) Grade de cards (nunca empilhar): 2–3 colunas conforme breakpoint */}
-      <section className="m360-grid">
-        <NavyCard onClick={() => setOpenBreath(true)}><div className="iconStack"><Icon name="breath" className="icon-24 icon-action" /><div>Respirar</div></div></NavyCard>
-        <Card style={{minHeight:110,display:"grid",placeItems:"center",cursor:"pointer"}} onClick={() => setOpenMood(true)}><div className="iconStack"><Icon name="reflect" className="icon-24 icon-action" /><div>Refletir</div></div></Card>
-        <NavyCard onClick={() => setOpenInspire(true)}><div className="iconStack"><Icon name="inspire" className="icon-24 icon-action" /><div>Inspirar</div></div></NavyCard>
-        <Card style={{minHeight:110,display:"grid",placeItems:"center",cursor:"pointer"}} onClick={() => setOpenPause(true)}><div className="iconStack"><Icon name="pause" className="icon-24 icon-action" /><div>Pausar</div></div></Card>
+      <section className="m360-grid m360-maternal-actions">
+        <div className="card m360-action">
+          <div className="card-icon">🏠</div>
+          <h3>Rotina da Casa</h3>
+          <p>Organize tarefas do lar — arrumar, preparar, compras.</p>
+          <div className="card-actions">
+            <button className="btn btn-primary">Adicionar tarefa</button>
+            <button className="btn btn-outline">Ver agenda</button>
+          </div>
+        </div>
+
+        <div className="card m360-action">
+          <div className="card-icon">💕</div>
+          <h3>Tempo com Meu Filho</h3>
+          <p>Registre um momento especial do dia com seu filho.</p>
+          <div className="card-actions">
+            <button className="btn btn-primary">Registrar momento</button>
+            <button className="btn btn-outline">Ver timeline</button>
+          </div>
+        </div>
+
+        <div className="card m360-action">
+          <div className="card-icon">🎨</div>
+          <h3>Atividade do Dia</h3>
+          <p>Receba sugestões educativas e brincadeiras do dia.</p>
+          <div className="card-actions">
+            <button className="btn btn-primary">Salvar no planner</button>
+            <button className="btn btn-outline">Ver sugestões</button>
+          </div>
+        </div>
+
+        <div className="card m360-action">
+          <div className="card-icon">🌿</div>
+          <h3>Momento para Mim</h3>
+          <p>Uma pequena pausa de cuidado e carinho com você.</p>
+          <div className="card-actions">
+            <button className="btn btn-primary">Fazer agora</button>
+            <button className="btn btn-outline">Planejar</button>
+          </div>
+        </div>
       </section>
 
       {/* 4) Hoje + Descobrir (lado a lado em telas médias+) */}
