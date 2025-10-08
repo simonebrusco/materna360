@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { safeGet, hasWindow } from "../../../lib/utils/safeStorage";
+import { safeGet, isBrowser } from "@/lib/utils/safeStorage";
 
 export default function PlannerMini(){
   const [counts, setCounts] = useState({ home:0, kids:0, me:0 });
   const [loaded, setLoaded] = useState(false);
   useEffect(()=>{
     try{
-      if(!hasWindow) return;
+      if(!isBrowser) return;
       const keys = ['home','kids','me'];
       const next = { home:0, kids:0, me:0 };
       keys.forEach(k=>{
-        const raw = safeGet(`m360:planner.${k}`);
-        if(raw){
-          try{
-            const parsed = JSON.parse(raw);
-            next[k] = Array.isArray(parsed) ? parsed.length : (Array.isArray(parsed?.items) ? parsed.items.length : 0);
-          }catch{}
-        }
+        const parsed = safeGet(`m360:planner.${k}`, []);
+        next[k] = Array.isArray(parsed) ? parsed.length : (Array.isArray(parsed?.items) ? parsed.items.length : 0);
       });
       setCounts(next);
     }catch{}
