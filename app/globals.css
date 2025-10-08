@@ -724,3 +724,11 @@ label{ font-weight: var(--m360-weight-medium); }
 .m360-container.meu-dia .progress{ position:relative; height:8px; border-radius:999px; background:#eee; overflow:hidden; }
 .m360-container.meu-dia .progress .base{ height:100%; border-radius:inherit; background:#ffd5e6; }
 .m360-container.meu-dia .progress .extra{ position:absolute; left:0; top:0; height:100%; background:linear-gradient(90deg,#ff4a8b,#ff679f); opacity:.35; border-radius:inherit; pointer-events:none; }
+
+/* Meu Dia icon & pill tokens */
+.m360-container.meu-dia .icon-primary{ color:#FF005E; }
+.m360-container.meu-dia .icon-secondary{ color:#2F3A56; }
+.m360-container.meu-dia .m360-chip{ border-color:#F9C9B7 !important; color:#2F3A56 !important; }
+
+/* Mood dot decoration */
+.m360-container.meu-dia .mood-card .mood-dot{ display:inline-block; width:8px; height:8px; border-radius:999px; background:#F9C9B7; margin-bottom:6px; }
