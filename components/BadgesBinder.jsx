@@ -18,7 +18,7 @@ export default function BadgesBinder(){
   const sync = () => {
     try {
       const badges = computeBadges();
-      writeJSON("m360:badges", badges);
+      writeJSON("m360:badges:list", badges);
     } catch {}
   };
 
