@@ -2,41 +2,88 @@
 import { useEffect, useState } from "react";
 import Card from "../ui/Card";
 import Btn from "../ui/Btn";
-import { allMessages } from "../../lib/messages";
+import { ensureMessage } from "../../lib/messages";
 
 export default function MessageOfDayCard({ nameHint = null, showTitle = true, showButton = true }) {
   const [motd, setMotd] = useState("");
 
+  function sanitizeMessage(text) {
+    if (!text || typeof text !== "string") return "";
+    const lines = String(text)
+      .replace(/^ai_main.*$/gim, "")
+      .replace(/^main$/gim, "")
+      .replace(/#[0-9a-f]{7,}/gi, "")
+      .split(/\r?\n+/);
+    const pick = lines.map(l => l.trim()).filter(Boolean).find(l => /[A-Za-zÀ-ÿ]/.test(l));
+    return (pick || "").trim();
+  }
+
+  function todayKey() {
+    try {
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      return { key: "m360:motd:today", iso: `${y}-${m}-${day}` };
+    } catch {
+      return { key: "m360:motd:today", iso: "" };
+    }
+  }
+
+  function readStored() {
+    const { key, iso } = todayKey();
+    try {
+      const raw = window.localStorage.getItem(key);
+      if (!raw) return null;
+      const obj = JSON.parse(raw);
+      if (obj && obj.date === iso && typeof obj.text === "string" && obj.text.trim()) {
+        return sanitizeMessage(obj.text);
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  }
+
+  function writeStored(text) {
+    const { key, iso } = todayKey();
+    try {
+      const payload = { date: iso, text: text || "" };
+      window.localStorage.setItem(key, JSON.stringify(payload));
+    } catch {}
+  }
+
+  function computeMessage() {
+    const candidate = ensureMessage(nameHint)?.body ?? "";
+    const cleaned = sanitizeMessage(candidate);
+    const finalText = cleaned || "Hoje pode ser mais leve. Um passo de cada vez.";
+    writeStored(finalText);
+    return finalText;
+  }
+
   useEffect(() => {
-    const msgs = allMessages();
-    const dayIndex = Math.floor(Date.now() / 86400000);
-    const idx = msgs.length ? (dayIndex % msgs.length) : 0;
-    const body = msgs[idx] || "";
-    const safeName = typeof nameHint === "string" ? nameHint.trim() : "";
-    const personalized = safeName ? `${safeName}, ${body.charAt(0).toLowerCase()}${body.slice(1)}` : body;
-    setMotd(personalized);
+    try {
+      const stored = readStored();
+      if (stored) {
+        setMotd(stored);
+        return;
+      }
+    } catch {}
+    setMotd(computeMessage());
   }, [nameHint]);
 
   function refresh() {
-    const msgs = allMessages();
-    const dayIndex = Math.floor(Date.now() / 86400000);
-    const idx = msgs.length ? (dayIndex % msgs.length) : 0;
-    const body = msgs[idx] || "";
-    const safeName = typeof nameHint === "string" ? nameHint.trim() : "";
-    const personalized = safeName ? `${safeName}, ${body.charAt(0).toLowerCase()}${body.slice(1)}` : body;
-    setMotd(personalized);
+    const next = computeMessage();
+    setMotd(next);
   }
 
   return (
     <Card>
       {showTitle ? <strong className="motd-title">“Mensagem do dia”</strong> : null}
-ai_main_7d7878c4bdcc
-      <p className="small motd-text"><span aria-hidden className="motd-quote">“</span>{motd?.body ?? "..."}</p>
-
-      <p className="small motd-text" style={{fontStyle:"italic", color:"#1E1E1E"}}>
-        <span className="motd-quote" aria-hidden>“</span>{motd || "..."}<span className="motd-quote" aria-hidden>”</span>
+      <p className="small motd-text">
+        <span className="motd-quote" aria-hidden style={{ color: "#F17324" }}>“</span>
+        <i>{motd}</i>
       </p>
-main
       {showButton ? <Btn onClick={refresh}>Nova mensagem</Btn> : null}
     </Card>
   );
