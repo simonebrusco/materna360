@@ -37,7 +37,10 @@ import { safeGet, safeMergeObject, safeSet } from "@/lib/utils/safeStorage";
 
 const GreetingBinder = dynamic(() => import("./GreetingBinder"), { ssr: false });
 
-export default function MaternalHome(){
+type MaternalHomeProps = { flags?: Record<string, any> };
+
+export default function MaternalHome({ flags: incomingFlags }: MaternalHomeProps){
+  const f = { ...defaultFlags, ...(incomingFlags || {}) };
   const [openBreath, setOpenBreath] = useState(false);
   const [openMood, setOpenMood] = useState(false);
   const [openInspire, setOpenInspire] = useState(false);
