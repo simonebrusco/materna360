@@ -50,7 +50,7 @@ export default function MaternalHome(){
   const bonus = tips[done % tips.length];
 
   return (
-    <div className="m360-container">
+    <div className="m360-container meu-dia">
       {/* 1) Hero (saudação + mensagem do dia) */}
       <section className="m360-hero">
         <GreetingBinder>
@@ -63,7 +63,7 @@ export default function MaternalHome(){
           <MessageOfDayCard showTitle={false} showButton={false} />
           <Card>
             <div style={{display:"grid",gridTemplateColumns:"48px 1fr",gap:12,alignItems:"center"}}>
-              <Icon name="mood" className="icon-24 icon-default" />
+              <Icon name="mood" className="icon-24 icon-accent" />
               <div>
                 <div style={{fontWeight:800}}>Como você se sente?</div>
                 <div className="small" style={{opacity:.75}}>Toque para registrar</div>
