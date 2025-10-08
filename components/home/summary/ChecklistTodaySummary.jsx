@@ -1,36 +1,23 @@
 import React, { useEffect, useState } from "react";
-
-ai_main_d2bddf17272b
-import { safeGet, hasWindow } from "../../../lib/utils/safeStorage";
-
-import { safeGet, isBrowser } from "@/lib/utils/safeStorage";
-main
+import { safeGet } from "@/lib/utils/safeStorage";
 
 export default function ChecklistTodaySummary(){
   const [count, setCount] = useState(0);
   const [total, setTotal] = useState(3);
   const [loaded, setLoaded] = useState(false);
+
   useEffect(()=>{
     try{
-
-ai_main_d2bddf17272b
-      if(!hasWindow) return;
-      const today = new Date().toISOString().slice(0,10);
-      const raw = safeGet(`m360:microtasks:${today}`);
-      if(raw){
-        const parsed = JSON.parse(raw);
-
-      if(!isBrowser) return;
       const today = new Date().toISOString().slice(0,10);
       const parsed = safeGet(`m360:microtasks:${today}`, null);
       if(parsed){
-main
         const c = Number(!!parsed?.water) + Number(!!parsed?.stretch) + Number(!!parsed?.play);
         setCount(c); setTotal(3);
       }
     }catch{}
     setLoaded(true);
   },[]);
+
   const pct = Math.round((count/Math.max(1,total))*100);
   return (
     <article className="block" aria-label="Checklist do dia">
