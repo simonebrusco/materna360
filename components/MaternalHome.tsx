@@ -13,7 +13,7 @@ const PauseModal = dynamic(() => import("./modals/PauseModal"), { ssr: false });
 import MessageOfDayCard from "./motd/MessageOfDayCard";
 import Vitrine from "./discover/Vitrine";
 import ChecklistToday from "./planner/ChecklistToday";
-import { flags } from "../lib/flags";
+import { flags as defaultFlags } from "../lib/flags";
 import HomeHub from "./home/HomeHub";
 import CardRotinaCasa from "./meu-dia/cards/CardRotinaCasa";
 import CardTempoFilho from "./meu-dia/cards/CardTempoFilho";
