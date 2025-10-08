@@ -10,7 +10,8 @@ export default function MoodModal({ open, onClose = () => {}, onComplete = () =>
   useEffect(() => {
     if (!open) return;
     try {
-      const prev = typeof window !== "undefined" ? window.localStorage.getItem("reflectionNotes") : null;
+      const { safeGet } = require("@/lib/utils/safeStorage");
+      const prev = safeGet("reflectionNotes", "");
       if (prev) setNote(prev);
     } catch {}
   }, [open]);
@@ -19,7 +20,7 @@ export default function MoodModal({ open, onClose = () => {}, onComplete = () =>
     { v: -2, e: "😞" },
     { v: -1, e: "🙁" },
     { v: 0, e: "😐" },
-    { v: 1, e: "🙂" },
+    { v: 1, e: "���" },
     { v: 2, e: "😄" },
   ];
 
@@ -49,7 +50,7 @@ export default function MoodModal({ open, onClose = () => {}, onComplete = () =>
           onChange={(e) => {
             const v = e.target.value;
             setNote(v);
-            try { window.localStorage.setItem("reflectionNotes", v); } catch {}
+            try { const { safeSet } = require("@/lib/utils/safeStorage"); safeSet("reflectionNotes", v); } catch {}
           }}
           placeholder="Escreva como você se sente (opcional)"
           className="m360-input"
@@ -63,7 +64,7 @@ export default function MoodModal({ open, onClose = () => {}, onComplete = () =>
           type="button"
           className="btn btn-primary"
           onClick={() => {
-            try { window.localStorage.setItem("reflectionNotes", note || ""); } catch {}
+            try { const { safeSet } = require("@/lib/utils/safeStorage"); safeSet("reflectionNotes", note || ""); } catch {}
             onComplete({ mood, note: note || undefined });
             onClose();
           }}
