@@ -394,7 +394,7 @@ label{ font-weight: var(--m360-weight-medium); }
   border-radius: 16px;
   padding: 16px;
   box-shadow: 0 8px 24px rgba(17, 17, 17, 0.06);
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 /* Grade de cards: nunca empilhar (>=360px já é 2 colunas) */
