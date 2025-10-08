@@ -80,9 +80,9 @@ export default function WeekProgressCard({ completedCount = 0, total = 7, days =
 
       <div style={{marginTop:10, cursor:"pointer"}} onClick={()=>onOpenCard()}>
         <div aria-hidden style={{position:"relative", height:8, background:"rgba(13,27,42,.06)", borderRadius:999, overflow:"hidden"}}>
-          <div style={{height:8, width:`${pct}%`, background:"#F15A2E", borderRadius:999}} />
+          <div style={{height:8, width:`${pct}%`, background:"#F15A2E", borderRadius:999, transition:"width .25s ease"}} />
           {extraPct ? (
-            <div style={{position:"absolute", top:0, left:0, height:8, width:`${Math.min(100, pct + extraPct)}%`, background:"rgba(241,115,36,.35)", borderRadius:999}} />
+            <div style={{position:"absolute", top:0, left:0, height:8, width:`${Math.min(100, pct + extraPct)}%`, background:"rgba(241,115,36,.35)", borderRadius:999, transition:"width .25s ease"}} />
           ) : null}
         </div>
         <div className="small" style={{opacity:.8, marginTop:6}}>{microcopy(pct)}</div>

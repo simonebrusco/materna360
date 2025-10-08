@@ -1,14 +1,26 @@
 import React, { useEffect, useState } from "react";
+
+ai_main_d2bddf17272b
+import { safeGet, hasWindow } from "../../../lib/utils/safeStorage";
+
 import { safeGet, isBrowser } from "@/lib/utils/safeStorage";
+main
 
 export default function ConquistasMini(){
   const [badges, setBadges] = useState(0);
   const [loaded, setLoaded] = useState(false);
   useEffect(()=>{
     try{
+
+ai_main_d2bddf17272b
+      if(!hasWindow) return;
+      const raw = safeGet('m360:badges');
+      if(raw){ try{ const arr = JSON.parse(raw); setBadges(Array.isArray(arr)? arr.length : 0); }catch{} }
+
       if(!isBrowser) return;
       const arr = safeGet('m360:badges', []);
       setBadges(Array.isArray(arr)? arr.length : 0);
+main
     }catch{}
     setLoaded(true);
   },[]);

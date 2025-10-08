@@ -75,13 +75,15 @@ export default function MessageOfDayCard({ nameHint = null, showTitle = true, sh
     setMotd(next);
   }
 
+  const short = String(motd||"").trim().length < 35;
   return (
-    <Card className={className}>
+    <Card className={className} role="region" aria-label="Mensagem do dia">
       {showTitle ? <strong className="motd-title">“Mensagem do dia”</strong> : null}
       <p className="small motd-text">
         <span className="motd-quote" aria-hidden>“</span>
         <i>{motd}</i>
       </p>
+      {short ? <div className="motd-skeleton" aria-hidden /> : null}
       {showButton ? <Btn onClick={refresh}>Nova mensagem</Btn> : null}
     </Card>
   );
