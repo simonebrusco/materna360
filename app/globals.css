@@ -719,3 +719,8 @@ label{ font-weight: var(--m360-weight-medium); }
   animation:pulse 1.6s infinite; opacity:.6; margin-top:10px;
 }
 @keyframes pulse{0%{background-position:0 0}100%{background-position:120% 0}}
+
+/* Planner progress overlay */
+.m360-container.meu-dia .progress{ position:relative; height:8px; border-radius:999px; background:#eee; overflow:hidden; }
+.m360-container.meu-dia .progress .base{ height:100%; border-radius:inherit; background:#ffd5e6; }
+.m360-container.meu-dia .progress .extra{ position:absolute; left:0; top:0; height:100%; background:linear-gradient(90deg,#ff4a8b,#ff679f); opacity:.35; border-radius:inherit; pointer-events:none; }
