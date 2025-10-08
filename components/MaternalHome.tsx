@@ -4,13 +4,13 @@ import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Card from "./ui/Card";
 import Icon from "./ui/Icon";
-import PlannerNotepad from "./planner/PlannerNotepad";
+const PlannerNotepad = dynamic(() => import("./planner/PlannerNotepad"), { ssr: false });
 import WeekProgressCard from "./planner/WeekProgressCard";
 import TipsRotator from "./planner/TipsRotator";
-import BreathModal from "./modals/BreathModal";
-import MoodModal from "./modals/MoodModal";
-import InspireModal from "./modals/InspireModal";
-import PauseModal from "./modals/PauseModal";
+const BreathModal = dynamic(() => import("./modals/BreathModal"), { ssr: false });
+const MoodModal = dynamic(() => import("./modals/MoodModal"), { ssr: false });
+const InspireModal = dynamic(() => import("./modals/InspireModal"), { ssr: false });
+const PauseModal = dynamic(() => import("./modals/PauseModal"), { ssr: false });
 import MessageOfDayCard from "./motd/MessageOfDayCard";
 import Vitrine from "./discover/Vitrine";
 import ChecklistToday from "./planner/ChecklistToday";
@@ -25,9 +25,9 @@ import {
   ensureSegmentedPlanners,
   getSegmentDaysDone,
 } from "../lib/storage";
-import QuickAddModal from "./planner/QuickAddModal";
+const QuickAddModal = dynamic(() => import("./planner/QuickAddModal"), { ssr: false });
 import { emitEu360Refresh } from "../lib/clientEvents";
-import BadgesLevelToast from "./BadgesLevelToast";
+const BadgesLevelToast = dynamic(() => import("./BadgesLevelToast"), { ssr: false });
 import { showToast } from "../lib/ui/toast";
 
 const GreetingBinder = dynamic(() => import("./GreetingBinder"), { ssr: false });
