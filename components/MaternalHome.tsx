@@ -6,7 +6,6 @@ import Card from "./ui/Card";
 import Icon from "./ui/Icon";
 const PlannerNotepad = dynamic(() => import("./planner/PlannerNotepad"), { ssr: false });
 import WeekProgressCard from "./planner/WeekProgressCard";
-import TipsRotator from "./planner/TipsRotator";
 const BreathModal = dynamic(() => import("./modals/BreathModal"), { ssr: false });
 const MoodModal = dynamic(() => import("./modals/MoodModal"), { ssr: false });
 const InspireModal = dynamic(() => import("./modals/InspireModal"), { ssr: false });
