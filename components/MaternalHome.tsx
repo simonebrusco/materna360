@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-"use client";
-
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import Card from "./ui/Card";
