@@ -6,7 +6,6 @@ import Card from "./ui/Card";
 import Icon from "./ui/Icon";
 const PlannerNotepad = dynamic(() => import("./planner/PlannerNotepad"), { ssr: false });
 import WeekProgressCard from "./planner/WeekProgressCard";
-import TipsRotator from "./planner/TipsRotator";
 const BreathModal = dynamic(() => import("./modals/BreathModal"), { ssr: false });
 const MoodModal = dynamic(() => import("./modals/MoodModal"), { ssr: false });
 const InspireModal = dynamic(() => import("./modals/InspireModal"), { ssr: false });
@@ -16,6 +15,10 @@ import Vitrine from "./discover/Vitrine";
 import ChecklistToday from "./planner/ChecklistToday";
 import { flags } from "../lib/flags";
 import HomeHub from "./home/HomeHub";
+import CardRotinaCasa from "./meu-dia/cards/CardRotinaCasa";
+import CardTempoFilho from "./meu-dia/cards/CardTempoFilho";
+import CardIdeiaDoDia from "./meu-dia/cards/CardIdeiaDoDia";
+import CardMomentoMim from "./meu-dia/cards/CardMomentoMim";
 import {
   addAction,
   addMood,
@@ -220,15 +223,18 @@ export default function MaternalHome(){
           </Card>
         </div>
 
-        {/* Checklist do Dia */}
-        <div className="space" />
-        <ChecklistToday onProgress={(p)=>setExtraPct(Math.max(0, Math.min(10, p)))} onUndo={()=>{ try{ if (completeTimerRef.current){ clearTimeout(completeTimerRef.current); completeTimerRef.current=null; } }catch{} }} />
       </section>
 
       {/* Meu Dia Hub (gated) */}
       {flags.newHomeMaternal ? (
         <HomeHub />
       ) : null}
+
+      {/* 1) Checklist do Dia */}
+      <section aria-label="Checklist do Dia">
+        <div className="space" />
+        <ChecklistToday onProgress={(p)=>setExtraPct(Math.max(0, Math.min(10, p)))} onUndo={()=>{ try{ if (completeTimerRef.current){ clearTimeout(completeTimerRef.current); completeTimerRef.current=null; } }catch{} }} />
+      </section>
 
       {/* 2) Planner da Família (full-width) */}
       <section className="m360-planner" role="region" aria-label="Planner da Família">
@@ -254,64 +260,16 @@ export default function MaternalHome(){
       </section>
 
       {/* 3) Ações (2x2) */}
-      <section className="m360-grid m360-maternal-actions" style={{gap:16, marginBottom:24}}>
-        <div className="card m360-action tap-scale" role="region" aria-label="Rotina da Casa">
-          <div className="card-icon" aria-hidden>🏠</div>
-          <h3>Rotina da Casa</h3>
-          <p>Organize tarefas do lar — arrumar, preparar, compras.</p>
-          <div className="card-actions">
-            <button className="btn btn-primary" onClick={()=>setOpenPad(true)}>Adicionar tarefa</button>
-            <button className="btn btn-outline" onClick={()=>setOpenPad(true)}>Ver agenda</button>
-          </div>
-        </div>
-
-        <div className="card m360-action tap-scale" role="region" aria-label="Tempo com Meu Filho">
-          <div className="card-icon" aria-hidden>💕</div>
-          <h3>Tempo com Meu Filho</h3>
-          <p>Registre um momento especial do dia com seu filho.</p>
-          <div className="card-actions">
-            <button className="btn btn-primary" onClick={()=>{
-              try{ showToast('Momento com seu filho registrado com sucesso!'); }catch{}
-              try{ addAction({ date:new Date().toISOString(), type:'momento_registrado' }); }catch{}
-              try{
-                const badges = safeGet('m360:badges', {}) || {};
-                if (!badges.maePresente) safeMergeObject('m360:badges', { maePresente:true });
-              }catch{}
-            }}>Registrar momento</button>
-            <button className="btn btn-outline">Ver timeline</button>
-          </div>
-        </div>
-
-        <div className="card m360-action tap-scale" role="region" aria-label="Atividade do Dia">
-          <div className="card-icon" aria-hidden>🎨</div>
-          <h3>Atividade do Dia</h3>
-          <p>Receba sugestões educativas e brincadeiras do dia.</p>
-          <div className="card-actions">
-            <button className="btn btn-primary" onClick={()=>setOpenPad(true)}>Salvar no planner</button>
-            <button className="btn btn-outline">Ver sugestões</button>
-          </div>
-        </div>
-
-        <div className="card m360-action tap-scale" role="region" aria-label="Momento para Mim">
-          <div className="card-icon" aria-hidden>🌿</div>
-          <h3>Momento para Mim</h3>
-          <p>Uma pequena pausa de cuidado e carinho com você.</p>
-          <div className="card-actions">
-            <button className="btn btn-primary" onClick={()=>setOpenPause(true)}>Fazer agora</button>
-            <button className="btn btn-outline">Planejar</button>
-          </div>
-        </div>
+      <section className="hub-grid" aria-label="Ações do dia" style={{marginBottom:24}}>
+        <CardRotinaCasa />
+        <CardTempoFilho />
+        <CardIdeiaDoDia />
+        <CardMomentoMim />
       </section>
 
-      {/* 4) Hoje + Descobrir (lado a lado em telas médias+) */}
-      <section className="m360-row" style={{marginBottom:24}}>
-        <div className="m360-col">
-          <h2 className="h3" style={{marginBottom:8}}>Hoje</h2>
-          <TipsRotator tips={tips} />
-        </div>
-        <div className="m360-col">
-          <Vitrine />
-        </div>
+      {/* 4) Recomendações */}
+      <section aria-label="Recomendações" style={{marginBottom:24}}>
+        <Vitrine />
       </section>
 
       {/* 5) FAB */}
