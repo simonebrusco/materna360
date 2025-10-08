@@ -4,16 +4,18 @@ import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Card from "./ui/Card";
 import Icon from "./ui/Icon";
-import PlannerNotepad from "./planner/PlannerNotepad";
+const PlannerNotepad = dynamic(() => import("./planner/PlannerNotepad"), { ssr: false });
 import WeekProgressCard from "./planner/WeekProgressCard";
 import TipsRotator from "./planner/TipsRotator";
-import BreathModal from "./modals/BreathModal";
-import MoodModal from "./modals/MoodModal";
-import InspireModal from "./modals/InspireModal";
-import PauseModal from "./modals/PauseModal";
+const BreathModal = dynamic(() => import("./modals/BreathModal"), { ssr: false });
+const MoodModal = dynamic(() => import("./modals/MoodModal"), { ssr: false });
+const InspireModal = dynamic(() => import("./modals/InspireModal"), { ssr: false });
+const PauseModal = dynamic(() => import("./modals/PauseModal"), { ssr: false });
 import MessageOfDayCard from "./motd/MessageOfDayCard";
 import Vitrine from "./discover/Vitrine";
 import ChecklistToday from "./planner/ChecklistToday";
+import { flags } from "../lib/flags";
+const MeuDiaHub = dynamic(() => import("./meu-dia/MeuDiaHub"), { ssr: false });
 import {
   addAction,
   addMood,
@@ -23,9 +25,9 @@ import {
   ensureSegmentedPlanners,
   getSegmentDaysDone,
 } from "../lib/storage";
-import QuickAddModal from "./planner/QuickAddModal";
+const QuickAddModal = dynamic(() => import("./planner/QuickAddModal"), { ssr: false });
 import { emitEu360Refresh } from "../lib/clientEvents";
-import BadgesLevelToast from "./BadgesLevelToast";
+const BadgesLevelToast = dynamic(() => import("./BadgesLevelToast"), { ssr: false });
 import { showToast } from "../lib/ui/toast";
 
 const GreetingBinder = dynamic(() => import("./GreetingBinder"), { ssr: false });
@@ -62,9 +64,13 @@ export default function MaternalHome(){
   const bonus = tips[done % tips.length];
 
   function PlannerTabs(){
-    const [tab, setTab] = useState<string>(() => {
-      try{ return localStorage.getItem('m360:planner:tab') || 'home'; }catch{ return 'home'; }
-    });
+    const [tab, setTab] = useState<string>('home');
+    useEffect(()=>{
+      try{
+        const stored = localStorage.getItem('m360:planner:tab');
+        if (stored) setTab(stored);
+      }catch{}
+    }, []);
     useEffect(()=>{ try{ localStorage.setItem('m360:planner:tab', tab); }catch{} }, [tab]);
     const items = [
       { id: 'home', label: 'Casa' },
@@ -83,9 +89,14 @@ export default function MaternalHome(){
   function DailyChecklist(){
     const today = useMemo(()=>{ try{ return new Date().toISOString().slice(0,10); }catch{ return ''; } }, []);
     const key = `m360:microtasks:${today}`;
-    const [state, setState] = useState<{water:boolean;stretch:boolean;play:boolean}>(()=>{
-      try{ return JSON.parse(localStorage.getItem(key)||'') || { water:false, stretch:false, play:false }; }catch{ return { water:false, stretch:false, play:false }; }
-    });
+    const [state, setState] = useState<{water:boolean;stretch:boolean;play:boolean}>({ water:false, stretch:false, play:false });
+    useEffect(()=>{
+      try{
+        const raw = localStorage.getItem(key) || '';
+        const parsed = raw ? JSON.parse(raw) : null;
+        if (parsed) setState(parsed);
+      }catch{}
+    }, [key]);
     useEffect(()=>{ try{ localStorage.setItem(key, JSON.stringify(state)); }catch{} }, [state]);
     const total = 3; const count = Number(state.water) + Number(state.stretch) + Number(state.play);
     const pct = Math.round((count/total)*100);
@@ -147,6 +158,11 @@ export default function MaternalHome(){
         <div className="space" />
         <ChecklistToday onProgress={(p)=>setExtraPct(p)} />
       </section>
+
+      {/* Meu Dia Hub (gated) */}
+      {flags.newHomeMaternal ? (
+        <MeuDiaHub />
+      ) : null}
 
       {/* 2) Planner da Família (full-width) */}
       <section className="m360-planner">
