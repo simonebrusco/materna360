@@ -33,9 +33,7 @@ export default function MessageOfDayCard({ nameHint = null, showTitle = true, sh
   function readStored() {
     const { key, iso } = todayKey();
     try {
-      const raw = safeGet(key);
-      if (!raw) return null;
-      const obj = JSON.parse(raw);
+      const obj = safeGet(key, null);
       if (obj && obj.date === iso && typeof obj.text === "string" && obj.text.trim()) {
         return sanitizeMessage(obj.text);
       }
@@ -49,7 +47,7 @@ export default function MessageOfDayCard({ nameHint = null, showTitle = true, sh
     const { key, iso } = todayKey();
     try {
       const payload = { date: iso, text: text || "" };
-      safeSet(key, JSON.stringify(payload));
+      safeSet(key, payload);
     } catch {}
   }
 
