@@ -460,3 +460,88 @@ label{ font-weight: var(--m360-weight-medium); }
 /* Micro polimentos premium */
 .m360-container .btn-primary{ box-shadow: 0 3px 8px rgba(255,0,94,0.25); }
 .m360-container .btn-primary:hover{ box-shadow: 0 0 12px 3px rgba(255,0,94,0.45); transform: scale(1.03); }
+
+/* ===== Materna360 Premium Theme Lock ===== */
+:root {
+  --m360-magenta: #FF005E;        /* base */
+  --m360-magenta-600: #E60054;    /* hover */
+  --m360-magenta-700: #CC004B;    /* active */
+  --m360-magenta-100: #FFE3EE;    /* soft bg / outline hover */
+  --m360-ink: #0F172A;
+  --m360-ink-60: rgba(15,23,42,.60);
+  --m360-radius-btn: 16px;
+  --m360-shadow-soft: 0 10px 24px rgba(255,0,94,.25);
+  --m360-shadow-outline: 0 0 0 4px rgba(255,0,94,.15);
+}
+
+/* Botões – garantimos especificidade com .m360-container */
+.m360-container .btn,
+.m360-col .btn,
+.card .btn {
+  font-weight: 700;
+  border-radius: var(--m360-radius-btn);
+  padding: 12px 18px;
+  line-height: 1;
+  transition: all .18s ease;
+}
+
+.m360-container .btn-primary {
+  background: var(--m360-magenta) !important;
+  color: #fff !important;
+  border: 2px solid var(--m360-magenta) !important;
+  box-shadow: var(--m360-shadow-soft);
+}
+.m360-container .btn-primary:hover {
+  background: var(--m360-magenta-600) !important;
+  border-color: var(--m360-magenta-600) !important;
+  transform: translateY(-1px);
+}
+.m360-container .btn-primary:active {
+  background: var(--m360-magenta-700) !important;
+  border-color: var(--m360-magenta-700) !important;
+  transform: translateY(0);
+}
+.m360-container .btn-primary:focus-visible {
+  outline: none;
+  box-shadow: var(--m360-shadow-outline), var(--m360-shadow-soft);
+}
+
+.m360-container .btn-outline {
+  background: #fff !important;
+  color: var(--m360-ink) !important;
+  border: 2px solid var(--m360-magenta) !important;
+}
+.m360-container .btn-outline:hover {
+  background: var(--m360-magenta-100) !important;
+}
+.m360-container .btn-outline:focus-visible {
+  outline: none;
+  box-shadow: var(--m360-shadow-outline);
+}
+
+/* Chips */
+.m360-container .chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 2px solid #ffd1df;
+  background: #fff;
+  font-weight: 600;
+}
+.m360-container .chip-active {
+  border-color: var(--m360-magenta);
+  box-shadow: 0 0 10px rgba(255,0,94,.35);
+}
+
+/* Ícones dentro dos botões/cards herdam o magenta */
+.m360-container .btn svg,
+.m360-container .card svg {
+  stroke: var(--m360-magenta);
+  color: var(--m360-magenta);
+}
+
+/* Cards continuam com brilho suave */
+.card {
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(17,17,17,.05);
+  background: #fff;
+}
