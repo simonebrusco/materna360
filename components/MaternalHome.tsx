@@ -15,7 +15,7 @@ import MessageOfDayCard from "./motd/MessageOfDayCard";
 import Vitrine from "./discover/Vitrine";
 import ChecklistToday from "./planner/ChecklistToday";
 import { flags } from "../lib/flags";
-const MeuDiaHub = dynamic(() => import("./meu-dia/MeuDiaHub"), { ssr: false });
+import HomeHub from "./home/HomeHub";
 import {
   addAction,
   addMood,
@@ -161,7 +161,7 @@ export default function MaternalHome(){
 
       {/* Meu Dia Hub (gated) */}
       {flags.newHomeMaternal ? (
-        <MeuDiaHub />
+        <HomeHub />
       ) : null}
 
       {/* 2) Planner da Família (full-width) */}

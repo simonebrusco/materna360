@@ -741,3 +741,6 @@ label{ font-weight: var(--m360-weight-medium); }
   animation:pulse 1.6s infinite; opacity:.6; margin-top:10px;
 }
 @keyframes pulse{0%{background-position:0 0}100%{background-position:120% 0}}
+
+.m360-container.meu-dia.hub .block { border-radius:16px; box-shadow:0 6px 18px rgba(18,21,26,.06); padding:14px; background:#FFF; margin-bottom:16px; }
+.m360-container.meu-dia.hub h3 { font:600 18px/24px Poppins,system-ui; color:#2F3A56; margin:0 0 8px; }
