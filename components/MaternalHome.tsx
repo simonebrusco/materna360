@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+'use client';
+
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Card from "./ui/Card";
 import Icon from "./ui/Icon";
@@ -37,9 +39,9 @@ import { safeGet, safeMergeObject, safeSet } from "@/lib/utils/safeStorage";
 
 const GreetingBinder = dynamic(() => import("./GreetingBinder"), { ssr: false });
 
-type MaternalHomeProps = { flags?: Record<string, any> };
+type Props = { flags?: Record<string, boolean> };
 
-export default function MaternalHome({ flags: incomingFlags }: MaternalHomeProps){
+export default function MaternalHome({ flags: incomingFlags }: Props){
   const f = { ...defaultFlags, ...(incomingFlags || {}) };
   const [openBreath, setOpenBreath] = useState(false);
   const [openMood, setOpenMood] = useState(false);
