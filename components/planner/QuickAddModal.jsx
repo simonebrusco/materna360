@@ -6,15 +6,17 @@ import { addPlannerEntry } from "../../lib/storage";
 import { showToast } from "../../lib/ui/toast";
 
 function getCurrentTab(){
-  try{ return localStorage.getItem("m360:planner:tab") || "home"; }catch{ return "home"; }
+  try{ const { safeGet } = require("@/lib/utils/safeStorage"); return safeGet("m360:planner:tab", "home"); }catch{ return "home"; }
 }
 
 function persistToTab(tab, payload){
   try{
+    const { safeGet, safeSet } = require("@/lib/utils/safeStorage");
     const key = tab === "kids" ? "m360:planner.kids" : (tab === "me" ? "m360:planner.me" : "m360:planner.home");
-    const list = JSON.parse(localStorage.getItem(key) || "[]");
-    const next = Array.isArray(list) ? [{ text: payload?.title || String(payload||"").trim(), ts: Date.now() }, ...list].slice(0,200) : [{ text: payload?.title || String(payload||"").trim(), ts: Date.now() }];
-    localStorage.setItem(key, JSON.stringify(next));
+    const list = safeGet(key, []);
+    const base = Array.isArray(list) ? list : (Array.isArray(list?.items) ? list.items : []);
+    const next = [{ text: payload?.title || String(payload||"").trim(), ts: Date.now() }, ...base].slice(0,200);
+    safeSet(key, next);
   }catch{}
 }
 
