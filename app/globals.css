@@ -270,6 +270,7 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .icon-default { color: #1E1E1E; }
 .icon-action { color: #F15A2E; }
 .icon-secondary { color: #6C4AB6; }
+.icon-accent { color: #F17324; }
 
 /* Pressable card interaction */
 .card-press { transition: transform .12s ease, box-shadow .12s ease; }
