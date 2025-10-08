@@ -266,7 +266,7 @@ export default function MaternalHome(){
       <InspireModal
         open={openInspire}
         onClose={() => setOpenInspire(false)}
-        onComplete(()=>{
+        onComplete={() => {
           try{ addAction({ date:new Date().toISOString(), type:"inspire" }); }catch{}
           try{ toggleDayDone(new Date()); }catch{}
           showToast("Mãe Presente");
