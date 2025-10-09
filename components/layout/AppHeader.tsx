@@ -3,7 +3,7 @@ import Logo from "@/components/brand/Logo";
 
 export default function AppHeader() {
   return (
-    <header className="brand-header" role="banner" aria-label="Cabeçalho Materna360">
+    <header className="brand-header" role="banner" aria-label="Cabeçalho Materna360" style={{ height: "var(--appbar-h)" }}>
       <div className="brand-header-row" aria-label="Barra do topo">
         <div className="header-spacer-left" aria-hidden="true" />
 
