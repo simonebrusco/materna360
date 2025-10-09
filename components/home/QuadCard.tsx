@@ -2,9 +2,10 @@
 import { useId } from "react";
 import { ChevronDown } from "lucide-react";
 
+import type { ReactNode } from "react";
 export type QuadCardProps = {
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
   open?: boolean;
   onToggle?: () => void;
   className?: string;
