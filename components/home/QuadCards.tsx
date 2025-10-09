@@ -45,29 +45,29 @@ const SECTIONS: Section[] = [
 ];
 
 export default function QuadCards() {
-  // SSR: all closed; client: open the first
+  // SSR closed; open first after hydration
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  useEffect(() => {
-    setOpenIndex(0);
-  }, []);
+  useEffect(() => setOpenIndex(0), []);
 
   return (
-    <div className="mx-auto max-w-[1200px] px-4 grid gap-6 grid-cols-1 md:grid-cols-2">
-      {SECTIONS.map((s, idx) => (
-        <QuadCard
-          key={s.title}
-          title={s.title}
-          open={openIndex === idx}
-          onToggle={() => setOpenIndex(openIndex === idx ? null : idx)}
-          className="shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
-        >
-          <div className="flex flex-wrap gap-2">
-            {s.chips.map((c) => (
-              <RoundActionButton key={c.label} href={c.href} label={c.label} />
-            ))}
-          </div>
-        </QuadCard>
-      ))}
-    </div>
+    <section data-quad-root className="mx-auto max-w-[1200px] px-4">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
+        {SECTIONS.map((s, idx) => (
+          <QuadCard
+            key={s.title}
+            title={s.title}
+            open={openIndex === idx}
+            onToggle={() => setOpenIndex((cur) => (cur === idx ? null : idx))}
+            className="shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
+          >
+            <div className="flex flex-wrap gap-2">
+              {s.chips.map((c) => (
+                <RoundActionButton key={c.label} href={c.href} label={c.label} />
+              ))}
+            </div>
+          </QuadCard>
+        ))}
+      </div>
+    </section>
   );
 }
