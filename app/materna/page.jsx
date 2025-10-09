@@ -82,42 +82,6 @@ export default function Materna() {
         </div>
       </section>
 
-      <style jsx>{`
-        .materna-hero {
-          background: linear-gradient(180deg, #F9C9B7 0%, #FFFFFF 100%);
-          border-radius: 16px;
-          padding: 36px 20px;
-          box-shadow: 0 8px 24px rgba(17,17,17,0.06);
-          text-align: center;
-          margin-bottom: 18px;
-        }
-        .hero-inner { display: grid; gap: 10px; place-items: center; }
-        .hero-title { font-family: Poppins, system-ui; font-weight: 700; color: #2F3A56; font-size: 28px; }
-        .hero-sub { color: rgba(47,58,86,.9); max-width: 720px; margin: 0 auto 8px; }
-
-        .materna-about { margin: 14px 0 6px; }
-        .about-grid { display: grid; grid-template-columns: 1fr; gap: 16px; align-items: center; }
-        .about-title { font-family: Poppins, system-ui; font-weight: 700; font-size: 20px; color: #2F3A56; margin: 0 0 6px; }
-        .about-text { color: rgba(47,58,86,.9); }
-        .about-figure { display: grid; place-items: center; }
-        .about-icon { width: 120px; height: 120px; border-radius: 24px; background: #FFF6F1; border: 2px solid #F9C9B7; display: grid; place-items: center; font-size: 42px; box-shadow: 0 8px 18px rgba(17,17,17,.06); }
-
-        @media (min-width: 768px) {
-          .about-grid { grid-template-columns: 1.2fr .8fr; }
-        }
-
-        .features-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin: 18px 0; }
-        .feature-card { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; }
-        .feature-emoji { width: 40px; height: 40px; border-radius: 12px; border: 1.5px solid rgba(47,58,86,.25); display: grid; place-items: center; font-size: 20px; color: #2F3A56; }
-        .feature-title { font-family: Poppins, system-ui; font-weight: 700; color: #2F3A56; }
-        .feature-sub { color: rgba(47,58,86,.75); }
-
-        .materna-cta { background: #F9C9B7; border-radius: 16px; padding: 16px; margin: 8px 0 16px; }
-        .cta-inner { display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; text-align: center; }
-        .cta-text { font-family: Poppins, system-ui; font-weight: 600; color: #2F3A56; }
-
-        @media (min-width: 768px) { .cta-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
-      `}</style>
     </div>
   );
 }
