@@ -8,9 +8,7 @@ export default function AppHeader() {
         <Link href="/" aria-label="Materna360" className="tap-scale" style={{display:'flex',alignItems:'center',gap:8}}>
           <Logo width={160} height={40} className="brand-logo" />
         </Link>
-        <div style={{display:'flex',alignItems:'center',gap:8}} aria-label="Ações do topo">
-          {/* ações futuras */}
-        </div>
+        <div style={{display:'flex',alignItems:'center',gap:8}} aria-label="Ações do topo"></div>
       </div>
     </header>
   );
