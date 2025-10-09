@@ -25,36 +25,56 @@ export default function QuadCard({
   };
 
   return (
-    <section className="rounded-3xl bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-black/5 p-5">
-      <header className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
-          {icon ? <div className="text-[20px]">{icon}</div> : null}
-          <div>
-            <h3 className="text-[18px] font-semibold text-[#2F3A56]">{title}</h3>
-            {subtitle ? (
-              <p className="text-[13px] text-[#6B7280]">{subtitle}</p>
-            ) : null}
-          </div>
-        </div>
-        <button
-          type="button"
-          aria-expanded={open}
-          onClick={() => setOpen(!open)}
-          className="h-9 px-4 rounded-full bg-white border border-black/10 shadow-sm text-[13px] text-[#2F3A56] hover:bg-black/5 transition"
-        >
-          {open ? "Fechar" : "Abrir"}
-        </button>
-      </header>
-
-      {/* Smooth expand/collapse with CSS only */}
+    <section
+      data-ui="quad-card"
+      className="
+       relative transform-gpu overflow-hidden
+       rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)]
+     "
+      style={{ WebkitBackfaceVisibility: "hidden" }}
+    >
+      {/* Blur background layer to provide glass effect without edge seams */}
       <div
-        className={`transition-[grid-template-rows,opacity,margin] duration-200 ease-out overflow-hidden
+        aria-hidden="true"
+        className="
+          absolute inset-px rounded-2xl
+          bg-white/80 backdrop-blur-sm
+          pointer-events-none
+        "
+      />
+
+      {/* Solid inner surface */}
+      <div className="relative rounded-2xl bg-white">
+        <header className="flex items-center justify-between px-4 py-3 select-none cursor-pointer bg-transparent shadow-none">
+          <div className="flex items-center gap-3">
+            {icon ? <div className="text-[20px]">{icon}</div> : null}
+            <div>
+              <h3 className="text-[18px] font-semibold text-[#2F3A56]">{title}</h3>
+              {subtitle ? (
+                <p className="text-[13px] text-[#6B7280]">{subtitle}</p>
+              ) : null}
+            </div>
+          </div>
+          <button
+            type="button"
+            aria-expanded={open}
+            onClick={() => setOpen(!open)}
+            className="h-9 px-4 rounded-full bg-white border border-black/10 shadow-sm text-[13px] text-[#2F3A56] hover:bg-black/5 transition"
+          >
+            {open ? "Fechar" : "Abrir"}
+          </button>
+        </header>
+
+        {/* Smooth expand/collapse with CSS only */}
+        <div
+          className={`transition-[grid-template-rows,opacity,margin] duration-200 ease-out overflow-hidden
         ${open ? "grid grid-rows-[1fr] mt-4 opacity-100" : "grid grid-rows-[0fr] mt-0 opacity-0"}`}
-      >
-        <div className="min-h-0">
-          {/* Actions grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {children}
+        >
+          <div className="min-h-0 px-4 pb-4">
+            {/* Actions grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              {children}
+            </div>
           </div>
         </div>
       </div>
