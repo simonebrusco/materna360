@@ -1,6 +1,7 @@
 import "./globals.css";
 
 import dynamic from "next/dynamic";
+import AppHeader from "@/components/layout/AppHeader";
 
 export const metadata = {
   title: "Materna360",
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt">
       <body className="bg-gray-50 text-gray-900 antialiased">
+        <AppHeader />
         {children}
         <Toaster />
         <BottomTabBar />
