@@ -15,7 +15,7 @@ export default function QuadCards() {
         subtitle="Organize seu dia e a semana."
         icon={<span>🏠</span>}
         openExternal={openId === "planner"}
-        onToggle={() => toggle("planner")}
+        onToggle={(_next) => toggle("planner")}
       >
         <RoundActionButton label="Rotina da Casa" icon="🏠" href="/rotina" variant="primary" />
         <RoundActionButton label="Planner da Família" icon="🗓️" href="/planner" />
@@ -29,7 +29,7 @@ export default function QuadCards() {
         subtitle="Registre sentimentos e momentos."
         icon={<span>🙂</span>}
         openExternal={openId === "emocoes"}
-        onToggle={() => toggle("emocoes")}
+        onToggle={(_next) => toggle("emocoes")}
       >
         <RoundActionButton label="Humor & Emoções" icon="🙂" href="/humor" variant="primary" />
         <RoundActionButton label="Momento com Meu Filho" icon="💗" href="/momentos" />
@@ -43,7 +43,7 @@ export default function QuadCards() {
         subtitle="Pequenas pausas para você."
         icon={<span>🌿</span>}
         openExternal={openId === "cuidar"}
-        onToggle={() => toggle("cuidar")}
+        onToggle={(_next) => toggle("cuidar")}
       >
         <RoundActionButton label="Meditar" icon="🧘" href="/meditar" variant="primary" />
         <RoundActionButton label="Respirar" icon="🌬️" href="/respirar" />
@@ -57,7 +57,7 @@ export default function QuadCards() {
         subtitle="Ideias e sugestões para hoje."
         icon={<span>💡</span>}
         openExternal={openId === "descobrir"}
-        onToggle={() => toggle("descobrir")}
+        onToggle={(_next) => toggle("descobrir")}
       >
         <RoundActionButton label="Ideia do Dia" icon="💡" href="/ideia" variant="primary" />
         <RoundActionButton label="Descobrir" icon="🔍" href="/descobrir" />
