@@ -2,14 +2,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Card from "./ui/Card";
-import Icon from "./ui/Icon";
 const PlannerNotepad = dynamic(() => import("./planner/PlannerNotepad"), { ssr: false });
 import WeekProgressCard from "./planner/WeekProgressCard";
 const BreathModal = dynamic(() => import("./modals/BreathModal"), { ssr: false });
 const MoodModal = dynamic(() => import("./modals/MoodModal"), { ssr: false });
 const InspireModal = dynamic(() => import("./modals/InspireModal"), { ssr: false });
 const PauseModal = dynamic(() => import("./modals/PauseModal"), { ssr: false });
-import { reflectiveQuestions } from "@/lib/reflectiveQuestions";
+import MessageOfDayCard from "./motd/MessageOfDayCard";
+import MiniMoodChip from "./wellbeing/MiniMoodChip";
 import Vitrine from "./discover/Vitrine";
 import ChecklistToday from "./planner/ChecklistToday";
 import { flags as defaultFlags } from "@/lib/flags";
@@ -34,7 +34,6 @@ const BadgesLevelToast = dynamic(() => import("./BadgesLevelToast"), { ssr: fals
 import { showToast } from "../lib/ui/toast";
 import { safeGet, safeMergeObject, safeSet } from "@/lib/utils/safeStorage";
 
-const GreetingBinder = dynamic(() => import("./GreetingBinder"), { ssr: false });
 
 export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<string, any> }){
   const flags = { ...defaultFlags, ...(incomingFlags || {}) };
@@ -109,18 +108,6 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
   ];
   const bonus = tips[done % tips.length];
 
-  function dayOfYear(d: Date){
-    const start = new Date(d.getFullYear(), 0, 0);
-    const diff = d.getTime() - start.getTime();
-    const oneDay = 1000 * 60 * 60 * 24;
-    return Math.floor(diff / oneDay);
-  }
-  const question = useMemo(()=>{
-    try{
-      const idx = dayOfYear(new Date()) % reflectiveQuestions.length;
-      return reflectiveQuestions[idx] || "";
-    }catch{ return ""; }
-  },[]);
 
   // Achievements: checklist complete handling
   const completeTimerRef = useRef<any>(null);
@@ -212,34 +199,18 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
 
   return (
     <div className={`m360-container meu-dia${flags.newHomeMaternal ? ' hub' : ''}`}>
-      {/* 1) Hero (saudação + mensagem do dia) */}
-      <section className="m360-hero hero" role="banner" aria-label="Saudação">
-        <GreetingBinder>
-          {({ name, part }) => {
-            const shown = displayName || name || 'Mãe';
-            return (
-              <div>
-                <h1 className="greeting-title" suppressHydrationWarning>{part}, {shown} <span aria-hidden>💛</span></h1>
-                <p className="greeting-sub">Como você está hoje?</p>
-              </div>
-            );
-          }}
-        </GreetingBinder>
-        <div className="hero-grid">
-          <Card className="motd-card" role="region" aria-label="Pergunta do dia">
-            <strong className="motd-title">“Pergunta do dia”</strong>
-            <p className="small motd-text">
-              <span className="motd-quote" aria-hidden>“</span>
-              <i>{question}</i>
-            </p>
-          </Card>
-          <Card className="mood-card tap-scale" onClick={()=>setOpenMood(true)} role="button" aria-label="Registrar humor">
-            <Icon name="mood" className="icon-24 icon-accent" />
-            <div>
-              <h3>Como você se sente?</h3>
-              <p className="small">Toque para registrar</p>
+      {/* Topo: Saudação PT-BR + pergunta reflexiva + chip de humor */}
+      <section className="m360-hero hero" role="banner" aria-label="Topo da Home">
+        <div className="home-top-row">
+          <div className="home-greet-stack">
+            <h1 className="greeting-title" suppressHydrationWarning>Bom dia, {displayName} <span aria-hidden>☀️</span></h1>
+            <div className="home-reflection" aria-label="Pergunta reflexiva do dia">
+              <MessageOfDayCard />
             </div>
-          </Card>
+          </div>
+          <div className="home-chip-col">
+            <MiniMoodChip />
+          </div>
         </div>
       </section>
 

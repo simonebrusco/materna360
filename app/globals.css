@@ -682,6 +682,25 @@ label{ font-weight: var(--m360-weight-medium); }
 }
 
 /* ===== Materna360 – Meu Dia (scoped to .m360-container.meu-dia) ===== */
+
+/* Home header layout */
+.home-top-row{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
+.home-greet-stack{ flex:1 1 auto; }
+.home-reflection{ display:flex; align-items:baseline; }
+.home-chip-col{ flex:0 0 auto; display:flex; align-items:flex-start; justify-content:flex-end; }
+
+/* Mini mood chip */
+.mini-mood-chip{ display:flex; align-items:center; gap:8px; background:#fff; border-radius:999px; box-shadow: var(--shadow-soft); padding:8px 12px; min-height:40px; border:1px solid rgba(13,27,42,.06); }
+.mini-mood-label{ font:600 14px/1 Poppins, system-ui; color:#6C4AB6; margin-right:4px; }
+.mini-mood-emojis{ display:flex; gap:6px; }
+.mini-mood-emoji{ all:unset; cursor:pointer; font-size:18px; line-height:1; padding:6px 8px; border-radius:12px; }
+.mini-mood-emoji:focus-visible{ outline:none; box-shadow: var(--ring); }
+
+@media (max-width:1023px){
+  .home-top-row{ flex-direction:column; align-items:stretch; }
+  .home-chip-col{ justify-content:center; }
+  .mini-mood-chip{ width:100%; margin-top:32px; justify-content:center; }
+}
 .m360-container.meu-dia{
   --m360-primary:#FF005E;      /* magenta */
   --m360-secondary:#2F3A56;    /* navy */
