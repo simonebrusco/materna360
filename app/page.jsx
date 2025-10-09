@@ -4,7 +4,7 @@ import MaternalHome from "@/components/MaternalHome";
 export default async function Page({ searchParams }) {
   const resolvedFlags = resolveFlagsFromSearch?.(searchParams) ?? null;
   return (
-    <main className="app-main" style={{ overflow: "visible", paddingTop: "5rem" }}>
+    <main className="app-main">
       <MaternalHome flags={resolvedFlags} />
     </main>
   );
