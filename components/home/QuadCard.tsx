@@ -1,57 +1,75 @@
 "use client";
-import { ReactNode } from "react";
+import { useId } from "react";
 import { ChevronDown } from "lucide-react";
 
-type QuadCardProps = {
-  id: string;
+export type QuadCardProps = {
   title: string;
-  open: boolean;
-  onToggle: () => void;
-  children?: ReactNode;
+  children: React.ReactNode;
+  open?: boolean;
+  onToggle?: () => void;
+  className?: string;
 };
 
-export default function QuadCard({ id, title, open, onToggle, children }: QuadCardProps) {
-  return (
-    <div
-      data-ui="quad-card"
-      className="relative isolate overflow-hidden rounded-2xl bg-white/90 bg-clip-padding backdrop-blur-sm
-                 shadow-[0_6px_24px_rgba(0,0,0,0.08)] ring-0 outline-none"
-      aria-labelledby={`${id}-header`}
-    >
-      {/* Local hairline guard inside the card (idempotent, scoped) */}
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-[data-ui="quad-card"] summary,
-[data-ui="quad-card"] details,
-[data-ui="quad-card"] fieldset,
-[data-ui="quad-card"] legend,
-[data-ui="quad-card"] select,
-[data-ui="quad-card"] option,
-[data-ui="quad-card"] hr { display: none !important; }
-[data-ui="quad-card"] * { border-color: transparent !important; }
-          `,
-        }}
-      />
+/**
+ * Glass card with SSR-safe grid collapse (no hairlines).
+ * No borders, no outlines, no dividers. Header is a real button.
+ */
+export default function QuadCard({
+  title,
+  children,
+  open = false,
+  onToggle,
+  className,
+}: QuadCardProps) {
+  const id = useId();
 
-      {/* Header is a real <button> to avoid UA summary styling */}
+  const containerCls = [
+    "relative rounded-2xl bg-white/90 backdrop-blur-sm shadow-[0_8px_30px_rgba(0,0,0,0.06)]",
+    "transition",
+    String(className || ""),
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const headerCls = [
+    "w-full select-none px-4 py-3",
+    "flex items-center justify-between",
+    "bg-transparent text-slate-900 font-medium leading-none",
+  ].join(" ");
+
+  const chevronCls = [
+    "shrink-0 transition-transform duration-200",
+    open ? "rotate-180 opacity-100" : "opacity-70",
+  ].join(" ");
+
+  const panelGridCls = [
+    "grid transition-all duration-300 ease-out",
+    open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+  ].join(" ");
+
+  return (
+    <div data-ui="quad-card" className={containerCls} style={{ borderWidth: 0 }}>
       <button
-        id={`${id}-header`}
         type="button"
-        onClick={onToggle}
-        aria-controls={`${id}-panel`}
+        id={`h-${id}`}
+        aria-controls={`p-${id}`}
         aria-expanded={open}
-        className="w-full bg-transparent border-0 outline-none flex items-center justify-between
-                   px-5 py-4 min-h-[44px] text-slate-900 font-semibold text-base md:text-lg
-                   leading-none select-none cursor-pointer"
+        onClick={onToggle}
+        className={headerCls}
       >
-        <span className="truncate">{title}</span>
-        <ChevronDown size={20} className={`shrink-0 transition-transform duration-200 ${open ? "rotate-180" : "rotate-0"}`} />
+        <span>{title}</span>
+        <ChevronDown className={chevronCls} size={18} aria-hidden="true" />
       </button>
 
-      {/* Content: hidden avoids 1px artifacts; no grid/overflow tricks needed */}
-      <div id={`${id}-panel`} hidden={!open} className="px-5 pb-4">
-        <div className="flex flex-wrap gap-2">{children}</div>
+      <div
+        id={`p-${id}`}
+        role="region"
+        aria-labelledby={`h-${id}`}
+        className={panelGridCls}
+      >
+        <div className="min-h-0 overflow-hidden">
+          <div className="px-4 pb-4 pt-0">{children}</div>
+        </div>
       </div>
     </div>
   );
