@@ -17,7 +17,7 @@ export default function RoundActionButton({
   className,
 }: Props) {
   const base =
-    "inline-flex items-center gap-2 rounded-full px-3 py-2 " +
+    "inline-flex items-center gap-2 rounded-full px-3 py-2 m360-ripple m360-focus " +
     "bg-white/80 backdrop-blur-sm shadow-sm " +
     "text-[13px] font-medium text-slate-800 " +
     "outline-none ring-0 focus-visible:ring-2 focus-visible:ring-pink-200 " +
