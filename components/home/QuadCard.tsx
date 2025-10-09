@@ -14,8 +14,8 @@ export default function QuadCard({
   subtitle?: string;
   icon?: React.ReactNode;
   children: React.ReactNode;
-  openExternal?: boolean;            // controlled (from parent)
-  onToggle?: (next: boolean) => void; // notify parent to toggle
+  openExternal?: boolean;
+  onToggle?: (next: boolean) => void;
 }) {
   const [openInternal, setOpenInternal] = useState(false);
   const open = typeof openExternal === "boolean" ? openExternal : openInternal;
@@ -25,7 +25,7 @@ export default function QuadCard({
   };
 
   return (
-    <section className="rounded-3xl bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-black/5 p-5">
+    <section className="rounded-2xl bg-white/90 backdrop-blur-sm shadow-[0_8px_30px_rgba(0,0,0,0.06)] ring-1 ring-black/5 transition p-5">
       <header className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           {icon ? <div className="text-[20px]">{icon}</div> : null}
@@ -40,20 +40,18 @@ export default function QuadCard({
           type="button"
           aria-expanded={open}
           onClick={() => setOpen(!open)}
-          className="h-9 px-4 rounded-full bg-white border border-black/10 shadow-sm text-[13px] text-[#2F3A56] hover:bg-black/5 transition"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full text-[#2F3A56] hover:bg-black/5 transition"
         >
-          {open ? "Fechar" : "Abrir"}
+          <span className={`inline-block transition-transform ${open ? "rotate-180" : "rotate-0"}`} aria-hidden>⌄</span>
         </button>
       </header>
 
-      {/* Smooth expand/collapse with CSS only */}
       <div
-        className={`transition-[grid-template-rows,opacity,margin] duration-200 ease-out overflow-hidden
-        ${open ? "grid grid-rows-[1fr] mt-4 opacity-100" : "grid grid-rows-[0fr] mt-0 opacity-0"}`}
+        className={`grid transition-[grid-template-rows,opacity,margin] duration-300 ease-out
+        ${open ? "grid-rows-[1fr] opacity-100 mt-3" : "grid-rows-[0fr] opacity-0 -mt-2"}`}
       >
-        <div className="min-h-0">
-          {/* Actions grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="min-h-0 overflow-hidden">
+          <div className="flex flex-wrap gap-2">
             {children}
           </div>
         </div>
