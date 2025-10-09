@@ -14,7 +14,7 @@ import Vitrine from "./discover/Vitrine";
 import ChecklistToday from "./planner/ChecklistToday";
 import { flags as defaultFlags } from "@/lib/flags";
 import HomeHub from "./home/HomeHub";
-import QuadCards from "./home/QuadCards";
+import HomeQuadGrid from "@/components/HomeQuadGrid";
 import CardRotinaCasa from "./meu-dia/cards/CardRotinaCasa";
 import CardTempoFilho from "./meu-dia/cards/CardTempoFilho";
 import CardIdeiaDoDia from "./meu-dia/cards/CardIdeiaDoDia";
@@ -215,8 +215,9 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
         </div>
       </section>
 
-      <section className="mt-6">
-        <QuadCards />
+      <section aria-labelledby="section-quick-actions" className="mt-6">
+        <h2 id="section-quick-actions" className="sr-only">Quick Actions</h2>
+        <HomeQuadGrid />
       </section>
 
       {/* Meu Dia Hub (gated) */}
