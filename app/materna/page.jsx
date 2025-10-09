@@ -1,6 +1,5 @@
 import Card from "../../components/ui/Card";
 import Btn from "../../components/ui/Btn";
-import Link from "next/link";
 
 export default function Materna() {
   return (
