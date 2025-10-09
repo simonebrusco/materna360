@@ -4,7 +4,11 @@ import Btn from "../ui/Btn";
 import { ensureMessage } from "../../lib/messages";
 import { safeGet, safeSet } from "@/lib/utils/safeStorage";
 
+ai_main_122635524f7a
+export default function MessageOfDayCard({ nameHint = null, showTitle = true, showButton = true, className = "", message }) {
+
 export default function MessageOfDayCard({ nameHint = null, showTitle = true, showButton = true, className = "" }) {
+main
   const [motd, setMotd] = useState("");
 
   function sanitizeMessage(text) {
@@ -75,6 +79,19 @@ export default function MessageOfDayCard({ nameHint = null, showTitle = true, sh
     setMotd(next);
   }
 
+ai_main_122635524f7a
+  const provided = typeof message === "string" ? sanitizeMessage(message) : "";
+  const display = provided || motd;
+
+  return (
+    <Card className={className}>
+      {showTitle ? <strong className="motd-title">“Mensagem do dia”</strong> : null}
+      <p className="small motd-text">
+        <span className="motd-quote" aria-hidden>“</span>
+        <i>{display}</i>
+      </p>
+      {showButton && !provided ? <Btn onClick={refresh}>Nova mensagem</Btn> : null}
+
   const short = String(motd||"").trim().length < 35;
   return (
     <Card className={className} role="region" aria-label="Mensagem do dia">
@@ -85,6 +102,7 @@ export default function MessageOfDayCard({ nameHint = null, showTitle = true, sh
       </p>
       {short ? <div className="motd-skeleton" aria-hidden /> : null}
       {showButton ? <Btn onClick={refresh}>Nova mensagem</Btn> : null}
+main
     </Card>
   );
 }

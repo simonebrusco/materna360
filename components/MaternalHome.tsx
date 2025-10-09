@@ -200,6 +200,21 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
   return (
     <div className={`m360-container meu-dia${flags.newHomeMaternal ? ' hub' : ''}`}>
       {/* 1) Hero (saudação + mensagem do dia) */}
+
+ai_main_122635524f7a
+      <section className="m360-hero hero">
+        <GreetingBinder>
+          {({ name, part }) => (
+            <div>
+              <h1 suppressHydrationWarning>{part}, {name} <span aria-hidden>💛</span></h1>
+              <h2>Como você está hoje?</h2>
+            </div>
+          )}
+        </GreetingBinder>
+        <div className="hero-grid">
+          <MessageOfDayCard className="motd-card" showTitle={false} showButton={false} />
+          <Card className="mood-card tap-scale" onClick={()=>setOpenMood(true)}>
+
       <section className="m360-hero hero" role="banner" aria-label="Saudação">
         <GreetingBinder>
           {({ name, part }) => {
@@ -215,6 +230,7 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
         <div className="hero-grid">
           <MessageOfDayCard className="motd-card" showTitle={false} showButton={false} />
           <Card className="mood-card tap-scale" onClick={()=>setOpenMood(true)} role="button" aria-label="Registrar humor">
+main
             <Icon name="mood" className="icon-24 icon-accent" />
             <div>
               <h3>Como você se sente?</h3>
@@ -260,11 +276,55 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
       </section>
 
       {/* 3) Ações (2x2) */}
+
+ai_main_122635524f7a
+      <section className="m360-grid m360-maternal-actions">
+        <div className="card m360-action tap-scale">
+          <div className="card-icon" aria-hidden>🏠</div>
+          <h3>Rotina da Casa</h3>
+          <p>Organize tarefas do lar — arrumar, preparar, compras.</p>
+          <div className="card-actions">
+            <button className="btn btn-primary" onClick={()=>setOpenPad(true)}>Adicionar tarefa</button>
+            <button className="btn btn-outline" onClick={()=>setOpenPad(true)}>Ver agenda</button>
+          </div>
+        </div>
+
+        <div className="card m360-action tap-scale">
+          <div className="card-icon" aria-hidden>💕</div>
+          <h3>Tempo com Meu Filho</h3>
+          <p>Registre um momento especial do dia com seu filho.</p>
+          <div className="card-actions">
+            <button className="btn btn-primary" onClick={()=>{ try{ (window as any).requestAnimationFrame?.(()=>{}); }catch{}; }}>Registrar momento</button>
+            <button className="btn btn-outline">Ver timeline</button>
+          </div>
+        </div>
+
+        <div className="card m360-action tap-scale">
+          <div className="card-icon" aria-hidden>🎨</div>
+          <h3>Atividade do Dia</h3>
+          <p>Receba sugestões educativas e brincadeiras do dia.</p>
+          <div className="card-actions">
+            <button className="btn btn-primary" onClick={()=>setOpenPad(true)}>Salvar no planner</button>
+            <button className="btn btn-outline">Ver sugestões</button>
+          </div>
+        </div>
+
+        <div className="card m360-action tap-scale">
+          <div className="card-icon" aria-hidden>🌿</div>
+          <h3>Momento para Mim</h3>
+          <p>Uma pequena pausa de cuidado e carinho com você.</p>
+          <div className="card-actions">
+            <button className="btn btn-primary" onClick={()=>setOpenPause(true)}>Fazer agora</button>
+            <button className="btn btn-outline">Planejar</button>
+          </div>
+        </div>
+
       <section className="hub-grid" aria-label="Ações do dia" style={{marginBottom:24}}>
         <CardRotinaCasa />
         <CardTempoFilho />
         <CardIdeiaDoDia />
         <CardMomentoMim />
+main
       </section>
 
       {/* 4) Recomendações */}
