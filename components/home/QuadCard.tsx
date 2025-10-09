@@ -14,11 +14,11 @@ export default function QuadCard({ id, title, open, onToggle, children }: QuadCa
   return (
     <div
       data-ui="quad-card"
-      className="relative isolate overflow-hidden rounded-2xl bg-white/90 bg-clip-padding backdrop-blur-sm
-                 shadow-[0_6px_24px_rgba(0,0,0,0.08)] ring-0 outline-none"
+      className="relative isolate overflow-hidden rounded-2xl bg-white/90 bg-clip-padding
+                 backdrop-blur-sm shadow-[0_6px_24px_rgba(0,0,0,0.08)] ring-0 outline-none"
       aria-labelledby={`${id}-header`}
     >
-      {/* Local hairline guard inside the card (idempotent, scoped) */}
+      {/* Local guard to kill any UA/3rd-party hairlines inside this card */}
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -34,7 +34,6 @@ export default function QuadCard({ id, title, open, onToggle, children }: QuadCa
         }}
       />
 
-      {/* Header is a real <button> to avoid UA summary styling */}
       <button
         id={`${id}-header`}
         type="button"
@@ -49,9 +48,12 @@ export default function QuadCard({ id, title, open, onToggle, children }: QuadCa
         <ChevronDown size={20} className={`shrink-0 transition-transform duration-200 ${open ? "rotate-180" : "rotate-0"}`} />
       </button>
 
-      {/* Content: hidden avoids 1px artifacts; no grid/overflow tricks needed */}
+      {/* IMPORTANT: content is hidden when closed to avoid any 1px artifacts */}
       <div id={`${id}-panel`} hidden={!open} className="px-5 pb-4">
-        <div className="flex flex-wrap gap-2">{children}</div>
+        {/* flex + gap ensure chips never collapse into a single text run */}
+        <div className="flex flex-wrap items-center gap-2">
+          {children}
+        </div>
       </div>
     </div>
   );
