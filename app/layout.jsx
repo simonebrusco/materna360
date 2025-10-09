@@ -1,6 +1,8 @@
 import "./globals.css";
 import dynamic from "next/dynamic";
 
+const DevErrorSuppressor = dynamic(() => import("../components/DevErrorSuppressor"), { ssr: false });
+
 const BottomTabBar = dynamic(() => import("../components/BottomTabBar"), { ssr: false });
 const Toaster = dynamic(() => import("../lib/ui/toast").then(m => ({ default: m.Toaster })), { ssr: false });
 
