@@ -14,42 +14,44 @@ export default function QuadCard({ id, title, open, onToggle, children }: QuadCa
   return (
     <div
       data-ui="quad-card"
-      className="
-        relative isolate overflow-hidden rounded-2xl
-        bg-white/90 bg-clip-padding backdrop-blur-sm
-        shadow-[0_6px_24px_rgba(0,0,0,0.08)]
-      "
-      style={{ WebkitBackfaceVisibility: "hidden" }}
+      className="relative isolate overflow-hidden rounded-2xl bg-white/90 bg-clip-padding backdrop-blur-sm
+                 shadow-[0_6px_24px_rgba(0,0,0,0.08)] ring-0 outline-none"
       aria-labelledby={`${id}-header`}
     >
-      {/* HEADER (hard reset against global styles) */}
+      {/* Local hairline guard inside the card (idempotent, scoped) */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+[data-ui="quad-card"] summary,
+[data-ui="quad-card"] details,
+[data-ui="quad-card"] fieldset,
+[data-ui="quad-card"] legend,
+[data-ui="quad-card"] select,
+[data-ui="quad-card"] option,
+[data-ui="quad-card"] hr { display: none !important; }
+[data-ui="quad-card"] * { border-color: transparent !important; }
+          `,
+        }}
+      />
+
+      {/* Header is a real <button> to avoid UA summary styling */}
       <button
         id={`${id}-header`}
         type="button"
         onClick={onToggle}
         aria-controls={`${id}-panel`}
         aria-expanded={open}
-        className="
-          w-full
-          appearance-none bg-transparent border-0 outline-none
-          flex items-center justify-between
-          px-4 py-3 min-h-[44px]
-          text-slate-800 font-semibold text-base leading-none
-          select-none cursor-pointer
-        "
+        className="w-full bg-transparent border-0 outline-none flex items-center justify-between
+                   px-5 py-4 min-h-[44px] text-slate-900 font-semibold text-base md:text-lg
+                   leading-none select-none cursor-pointer"
       >
         <span className="truncate">{title}</span>
-        <ChevronDown
-          className={`shrink-0 transition-transform duration-200 ${open ? "rotate-180 opacity-100" : "rotate-0 opacity-80"}`}
-          size={18}
-        />
+        <ChevronDown size={20} className={`shrink-0 transition-transform duration-200 ${open ? "rotate-180" : "rotate-0"}`} />
       </button>
 
-      {/* CONTENT (zero height when closed) */}
-      <div id={`${id}-panel`} hidden={!open} className="px-4 pb-3">
-        <div className="flex flex-wrap gap-2">
-          {children}
-        </div>
+      {/* Content: hidden avoids 1px artifacts; no grid/overflow tricks needed */}
+      <div id={`${id}-panel`} hidden={!open} className="px-5 pb-4">
+        <div className="flex flex-wrap gap-2">{children}</div>
       </div>
     </div>
   );
