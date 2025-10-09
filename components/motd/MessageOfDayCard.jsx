@@ -1,50 +1,91 @@
 import { useEffect, useState } from "react";
-import { perguntasReflexivas } from "@/lib/perguntasReflexivas";
+import Card from "../ui/Card";
+import Btn from "../ui/Btn";
+import { ensureMessage } from "../../lib/messages";
 import { safeGet, safeSet } from "@/lib/utils/safeStorage";
 
-export default function MessageOfDayCard({ className = "", message }) {
-  const [text, setText] = useState("");
+export default function MessageOfDayCard({ nameHint = null, showTitle = true, showButton = true, className = "", message }) {
+  const [motd, setMotd] = useState("");
+
+  function sanitizeMessage(text) {
+    if (!text || typeof text !== "string") return "";
+    const lines = String(text)
+      .replace(/^ai_main.*$/gim, "")
+      .replace(/^main$/gim, "")
+      .replace(/#[0-9a-f]{7,}/gi, "")
+      .split(/\r?\n+/);
+    const pick = lines.map(l => l.trim()).filter(Boolean).find(l => /[A-Za-zÀ-ÿ]/.test(l));
+    return (pick || "").trim();
+  }
+
+  function todayKey() {
+    try {
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      return { key: "m360:motd:today", iso: `${y}-${m}-${day}` };
+    } catch {
+      return { key: "m360:motd:today", iso: "" };
+    }
+  }
+
+  function readStored() {
+    const { key, iso } = todayKey();
+    try {
+      const obj = safeGet(key, null);
+      if (obj && obj.date === iso && typeof obj.text === "string" && obj.text.trim()) {
+        return sanitizeMessage(obj.text);
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  }
+
+  function writeStored(text) {
+    const { key, iso } = todayKey();
+    try {
+      const payload = { date: iso, text: text || "" };
+      safeSet(key, payload);
+    } catch {}
+  }
+
+  function computeMessage() {
+    const candidate = ensureMessage(nameHint)?.body ?? "";
+    const cleaned = sanitizeMessage(candidate);
+    const finalText = cleaned || "Hoje pode ser mais leve. Um passo de cada vez.";
+    writeStored(finalText);
+    return finalText;
+  }
 
   useEffect(() => {
-    // SSR-safe: only run on client
-    const KEY = "m360:perguntaDia";
-    const KEY_TS = "m360:perguntaDia:lastChange";
-    const DAY_MS = 86_400_000;
     try {
-      const now = Date.now();
-      const last = Number(safeGet(KEY_TS, 0)) || 0;
-      const stored = String(safeGet(KEY, "") || "").trim();
-      const provided = typeof message === "string" ? String(message).trim() : "";
-
-      // If a message prop is provided, prefer it (still store to keep rotation consistent)
-      if (provided) {
-        setText(provided);
-        try { safeSet(KEY, provided); safeSet(KEY_TS, now); } catch {}
+      const stored = readStored();
+      if (stored) {
+        setMotd(stored);
         return;
       }
+    } catch {}
+    setMotd(computeMessage());
+  }, [nameHint]);
 
-      if (stored && now - last < DAY_MS) {
-        setText(stored);
-        return;
-      }
+  function refresh() {
+    const next = computeMessage();
+    setMotd(next);
+  }
 
-      const idxFromStored = perguntasReflexivas.indexOf(stored);
-      const nextIdx = idxFromStored >= 0
-        ? (idxFromStored + 1) % perguntasReflexivas.length
-        : Math.abs(Math.floor(now / DAY_MS)) % perguntasReflexivas.length;
-      const pick = perguntasReflexivas[nextIdx] || perguntasReflexivas[0] || "";
-      setText(pick);
-      try { safeSet(KEY, pick); safeSet(KEY_TS, now); } catch {}
-    } catch {
-      setText("");
-    }
-  }, [message]);
+  const provided = typeof message === "string" ? sanitizeMessage(message) : "";
+  const display = provided || motd;
 
-  // Render only the italic phrase with decorative quote icon
   return (
-    <p className={`small motd-text ${className}`.trim()} aria-live="polite">
-      <span className="motd-quote" aria-hidden>“</span>
-      <i>{text}</i>
-    </p>
+    <Card className={className} role="region" aria-label="Mensagem do dia">
+      {showTitle ? <strong className="motd-title">“Mensagem do dia”</strong> : null}
+      <p className="small motd-text">
+        <span className="motd-quote" aria-hidden>“</span>
+        <i>{display}</i>
+      </p>
+      {showButton && !provided ? <Btn onClick={refresh}>Nova mensagem</Btn> : null}
+    </Card>
   );
 }
