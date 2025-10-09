@@ -5,7 +5,7 @@ import RoundActionButton from "@/components/ui/RoundActionButton";
 
 type Section = {
   title: string;
-  chips: { label: string; href: string; icon?: React.ReactNode }[];
+  chips: { label: string; href: string; icon?: any }[];
 };
 
 const SECTIONS: Section[] = [
