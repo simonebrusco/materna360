@@ -102,7 +102,7 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
   function openNotepad(i?: number){ if (typeof i==='number') setPadDay(i); setOpenPad(true); }
 
   const tips = [
-    "Beba água e alongue-se 1 min.",
+    "Beba ��gua e alongue-se 1 min.",
     "Três respirações profundas.",
     "Envie uma mensagem carinhosa pra você mesma.",
     "Caminhe 2 min e olhe o céu."
@@ -200,21 +200,6 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
   return (
     <div className={`m360-container meu-dia${flags.newHomeMaternal ? ' hub' : ''}`}>
       {/* 1) Hero (saudação + mensagem do dia) */}
-
-ai_main_122635524f7a
-      <section className="m360-hero hero">
-        <GreetingBinder>
-          {({ name, part }) => (
-            <div>
-              <h1 suppressHydrationWarning>{part}, {name} <span aria-hidden>💛</span></h1>
-              <h2>Como você está hoje?</h2>
-            </div>
-          )}
-        </GreetingBinder>
-        <div className="hero-grid">
-          <MessageOfDayCard className="motd-card" showTitle={false} showButton={false} />
-          <Card className="mood-card tap-scale" onClick={()=>setOpenMood(true)}>
-
       <section className="m360-hero hero" role="banner" aria-label="Saudação">
         <GreetingBinder>
           {({ name, part }) => {
@@ -230,7 +215,6 @@ ai_main_122635524f7a
         <div className="hero-grid">
           <MessageOfDayCard className="motd-card" showTitle={false} showButton={false} />
           <Card className="mood-card tap-scale" onClick={()=>setOpenMood(true)} role="button" aria-label="Registrar humor">
-main
             <Icon name="mood" className="icon-24 icon-accent" />
             <div>
               <h3>Como você se sente?</h3>
@@ -238,7 +222,6 @@ main
             </div>
           </Card>
         </div>
-
       </section>
 
       {/* Meu Dia Hub (gated) */}
@@ -276,8 +259,6 @@ main
       </section>
 
       {/* 3) Ações (2x2) */}
-
-ai_main_122635524f7a
       <section className="m360-grid m360-maternal-actions">
         <div className="card m360-action tap-scale">
           <div className="card-icon" aria-hidden>🏠</div>
@@ -318,13 +299,14 @@ ai_main_122635524f7a
             <button className="btn btn-outline">Planejar</button>
           </div>
         </div>
+      </section>
 
+      {/* Hub grid cards */}
       <section className="hub-grid" aria-label="Ações do dia" style={{marginBottom:24}}>
         <CardRotinaCasa />
         <CardTempoFilho />
         <CardIdeiaDoDia />
         <CardMomentoMim />
-main
       </section>
 
       {/* 4) Recomendações */}
