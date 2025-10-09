@@ -4,7 +4,7 @@ import QuadCard from "./QuadCard";
 import RoundActionButton from "@/components/ui/RoundActionButton";
 
 export default function QuadCards() {
-  const [openId, setOpenId] = useState<string | null>(null);
+  const [openId, setOpenId] = useState<string | null>("planner");
   const toggle = (id: string) => setOpenId(prev => (prev === id ? null : id));
 
   return (
