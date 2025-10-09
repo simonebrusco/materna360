@@ -598,7 +598,7 @@ label{ font-weight: var(--m360-weight-medium); }
 }
 
 /* Greeting styles */
-.greeting-title{ font-family: Poppins, system-ui; font-weight: 700; font-size: 24px; color: #1E1E1E; }
+.greeting-title{ font-family: Poppins, system-ui; font-weight: 700; font-size: 22px; color: #1E1E1E; padding-top: 12px; margin-bottom: 8px; }
 .greeting-sub{ font-family: Poppins, system-ui; font-weight: 400; font-size: 16px; color: #1E1E1E; opacity:.85; margin-top:4px; }
 
 /* Segmented control */

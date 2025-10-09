@@ -9,7 +9,7 @@ const BreathModal = dynamic(() => import("./modals/BreathModal"), { ssr: false }
 const MoodModal = dynamic(() => import("./modals/MoodModal"), { ssr: false });
 const InspireModal = dynamic(() => import("./modals/InspireModal"), { ssr: false });
 const PauseModal = dynamic(() => import("./modals/PauseModal"), { ssr: false });
-import MessageOfDayCard from "./motd/MessageOfDayCard";
+import { reflectiveQuestions } from "@/lib/reflectiveQuestions";
 import Vitrine from "./discover/Vitrine";
 import ChecklistToday from "./planner/ChecklistToday";
 import { flags as defaultFlags } from "@/lib/flags";
@@ -102,12 +102,25 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
   function openNotepad(i?: number){ if (typeof i==='number') setPadDay(i); setOpenPad(true); }
 
   const tips = [
-    "Beba ��gua e alongue-se 1 min.",
+    "Beba água e alongue-se 1 min.",
     "Três respirações profundas.",
     "Envie uma mensagem carinhosa pra você mesma.",
     "Caminhe 2 min e olhe o céu."
   ];
   const bonus = tips[done % tips.length];
+
+  function dayOfYear(d: Date){
+    const start = new Date(d.getFullYear(), 0, 0);
+    const diff = d.getTime() - start.getTime();
+    const oneDay = 1000 * 60 * 60 * 24;
+    return Math.floor(diff / oneDay);
+  }
+  const question = useMemo(()=>{
+    try{
+      const idx = dayOfYear(new Date()) % reflectiveQuestions.length;
+      return reflectiveQuestions[idx] || "";
+    }catch{ return ""; }
+  },[]);
 
   // Achievements: checklist complete handling
   const completeTimerRef = useRef<any>(null);
@@ -213,7 +226,13 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
           }}
         </GreetingBinder>
         <div className="hero-grid">
-          <MessageOfDayCard className="motd-card" showTitle={false} showButton={false} />
+          <Card className="motd-card" role="region" aria-label="Pergunta do dia">
+            <strong className="motd-title">“Pergunta do dia”</strong>
+            <p className="small motd-text">
+              <span className="motd-quote" aria-hidden>“</span>
+              <i>{question}</i>
+            </p>
+          </Card>
           <Card className="mood-card tap-scale" onClick={()=>setOpenMood(true)} role="button" aria-label="Registrar humor">
             <Icon name="mood" className="icon-24 icon-accent" />
             <div>
