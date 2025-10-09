@@ -1,5 +1,7 @@
 "use client";
 
+import type React from "react";
+
 type Props = {
   label: string;
   icon: React.ReactNode;
