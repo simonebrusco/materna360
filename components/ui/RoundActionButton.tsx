@@ -23,41 +23,27 @@ export default function RoundActionButton({
   ariaLabel,
   className = "",
 }: Props) {
-  const circleBase =
-    "relative grid place-items-center w-[64px] h-[64px] rounded-full shadow-md transition-colors";
-  const circlePrimary = "bg-[#FF005E] text-white border border-transparent";
-  const circleSecondary =
-    "bg-white text-[#2F3A56] border border-black/10 hover:bg-black/5";
-  const labelCls = "text-[12px] leading-[14px] text-[#2F3A56] mt-2";
+  // Base chip styles per spec
+  const chipBase =
+    "inline-flex items-center gap-2 rounded-full px-3 py-2 bg-white/70 backdrop-blur-sm shadow-sm hover:bg-white transition";
+  const labelCls = "text-sm font-medium text-slate-800";
 
-  const Inner = (
-    <div
-      className={`group flex flex-col items-center select-none focus:outline-none ${className}`}
-    >
-      <span
-        className={`${circleBase} ${
-          variant === "primary" ? circlePrimary : circleSecondary
-        }`}
-      >
-        {badgeCount ? (
-          <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#FF005E] text-white text-[10px] leading-[18px] text-center">
-            {badgeCount}
-          </span>
-        ) : null}
-        <span className="text-[22px]">{icon}</span>
-      </span>
+  const content = (
+    <span className={`relative ${chipBase} ${className}`}>
+      {badgeCount ? (
+        <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#FF005E] text-white text-[10px] leading-[18px] text-center">
+          {badgeCount}
+        </span>
+      ) : null}
+      <span className="shrink-0 text-[18px]">{icon}</span>
       <span className={labelCls}>{label}</span>
-    </div>
+    </span>
   );
 
   if (href) {
     return (
-      <a
-        href={href}
-        aria-label={ariaLabel || label}
-        className="active:scale-[.98] transition-transform"
-      >
-        {Inner}
+      <a href={href} aria-label={ariaLabel || label} className="active:scale-[.98] transition-transform">
+        {content}
       </a>
     ) as any;
   }
@@ -69,7 +55,7 @@ export default function RoundActionButton({
       aria-label={ariaLabel || label}
       className="active:scale-[.98] transition-transform"
     >
-      {Inner}
+      {content}
     </button>
   );
 }
