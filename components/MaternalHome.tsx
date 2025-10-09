@@ -215,7 +215,9 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
         </div>
       </section>
 
-      {flags.quadCards ? <div className="mt-6"><QuadCards /></div> : null}
+      <section className="mt-6">
+        <QuadCards />
+      </section>
 
       {/* Meu Dia Hub (gated) */}
       {flags.newHomeMaternal ? (
