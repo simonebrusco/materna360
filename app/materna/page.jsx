@@ -37,8 +37,8 @@ export default function Materna() {
             <div className="feature-card">
               <div className="feature-emoji" aria-hidden>🏡</div>
               <div>
-                <div className="feature-title">Rotina da Casa</div>
-                <div className="feature-sub">organize suas tarefas e compromissos familiares.</div>
+                <div className="feature-title">Rotina & Planner</div>
+                <div className="feature-sub">“organize suas tarefas, lembretes e planos da família.”</div>
               </div>
             </div>
           </Card>
@@ -46,8 +46,8 @@ export default function Materna() {
             <div className="feature-card">
               <div className="feature-emoji" aria-hidden>💕</div>
               <div>
-                <div className="feature-title">Conexão com o Filho</div>
-                <div className="feature-sub">compartilhe momentos especiais com seu filho.</div>
+                <div className="feature-title">Conexão & Emoções</div>
+                <div className="feature-sub">“cultive vínculos e registre momentos significativos.”</div>
               </div>
             </div>
           </Card>
@@ -55,8 +55,8 @@ export default function Materna() {
             <div className="feature-card">
               <div className="feature-emoji" aria-hidden>🌿</div>
               <div>
-                <div className="feature-title">Momento para Mim</div>
-                <div className="feature-sub">respiração guiada, gratidão e autocuidado.</div>
+                <div className="feature-title">Cuidar de Mim</div>
+                <div className="feature-sub">“respiração guiada, gratidão e autocuidado.”</div>
               </div>
             </div>
           </Card>
@@ -64,8 +64,8 @@ export default function Materna() {
             <div className="feature-card">
               <div className="feature-emoji" aria-hidden>🎓</div>
               <div>
-                <div className="feature-title">Mentoria Especializada</div>
-                <div className="feature-sub">acesso a especialistas em parentalidade e desenvolvimento infantil.</div>
+                <div className="feature-title">Descobrir & Aprender</div>
+                <div className="feature-sub">“acesso a especialistas, mentorias e novos aprendizados.”</div>
               </div>
             </div>
           </Card>
