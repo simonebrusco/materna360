@@ -34,7 +34,6 @@ const BadgesLevelToast = dynamic(() => import("./BadgesLevelToast"), { ssr: fals
 import { showToast } from "../lib/ui/toast";
 import { safeGet, safeMergeObject, safeSet } from "@/lib/utils/safeStorage";
 
-const GreetingBinder = dynamic(() => import("./GreetingBinder"), { ssr: false });
 
 export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<string, any> }){
   const flags = { ...defaultFlags, ...(incomingFlags || {}) };
