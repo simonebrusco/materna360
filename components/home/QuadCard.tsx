@@ -25,7 +25,8 @@ export default function QuadCard({
   };
 
   return (
-    <div data-ui="quad-card" style={{ borderWidth: 0 }} className="relative isolate overflow-hidden rounded-2xl bg-white/90 bg-clip-padding backdrop-blur-sm shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-transparent outline-none ring-0 transition">
+    <div data-ui="quad-card" style={{ borderWidth: 0, WebkitBackfaceVisibility: 'hidden' }} className="relative transform-gpu rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] overflow-hidden before:content-[''] before:absolute before:inset-0.5 before:rounded-2xl before:bg-white/80 before:backdrop-blur-sm before:pointer-events-none before:-z-10">
+      <div className="rounded-2xl bg-white">
       <header
         className="flex items-center justify-between px-4 py-3 select-none cursor-pointer shadow-none bg-transparent"
         onClick={() => setOpen(!open)}
@@ -60,6 +61,7 @@ export default function QuadCard({
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
