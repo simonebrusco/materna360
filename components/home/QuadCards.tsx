@@ -45,10 +45,10 @@ const SECTIONS = [
 ];
 
 export default function QuadCards() {
-  const [openId, setOpenId] = useState<string | null>(SECTIONS[0].id); // abre só o primeiro
+  const [openId, setOpenId] = useState<string | null>(SECTIONS[0].id);
 
   return (
-    <div className="mx-auto max-w-[1200px] px-4 grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div className="quad-guard mx-auto max-w-[1200px] px-4 mt-4 grid grid-cols-1 md:grid-cols-2 gap-5">
       {SECTIONS.map((s) => {
         const open = openId === s.id;
         return (
