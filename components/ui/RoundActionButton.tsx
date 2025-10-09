@@ -1,19 +1,44 @@
 import Link from "next/link";
+import { ReactNode } from "react";
+
+type Props = {
+  href?: string;
+  onClick?: () => void;
+  icon?: ReactNode;
+  label: string;
+  className?: string;
+};
 
 export default function RoundActionButton({
   href,
-  label,
   onClick,
-}: {
-  href?: string;
-  label: string;
-  onClick?: () => void;
-}) {
-  const cls =
-    "inline-flex items-center rounded-full px-3 py-1.5 text-sm font-medium " +
-    "bg-white/70 backdrop-blur-sm shadow-sm hover:bg-white/90 active:scale-[.98] " +
-    "transition select-none";
+  icon,
+  label,
+  className,
+}: Props) {
+  const base =
+    "inline-flex items-center gap-2 rounded-full px-3 py-2 " +
+    "bg-white/80 backdrop-blur-sm shadow-sm " +
+    "text-[13px] font-medium text-slate-800 " +
+    "outline-none ring-0 focus-visible:ring-2 focus-visible:ring-pink-200 " +
+    "transition active:scale-[0.98]";
 
-  if (href) return <Link href={href} className={cls}>{label}</Link>;
-  return <button type="button" onClick={onClick} className={cls}>{label}</button>;
+  const classes = [base, className || ""].filter(Boolean).join(" ");
+
+  const inner = (
+    <>
+      {icon ? <span className="grid place-items-center">{icon}</span> : null}
+      <span>{label}</span>
+    </>
+  );
+
+  return href ? (
+    <Link href={href} className={classes}>
+      {inner}
+    </Link>
+  ) : (
+    <button type="button" onClick={onClick} className={classes}>
+      {inner}
+    </button>
+  );
 }
