@@ -37,8 +37,8 @@ export default function Materna() {
             <div className="feature-card">
               <div className="feature-emoji" aria-hidden>🏡</div>
               <div>
-                <div className="feature-title">Rotina & Planner</div>
-                <div className="feature-sub">“organize suas tarefas, lembretes e planos da família.”</div>
+                <div className="feature-title">Meu Dia</div>
+                <div className="feature-sub">“organize sua rotina e o dia da família.”</div>
               </div>
             </div>
           </Card>
@@ -46,8 +46,8 @@ export default function Materna() {
             <div className="feature-card">
               <div className="feature-emoji" aria-hidden>💕</div>
               <div>
-                <div className="feature-title">Conexão & Emoções</div>
-                <div className="feature-sub">“cultive vínculos e registre momentos significativos.”</div>
+                <div className="feature-title">Cuidar</div>
+                <div className="feature-sub">“momentos de bem-estar e autocuidado.”</div>
               </div>
             </div>
           </Card>
@@ -55,8 +55,8 @@ export default function Materna() {
             <div className="feature-card">
               <div className="feature-emoji" aria-hidden>🌿</div>
               <div>
-                <div className="feature-title">Cuidar de Mim</div>
-                <div className="feature-sub">“respiração guiada, gratidão e autocuidado.”</div>
+                <div className="feature-title">Descobrir</div>
+                <div className="feature-sub">“atividades, ideias e brincadeiras para aprender juntos.”</div>
               </div>
             </div>
           </Card>
@@ -64,8 +64,8 @@ export default function Materna() {
             <div className="feature-card">
               <div className="feature-emoji" aria-hidden>🎓</div>
               <div>
-                <div className="feature-title">Descobrir & Aprender</div>
-                <div className="feature-sub">“acesso a especialistas, mentorias e novos aprendizados.”</div>
+                <div className="feature-title">Eu360</div>
+                <div className="feature-sub">“seu espaço de autoconhecimento e equilíbrio emocional.”</div>
               </div>
             </div>
           </Card>
