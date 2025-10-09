@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import "./globals.css";
+import "@/styles/globals.css";
 
 import dynamic from "next/dynamic";
 import AppHeader from "@/components/layout/AppHeader";
