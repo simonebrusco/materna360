@@ -9,7 +9,7 @@ const BreathModal = dynamic(() => import("./modals/BreathModal"), { ssr: false }
 const MoodModal = dynamic(() => import("./modals/MoodModal"), { ssr: false });
 const InspireModal = dynamic(() => import("./modals/InspireModal"), { ssr: false });
 const PauseModal = dynamic(() => import("./modals/PauseModal"), { ssr: false });
-import MessageOfDayCard from "./motd/MessageOfDayCard";
+import { reflectiveQuestions } from "@/lib/reflectiveQuestions";
 import Vitrine from "./discover/Vitrine";
 import ChecklistToday from "./planner/ChecklistToday";
 import { flags as defaultFlags } from "@/lib/flags";
@@ -109,6 +109,19 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
   ];
   const bonus = tips[done % tips.length];
 
+  function dayOfYear(d: Date){
+    const start = new Date(d.getFullYear(), 0, 0);
+    const diff = d.getTime() - start.getTime();
+    const oneDay = 1000 * 60 * 60 * 24;
+    return Math.floor(diff / oneDay);
+  }
+  const question = useMemo(()=>{
+    try{
+      const idx = dayOfYear(new Date()) % reflectiveQuestions.length;
+      return reflectiveQuestions[idx] || "";
+    }catch{ return ""; }
+  },[]);
+
   // Achievements: checklist complete handling
   const completeTimerRef = useRef<any>(null);
   useEffect(()=>{
@@ -200,21 +213,6 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
   return (
     <div className={`m360-container meu-dia${flags.newHomeMaternal ? ' hub' : ''}`}>
       {/* 1) Hero (saudação + mensagem do dia) */}
-
-ai_main_122635524f7a
-      <section className="m360-hero hero">
-        <GreetingBinder>
-          {({ name, part }) => (
-            <div>
-              <h1 suppressHydrationWarning>{part}, {name} <span aria-hidden>💛</span></h1>
-              <h2>Como você está hoje?</h2>
-            </div>
-          )}
-        </GreetingBinder>
-        <div className="hero-grid">
-          <MessageOfDayCard className="motd-card" showTitle={false} showButton={false} />
-          <Card className="mood-card tap-scale" onClick={()=>setOpenMood(true)}>
-
       <section className="m360-hero hero" role="banner" aria-label="Saudação">
         <GreetingBinder>
           {({ name, part }) => {
@@ -228,9 +226,14 @@ ai_main_122635524f7a
           }}
         </GreetingBinder>
         <div className="hero-grid">
-          <MessageOfDayCard className="motd-card" showTitle={false} showButton={false} />
+          <Card className="motd-card" role="region" aria-label="Pergunta do dia">
+            <strong className="motd-title">“Pergunta do dia”</strong>
+            <p className="small motd-text">
+              <span className="motd-quote" aria-hidden>“</span>
+              <i>{question}</i>
+            </p>
+          </Card>
           <Card className="mood-card tap-scale" onClick={()=>setOpenMood(true)} role="button" aria-label="Registrar humor">
-main
             <Icon name="mood" className="icon-24 icon-accent" />
             <div>
               <h3>Como você se sente?</h3>
@@ -238,7 +241,6 @@ main
             </div>
           </Card>
         </div>
-
       </section>
 
       {/* Meu Dia Hub (gated) */}
@@ -276,8 +278,6 @@ main
       </section>
 
       {/* 3) Ações (2x2) */}
-
-ai_main_122635524f7a
       <section className="m360-grid m360-maternal-actions">
         <div className="card m360-action tap-scale">
           <div className="card-icon" aria-hidden>🏠</div>
@@ -318,13 +318,14 @@ ai_main_122635524f7a
             <button className="btn btn-outline">Planejar</button>
           </div>
         </div>
+      </section>
 
+      {/* Hub grid cards */}
       <section className="hub-grid" aria-label="Ações do dia" style={{marginBottom:24}}>
         <CardRotinaCasa />
         <CardTempoFilho />
         <CardIdeiaDoDia />
         <CardMomentoMim />
-main
       </section>
 
       {/* 4) Recomendações */}

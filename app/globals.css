@@ -598,7 +598,7 @@ label{ font-weight: var(--m360-weight-medium); }
 }
 
 /* Greeting styles */
-.greeting-title{ font-family: Poppins, system-ui; font-weight: 700; font-size: 24px; color: #1E1E1E; }
+.greeting-title{ font-family: Poppins, system-ui; font-weight: 700; font-size: 22px; color: #1E1E1E; padding-top: 12px; margin-bottom: 8px; }
 .greeting-sub{ font-family: Poppins, system-ui; font-weight: 400; font-size: 16px; color: #1E1E1E; opacity:.85; margin-top:4px; }
 
 /* Segmented control */
@@ -681,26 +681,23 @@ label{ font-weight: var(--m360-weight-medium); }
   min-width: 130px;
 }
 
-ai_main_122635524f7a
 /* ===== Materna360 – Meu Dia (scoped to .m360-container.meu-dia) ===== */
 .m360-container.meu-dia{
   --m360-primary:#FF005E;      /* magenta */
   --m360-secondary:#2F3A56;    /* navy */
   --m360-accent:#F9C9B7;       /* rosé */
+}
 
 /* ===== Materna360 – Meu Dia (soft-luxury scoped) ===== */
 .meu-dia{
   --m360-primary:#FF005E;      /* magenta */
   --m360-secondary:#2F3A56;    /* navy discreto */
   --m360-accent:#F9C9B7;       /* rosé suave */
-main
   --m360-bg:#FFFFFF;
   --m360-text:#2F3A56;
 }
 
 /* Hero topo */
-
-  ai_main_122635524f7a
 .m360-container.meu-dia .hero{max-width:1120px;margin:12px auto 24px;}
 .m360-container.meu-dia .hero h1{
   font-family:Poppins,system-ui;font-weight:700;font-size:26px;line-height:32px;color:var(--m360-text);
@@ -744,7 +741,7 @@ main
 
 /* Espaçamento entre seções do Meu Dia */
 .m360-container.meu-dia section{margin-bottom:24px;}
-=======
+
 .meu-dia .hero{max-width:1120px;margin:12px auto 24px;}
 .meu-dia .hero h1{font-family:Poppins,system-ui; font-weight:700; font-size:26px; line-height:32px; color:var(--m360-text);}
 .meu-dia .hero h2{font-family:Poppins,system-ui; font-weight:400; font-size:16px; line-height:24px; color:rgba(47,58,86,.85); margin:0 0 12px;}
@@ -832,4 +829,3 @@ main
 
 .m360-container.meu-dia .m360-day-chip:focus-visible,
 .m360-container.meu-dia .btn:focus-visible{ outline:none; box-shadow: var(--m360-shadow-outline, var(--ring)); }
-main
