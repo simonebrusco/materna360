@@ -25,7 +25,7 @@ export default function QuadCard({
   };
 
   return (
-    <section className="rounded-2xl bg-white/90 backdrop-blur-sm shadow-[0_8px_30px_rgba(0,0,0,0.06)] ring-1 ring-black/5 transition p-5">
+    <div data-ui="quad-card" style={{ borderWidth: 0 }} className="rounded-2xl bg-white/90 backdrop-blur-sm shadow-[0_8px_30px_rgba(0,0,0,0.06)] border-0 outline-none ring-0 transition">
       <header
         className="flex items-center justify-between px-4 py-3 select-none cursor-pointer"
         onClick={() => setOpen(!open)}
@@ -60,6 +60,6 @@ export default function QuadCard({
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
