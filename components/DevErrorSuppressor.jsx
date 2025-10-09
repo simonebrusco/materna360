@@ -59,17 +59,37 @@ export default function DevErrorSuppressor() {
     try{
       if (typeof window !== 'undefined' && typeof origFetch === 'function'){
         window.fetch = function(input, init){
-          try{
-            const url = typeof input === 'string' ? input : (input && input.url) ? input.url : '';
-            if (typeof url === 'string' && url.toLowerCase().includes('fullstory')){
-              return origFetch(input, init).catch(err => {
+          const url = (() => {
+            try { return typeof input === 'string' ? input : (input && input.url) ? input.url : ''; } catch (e) { return ''; }
+          })();
+
+          // Helper to produce a safe resolved Response or undefined wrapped in a Promise
+          const safeResponse = () => {
+            try {
+              return Promise.resolve(typeof Response !== 'undefined' ? new Response(null, { status: 204, statusText: 'No Content' }) : undefined);
+            } catch (e) { return Promise.resolve(undefined); }
+          };
+
+          try {
+            // Call original fetch and ensure we always return a Promise
+            const res = origFetch(input, init);
+            // If targeting FullStory URLs, suppress network failures
+            if (typeof url === 'string' && url.toLowerCase().includes('fullstory')) {
+              return Promise.resolve(res).catch(err => {
                 try{ console.debug('Suppressed FullStory network fetch error (dev):', err); }catch(e){}
-                // Return an empty successful Response to avoid unhandled rejections bubbling
-                try{ return new Response(null, { status: 204, statusText: 'No Content' }); }catch(e){ return Promise.resolve(undefined); }
+                return safeResponse();
               });
             }
-          }catch(e){ /* swallow */ }
-          return origFetch(input, init);
+            // Non-FullStory: return original result wrapped as Promise
+            return Promise.resolve(res);
+          } catch (err) {
+            // Synchronous throw from original fetch - suppress if FullStory, else rethrow
+            try{ console.debug('Fetch threw synchronously (dev):', err); }catch(e){}
+            if (typeof url === 'string' && url.toLowerCase().includes('fullstory')) {
+              return safeResponse();
+            }
+            return Promise.reject(err);
+          }
         };
       }
     }catch(e){}
