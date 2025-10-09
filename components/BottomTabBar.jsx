@@ -5,7 +5,8 @@ const tabs=[
   { href:"/", label:"Meu Dia", icon:"🏠" },
   { href:"/cuidar", label:"Cuidar", icon:"🌿" },
   { href:"/descobrir", label:"Descobrir", icon:"✨" },
-  { href:"/eu360", label:"Eu360", icon:"💫" }
+  { href:"/eu360", label:"Eu360", icon:"💫" },
+  { href:"/materna", label:"Materna", icon:"💗" }
 ];
 export default function BottomTabBar(){
   const path=usePathname();
