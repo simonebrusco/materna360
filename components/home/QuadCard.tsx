@@ -68,7 +68,7 @@ export default function QuadCard({
         {/* Smooth expand/collapse with CSS only */}
         <div
           className={`transition-[grid-template-rows,opacity,margin] duration-200 ease-out overflow-hidden
-        ${open ? "grid grid-rows-[1fr] mt-0 opacity-100" : "grid grid-rows-[0fr] mt-0 opacity-0"}`}
+        ${open ? "grid grid-rows-[1fr] mt-4 opacity-100" : "grid grid-rows-[0fr] mt-0 opacity-0"}`}
         >
           <div className="min-h-0 px-4 pb-4">
             {/* Actions grid */}
