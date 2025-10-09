@@ -22,3 +22,29 @@ body {
 .quad-guard * {
   border-color: transparent !important; /* neutralize leaking borders */
 }
+
+/* Soft ripple for circular buttons */
+.m360-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.m360-ripple:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(0,0,0,.12) 10%, transparent 10.5%);
+  transform: scale(10);
+  opacity: 0;
+  transition: transform .35s, opacity .6s;
+}
+.m360-ripple:active:after {
+  transform: scale(0);
+  opacity: 1;
+  transition: 0s;
+}
+/* High-contrast, visible focus */
+.m360-focus:focus-visible {
+  outline: 2px solid #6C4AB6;
+  outline-offset: 3px;
+  border-radius: 9999px;
+}
