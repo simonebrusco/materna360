@@ -8,7 +8,7 @@ export default function QuadCards() {
   const toggle = (id: string) => setOpenId(prev => (prev === id ? null : id));
 
   return (
-    <div className="mx-auto max-w-[1200px] px-4 grid grid-cols-1 md:grid-cols-2 gap-6 bg-yellow-50">
+    <div className="mx-auto max-w-[1200px] px-4 grid grid-cols-1 md:grid-cols-2 gap-5">
       {/* 1) Rotina & Planner */}
       <QuadCard
         title="Rotina & Planner"
