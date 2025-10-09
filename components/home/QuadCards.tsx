@@ -1,68 +1,51 @@
 "use client";
-import { useState } from "react";
+
+import * as React from "react";
 import QuadCard from "./QuadCard";
 import RoundActionButton from "@/components/ui/RoundActionButton";
 
+// util para single-open
+function useSingleOpen(defaultId: string) {
+  const [openId, setOpenId] = React.useState(defaultId);
+  const onToggle = (id: string) => setOpenId((prev) => (prev === id ? "" : id));
+  const isOpen = (id: string) => openId === id;
+  return { openId, onToggle, isOpen };
+}
+
 export default function QuadCards() {
-  const [openId, setOpenId] = useState<string | null>("planner");
-  const toggle = (id: string) => setOpenId(prev => (prev === id ? null : id));
+  // Abra o primeiro por padrão
+  const { onToggle, isOpen } = useSingleOpen("planner");
 
   return (
     <div className="mx-auto max-w-[1200px] px-4 grid grid-cols-1 md:grid-cols-2 gap-5">
-      {/* 1) Rotina & Planner */}
-      <QuadCard
-        title="Rotina & Planner"
-        subtitle="Organize seu dia e a semana."
-        icon={<span>🏠</span>}
-        openExternal={openId === "planner"}
-        onToggle={(_next) => toggle("planner")}
-      >
-        <RoundActionButton label="Rotina da Casa" icon="🏠" href="/rotina" variant="primary" />
-        <RoundActionButton label="Planner da Família" icon="🗓️" href="/planner" />
-        <RoundActionButton label="Checklist do Dia" icon="✅" href="/checklist" />
-        <RoundActionButton label="Compras & Lembretes" icon="🧾" href="/compras" />
+      {/* Rotina & Planner */}
+      <QuadCard id="planner" title="Rotina & Planner" open={isOpen("planner")} onToggle={onToggle}>
+        <RoundActionButton label="Rotina da Casa" href="/rotina" />
+        <RoundActionButton label="Planner da Família" href="/planner" />
+        <RoundActionButton label="Checklist do Dia" href="/checklist" />
+        <RoundActionButton label="Compras & Lembretes" href="/compras" />
       </QuadCard>
 
-      {/* 2) Conexão & Emoções */}
-      <QuadCard
-        title="Conexão & Emoções"
-        subtitle="Registre sentimentos e momentos."
-        icon={<span>🙂</span>}
-        openExternal={openId === "emocoes"}
-        onToggle={(_next) => toggle("emocoes")}
-      >
-        <RoundActionButton label="Humor & Emoções" icon="🙂" href="/humor" variant="primary" />
-        <RoundActionButton label="Momento com Meu Filho" icon="💗" href="/momentos" />
-        <RoundActionButton label="Gratidão" icon="✨" href="/gratidao" />
-        <RoundActionButton label="Humor da Semana" icon="📈" href="/humor/semana" />
+      {/* Conexão & Emoções */}
+      <QuadCard id="emocoes" title="Conexão & Emoções" open={isOpen("emocoes")} onToggle={onToggle}>
+        <RoundActionButton label="Humor & Emoções" href="/humor" />
+        <RoundActionButton label="Momento com Meu Filho" href="/momentos" />
+        <RoundActionButton label="Gratidão" href="/gratidao" />
+        <RoundActionButton label="Humor da Semana" href="/humor/semana" />
       </QuadCard>
 
-      {/* 3) Cuidar de Mim */}
-      <QuadCard
-        title="Cuidar de Mim"
-        subtitle="Pequenas pausas para você."
-        icon={<span>🌿</span>}
-        openExternal={openId === "cuidar"}
-        onToggle={(_next) => toggle("cuidar")}
-      >
-        <RoundActionButton label="Meditar" icon="🧘" href="/meditar" variant="primary" />
-        <RoundActionButton label="Respirar" icon="🌬️" href="/respirar" />
-        <RoundActionButton label="Momento para Mim" icon="☕" href="/pausas" />
-        <RoundActionButton label="Afirmações" icon="💬" href="/afirmacoes" />
+      {/* Cuidar de Mim */}
+      <QuadCard id="cuidar" title="Cuidar de Mim" open={isOpen("cuidar")} onToggle={onToggle}>
+        <RoundActionButton label="Meditar" href="/meditar" />
+        <RoundActionButton label="Respirar" href="/respirar" />
+        <RoundActionButton label="Momento para Mim" href="/pausas" />
       </QuadCard>
 
-      {/* 4) Descobrir & Aprender */}
-      <QuadCard
-        title="Descobrir & Aprender"
-        subtitle="Ideias e sugestões para hoje."
-        icon={<span>💡</span>}
-        openExternal={openId === "descobrir"}
-        onToggle={(_next) => toggle("descobrir")}
-      >
-        <RoundActionButton label="Ideia do Dia" icon="💡" href="/ideia" variant="primary" />
-        <RoundActionButton label="Descobrir" icon="🔍" href="/descobrir" />
-        <RoundActionButton label="Conquistas" icon="🏆" href="/conquistas" />
-        <RoundActionButton label="Downloads" icon="📥" href="/downloads" />
+      {/* Descobrir & Aprender */}
+      <QuadCard id="descobrir" title="Descobrir & Aprender" open={isOpen("descobrir")} onToggle={onToggle}>
+        <RoundActionButton label="Ideia do Dia" href="/ideia" />
+        <RoundActionButton label="Descobrir" href="/descobrir" />
+        <RoundActionButton label="Conquistas" href="/conquistas" />
       </QuadCard>
     </div>
   );
