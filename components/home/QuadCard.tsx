@@ -1,83 +1,49 @@
 "use client";
-import { useState } from "react";
-import type React from "react";
+import { ReactNode } from "react";
+import { ChevronDown } from "lucide-react";
 
-export default function QuadCard({
-  title,
-  subtitle,
-  icon,
-  children,
-  openExternal,
-  onToggle,
-}: {
+type QuadCardProps = {
+  id: string;
   title: string;
-  subtitle?: string;
-  icon?: React.ReactNode;
-  children: React.ReactNode;
-  openExternal?: boolean;            // controlled (from parent)
-  onToggle?: (next: boolean) => void; // notify parent to toggle
-}) {
-  const [openInternal, setOpenInternal] = useState(false);
-  const open = typeof openExternal === "boolean" ? openExternal : openInternal;
-  const setOpen = (v: boolean) => {
-    if (typeof openExternal === "boolean") onToggle?.(v);
-    else setOpenInternal(v);
-  };
+  open: boolean;
+  onToggle: () => void;
+  children?: ReactNode;
+};
 
+export default function QuadCard({ id, title, open, onToggle, children }: QuadCardProps) {
   return (
-    <section
+    <div
       data-ui="quad-card"
       className="
-       relative transform-gpu overflow-hidden
-       rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)]
-     "
+        relative isolate overflow-hidden rounded-2xl
+        bg-white/90 bg-clip-padding backdrop-blur-sm
+        shadow-[0_6px_24px_rgba(0,0,0,0.08)]
+      "
       style={{ WebkitBackfaceVisibility: "hidden" }}
+      aria-labelledby={`${id}-header`}
     >
-      {/* Blur background layer to provide glass effect without edge seams */}
-      <div
-        aria-hidden="true"
-        className="
-          absolute inset-px rounded-2xl
-          bg-white/80 backdrop-blur-sm
-          pointer-events-none
-        "
-      />
+      {/* header */}
+      <button
+        id={`${id}-header`}
+        type="button"
+        onClick={onToggle}
+        aria-controls={`${id}-panel`}
+        aria-expanded={open}
+        className="w-full flex items-center justify-between px-4 py-2.5 select-none cursor-pointer"
+      >
+        <span className="text-slate-800 font-semibold">{title}</span>
+        <ChevronDown
+          className={`shrink-0 transition-transform duration-200 ${open ? "rotate-180 opacity-100" : "rotate-0 opacity-80"}`}
+          size={18}
+        />
+      </button>
 
-      {/* Solid inner surface */}
-      <div className="relative rounded-2xl bg-white">
-        <header className="flex items-center justify-between px-4 py-3 select-none cursor-pointer bg-transparent shadow-none">
-          <div className="flex items-center gap-3">
-            {icon ? <div className="text-[20px]">{icon}</div> : null}
-            <div>
-              <h3 className="text-[18px] font-semibold text-[#2F3A56]">{title}</h3>
-              {subtitle ? (
-                <p className="text-[13px] text-[#6B7280]">{subtitle}</p>
-              ) : null}
-            </div>
-          </div>
-          <button
-            type="button"
-            aria-expanded={open}
-            onClick={() => setOpen(!open)}
-            className="h-9 px-4 rounded-full bg-white border border-black/10 shadow-sm text-[13px] text-[#2F3A56] hover:bg-black/5 transition"
-          >
-            {open ? "Fechar" : "Abrir"}
-          </button>
-        </header>
-
-        {/* Smooth expand/collapse with CSS only */}
-        <div
-          className={`transition-[grid-template-rows,opacity,margin] duration-200 ease-out overflow-hidden
-        ${open ? "grid grid-rows-[1fr] mt-4 opacity-100" : "grid grid-rows-[0fr] mt-0 opacity-0"}`}
-        >
-          <div className="min-h-0 px-4 pb-4">
-            {/* Actions grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-              {children}
-            </div>
-          </div>
+      {/* content (zero height when closed) */}
+      <div id={`${id}-panel`} hidden={!open} className="px-4 pb-3">
+        <div className="flex flex-wrap gap-2">
+          {children}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
