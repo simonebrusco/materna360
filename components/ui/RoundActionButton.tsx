@@ -16,5 +16,5 @@ export default function RoundActionButton({
     "no-underline select-none";
 
   if (href) return <Link href={href} className={base}>{label}</Link>;
-  return <button type=\"button\" onClick={onClick} className={base}>{label}</button>;
+  return <button type="button" onClick={onClick} className={base}>{label}</button>;
 }
