@@ -22,23 +22,30 @@ export default function QuadCard({ id, title, open, onToggle, children }: QuadCa
       style={{ WebkitBackfaceVisibility: "hidden" }}
       aria-labelledby={`${id}-header`}
     >
-      {/* header */}
+      {/* HEADER (hard reset against global styles) */}
       <button
         id={`${id}-header`}
         type="button"
         onClick={onToggle}
         aria-controls={`${id}-panel`}
         aria-expanded={open}
-        className="w-full flex items-center justify-between px-4 py-2.5 select-none cursor-pointer"
+        className="
+          w-full
+          appearance-none bg-transparent border-0 outline-none
+          flex items-center justify-between
+          px-4 py-3 min-h-[44px]
+          text-slate-800 font-semibold text-base leading-none
+          select-none cursor-pointer
+        "
       >
-        <span className="text-slate-800 font-semibold">{title}</span>
+        <span className="truncate">{title}</span>
         <ChevronDown
           className={`shrink-0 transition-transform duration-200 ${open ? "rotate-180 opacity-100" : "rotate-0 opacity-80"}`}
           size={18}
         />
       </button>
 
-      {/* content (zero height when closed) */}
+      {/* CONTENT (zero height when closed) */}
       <div id={`${id}-panel`} hidden={!open} className="px-4 pb-3">
         <div className="flex flex-wrap gap-2">
           {children}
