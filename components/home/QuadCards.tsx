@@ -1,70 +1,73 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import QuadCard from "./QuadCard";
 import RoundActionButton from "@/components/ui/RoundActionButton";
 
-const SECTIONS = [
+type Section = {
+  title: string;
+  chips: { label: string; href: string; icon?: React.ReactNode }[];
+};
+
+const SECTIONS: Section[] = [
   {
-    id: "planner",
     title: "Rotina & Planner",
     chips: [
-      { label: "Rotina da Casa", href: "/planner/home" },
+      { label: "Rotina da Casa", href: "/home/house" },
       { label: "Planner da Família", href: "/planner/family" },
-      { label: "Checklist do Dia", href: "/planner/checklist" },
-      { label: "Compras & Lembretes", href: "/planner/list" },
+      { label: "Checklist do Dia", href: "/checklist" },
+      { label: "Compras & Lembretes", href: "/shopping" },
     ],
   },
   {
-    id: "emocoes",
     title: "Conexão & Emoções",
     chips: [
       { label: "Humor & Emoções", href: "/mood" },
       { label: "Momento com Meu Filho", href: "/moments" },
       { label: "Gratidão", href: "/gratitude" },
-      { label: "Humor da Semana", href: "/mood/weekly" },
     ],
   },
   {
-    id: "cuidar",
     title: "Cuidar de Mim",
     chips: [
-      { label: "Meditar", href: "/self/meditate" },
-      { label: "Respirar", href: "/self/breathe" },
-      { label: "Momento para Mim", href: "/self/me-time" },
+      { label: "Meditar", href: "/meditate" },
+      { label: "Respirar", href: "/breathe" },
+      { label: "Momento para Mim", href: "/self-time" },
     ],
   },
   {
-    id: "descobrir",
     title: "Descobrir & Aprender",
     chips: [
-      { label: "Ideia do Dia", href: "/discover/idea" },
-      { label: "Descobrir", href: "/discover" },
-      { label: "Conquistas", href: "/badges" },
+      { label: "Ideia do Dia", href: "/ideas" },
+      { label: "Conquistas", href: "/achievements" },
+      { label: "Humor da Semana", href: "/weekly-mood" },
     ],
   },
 ];
 
 export default function QuadCards() {
-  const [openId, setOpenId] = useState<string | null>(SECTIONS[0].id);
+  // SSR: all closed; client: open the first
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  useEffect(() => {
+    setOpenIndex(0);
+  }, []);
 
   return (
-    <div className="quad-guard mx-auto max-w-[1200px] px-4 mt-4 grid grid-cols-1 md:grid-cols-2 gap-5">
-      {SECTIONS.map((s) => {
-        const open = openId === s.id;
-        return (
-          <QuadCard
-            key={s.id}
-            id={s.id}
-            title={s.title}
-            open={open}
-            onToggle={() => setOpenId(open ? null : s.id)}
-          >
+    <div className="mx-auto max-w-[1200px] px-4 grid gap-6 grid-cols-1 md:grid-cols-2">
+      {SECTIONS.map((s, idx) => (
+        <QuadCard
+          key={s.title}
+          title={s.title}
+          open={openIndex === idx}
+          onToggle={() => setOpenIndex(openIndex === idx ? null : idx)}
+          className="shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
+        >
+          <div className="flex flex-wrap gap-2">
             {s.chips.map((c) => (
               <RoundActionButton key={c.label} href={c.href} label={c.label} />
             ))}
-          </QuadCard>
-        );
-      })}
+          </div>
+        </QuadCard>
+      ))}
     </div>
   );
 }
