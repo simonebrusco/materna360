@@ -843,16 +843,18 @@ label{ font-weight: var(--m360-weight-medium); }
 .materna-hero {
   background: linear-gradient(180deg, #F9C9B7 0%, #FFFFFF 100%);
   border-radius: 16px;
-  padding: 36px 20px;
+  padding: 40px 20px;
   box-shadow: 0 8px 24px rgba(17,17,17,0.06);
   text-align: center;
   margin-bottom: 18px;
+  display: grid;
+  place-items: center;
 }
-.hero-inner { display: grid; gap: 10px; place-items: center; }
+.hero-inner { display: grid; gap: 12px; place-items: center; }
 .hero-title { font-family: Poppins, system-ui; font-weight: 700; color: #2F3A56; font-size: 24px; }
 .hero-sub { font-family: Quicksand, system-ui; font-weight: 400; font-size: 16px; color: rgba(47,58,86,.9); max-width: 720px; margin: 0 auto 8px; }
 
-.materna-about { margin: 14px 0 6px; }
+.materna-about { margin: 40px 0 6px; }
 .about-grid { display: grid; grid-template-columns: 1fr; gap: 16px; align-items: center; }
 .about-title { font-family: Poppins, system-ui; font-weight: 600; font-size: 18px; color: #2F3A56; margin: 0 0 6px; }
 .about-text { font-family: Quicksand, system-ui; font-size: 16px; color: rgba(47,58,86,.9); }
@@ -863,7 +865,7 @@ label{ font-weight: var(--m360-weight-medium); }
   .about-grid { grid-template-columns: 1.2fr .8fr; }
 }
 
-.features-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin: 18px 0; }
+.features-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 24px; margin: 18px 0; }
 .feature-card { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; }
 .feature-emoji { width: 40px; height: 40px; border-radius: 12px; border: 1.5px solid rgba(47,58,86,.25); display: grid; place-items: center; font-size: 20px; color: #2F3A56; }
 .feature-title { font-family: Poppins, system-ui; font-weight: 600; font-size: 18px; color: #2F3A56; }
@@ -874,5 +876,10 @@ label{ font-weight: var(--m360-weight-medium); }
 .cta-text { font-family: Quicksand, system-ui; font-weight: 600; color: #2F3A56; }
 
 .materna-cta .btn { background: #FF005E; color: #FFFFFF; box-shadow: 0 4px 12px rgba(255,0,94,0.25); }
+
+.materna-page { padding-top: 40px; }
+@media (min-width: 768px) { .materna-page { padding-top: 72px; } }
+
+@media (min-width: 768px) { .materna-hero { padding: 56px 24px; } }
 
 @media (min-width: 768px) { .cta-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
