@@ -1,6 +1,6 @@
-"use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Card from "../ui/Card";
+import { safeGet, safeSet } from "@/lib/utils/safeStorage";
 
 const DAY_LABELS = ["S","T","Q","Q","S","S","D"]; // Seg..Dom
 const DAY_FULL = [
@@ -35,7 +35,7 @@ export default function WeekProgressCard({ completedCount = 0, total = 7, days =
 
   useEffect(() => {
     try {
-      const v = typeof window !== 'undefined' ? Number(localStorage.getItem('m360:planner:scrollX')) || 0 : 0;
+      const v = Number(safeGet('m360:planner:scrollX')) || 0;
       setScrollX(v);
       if (scrollRef.current) scrollRef.current.scrollLeft = v;
     } catch {}
@@ -44,7 +44,7 @@ export default function WeekProgressCard({ completedCount = 0, total = 7, days =
   function onScroll(e){
     const x = e.currentTarget?.scrollLeft || 0;
     setScrollX(x);
-    try { localStorage.setItem('m360:planner:scrollX', String(x)); } catch {}
+    try { safeSet('m360:planner:scrollX', String(x)); } catch {}
   }
 
   const done = Array.isArray(days) ? days.filter(Boolean).length : 0;
@@ -80,9 +80,9 @@ export default function WeekProgressCard({ completedCount = 0, total = 7, days =
 
       <div style={{marginTop:10, cursor:"pointer"}} onClick={()=>onOpenCard()}>
         <div aria-hidden style={{position:"relative", height:8, background:"rgba(13,27,42,.06)", borderRadius:999, overflow:"hidden"}}>
-          <div style={{height:8, width:`${pct}%`, background:"#F15A2E", borderRadius:999}} />
+          <div style={{height:8, width:`${pct}%`, background:"#F15A2E", borderRadius:999, transition:"width .25s ease"}} />
           {extraPct ? (
-            <div style={{position:"absolute", top:0, left:0, height:8, width:`${Math.min(100, pct + extraPct)}%`, background:"rgba(241,115,36,.35)", borderRadius:999}} />
+            <div style={{position:"absolute", top:0, left:0, height:8, width:`${Math.min(100, pct + extraPct)}%`, background:"rgba(241,115,36,.35)", borderRadius:999, transition:"width .25s ease"}} />
           ) : null}
         </div>
         <div className="small" style={{opacity:.8, marginTop:6}}>{microcopy(pct)}</div>

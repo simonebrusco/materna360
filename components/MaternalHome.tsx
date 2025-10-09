@@ -1,19 +1,23 @@
-"use client";
-
-import { useEffect, useMemo, useState } from "react";
+'use client';
+import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Card from "./ui/Card";
 import Icon from "./ui/Icon";
-import PlannerNotepad from "./planner/PlannerNotepad";
+const PlannerNotepad = dynamic(() => import("./planner/PlannerNotepad"), { ssr: false });
 import WeekProgressCard from "./planner/WeekProgressCard";
-import TipsRotator from "./planner/TipsRotator";
-import BreathModal from "./modals/BreathModal";
-import MoodModal from "./modals/MoodModal";
-import InspireModal from "./modals/InspireModal";
-import PauseModal from "./modals/PauseModal";
+const BreathModal = dynamic(() => import("./modals/BreathModal"), { ssr: false });
+const MoodModal = dynamic(() => import("./modals/MoodModal"), { ssr: false });
+const InspireModal = dynamic(() => import("./modals/InspireModal"), { ssr: false });
+const PauseModal = dynamic(() => import("./modals/PauseModal"), { ssr: false });
 import MessageOfDayCard from "./motd/MessageOfDayCard";
 import Vitrine from "./discover/Vitrine";
 import ChecklistToday from "./planner/ChecklistToday";
+import { flags as defaultFlags } from "@/lib/flags";
+import HomeHub from "./home/HomeHub";
+import CardRotinaCasa from "./meu-dia/cards/CardRotinaCasa";
+import CardTempoFilho from "./meu-dia/cards/CardTempoFilho";
+import CardIdeiaDoDia from "./meu-dia/cards/CardIdeiaDoDia";
+import CardMomentoMim from "./meu-dia/cards/CardMomentoMim";
 import {
   addAction,
   addMood,
@@ -22,15 +26,18 @@ import {
   toggleDayDone,
   ensureSegmentedPlanners,
   getSegmentDaysDone,
+  getSegmentPlanner,
 } from "../lib/storage";
-import QuickAddModal from "./planner/QuickAddModal";
+const QuickAddModal = dynamic(() => import("./planner/QuickAddModal"), { ssr: false });
 import { emitEu360Refresh } from "../lib/clientEvents";
-import BadgesLevelToast from "./BadgesLevelToast";
+const BadgesLevelToast = dynamic(() => import("./BadgesLevelToast"), { ssr: false });
 import { showToast } from "../lib/ui/toast";
+import { safeGet, safeMergeObject, safeSet } from "@/lib/utils/safeStorage";
 
 const GreetingBinder = dynamic(() => import("./GreetingBinder"), { ssr: false });
 
-export default function MaternalHome(){
+export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<string, any> }){
+  const flags = { ...defaultFlags, ...(incomingFlags || {}) };
   const [openBreath, setOpenBreath] = useState(false);
   const [openMood, setOpenMood] = useState(false);
   const [openInspire, setOpenInspire] = useState(false);
@@ -44,12 +51,53 @@ export default function MaternalHome(){
   const [extraPct, setExtraPct] = useState(0);
   const done = useMemo(() => (Array.isArray(plan) ? plan.filter(Boolean).length : 0), [plan]);
 
+  // Greeting name hydration (avoid flicker)
+  const [displayName, setDisplayName] = useState<string>('Mãe');
+  useEffect(()=>{
+    try{
+      const raw = safeGet('m360:user.name', '') || '';
+      const first = String(raw||'').trim().split(/\s+/)[0] || 'Mãe';
+      setDisplayName(first);
+    }catch{ setDisplayName('Mãe'); }
+  },[]);
+
+  // Init required keys (SSR-safe)
+  useEffect(()=>{
+    try{
+      ensurePlannerWeek();
+      ensureSegmentedPlanners();
+      const today = new Date();
+      const y = today.getFullYear();
+      const m = String(today.getMonth()+1).padStart(2,'0');
+      const d = String(today.getDate()).padStart(2,'0');
+      const ck = `m360:checklist:${y}-${m}-${d}`;
+      if (safeGet('m360:badges', null) === null) safeSet('m360:badges', {});
+      if (!safeGet(ck, null)) safeSet(ck, [
+        { id:'water', title:'Beber água 💧', done:false },
+        { id:'stretch', title:'Alongar-se 🧘', done:false },
+        { id:'play', title:'Brincar com meu filho 🎲', done:false },
+      ]);
+    }catch{}
+  },[]);
+
+  // Planner computed days done per current segment
   useEffect(()=>{ try{ ensurePlannerWeek(); ensureSegmentedPlanners(); setPlan(getSegmentDaysDone(activeTab)); }catch{} },[activeTab]);
   useEffect(()=>{
+    if (typeof window === 'undefined') return;
     const off = () => { try { setPlan(getSegmentDaysDone(activeTab) || getWeeklyPlan()); } catch {} };
     try { window.addEventListener('m360:data:updated', off); } catch {}
     return () => { try { window.removeEventListener('m360:data:updated', off); } catch {} };
   },[activeTab]);
+
+  // Empty state per tab
+  const [isEmptyTab, setIsEmptyTab] = useState(false);
+  useEffect(()=>{
+    try{
+      const seg = getSegmentPlanner(activeTab);
+      const totalEntries = Array.isArray(seg) ? seg.reduce((acc, day)=> acc + (Array.isArray((day as any).entries) ? (day as any).entries.length : 0), 0) : 0;
+      setIsEmptyTab(totalEntries === 0);
+    }catch{ setIsEmptyTab(false); }
+  },[activeTab, plan]);
 
   function openNotepad(i?: number){ if (typeof i==='number') setPadDay(i); setOpenPad(true); }
 
@@ -61,11 +109,35 @@ export default function MaternalHome(){
   ];
   const bonus = tips[done % tips.length];
 
+  // Achievements: checklist complete handling
+  const completeTimerRef = useRef<any>(null);
+  useEffect(()=>{
+    function onComplete(){
+      if (completeTimerRef.current) { clearTimeout(completeTimerRef.current); completeTimerRef.current = null; }
+      completeTimerRef.current = setTimeout(()=>{
+        try{
+          const badges = safeGet('m360:badges', {}) || {};
+          if (!badges.organizada) {
+            safeMergeObject('m360:badges', { organizada: true });
+          }
+          addAction({ date:new Date().toISOString(), type: 'checklist_complete' });
+        }catch{}
+      }, 350);
+    }
+    try { window.addEventListener('m360:checklist-complete', onComplete); } catch {}
+    return () => { try { window.removeEventListener('m360:checklist-complete', onComplete); } catch {} };
+  },[]);
+
   function PlannerTabs(){
-    const [tab, setTab] = useState<string>(() => {
-      try{ return localStorage.getItem('m360:planner:tab') || 'home'; }catch{ return 'home'; }
-    });
-    useEffect(()=>{ try{ localStorage.setItem('m360:planner:tab', tab); }catch{} }, [tab]);
+    const [tab, setTab] = useState<string>('home');
+    useEffect(()=>{
+      try{
+        const stored = safeGet('m360:planner:tab', null);
+        if (stored) setTab(stored as any);
+      }catch{}
+    }, []);
+    useEffect(()=>{ try{ safeSet('m360:planner:tab', tab); }catch{} }, [tab]);
+
     const items = [
       { id: 'home', label: 'Casa' },
       { id: 'kids', label: 'Filhos' },
@@ -83,10 +155,15 @@ export default function MaternalHome(){
   function DailyChecklist(){
     const today = useMemo(()=>{ try{ return new Date().toISOString().slice(0,10); }catch{ return ''; } }, []);
     const key = `m360:microtasks:${today}`;
-    const [state, setState] = useState<{water:boolean;stretch:boolean;play:boolean}>(()=>{
-      try{ return JSON.parse(localStorage.getItem(key)||'') || { water:false, stretch:false, play:false }; }catch{ return { water:false, stretch:false, play:false }; }
-    });
-    useEffect(()=>{ try{ localStorage.setItem(key, JSON.stringify(state)); }catch{} }, [state]);
+    const [state, setState] = useState<{water:boolean;stretch:boolean;play:boolean}>({ water:false, stretch:false, play:false });
+    useEffect(()=>{
+      try{
+        const parsed = safeGet(key, null);
+        if (parsed) setState(parsed);
+      }catch{}
+    }, [key]);
+    useEffect(()=>{ try{ safeSet(key, state); }catch{} }, [state]);
+
     const total = 3; const count = Number(state.water) + Number(state.stretch) + Number(state.play);
     const pct = Math.round((count/total)*100);
     function toggleItem(k: 'water'|'stretch'|'play'){
@@ -121,8 +198,10 @@ export default function MaternalHome(){
   }
 
   return (
-    <div className="m360-container meu-dia">
+    <div className={`m360-container meu-dia${flags.newHomeMaternal ? ' hub' : ''}`}>
       {/* 1) Hero (saudação + mensagem do dia) */}
+
+ai_main_122635524f7a
       <section className="m360-hero hero">
         <GreetingBinder>
           {({ name, part }) => (
@@ -135,6 +214,23 @@ export default function MaternalHome(){
         <div className="hero-grid">
           <MessageOfDayCard className="motd-card" showTitle={false} showButton={false} />
           <Card className="mood-card tap-scale" onClick={()=>setOpenMood(true)}>
+
+      <section className="m360-hero hero" role="banner" aria-label="Saudação">
+        <GreetingBinder>
+          {({ name, part }) => {
+            const shown = displayName || name || 'Mãe';
+            return (
+              <div>
+                <h1 className="greeting-title" suppressHydrationWarning>{part}, {shown} <span aria-hidden>💛</span></h1>
+                <p className="greeting-sub">Como você está hoje?</p>
+              </div>
+            );
+          }}
+        </GreetingBinder>
+        <div className="hero-grid">
+          <MessageOfDayCard className="motd-card" showTitle={false} showButton={false} />
+          <Card className="mood-card tap-scale" onClick={()=>setOpenMood(true)} role="button" aria-label="Registrar humor">
+main
             <Icon name="mood" className="icon-24 icon-accent" />
             <div>
               <h3>Como você se sente?</h3>
@@ -143,13 +239,21 @@ export default function MaternalHome(){
           </Card>
         </div>
 
-        {/* Checklist do Dia */}
+      </section>
+
+      {/* Meu Dia Hub (gated) */}
+      {flags.newHomeMaternal ? (
+        <HomeHub />
+      ) : null}
+
+      {/* 1) Checklist do Dia */}
+      <section aria-label="Checklist do Dia">
         <div className="space" />
-        <ChecklistToday onProgress={(p)=>setExtraPct(p)} />
+        <ChecklistToday onProgress={(p)=>setExtraPct(Math.max(0, Math.min(10, p)))} onUndo={()=>{ try{ if (completeTimerRef.current){ clearTimeout(completeTimerRef.current); completeTimerRef.current=null; } }catch{} }} />
       </section>
 
       {/* 2) Planner da Família (full-width) */}
-      <section className="m360-planner">
+      <section className="m360-planner" role="region" aria-label="Planner da Família">
         <div className="m360-chip-row" role="tablist" aria-label="Planner categorias">
           {['home','kids','me'].map((k)=>{
             const labels = { home: 'Casa', kids: 'Filhos', me: 'Eu' } as const;
@@ -160,9 +264,20 @@ export default function MaternalHome(){
           })}
         </div>
         <WeekProgressCard className="planner-card" completedCount={done} total={7} days={plan} onOpenDay={(i)=>openNotepad(i)} onOpenCard={()=>openNotepad(padDay)} bonus={bonus} extraPct={extraPct} />
+        {isEmptyTab ? (
+          <div className="card" style={{marginTop:12}} role="note" aria-label="Planner vazio">
+            <div className="card-title">Que tal começar?</div>
+            <p className="card-sub">Adicione sua primeira tarefa nesta aba para organizar sua semana.</p>
+            <div className="row" style={{display:'flex', gap:10, marginTop:8}}>
+              <button className="btn btn-primary" onClick={()=>openNotepad(padDay)}>Adicionar primeira tarefa</button>
+            </div>
+          </div>
+        ) : null}
       </section>
 
       {/* 3) Ações (2x2) */}
+
+ai_main_122635524f7a
       <section className="m360-grid m360-maternal-actions">
         <div className="card m360-action tap-scale">
           <div className="card-icon" aria-hidden>🏠</div>
@@ -203,17 +318,18 @@ export default function MaternalHome(){
             <button className="btn btn-outline">Planejar</button>
           </div>
         </div>
+
+      <section className="hub-grid" aria-label="Ações do dia" style={{marginBottom:24}}>
+        <CardRotinaCasa />
+        <CardTempoFilho />
+        <CardIdeiaDoDia />
+        <CardMomentoMim />
+main
       </section>
 
-      {/* 4) Hoje + Descobrir (lado a lado em telas médias+) */}
-      <section className="m360-row" style={{marginBottom:24}}>
-        <div className="m360-col">
-          <h2 className="h3" style={{marginBottom:8}}>Hoje</h2>
-          <TipsRotator tips={tips} />
-        </div>
-        <div className="m360-col">
-          <Vitrine />
-        </div>
+      {/* 4) Recomendações */}
+      <section aria-label="Recomendações" style={{marginBottom:24}}>
+        <Vitrine />
       </section>
 
       {/* 5) FAB */}
@@ -250,7 +366,7 @@ export default function MaternalHome(){
       <InspireModal
         open={openInspire}
         onClose={() => setOpenInspire(false)}
-        onComplete={()=>{
+        onComplete={() => {
           try{ addAction({ date:new Date().toISOString(), type:"inspire" }); }catch{}
           try{ toggleDayDone(new Date()); }catch{}
           showToast("Mãe Presente");

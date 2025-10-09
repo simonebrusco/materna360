@@ -1,10 +1,14 @@
-"use client";
 import { useEffect, useState } from "react";
 import Card from "../ui/Card";
 import Btn from "../ui/Btn";
 import { ensureMessage } from "../../lib/messages";
+import { safeGet, safeSet } from "@/lib/utils/safeStorage";
 
+ai_main_122635524f7a
 export default function MessageOfDayCard({ nameHint = null, showTitle = true, showButton = true, className = "", message }) {
+
+export default function MessageOfDayCard({ nameHint = null, showTitle = true, showButton = true, className = "" }) {
+main
   const [motd, setMotd] = useState("");
 
   function sanitizeMessage(text) {
@@ -33,9 +37,7 @@ export default function MessageOfDayCard({ nameHint = null, showTitle = true, sh
   function readStored() {
     const { key, iso } = todayKey();
     try {
-      const raw = window.localStorage.getItem(key);
-      if (!raw) return null;
-      const obj = JSON.parse(raw);
+      const obj = safeGet(key, null);
       if (obj && obj.date === iso && typeof obj.text === "string" && obj.text.trim()) {
         return sanitizeMessage(obj.text);
       }
@@ -49,7 +51,7 @@ export default function MessageOfDayCard({ nameHint = null, showTitle = true, sh
     const { key, iso } = todayKey();
     try {
       const payload = { date: iso, text: text || "" };
-      window.localStorage.setItem(key, JSON.stringify(payload));
+      safeSet(key, payload);
     } catch {}
   }
 
@@ -77,6 +79,7 @@ export default function MessageOfDayCard({ nameHint = null, showTitle = true, sh
     setMotd(next);
   }
 
+ai_main_122635524f7a
   const provided = typeof message === "string" ? sanitizeMessage(message) : "";
   const display = provided || motd;
 
@@ -88,6 +91,18 @@ export default function MessageOfDayCard({ nameHint = null, showTitle = true, sh
         <i>{display}</i>
       </p>
       {showButton && !provided ? <Btn onClick={refresh}>Nova mensagem</Btn> : null}
+
+  const short = String(motd||"").trim().length < 35;
+  return (
+    <Card className={className} role="region" aria-label="Mensagem do dia">
+      {showTitle ? <strong className="motd-title">“Mensagem do dia”</strong> : null}
+      <p className="small motd-text">
+        <span className="motd-quote" aria-hidden>“</span>
+        <i>{motd}</i>
+      </p>
+      {short ? <div className="motd-skeleton" aria-hidden /> : null}
+      {showButton ? <Btn onClick={refresh}>Nova mensagem</Btn> : null}
+main
     </Card>
   );
 }

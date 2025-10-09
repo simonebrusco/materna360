@@ -151,7 +151,7 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .m360-modal .btn-ghost:hover { border-color: var(--magenta); }
 
 /* Animations */
-@keyframes m360-fade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes m360-fade { from { opacity: 0 } to { opacity:  1 } }
 @keyframes m360-rise { from { opacity: 0; transform: translateY(8px) scale(.98) } to { opacity: 1; transform: translateY(0) scale(1) } }
 /* exit animations */
 @keyframes m360-fade-out { from { opacity: 1 } to { opacity: 0 } }
@@ -216,6 +216,8 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
   .planner-meta{ text-align:right; }
 }
 
+/* ci: retrigger vercel preview (no-op) */
+
 /* Discover page: age tabs and grids */
 .age-tabs{ display:flex; gap:10px; margin:12px 0 8px; }
 .age-tab{ all:unset; cursor:pointer; padding:8px 14px; border-radius:999px; border:1.5px solid rgba(13,27,42,.12); color:#0D1B2A; background:#fff; }
@@ -263,13 +265,11 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 
 /* Message of the day */
 .motd-title{ display:block; margin-bottom:8px; font-weight:800; }
-ai_main_7d7878c4bdcc
 .motd-text{ margin:0 0 12px; font-style: italic; }
 .motd-quote{ color:#F17324; font-weight:800; margin-right:6px; }
 
 .motd-text{ margin:0 0 12px; }
 .motd-quote{ color:#F17324; font-weight:700; }
-main
 
 /* Icon utility */
 .icon { width: 22px; height: 22px; display: inline-block; vertical-align: middle; }
@@ -609,6 +609,26 @@ label{ font-weight: var(--m360-weight-medium); }
 /* Tap micro animation utility */
 .tap-scale:active{ transform: scale(1.02); }
 
+/* Meu Dia Hub (scoped) */
+.m360-container.meu-dia .meu-dia-hub{ margin: 8px 0 20px; }
+.m360-container.meu-dia .hub-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width:768px){ .m360-container.meu-dia .hub-grid{ grid-template-columns:1fr; gap:10px; } }
+.m360-container.meu-dia .hub-card{
+  background: var(--m360-bg, #FFF);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(18,21,26,.06);
+  padding: 14px;
+  min-height: 128px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+.m360-container.meu-dia .hub-card-head{ display:flex; align-items:center; gap:10px; }
+.m360-container.meu-dia .hub-card-title{ font:600 16px/20px Poppins, system-ui; color: var(--m360-text, #2F3A56); }
+.m360-container.meu-dia .hub-card-sub{ font:500 12px/16px Poppins, system-ui; color: rgba(47,58,86,.7); }
+.m360-container.meu-dia .hub-card-body{ margin:10px 0; }
+.m360-container.meu-dia .hub-meta{ font:500 13px/18px Poppins, system-ui; color: var(--m360-secondary, #2F3A56); }
+.m360-container.meu-dia .hub-card-actions{ display:flex; gap:8px; }
+
 /* Pulsing heart */
 @keyframes pulse-heart { 0%{ transform: scale(1) } 50%{ transform: scale(1.06) } 100%{ transform: scale(1) } }
 .greeting-title span[aria-hidden]{ display:inline-block; animation: pulse-heart 2s ease-in-out infinite; }
@@ -661,16 +681,26 @@ label{ font-weight: var(--m360-weight-medium); }
   min-width: 130px;
 }
 
+ai_main_122635524f7a
 /* ===== Materna360 – Meu Dia (scoped to .m360-container.meu-dia) ===== */
 .m360-container.meu-dia{
   --m360-primary:#FF005E;      /* magenta */
   --m360-secondary:#2F3A56;    /* navy */
   --m360-accent:#F9C9B7;       /* rosé */
+
+/* ===== Materna360 – Meu Dia (soft-luxury scoped) ===== */
+.meu-dia{
+  --m360-primary:#FF005E;      /* magenta */
+  --m360-secondary:#2F3A56;    /* navy discreto */
+  --m360-accent:#F9C9B7;       /* rosé suave */
+main
   --m360-bg:#FFFFFF;
   --m360-text:#2F3A56;
 }
 
 /* Hero topo */
+
+  ai_main_122635524f7a
 .m360-container.meu-dia .hero{max-width:1120px;margin:12px auto 24px;}
 .m360-container.meu-dia .hero h1{
   font-family:Poppins,system-ui;font-weight:700;font-size:26px;line-height:32px;color:var(--m360-text);
@@ -714,3 +744,92 @@ label{ font-weight: var(--m360-weight-medium); }
 
 /* Espaçamento entre seções do Meu Dia */
 .m360-container.meu-dia section{margin-bottom:24px;}
+=======
+.meu-dia .hero{max-width:1120px;margin:12px auto 24px;}
+.meu-dia .hero h1{font-family:Poppins,system-ui; font-weight:700; font-size:26px; line-height:32px; color:var(--m360-text);}
+.meu-dia .hero h2{font-family:Poppins,system-ui; font-weight:400; font-size:16px; line-height:24px; color:rgba(47,58,86,.85); margin:0 0 12px;}
+.meu-dia .hero h1,.meu-dia .hero h2{word-break:normal; overflow-wrap:anywhere; hyphens:manual;}
+
+/* Grid dos 2 cards */
+.meu-dia .hero-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+@media (max-width:768px){ .meu-dia .hero-grid{grid-template-columns:1fr; gap:12px;} }
+
+/* Cards consistentes */
+.meu-dia .motd-card,.meu-dia .mood-card{
+  background:#FFF; border-radius:16px; box-shadow:0 8px 24px rgba(18,21,26,.06);
+  min-height:180px; padding:16px 18px; display:flex; align-items:flex-start; justify-content:flex-start;
+  transform:translateZ(0); transition:transform 120ms ease-out;
+}
+.meu-dia .motd-card:active,.meu-dia .mood-card:active{ transform:scale(1.02); }
+
+/* Mensagem do dia */
+.meu-dia .motd-quote{color:var(--m360-accent); font-size:20px; margin-right:6px;}
+.meu-dia .motd-text{font-family:Poppins,system-ui; font-style:italic; font-size:16px; line-height:24px; color:rgba(47,58,86,.92);}
+
+/* Mood card – evitar texto “em coluna” */
+.meu-dia .mood-card h3{font:600 18px/24px Poppins,system-ui; margin:0 0 4px; white-space:normal; overflow-wrap:break-word;}
+.meu-dia .mood-card p{font:400 14px/20px Poppins,system-ui; color:rgba(47,58,86,.70);}
+
+/* Ícones e botões dentro do Meu Dia */
+.meu-dia .icon-accent{color:var(--m360-primary);} 
+.meu-dia .btn-primary{background:var(--m360-primary); color:#FFF; border:none;}
+.meu-dia .btn-outline{background:transparent; color:var(--m360-secondary); border:1px solid var(--m360-secondary);}
+
+/* Espaçamento entre seções */
+.meu-dia section{margin-bottom:24px;}
+
+/* ci: retrigger preview */
+
+/* no-op: trigger Vercel preview build */
+
+/* Hero refinado */
+.m360-container.meu-dia .hero{ margin:8px auto 24px; }
+.m360-container.meu-dia .motd-card,
+.m360-container.meu-dia .mood-card{ min-height:200px; box-shadow:0 12px 28px rgba(18,21,26,.06); }
+
+.m360-container.meu-dia .motd-skeleton{
+  width:60%; height:10px; border-radius:6px;
+  background:linear-gradient(90deg, #f7e9e4 0%, #fff 50%, #f7e9e4 100%);
+  animation:pulse 1.6s infinite; opacity:.6; margin-top:10px;
+}
+@keyframes pulse{0%{background-position:0 0}100%{background-position:120% 0}}
+
+.m360-container.meu-dia.hub .block { border-radius:16px; box-shadow:0 6px 18px rgba(18,21,26,.06); padding:14px; background:#FFF; margin-bottom:16px; }
+.m360-container.meu-dia.hub h3 { font:600 18px/24px Poppins,system-ui; color:#2F3A56; margin:0 0 8px; }
+.m360-container.meu-dia.hub .hub-grid{ display:grid; grid-template-columns:1fr; gap:12px; }
+@media (min-width:768px){ .m360-container.meu-dia.hub .hub-grid{ grid-template-columns:1fr 1fr; } }
+
+/* ===== Meu Dia: premium polish (scoped) ===== */
+.m360-container.meu-dia .icon-primary{ color:#FF005E; }
+.m360-container.meu-dia .icon-secondary{ color:#2F3A56; }
+.m360-container.meu-dia .motd-quote{ color:#F9C9B7; }
+
+.m360-container.meu-dia .tag,
+.m360-container.meu-dia .pill{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  border:2px solid #F9C9B7;
+  background:#FFF;
+  color:#2F3A56;
+  font-weight:600;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+  transition: box-shadow .2s ease;
+}
+.m360-container.meu-dia .tag:hover,
+.m360-container.meu-dia .pill:hover{ box-shadow:0 8px 18px rgba(17,17,17,.06); }
+
+@media (min-width:390px){
+  .m360-container.meu-dia .motd-card,
+  .m360-container.meu-dia .mood-card{ min-height:200px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .m360-container.meu-dia .tap-scale:active{ transform:none !important; }
+  .m360-container.meu-dia .card,
+  .m360-container.meu-dia .btn{ transition: none !important; }
+}
+
+.m360-container.meu-dia .m360-day-chip:focus-visible,
+.m360-container.meu-dia .btn:focus-visible{ outline:none; box-shadow: var(--m360-shadow-outline, var(--ring)); }
+main
