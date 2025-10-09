@@ -6,19 +6,19 @@ import RoundActionButton from "@/components/ui/RoundActionButton";
 const SECTIONS = [
   {
     id: "planner",
-    title: "Rotina & Planner",
+    title: "Rotina &amp; Planner",
     chips: [
       { label: "Rotina da Casa", href: "/planner/home" },
       { label: "Planner da Família", href: "/planner/family" },
       { label: "Checklist do Dia", href: "/planner/checklist" },
-      { label: "Compras & Lembretes", href: "/planner/list" },
+      { label: "Compras &amp; Lembretes", href: "/planner/list" },
     ],
   },
   {
     id: "emocoes",
-    title: "Conexão & Emoções",
+    title: "Conexão &amp; Emoções",
     chips: [
-      { label: "Humor & Emoções", href: "/mood" },
+      { label: "Humor &amp; Emoções", href: "/mood" },
       { label: "Momento com Meu Filho", href: "/moments" },
       { label: "Gratidão", href: "/gratitude" },
       { label: "Humor da Semana", href: "/mood/weekly" },
@@ -35,7 +35,7 @@ const SECTIONS = [
   },
   {
     id: "descobrir",
-    title: "Descobrir & Aprender",
+    title: "Descobrir &amp; Aprender",
     chips: [
       { label: "Ideia do Dia", href: "/discover/idea" },
       { label: "Descobrir", href: "/discover" },
