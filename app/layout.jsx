@@ -1,4 +1,8 @@
 import "./globals.css";
+import dynamic from "next/dynamic";
+
+const BottomTabBar = dynamic(() => import("../components/BottomTabBar"), { ssr: false });
+const Toaster = dynamic(() => import("../lib/ui/toast").then(m => ({ default: m.Toaster })), { ssr: false });
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
@@ -11,9 +15,8 @@ export default function RootLayout({ children }) {
     <html lang="pt">
       <body className="bg-gray-50 text-gray-900 antialiased">
         {children}
-        <div aria-hidden="true" className="sr-only" suppressHydrationWarning>
-          BUILD: {new Date().toISOString()}
-        </div>
+        <Toaster />
+        <BottomTabBar />
       </body>
     </html>
   );
