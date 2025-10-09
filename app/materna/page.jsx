@@ -3,7 +3,7 @@ import Btn from "../../components/ui/Btn";
 
 export default function Materna() {
   return (
-    <div className="container" aria-label="Materna – introdução">
+    <div className="container materna-page" aria-label="Materna – introdução">
       {/* Hero */}
       <section className="materna-hero" aria-label="Boas-vindas Materna360">
         <div className="hero-inner">
