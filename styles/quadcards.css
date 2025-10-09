@@ -1,0 +1,32 @@
+/* Scope everything to avoid collateral effects */
+[data-quad-root] {
+  /* eliminate subpixel seams & outlines in high-dpi */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[data-quad-root] * {
+  /* Never show borders/outlines/rings inside this block */
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Kill native markers/carets of UA widgets if they ever sneak in */
+[data-quad-root] summary::-webkit-details-marker { display: none !important; }
+[data-quad-root] details,
+[data-quad-root] summary,
+[data-quad-root] select,
+[data-quad-root] fieldset,
+[data-quad-root] legend {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Windows / legacy select arrow */
+[data-quad-root] select::-ms-expand { display: none !important; }

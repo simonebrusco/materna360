@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "@/styles/quadcards.css";
 import "./globals.css";
 
 import dynamic from "next/dynamic";
