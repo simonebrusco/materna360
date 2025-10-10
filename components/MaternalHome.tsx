@@ -213,8 +213,7 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
   return (
     <div className={`m360-container meu-dia${flags.newHomeMaternal ? ' hub' : ''}`}>
       {/* 1) Hero (saudação + mensagem do dia) */}
-      <section className="m360-hero hero meudia-hero" role="banner" aria-label="Saudação">
-        <div className="meudia-ribbon" aria-hidden />
+      <section className="m360-hero hero" role="banner" aria-label="Saudação">
         <GreetingBinder>
           {({ name, part }) => {
             const shown = displayName || name || 'Mãe';
