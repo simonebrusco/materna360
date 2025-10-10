@@ -264,7 +264,7 @@ nav { background: transparent; border-top: none; box-shadow: none; }
 /* keep existing .btn, .btn-primary, .btn-ghost styles */
 
 /* Brand header */
-.brand-header{position:fixed;top:0;left:0;width:100%;display:flex;align-items:center;justify-content:center;padding:12px 0;background:transparent;backdrop-filter:blur(10px);border-bottom:none;z-index:1000}
+.brand-header{position:fixed;top:0;left:0;right:0;width:100%;display:flex;align-items:center;justify-content:center;padding:0;background:transparent;border-bottom:none;z-index:1000}
 .brand-logo{display:block;width:160px;max-height:80px;height:auto;object-fit:contain;opacity:0;box-shadow:0 2px 4px rgba(0,0,0,.05);transition:filter .2s ease-in;animation:m360-logo-fade .4s ease-in forwards}
 .brand-logo:hover{filter:brightness(1.1)}
 @media(max-width:768px){.brand-logo{width:120px}}
@@ -280,6 +280,41 @@ nav { background: transparent; border-top: none; box-shadow: none; }
 .logo-link{ display:flex; align-items:center; gap:8px; }
 .brand-logo-img{ width:184px; height:auto; display:block; }
 @media (max-width:1023px){ .brand-logo-img{ width:156px; } }
+
+/* Header ribbon behind logo */
+.header-ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.header-ribbon::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: linear-gradient(to right, transparent, #FF005E 45%, #F9C9B7 85%, transparent);
+  opacity: 0.9;
+}
+/* Logo within ribbon */
+.header-logo { position: relative; z-index: 2; height: 32px !important; object-fit: contain; display:block; }
+@media (max-width:768px){
+  .header-ribbon{ height:60px; }
+  .header-logo{ height:28px !important; }
+}
+
+/* Ensure breathing room below header before greeting */
+.m360-container.meu-dia .greeting-area{ margin-top: 56px; }
 
 /* Message of the day */
 .motd-title{ display:block; margin-bottom:8px; font-weight:800; }
@@ -536,7 +571,7 @@ label{ font-weight: var(--m360-weight-medium); }
   --m360-shadow-outline: 0 0 0 4px rgba(255,0,94,.15);
 }
 
-/* Bot��es – garantimos especificidade com .m360-container */
+/* Botões – garantimos especificidade com .m360-container */
 .m360-container .btn,
 .m360-col .btn,
 .card .btn {
