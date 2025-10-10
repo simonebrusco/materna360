@@ -288,6 +288,9 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 .brand-logo-img{ width:184px; height:auto; display:block; }
 @media (max-width:1023px){ .brand-logo-img{ width:156px; } }
 
+/* Sunrise ray (brand signature) */
+.brand-header .sunrise-ray{ height:1px; width:100%; background: linear-gradient(to right, transparent, #FF005E, transparent); }
+
 /* Message of the day */
 .motd-title{ display:block; margin-bottom:8px; font-weight:800; }
 .motd-text{ margin:0 0 12px; font-style: italic; }
