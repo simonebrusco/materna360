@@ -59,7 +59,7 @@ export default function DevErrorSuppressor() {
     window.addEventListener("error", onError);
 
     // store restore helper
-    try{ window.__devErrorSuppressor_restore = () => { console.error = origConsoleError; console.warn = origConsoleWarn; if (typeof origFetch === 'function') window.fetch = origFetch; }; }catch(e){}
+    try{ window.__devErrorSuppressor_restore = () => { console.error = origConsoleError; console.warn = origConsoleWarn; }; }catch(e){}
 
     return () => { try { if (typeof window !== 'undefined' && window.__devErrorSuppressor_restore) { try { window.__devErrorSuppressor_restore(); } catch(e){} window.__devErrorSuppressor_restore = null; } } catch(e){}
       window.removeEventListener("unhandledrejection", onUnhandledRejection);
