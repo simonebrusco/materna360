@@ -846,11 +846,13 @@ label{ font-weight: var(--m360-weight-medium); }
   .m360-container.meu-dia .mood-card{ min-height:200px; box-shadow:0 12px 28px rgba(18,21,26,.06); }
 
 /* MOTD refined in hero */
-.m360-container.meu-dia .m360-hero .motd-card{ position: relative; background: rgba(255,255,255,.7); border-radius:20px; padding:20px; box-shadow: 0 6px 18px rgba(0,0,0,.04); animation: m360-fade-scale .6s ease-in-out both; animation-delay: .8s; }
-.m360-container.meu-dia .m360-hero .motd-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(90deg, #FF005E 0%, #F9C9B7 100%); border-top-left-radius:20px; border-top-right-radius:20px; }
-.m360-container.meu-dia .m360-hero .motd-title{ font:500 16px/22px Poppins, system-ui; color: #2F3A56; margin: 0 0 8px; }
-.m360-container.meu-dia .m360-hero .motd-text{ font:italic 17px/24px Quicksand, system-ui; color: #2F3A56E6; }
+.m360-container.meu-dia .m360-hero .motd-card{ position: relative; background: rgba(255,255,255,.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-radius:24px; padding:22px; box-shadow: inset 0 1px 3px rgba(255,255,255,.5); animation: m360-fade-scale .6s ease-in-out both; animation-delay: .8s; }
+.m360-container.meu-dia .m360-hero .motd-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, #FF005E 0%, #F9C9B7 100%); border-top-left-radius:24px; border-top-right-radius:24px; }
+.m360-container.meu-dia .m360-hero .motd-title{ font:500 16px/22px Poppins, system-ui; color:#2F3A56; margin:0 0 8px; }
+.m360-container.meu-dia .m360-hero .motd-text{ font:italic 17px/1.6 Quicksand, system-ui; color:#2F3A56CC; }
 .m360-container.meu-dia .m360-hero .motd-quote{ color: #FF005E; }
+.m360-container.meu-dia .m360-hero .motd-card::after{ content:"\201C"; position:absolute; top:8px; left:12px; font:700 64px/1 Poppins, system-ui; color:#FF005E; opacity:.06; pointer-events:none; }
+.m360-container.meu-dia .m360-hero .motd-card > *{ position: relative; z-index: 1; }
 
 .m360-container.meu-dia .motd-skeleton{
   width:60%; height:10px; border-radius:6px;
