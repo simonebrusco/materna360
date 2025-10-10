@@ -1,4 +1,4 @@
-/* =========  Materna360 — Global Theme ========= */
+/* =========  Materna360 �� Global Theme ========= */
 
 :root {
   /* Palette */
@@ -831,11 +831,11 @@ label{ font-weight: var(--m360-weight-medium); }
   .m360-container.meu-dia .mood-card{ min-height:200px; box-shadow:0 12px 28px rgba(18,21,26,.06); }
 
 /* MOTD refined in hero */
-.m360-hero .motd-card{ position: relative; background: linear-gradient(180deg, #FFF5F9 0%, #FFFFFF 40%); border-radius:16px; box-shadow: 0 2px 8px rgba(0,0,0,.03); animation: m360-fade-up .6s ease-in both; animation-delay: .6s; }
-.m360-hero .motd-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, #FF005E 0%, #F49B0B 100%); border-top-left-radius:16px; border-top-right-radius:16px; }
-.m360-hero .motd-title{ font:500 15px/20px Poppins, system-ui; color: rgba(47,58,86,.85); margin: 0 0 8px; }
-.m360-hero .motd-text{ font:italic 16px/22px Quicksand, system-ui; color: rgba(47,58,86,.9); }
-.m360-hero .motd-quote{ color: #FF005E; }
+.m360-container.meu-dia .m360-hero .motd-card{ position: relative; background: linear-gradient(180deg, #FFF5F9 0%, #FFFFFF 40%); border-radius:16px; box-shadow: 0 2px 8px rgba(0,0,0,.03); animation: m360-fade-up .6s ease-in both; animation-delay: .6s; }
+.m360-container.meu-dia .m360-hero .motd-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, #FF005E 0%, #F49B0B 100%); border-top-left-radius:16px; border-top-right-radius:16px; }
+.m360-container.meu-dia .m360-hero .motd-title{ font:500 15px/20px Poppins, system-ui; color: rgba(47,58,86,.85); margin: 0 0 8px; }
+.m360-container.meu-dia .m360-hero .motd-text{ font:italic 16px/22px Quicksand, system-ui; color: rgba(47,58,86,.9); }
+.m360-container.meu-dia .m360-hero .motd-quote{ color: #FF005E; }
 
 .m360-container.meu-dia .motd-skeleton{
   width:60%; height:10px; border-radius:6px;
