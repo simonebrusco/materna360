@@ -313,8 +313,8 @@ nav { background: transparent; border-top: none; box-shadow: none; }
   .header-logo{ height:28px !important; }
 }
 
-/* Ensure breathing room below header before greeting */
-.m360-container.meu-dia .greeting-area{ margin-top: 56px; }
+/* Hero region spacing to avoid overlap with header ribbon */
+.hero-region{ padding-top:56px; }
 
 /* Message of the day */
 .motd-title{ display:block; margin-bottom:8px; font-weight:800; }
@@ -923,25 +923,22 @@ label{ font-weight: var(--m360-weight-medium); }
 .m360-container.meu-dia .m360-day-chip:focus-visible,
 .m360-container.meu-dia .btn:focus-visible{ outline:none; box-shadow: var(--m360-shadow-outline, var(--ring)); }
 
-/* Meudia styles */
-.meudia-hero { max-width: 640px; margin: 0 auto; padding: 24px; text-align: center; }
-.meudia-hero h1 { font: 700 28px/1.4 Poppins,system-ui; color:#2F3A56; margin: 0 0 8px; }
-.meudia-hero p.sub { font: 400 16px/1.6 Quicksand,system-ui; color: rgba(47,58,86,.85); margin: 0 0 16px; }
+/* Hero stack layout for /meudia */
+.hero-stack{ max-width:640px; margin:0 auto; padding:0 24px; text-align:center; }
+.hero-stack .greeting{ margin:0 0 8px; font:700 28px/1.35 Poppins, system-ui; color:#2F3A56; }
+.hero-stack .sub{ margin:0 auto 16px; max-width:44ch; opacity:.85; font:400 16px/1.6 Quicksand, system-ui; color:rgba(47,58,86,.85); }
+.hero-stack .cta-wrap{ margin:0 0 28px; }
+.hero-stack .motd{ margin:0 auto 32px; }
 
-.meudia-ribbon { 
-  width: 100%; height: 56px; background: rgba(255,255,255,.65); 
-  backdrop-filter: blur(10px) saturate(130%); position: relative;
-}
-.meudia-ribbon:after{
-  content:""; position:absolute; left: 5%; right:5%; bottom:0; height:2px;
-  background: linear-gradient(90deg, transparent 0%, #FF005E 30%, #F9C9B7 70%, transparent 100%);
-  filter: blur(1.2px); opacity:.85;
-}
+/* CTA capsule */
+.cta{ display:inline-flex; align-items:center; gap:8px; padding:10px 24px; border-radius:28px; }
 
-.motd{ background: rgba(255,255,255,.55); backdrop-filter: blur(10px);
-  border-radius:20px; padding:20px; margin: 24px auto 32px; max-width:600px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.03); text-align:left; position:relative; overflow:hidden;
-}
-.motd:before{ content:""; position:absolute; inset:0 0 auto 0; height:2px; background:linear-gradient(90deg,#FF005E,#F9C9B7); }
-.motd h3{ font:600 15px/1.4 Poppins; color:#2F3A56E6; margin:0 0 6px; }
-.motd p{ font: italic 16px/1.6 Quicksand; color:#2F3A56E6; margin:0; }
+/* MOTD editorial card */
+.motd{ max-width:560px; width:100%; text-align:left; padding:20px; border-radius:20px; background:rgba(255,255,255,.55); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow:0 2px 8px rgba(0,0,0,.03); margin-left:auto; margin-right:auto; position:relative; overflow:hidden; }
+.motd::before{ content:""; position:absolute; left:0; right:0; top:0; height:2px; background: linear-gradient(90deg,#FF005E,#F9C9B7); }
+.motd .title{ font:600 15px/1.4 Poppins; color:#2F3A56E6; margin:0 0 6px; }
+.motd .text{ font: italic 16px/1.6 Quicksand; color:#2F3A56E6; margin:0; }
+
+/* Responsiveness */
+@media(max-width:1024px){ .hero-stack{ max-width:560px; } }
+@media(max-width:768px){ .hero-stack{ max-width:92%; padding:0 16px; } .hero-stack .greeting{ font-size:24px; } }
