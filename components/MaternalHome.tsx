@@ -227,7 +227,7 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
           }}
         </GreetingBinder>
         <div className="hero-grid">
-          <Card className="motd-card" role="region" aria-label="Mensagem do dia">
+          <Card className="motd-card motd" role="region" aria-label="Mensagem do dia">
             <strong className="motd-title">“Mensagem do dia”</strong>
             <p className="small motd-text">
               <span className="motd-quote" aria-hidden>“</span>

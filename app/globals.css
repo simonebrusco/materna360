@@ -104,7 +104,7 @@ main { min-height: 100vh; display: flex; justify-content: center; }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
 /* Home actions grid (mobile: 2x2, tablet: 3 columns) */
-.actions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+actions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media (min-width:769px) and (max-width:1024px){
   .actions-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
 }
@@ -264,7 +264,7 @@ nav { background: transparent; border-top: none; box-shadow: none; }
 /* keep existing .btn, .btn-primary, .btn-ghost styles */
 
 /* Brand header */
-.brand-header{position:fixed;top:0;left:0;width:100%;display:flex;align-items:center;justify-content:center;padding:12px 0;background:transparent;backdrop-filter:blur(10px);border-bottom:none;z-index:1000}
+.brand-header{position:fixed;top:0;left:0;right:0;width:100%;display:flex;align-items:center;justify-content:center;padding:0;background:transparent;border-bottom:none;z-index:1000}
 .brand-logo{display:block;width:160px;max-height:80px;height:auto;object-fit:contain;opacity:0;box-shadow:0 2px 4px rgba(0,0,0,.05);transition:filter .2s ease-in;animation:m360-logo-fade .4s ease-in forwards}
 .brand-logo:hover{filter:brightness(1.1)}
 @media(max-width:768px){.brand-logo{width:120px}}
@@ -280,6 +280,41 @@ nav { background: transparent; border-top: none; box-shadow: none; }
 .logo-link{ display:flex; align-items:center; gap:8px; }
 .brand-logo-img{ width:184px; height:auto; display:block; }
 @media (max-width:1023px){ .brand-logo-img{ width:156px; } }
+
+/* Header ribbon behind logo */
+.header-ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.header-ribbon::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: linear-gradient(to right, transparent, #FF005E 45%, #F9C9B7 85%, transparent);
+  opacity: 0.9;
+}
+/* Logo within ribbon */
+.header-logo { position: relative; z-index: 2; height: 32px !important; object-fit: contain; display:block; }
+@media (max-width:768px){
+  .header-ribbon{ height:60px; }
+  .header-logo{ height:28px !important; }
+}
+
+/* Ensure breathing room below header before greeting */
+.m360-container.meu-dia .greeting-area{ margin-top: 56px; }
 
 /* Message of the day */
 .motd-title{ display:block; margin-bottom:8px; font-weight:800; }
@@ -887,3 +922,26 @@ label{ font-weight: var(--m360-weight-medium); }
 
 .m360-container.meu-dia .m360-day-chip:focus-visible,
 .m360-container.meu-dia .btn:focus-visible{ outline:none; box-shadow: var(--m360-shadow-outline, var(--ring)); }
+
+/* Meudia styles */
+.meudia-hero { max-width: 640px; margin: 0 auto; padding: 24px; text-align: center; }
+.meudia-hero h1 { font: 700 28px/1.4 Poppins,system-ui; color:#2F3A56; margin: 0 0 8px; }
+.meudia-hero p.sub { font: 400 16px/1.6 Quicksand,system-ui; color: rgba(47,58,86,.85); margin: 0 0 16px; }
+
+.meudia-ribbon { 
+  width: 100%; height: 56px; background: rgba(255,255,255,.65); 
+  backdrop-filter: blur(10px) saturate(130%); position: relative;
+}
+.meudia-ribbon:after{
+  content:""; position:absolute; left: 5%; right:5%; bottom:0; height:2px;
+  background: linear-gradient(90deg, transparent 0%, #FF005E 30%, #F9C9B7 70%, transparent 100%);
+  filter: blur(1.2px); opacity:.85;
+}
+
+.motd{ background: rgba(255,255,255,.55); backdrop-filter: blur(10px);
+  border-radius:20px; padding:20px; margin: 24px auto 32px; max-width:600px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.03); text-align:left; position:relative; overflow:hidden;
+}
+.motd:before{ content:""; position:absolute; inset:0 0 auto 0; height:2px; background:linear-gradient(90deg,#FF005E,#F9C9B7); }
+.motd h3{ font:600 15px/1.4 Poppins; color:#2F3A56E6; margin:0 0 6px; }
+.motd p{ font: italic 16px/1.6 Quicksand; color:#2F3A56E6; margin:0; }
