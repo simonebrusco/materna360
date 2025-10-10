@@ -408,13 +408,19 @@ label{ font-weight: var(--m360-weight-medium); }
 }
 
 /* Hero e Planner em blocos amplos e elegantes */
-.m360-hero,
 .m360-planner{
   background: #fff;
   border-radius: 16px;
   padding: 16px;
   box-shadow: 0 8px 24px rgba(17, 17, 17, 0.06);
   margin-bottom: 24px;
+}
+.m360-hero{
+  padding: 16px;
+  margin-bottom: 24px;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 /* Grade de cards: nunca empilhar (>=360px já é 2 colunas) */
