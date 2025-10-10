@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
         {children}
         <Toaster />
         <BottomTabBar />
-        <div aria-hidden="true" className="sr-only">
+        <div aria-hidden="true" className="sr-only" suppressHydrationWarning>
           BUILD: {new Date().toISOString()}
         </div>
       </body>
