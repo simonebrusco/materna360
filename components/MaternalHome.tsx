@@ -214,26 +214,29 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
     <div className={`m360-container meu-dia${flags.newHomeMaternal ? ' hub' : ''}`}>
       {/* 1) Hero (saudação + mensagem do dia) */}
       <section className="m360-hero hero" role="banner" aria-label="Saudação">
-        <GreetingBinder>
-          {({ name, part }) => {
-            const shown = displayName || name || 'Mãe';
-            return (
-              <div className="greeting-area">
-                <h1 className="greeting-title" suppressHydrationWarning>{part}, {shown} <span aria-hidden>💕</span></h1>
-                <p className="greeting-blurb">Que seu dia seja leve e cheio de pequenos momentos bons 💕</p>
-                <button type="button" className="mood-inline" onClick={()=>setOpenMood(true)}>😊 Registrar humor de hoje</button>
-              </div>
-            );
-          }}
-        </GreetingBinder>
-        <div className="hero-grid">
-          <Card className="motd-card motd" role="region" aria-label="Mensagem do dia">
-            <strong className="motd-title">“Mensagem do dia”</strong>
-            <p className="small motd-text">
-              <span className="motd-quote" aria-hidden>“</span>
-              <i>Você merece um tempo para respirar hoje 💕</i>
-            </p>
-          </Card>
+        <div className="hero-light is-animated"></div>
+        <div className="hero-region">
+          <GreetingBinder>
+            {({ name, part }) => {
+              const shown = displayName || name || 'Mãe';
+              return (
+                <div className="greeting-area">
+                  <h1 className="greeting-title" suppressHydrationWarning>{part}, {shown} <span aria-hidden>💕</span></h1>
+                  <p className="greeting-blurb">Que seu dia seja leve e cheio de pequenos momentos bons 💕</p>
+                  <button type="button" className="mood-inline" onClick={()=>setOpenMood(true)}>😊 Registrar humor de hoje</button>
+                </div>
+              );
+            }}
+          </GreetingBinder>
+          <div className="hero-grid">
+            <Card className="motd-card motd" role="region" aria-label="Mensagem do dia">
+              <strong className="motd-title">“Mensagem do dia”</strong>
+              <p className="small motd-text">
+                <span className="motd-quote" aria-hidden>“</span>
+                <i>Você merece um tempo para respirar hoje 💕</i>
+              </p>
+            </Card>
+          </div>
         </div>
       </section>
 
