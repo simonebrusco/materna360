@@ -862,7 +862,7 @@ label{ font-weight: var(--m360-weight-medium); }
   .m360-container.meu-dia .m360-hero .motd-card{ animation: m360-fade-scale .8s cubic-bezier(0.45, 0, 0.55, 1) both .6s, m360-flash-shadow .3s ease-out both 1.4s; }
 }
 .m360-container.meu-dia .m360-hero .motd-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, #FF005E 0%, #F9C9B7 100%); border-top-left-radius:24px; border-top-right-radius:24px; }
-.m360-container.meu-dia .m360-hero .motd-title{ font:500 16px/22px Poppins, system-ui; color:#2F3A56; margin:0 0 8px; }
+.m360-container.meu-dia .m360-hero .motd-title{ font:500 16px/22px Poppins, system-ui; color:#2F3A56; margin:0 0 6px; }
 .m360-container.meu-dia .m360-hero .motd-text{ font:italic 17px/1.6 Quicksand, system-ui; color:#2F3A56CC; }
 .m360-container.meu-dia .m360-hero .motd-quote{ color: #FF005E; }
 .m360-container.meu-dia .m360-hero .motd-card::after{ content:"\201C"; position:absolute; top:8px; left:12px; font:700 64px/1 Poppins, system-ui; color:#FF005E; opacity:.06; pointer-events:none; }
