@@ -15,6 +15,7 @@ export default function AppHeader() {
 
         <div className="header-actions" aria-label="Ações do topo"></div>
       </div>
+      <div className="sunrise-ray" aria-hidden="true" />
     </header>
   );
 }
