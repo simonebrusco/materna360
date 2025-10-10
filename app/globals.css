@@ -192,6 +192,14 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 
 @keyframes m360-soft-pulse { 0%{ opacity:.08 } 50%{ opacity:.14 } 100%{ opacity:.08 } }
 
+/* hero animation glow overlays */
+.greeting-title::after, .greeting-blurb::after, .mood-inline::after{ content:""; position:absolute; inset:-2px; border-radius:inherit; background: rgba(255,255,255,.05); opacity:0; pointer-events:none; }
+.greeting-title::after{ animation: m360-glow-flash .3s ease-out both; animation-delay: .8s; }
+.greeting-blurb::after{ animation: m360-glow-flash .3s ease-out both; animation-delay: 1.0s; }
+.mood-inline::after{ animation: m360-glow-flash .3s ease-out both; animation-delay: 1.2s; }
+@keyframes m360-glow-flash { 0%{ opacity:.05 } 100%{ opacity:0 } }
+@keyframes m360-flash-shadow { 0%{ box-shadow: inset 0 0 0 9999px rgba(255,255,255,.05) } 100%{ box-shadow: inset 0 0 0 0 rgba(255,255,255,0) } }
+
 /* utilities */
 .m360-soft { opacity: .8; }
 
@@ -652,9 +660,9 @@ label{ font-weight: var(--m360-weight-medium); }
 
 /* Greeting styles */
 .greeting-area{ margin-bottom:32px; text-align:center; position:relative; z-index:1; max-width: 480px; margin-left:auto; margin-right:auto; }
-.greeting-title{ font-family:Poppins, system-ui; font-weight:600; font-size:28px; line-height:1.4; color:#2F3A56; margin:0 0 8px; text-align:center; text-shadow: 0 2px 8px rgba(255,0,94,.12); animation: m360-fade-down .6s ease-in-out both; animation-delay: 0s; }
-.greeting-blurb{ font-family:Quicksand, system-ui; font-weight:400; font-size:17px; line-height:1.6; color:rgba(47,58,86,.85); margin:0 auto 0; max-width:440px; text-align:center; animation: m360-fade-down .6s ease-in-out both; animation-delay: .2s; }
-.mood-inline{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 28px; margin:14px auto 32px; font-family:Quicksand, system-ui; font-size:15px; color:#2F3A56; background:rgba(255,255,255,.35); backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%); border:1px solid rgba(255,255,255,.6); border-radius:28px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), 0 4px 16px rgba(255,0,94,0.18); transition: box-shadow .3s ease-in-out, transform .3s ease-in-out; animation: m360-fade-up .6s ease-in-out both; animation-delay: .4s; }
+.greeting-title{ font-family:Poppins, system-ui; font-weight:600; font-size:28px; line-height:1.4; color:#2F3A56; margin:0 0 8px; text-align:center; text-shadow: 0 2px 8px rgba(255,0,94,.12); transform-origin: center; animation: m360-fade-down .8s cubic-bezier(0.45, 0, 0.55, 1) both; animation-delay: 0s; }
+.greeting-blurb{ font-family:Quicksand, system-ui; font-weight:400; font-size:17px; line-height:1.6; color:rgba(47,58,86,.85); margin:0 auto 0; max-width:440px; text-align:center; transform-origin: center; animation: m360-fade-up .8s cubic-bezier(0.45, 0, 0.55, 1) both; animation-delay: .2s; }
+.mood-inline{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 28px; margin:14px auto 32px; font-family:Quicksand, system-ui; font-size:15px; color:#2F3A56; background:rgba(255,255,255,.35); backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%); border:1px solid rgba(255,255,255,.6); border-radius:28px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), 0 4px 16px rgba(255,0,94,0.18); transition: box-shadow .3s ease-in-out, transform .3s ease-in-out; transform-origin: center; animation: m360-fade-scale .8s cubic-bezier(0.45, 0, 0.55, 1) both; animation-delay: .4s; }
 .mood-inline:hover{ color:#2F3A56; text-decoration: none; box-shadow: inset 0 2px 4px rgba(255,255,255,0.96), 0 4px 19px rgba(255,0,94,0.216); transform: scale(1.02); }
 .mood-inline:focus-visible{ outline:none; box-shadow: 0 0 0 4px rgba(255,0,94,.15); }
 
@@ -846,7 +854,10 @@ label{ font-weight: var(--m360-weight-medium); }
   .m360-container.meu-dia .mood-card{ min-height:200px; box-shadow:0 12px 28px rgba(18,21,26,.06); }
 
 /* MOTD refined in hero */
-.m360-container.meu-dia .m360-hero .motd-card{ position: relative; background: rgba(255,255,255,.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-radius:24px; padding:22px; box-shadow: inset 0 1px 3px rgba(255,255,255,.5); animation: m360-fade-scale .6s ease-in-out both; animation-delay: .8s; }
+.m360-container.meu-dia .m360-hero .motd-card{ position: relative; background: rgba(255,255,255,.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-radius:24px; padding:22px; box-shadow: inset 0 1px 3px rgba(255,255,255,.5); transform-origin: center; animation: m360-fade-scale .8s cubic-bezier(0.45, 0, 0.55, 1) both; animation-delay: .6s; }
+@media (prefers-reduced-motion: no-preference){
+  .m360-container.meu-dia .m360-hero .motd-card{ animation: m360-fade-scale .8s cubic-bezier(0.45, 0, 0.55, 1) both .6s, m360-flash-shadow .3s ease-out both 1.4s; }
+}
 .m360-container.meu-dia .m360-hero .motd-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, #FF005E 0%, #F9C9B7 100%); border-top-left-radius:24px; border-top-right-radius:24px; }
 .m360-container.meu-dia .m360-hero .motd-title{ font:500 16px/22px Poppins, system-ui; color:#2F3A56; margin:0 0 8px; }
 .m360-container.meu-dia .m360-hero .motd-text{ font:italic 17px/1.6 Quicksand, system-ui; color:#2F3A56CC; }
