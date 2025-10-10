@@ -821,6 +821,12 @@ label{ font-weight: var(--m360-weight-medium); }
 .meu-dia .hero-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
 @media (max-width:768px){ .meu-dia .hero-grid{grid-template-columns:1fr; gap:12px;} }
 /* Place MOTD ~40px below the button */
+.m360-hero .hero-inner{ position: relative; z-index:1; margin:40px auto 0; width:92%; max-width:640px; text-align:center; }
+@media (min-width:768px){ .m360-hero .hero-inner{ width:90%; } }
+@media (min-width:1024px){ .m360-hero .hero-inner{ width:100%; max-width:640px; } }
+.m360-hero .hero-inner::before, .m360-hero .hero-inner::after{ content:""; position:absolute; top:0; bottom:0; width:10%; pointer-events:none; opacity:.05; mix-blend-mode: soft-light; }
+.m360-hero .hero-inner::before{ left:-2%; background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)); }
+.m360-hero .hero-inner::after{ right:-2%; background: linear-gradient(to left, rgba(255,255,255,0), rgba(255,255,255,1)); }
 .m360-hero .hero-grid{ margin-top: 40px; position: relative; z-index: 1; }
 
 /* Cards consistentes */
@@ -835,7 +841,7 @@ label{ font-weight: var(--m360-weight-medium); }
 .meu-dia .motd-quote{color:var(--m360-primary); font-size:20px; margin-right:6px;}
 .meu-dia .motd-text{font-family:Quicksand,system-ui; font-style:italic; font-size:16px; line-height:24px; color:rgba(47,58,86,.92);}
 
-/* Mood card – evitar texto “em coluna” */
+/* Mood card ��� evitar texto “em coluna” */
 .meu-dia .mood-card h3{font:600 18px/24px Poppins,system-ui; margin:0 0 4px; white-space:normal; overflow-wrap:break-word;}
 .meu-dia .mood-card p{font:400 14px/20px Poppins,system-ui; color:rgba(47,58,86,.70);}
 
