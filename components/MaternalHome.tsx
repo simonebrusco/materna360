@@ -213,7 +213,8 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
   return (
     <div className={`m360-container meu-dia${flags.newHomeMaternal ? ' hub' : ''}`}>
       {/* 1) Hero (saudação + mensagem do dia) */}
-      <section className="m360-hero hero" role="banner" aria-label="Saudação">
+      <section className="m360-hero hero meudia-hero" role="banner" aria-label="Saudação">
+        <div className="meudia-ribbon" aria-hidden />
         <GreetingBinder>
           {({ name, part }) => {
             const shown = displayName || name || 'Mãe';
@@ -227,7 +228,7 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
           }}
         </GreetingBinder>
         <div className="hero-grid">
-          <Card className="motd-card" role="region" aria-label="Mensagem do dia">
+          <Card className="motd-card motd" role="region" aria-label="Mensagem do dia">
             <strong className="motd-title">“Mensagem do dia”</strong>
             <p className="small motd-text">
               <span className="motd-quote" aria-hidden>“</span>
