@@ -41,7 +41,10 @@ a { color: inherit; text-decoration: none; }
 
 body {
   color: var(--navy);
-  background: linear-gradient(180deg, var(--rose-bg) 0%, var(--white) 100%);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255,0,94,0.10), transparent 70%),
+    radial-gradient(circle at 30% 80%, rgba(249,201,183,0.12), transparent 70%),
+    linear-gradient(to bottom, #FFF8FA 0%, #FFFFFF 100%);
 }
 
 main { min-height: 100vh; display: flex; justify-content: center; }
@@ -107,14 +110,14 @@ main { min-height: 100vh; display: flex; justify-content: center; }
 }
 
 /* Tab bar */
-.bottom-nav { position: sticky; bottom: 0; left: 0; right: 0; display: flex; gap: 6px; justify-content: space-around; align-items: center; background: var(--card); padding: 10px 8px; border-top: 1px solid var(--rose-2); box-shadow: var(--shadow-soft); }
+.bottom-nav { position: sticky; bottom: 0; left: 0; right: 0; display: flex; gap: 6px; justify-content: space-around; align-items: center; background: rgba(255,255,255,0.75); backdrop-filter: blur(12px); padding: 10px 8px; border-top: none !important; box-shadow: 0 -8px 24px rgba(255,0,94,0.08); }
 .tab { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--navy); font-size: 12px; }
 .tab .icon { width: 22px; height: 22px; border-radius: 8px; border: 1.7px solid currentColor; display: flex; align-items: center; justify-content: center; }
 .tab-active { position: relative; color: var(--magenta); }
 .tab-active::after { content: ""; position: absolute; bottom: -6px; width: 6px; height: 6px; border-radius: 50%; background: var(--magenta); }
 
 /* Generic nav styling */
-nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shadow: var(--shadow-soft); }
+nav { background: transparent; border-top: none; box-shadow: none; }
 
 /* Eu360 ring */
 .ring { --s:120px; position: relative; width: var(--s); height: var(--s); border-radius: 50%; background: conic-gradient(var(--magenta) var(--p,40%), rgba(255,255,255,.2) 0); display: grid; place-items: center; outline: 2px solid rgba(255,255,255,.25); outline-offset: -6px; }
@@ -261,7 +264,7 @@ nav { background: var(--card); border-top: 1px solid var(--magenta-20); box-shad
 /* keep existing .btn, .btn-primary, .btn-ghost styles */
 
 /* Brand header */
-.brand-header{position:fixed;top:0;left:0;width:100%;display:flex;align-items:center;justify-content:center;padding:12px 0;background:rgba(255,255,255,.8);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.05);z-index:1000}
+.brand-header{position:fixed;top:0;left:0;width:100%;display:flex;align-items:center;justify-content:center;padding:12px 0;background:transparent;backdrop-filter:blur(10px);border-bottom:none;z-index:1000}
 .brand-logo{display:block;width:160px;max-height:80px;height:auto;object-fit:contain;opacity:0;box-shadow:0 2px 4px rgba(0,0,0,.05);transition:filter .2s ease-in;animation:m360-logo-fade .4s ease-in forwards}
 .brand-logo:hover{filter:brightness(1.1)}
 @media(max-width:768px){.brand-logo{width:120px}}
@@ -445,6 +448,7 @@ label{ font-weight: var(--m360-weight-medium); }
   will-change: filter;
   animation: m360-breathe-color 10s ease-in-out infinite alternate;
 }
+.hero, .hero-wrap { border-top: none !important; background-color: transparent !important; background-repeat: no-repeat; background-size: cover; }
 /* Optional soft elliptical overlays for premium touch */
 
 /* Grade de cards: nunca empilhar (>=360px já é 2 colunas) */
@@ -730,7 +734,7 @@ label{ font-weight: var(--m360-weight-medium); }
 .m360-container.meu-dia{
   --m360-primary:#FF005E;      /* magenta */
   --m360-secondary:#2F3A56;    /* navy */
-  --m360-accent:#F9C9B7;       /* rosé */
+  --m360-accent:#F9C9B7;       /* ros�� */
 }
 
 /* ===== Materna360 – Meu Dia (soft-luxury scoped) ===== */
@@ -785,7 +789,7 @@ label{ font-weight: var(--m360-weight-medium); }
 .m360-container.meu-dia .btn-outline{background:transparent;color:var(--m360-secondary);border:1px solid var(--m360-secondary);}
 
 /* Espaçamento entre seções do Meu Dia */
-.m360-container.meu-dia section{margin-bottom:24px;}
+.m360-container.meu-dia section{margin-bottom:24px; background: transparent !important; border: 0 !important;}
 
 .meu-dia .hero{max-width:1120px;margin:12px auto 32px;}
 .meu-dia .hero h1{font-family:Poppins,system-ui; font-weight:700; font-size:24px; line-height:30px; color:var(--m360-text);}
