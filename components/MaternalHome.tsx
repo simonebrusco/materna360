@@ -213,23 +213,25 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
   return (
     <div className={`m360-container meu-dia${flags.newHomeMaternal ? ' hub' : ''}`}>
       {/* 1) Hero (saudação + mensagem do dia) */}
-      <section className="m360-hero hero" role="banner" aria-label="Saudação">
-        <GreetingBinder>
-          {({ name, part }) => {
-            const shown = displayName || name || 'Mãe';
-            return (
-              <div className="greeting-area">
-                <h1 className="greeting-title" suppressHydrationWarning>{part}, {shown} <span aria-hidden>💕</span></h1>
-                <p className="greeting-blurb">Que seu dia seja leve e cheio de pequenos momentos bons 💕</p>
-                <button type="button" className="mood-inline" onClick={()=>setOpenMood(true)}>😊 Registrar humor de hoje</button>
-              </div>
-            );
-          }}
-        </GreetingBinder>
-        <div className="hero-grid">
+      <section className="m360-hero hero hero-region" role="banner" aria-label="Saudação">
+        <div className="hero-stack">
+          <GreetingBinder>
+            {({ name, part }) => {
+              const shown = displayName || name || 'Mãe';
+              return (
+                <div>
+                  <h1 className="greeting greeting-title" suppressHydrationWarning>{part}, {shown} <span aria-hidden>💕</span></h1>
+                  <p className="sub greeting-blurb">Que seu dia seja leve e cheio de pequenos momentos bons 💕</p>
+                  <div className="cta-wrap">
+                    <button type="button" className="cta mood-inline" onClick={()=>setOpenMood(true)}>😊 Registrar humor de hoje</button>
+                  </div>
+                </div>
+              );
+            }}
+          </GreetingBinder>
           <Card className="motd-card motd" role="region" aria-label="Mensagem do dia">
-            <strong className="motd-title">“Mensagem do dia”</strong>
-            <p className="small motd-text">
+            <strong className="motd-title title">“Mensagem do dia”</strong>
+            <p className="small motd-text text">
               <span className="motd-quote" aria-hidden>“</span>
               <i>Você merece um tempo para respirar hoje 💕</i>
             </p>
