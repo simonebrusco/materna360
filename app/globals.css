@@ -820,6 +820,7 @@ label{ font-weight: var(--m360-weight-medium); }
 /* Grid dos 2 cards */
 .meu-dia .hero-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
 @media (max-width:768px){ .meu-dia .hero-grid{grid-template-columns:1fr; gap:12px;} }
+@media (max-width:767px){ .m360-container.meu-dia .m360-hero .motd-card{ width:100%; } }
 /* Place MOTD ~40px below the button */
 .m360-hero .hero-inner{ position: relative; z-index:1; margin:40px auto 0; width:92%; max-width:640px; text-align:center; }
 @media (min-width:768px){ .m360-hero .hero-inner{ width:90%; } }
