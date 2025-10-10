@@ -54,25 +54,6 @@ export default function DevErrorSuppressor() {
     console.error = function(...a){ consoleFilter(origConsoleError, a); };
     console.warn = function(...a){ consoleFilter(origConsoleWarn, a); };
 
-    // Wrap window.fetch to catch and gracefully handle FullStory network failures
-    const origFetch = typeof window !== 'undefined' ? window.fetch : undefined;
-    try{
-      if (typeof window !== 'undefined' && typeof origFetch === 'function'){
-        window.fetch = function(input, init){
-          try{
-            const url = typeof input === 'string' ? input : (input && input.url) ? input.url : '';
-            if (typeof url === 'string' && url.toLowerCase().includes('fullstory')){
-              return origFetch(input, init).catch(err => {
-                try{ console.debug('Suppressed FullStory network fetch error (dev):', err); }catch(e){}
-                // Return an empty successful Response to avoid unhandled rejections bubbling
-                try{ return new Response(null, { status: 204, statusText: 'No Content' }); }catch(e){ return Promise.resolve(undefined); }
-              });
-            }
-          }catch(e){ /* swallow */ }
-          return origFetch(input, init);
-        };
-      }
-    }catch(e){}
 
     window.addEventListener("unhandledrejection", onUnhandledRejection);
     window.addEventListener("error", onError);
