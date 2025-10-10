@@ -219,7 +219,7 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
             const shown = displayName || name || 'Mãe';
             return (
               <div className="greeting-area">
-                <h1 className="greeting-title" suppressHydrationWarning>{part}, {shown} <span aria-hidden>💛</span></h1>
+                <h1 className="greeting-title" suppressHydrationWarning>{part}, {shown} <span aria-hidden>💕</span></h1>
                 <p className="greeting-blurb">Que seu dia seja leve e cheio de pequenos momentos bons 💕</p>
                 <button type="button" className="mood-inline" onClick={()=>setOpenMood(true)}>😊 Registrar humor de hoje</button>
               </div>
@@ -231,7 +231,7 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
             <strong className="motd-title">“Mensagem do dia”</strong>
             <p className="small motd-text">
               <span className="motd-quote" aria-hidden>“</span>
-              <i>{question}</i>
+              <i>Você merece um tempo para respirar hoje 💕</i>
             </p>
           </Card>
         </div>
