@@ -218,27 +218,21 @@ export default function MaternalHome({ flags: incomingFlags }: { flags?: Record<
           {({ name, part }) => {
             const shown = displayName || name || 'Mãe';
             return (
-              <div>
+              <div className="greeting-area">
                 <h1 className="greeting-title" suppressHydrationWarning>{part}, {shown} <span aria-hidden>💛</span></h1>
-                <p className="greeting-sub">Como você está hoje?</p>
+                <p className="greeting-blurb">Que seu dia seja leve e cheio de pequenos momentos bons 💕</p>
+                <button type="button" className="mood-inline" onClick={()=>setOpenMood(true)}>😊 Registrar humor de hoje</button>
               </div>
             );
           }}
         </GreetingBinder>
         <div className="hero-grid">
-          <Card className="motd-card" role="region" aria-label="Pergunta do dia">
-            <strong className="motd-title">“Pergunta do dia”</strong>
+          <Card className="motd-card" role="region" aria-label="Mensagem do dia">
+            <strong className="motd-title">“Mensagem do dia”</strong>
             <p className="small motd-text">
               <span className="motd-quote" aria-hidden>“</span>
               <i>{question}</i>
             </p>
-          </Card>
-          <Card className="mood-card tap-scale" onClick={()=>setOpenMood(true)} role="button" aria-label="Registrar humor">
-            <Icon name="mood" className="icon-24 icon-accent" />
-            <div>
-              <h3>Como você se sente?</h3>
-              <p className="small">Toque para registrar</p>
-            </div>
           </Card>
         </div>
       </section>

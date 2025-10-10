@@ -560,7 +560,7 @@ label{ font-weight: var(--m360-weight-medium); }
 /* Meu Dia component mappings (scoped) */
 .meu-dia .m360-hero h1{ font-family:Poppins, system-ui; font-weight:700; font-size:24px; color:var(--m360-text); }
 .meu-dia .m360-hero .sub{ font-family:Poppins, system-ui; font-weight:400; font-size:16px; color:var(--m360-text); }
-.meu-dia .motd-quote{ color: var(--m360-accent); }
+.meu-dia .motd-quote{ color: var(--m360-primary); }
 .meu-dia .card{ background: var(--m360-bg); border-radius:16px; }
 
 /* Icons mapping */
@@ -607,8 +607,11 @@ label{ font-weight: var(--m360-weight-medium); }
 }
 
 /* Greeting styles */
-.greeting-title{ font-family: Poppins, system-ui; font-weight: 700; font-size: 22px; color: #1E1E1E; padding-top: 12px; margin-bottom: 8px; }
-.greeting-sub{ font-family: Poppins, system-ui; font-weight: 400; font-size: 16px; color: #1E1E1E; opacity:.85; margin-top:4px; }
+.greeting-area{ margin-bottom:24px; }
+.greeting-title{ font-family:Poppins, system-ui; font-weight:700; font-size:24px; line-height:30px; color:#2F3A56; padding-top:12px; margin:0; }
+.greeting-blurb{ font-family:Quicksand, system-ui; font-weight:400; font-size:16px; line-height:22px; color:rgba(47,58,86,.85); margin:6px 0 6px; }
+.mood-inline{ all:unset; cursor:pointer; font-family:Quicksand, system-ui; font-weight:400; font-size:16px; line-height:22px; color:rgba(47,58,86,.7); display:inline-flex; align-items:center; gap:6px; }
+.mood-inline:hover{ color:#FF005E; }
 
 /* Segmented control */
 .segmented{ display:inline-flex; background:#fff; border:1px solid rgba(0,0,0,.1); border-radius:999px; padding:4px; gap:4px; margin-bottom:12px; }
@@ -707,9 +710,9 @@ label{ font-weight: var(--m360-weight-medium); }
 }
 
 /* Hero topo */
-.m360-container.meu-dia .hero{max-width:1120px;margin:12px auto 24px;}
+.m360-container.meu-dia .hero{max-width:1120px;margin:12px auto 32px;}
 .m360-container.meu-dia .hero h1{
-  font-family:Poppins,system-ui;font-weight:700;font-size:26px;line-height:32px;color:var(--m360-text);
+  font-family:Poppins,system-ui;font-weight:700;font-size:24px;line-height:30px;color:var(--m360-text);
 }
 .m360-container.meu-dia .hero h2{
   font-family:Poppins,system-ui;font-weight:400;font-size:16px;line-height:24px;color:rgba(47,58,86,.85);margin:0 0 12px;
@@ -734,7 +737,7 @@ label{ font-weight: var(--m360-weight-medium); }
 .m360-container.meu-dia .mood-card:active{transform:scale(1.02);}
 
 /* Mensagem do Dia */
-.m360-container.meu-dia .motd-quote{color:var(--m360-accent);font-size:20px;margin-right:6px;}
+.m360-container.meu-dia .motd-quote{color:var(--m360-primary);font-size:20px;margin-right:6px;}
 .m360-container.meu-dia .motd-text{font-family:Poppins,system-ui;font-style:italic;font-size:16px;line-height:24px;color:rgba(47,58,86,.92);}
 
 /* Mood card — impedir “texto em coluna” */
@@ -751,8 +754,8 @@ label{ font-weight: var(--m360-weight-medium); }
 /* Espaçamento entre seções do Meu Dia */
 .m360-container.meu-dia section{margin-bottom:24px;}
 
-.meu-dia .hero{max-width:1120px;margin:12px auto 24px;}
-.meu-dia .hero h1{font-family:Poppins,system-ui; font-weight:700; font-size:26px; line-height:32px; color:var(--m360-text);}
+.meu-dia .hero{max-width:1120px;margin:12px auto 32px;}
+.meu-dia .hero h1{font-family:Poppins,system-ui; font-weight:700; font-size:24px; line-height:30px; color:var(--m360-text);}
 .meu-dia .hero h2{font-family:Poppins,system-ui; font-weight:400; font-size:16px; line-height:24px; color:rgba(47,58,86,.85); margin:0 0 12px;}
 .meu-dia .hero h1,.meu-dia .hero h2{word-break:normal; overflow-wrap:anywhere; hyphens:manual;}
 
@@ -769,7 +772,7 @@ label{ font-weight: var(--m360-weight-medium); }
 .meu-dia .motd-card:active,.meu-dia .mood-card:active{ transform:scale(1.02); }
 
 /* Mensagem do dia */
-.meu-dia .motd-quote{color:var(--m360-accent); font-size:20px; margin-right:6px;}
+.meu-dia .motd-quote{color:var(--m360-primary); font-size:20px; margin-right:6px;}
 .meu-dia .motd-text{font-family:Poppins,system-ui; font-style:italic; font-size:16px; line-height:24px; color:rgba(47,58,86,.92);}
 
 /* Mood card – evitar texto “em coluna” */
@@ -789,7 +792,7 @@ label{ font-weight: var(--m360-weight-medium); }
 /* no-op: trigger Vercel preview build */
 
 /* Hero refinado */
-.m360-container.meu-dia .hero{ margin:8px auto 24px; }
+.m360-container.meu-dia .hero{ margin:8px auto 32px; }
 .m360-container.meu-dia .motd-card,
 .m360-container.meu-dia .mood-card{ min-height:200px; box-shadow:0 12px 28px rgba(18,21,26,.06); }
 
@@ -808,7 +811,7 @@ label{ font-weight: var(--m360-weight-medium); }
 /* ===== Meu Dia: premium polish (scoped) ===== */
 .m360-container.meu-dia .icon-primary{ color:#FF005E; }
 .m360-container.meu-dia .icon-secondary{ color:#2F3A56; }
-.m360-container.meu-dia .motd-quote{ color:#F9C9B7; }
+.m360-container.meu-dia .motd-quote{ color:#FF005E; }
 
 .m360-container.meu-dia .tag,
 .m360-container.meu-dia .pill{
